@@ -580,33 +580,6 @@
     "##########",
   ];
 
-  // Every vignette now carries its own fixed, hand-assigned caseNum (set directly
-  // in its object literal above) instead of a number computed from array position.
-  // This means the number is a permanent ID: inserting or reordering organisms/
-  // vignettes later never changes an existing case's number. When adding a new
-  // vignette, give it the next unused caseNum (one past the current highest) —
-  // this check just warns in the console if that's ever done incorrectly
-  // (duplicate or missing number), so mistakes surface immediately.
-  (function validateCaseNumbers() {
-    const seen = new Map();
-    let missing = 0;
-    for (const org of ORGANISMS) {
-      for (const v of org.vignettes) {
-        if (v.caseNum == null) {
-          missing++;
-          console.warn(`Vignette missing caseNum: ${org.id} — "${v.syndrome}"`);
-        } else if (seen.has(v.caseNum)) {
-          console.warn(`Duplicate caseNum ${v.caseNum}: ${org.id} — "${v.syndrome}" clashes with ${seen.get(v.caseNum)}`);
-        } else {
-          seen.set(v.caseNum, `${org.id} — "${v.syndrome}"`);
-        }
-      }
-    }
-    if (missing === 0 && seen.size === [...seen.keys()].length) {
-      // silent when everything checks out
-    }
-  })();
-
   // ===================================================================
   // ORGANISMS
   // Each organism now carries a `vignettes` array (3-4 entries). Every
@@ -4163,6 +4136,33 @@
       ],
     },
   ];
+
+  // Every vignette now carries its own fixed, hand-assigned caseNum (set directly
+  // in its object literal above) instead of a number computed from array position.
+  // This means the number is a permanent ID: inserting or reordering organisms/
+  // vignettes later never changes an existing case's number. When adding a new
+  // vignette, give it the next unused caseNum (one past the current highest) —
+  // this check just warns in the console if that's ever done incorrectly
+  // (duplicate or missing number), so mistakes surface immediately.
+  (function validateCaseNumbers() {
+    const seen = new Map();
+    let missing = 0;
+    for (const org of ORGANISMS) {
+      for (const v of org.vignettes) {
+        if (v.caseNum == null) {
+          missing++;
+          console.warn(`Vignette missing caseNum: ${org.id} — "${v.syndrome}"`);
+        } else if (seen.has(v.caseNum)) {
+          console.warn(`Duplicate caseNum ${v.caseNum}: ${org.id} — "${v.syndrome}" clashes with ${seen.get(v.caseNum)}`);
+        } else {
+          seen.set(v.caseNum, `${org.id} — "${v.syndrome}"`);
+        }
+      }
+    }
+    if (missing === 0 && seen.size === [...seen.keys()].length) {
+      // silent when everything checks out
+    }
+  })();
 
 // ===================================================================
 // DEX REFERENCE DATA — organism & drug reference pages ("lite Microbe
