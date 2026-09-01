@@ -580,6 +580,33 @@
     "##########",
   ];
 
+  // Every vignette now carries its own fixed, hand-assigned caseNum (set directly
+  // in its object literal above) instead of a number computed from array position.
+  // This means the number is a permanent ID: inserting or reordering organisms/
+  // vignettes later never changes an existing case's number. When adding a new
+  // vignette, give it the next unused caseNum (one past the current highest) —
+  // this check just warns in the console if that's ever done incorrectly
+  // (duplicate or missing number), so mistakes surface immediately.
+  (function validateCaseNumbers() {
+    const seen = new Map();
+    let missing = 0;
+    for (const org of ORGANISMS) {
+      for (const v of org.vignettes) {
+        if (v.caseNum == null) {
+          missing++;
+          console.warn(`Vignette missing caseNum: ${org.id} — "${v.syndrome}"`);
+        } else if (seen.has(v.caseNum)) {
+          console.warn(`Duplicate caseNum ${v.caseNum}: ${org.id} — "${v.syndrome}" clashes with ${seen.get(v.caseNum)}`);
+        } else {
+          seen.set(v.caseNum, `${org.id} — "${v.syndrome}"`);
+        }
+      }
+    }
+    if (missing === 0 && seen.size === [...seen.keys()].length) {
+      // silent when everything checks out
+    }
+  })();
+
   // ===================================================================
   // ORGANISMS
   // Each organism now carries a `vignettes` array (3-4 entries). Every
@@ -604,6 +631,7 @@
       flagName: 'MRSA',
       vignettes: [
         {
+          caseNum: 1,
           syndrome: 'Skin & Soft Tissue — Abscess',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 34-year-old man with a history of injecting drug use presents with 3 days of fever and a painful, rapidly expanding red lesion on his forearm with central fluctuance. Temp 38.9°C, HR 112. He was treated for a similar abscess with antibiotics eight months ago.",
@@ -614,6 +642,7 @@
           ],
         },
         {
+          caseNum: 2,
           syndrome: 'Bacteraemia — Post-Surgical, Healthcare-Associated',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 71-year-old nursing home resident is transferred with 2 days of fever and rigors, 3 weeks after a hip revision surgery and a hospital stay that included a course of intravenous vancomycin for a line infection. Temp 39.4°C, BP 98/58, HR 124. Two of two blood culture sets flag positive.",
@@ -624,6 +653,7 @@
           ],
         },
         {
+          caseNum: 3,
           syndrome: 'Skin & Soft Tissue — Community Furuncle',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A previously well 19-year-old university student presents with a tender, fluctuant boil on the buttock that developed over 4 days. No fever, no prior antibiotic exposure, no healthcare contact, and no one else at home is unwell.",
@@ -634,6 +664,7 @@
           ],
         },
         {
+          caseNum: 4,
           syndrome: 'Ventilator-Associated Pneumonia',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 63-year-old man on mechanical ventilation in the ICU for 9 days after a stroke develops new fever, purulent tracheal secretions, and a new infiltrate on chest X-ray. He has received two prior courses of broad-spectrum antibiotics this admission.",
@@ -690,6 +721,7 @@
       flagName: 'ESBL',
       vignettes: [
         {
+          caseNum: 5,
           syndrome: 'Uncomplicated Cystitis',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 58-year-old woman presents with 2 days of dysuria, urinary frequency, and suprapubic tenderness. Afebrile, no flank pain. Urine dipstick positive for leukocyte esterase and nitrites. She has no recent antibiotic use, hospital admissions, or travel.",
@@ -700,6 +732,7 @@
           ],
         },
         {
+          caseNum: 6,
           syndrome: 'Pyelonephritis / Urosepsis — Healthcare-Associated',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 76-year-old man with a long-term indwelling urinary catheter is admitted with 1 day of fever, rigors, and confusion. He was hospitalised for 3 weeks two months ago and completed two antibiotic courses, including ciprofloxacin, during that stay. Temp 38.7°C, BP 92/60.",
@@ -710,6 +743,7 @@
           ],
         },
         {
+          caseNum: 7,
           syndrome: 'Biliary Sepsis — Post-Travel',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 64-year-old woman presents with fever, right upper quadrant pain, and jaundice 10 days after returning from a region with high rates of extended-spectrum beta-lactamase carriage. Ultrasound shows cholelithiasis with a dilated common bile duct. Blood cultures grow gram-negative rods.",
@@ -720,6 +754,7 @@
           ],
         },
         {
+          caseNum: 8,
           syndrome: 'Uncomplicated Cystitis — Low Risk',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A healthy 27-year-old woman with no prior UTIs, no recent antibiotics, and no healthcare exposure presents with 1 day of dysuria and urgency. Afebrile, well-appearing. Urine dipstick positive for nitrites and leukocyte esterase.",
@@ -776,6 +811,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 9,
           syndrome: 'Pharyngitis / Tonsillitis',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 9-year-old presents with sudden-onset sore throat, fever of 39°C, tonsillar exudates, and tender anterior cervical lymphadenopathy. No cough or coryza.",
@@ -786,6 +822,7 @@
           ],
         },
         {
+          caseNum: 10,
           syndrome: 'Cellulitis / Erysipelas',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 52-year-old man presents with 2 days of a well-demarcated, rapidly spreading area of erythema, warmth, and pain on his lower leg, with visible red streaking tracking up towards the knee. Temp 38.4°C. He has chronic bilateral leg oedema.",
@@ -796,6 +833,7 @@
           ],
         },
         {
+          caseNum: 11,
           syndrome: 'Necrotising Soft Tissue Infection / Toxic Shock',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 46-year-old previously healthy woman presents 18 hours after a minor scratch on her arm with severe pain out of proportion to exam findings, spreading purplish discolouration, hypotension (BP 84/50), and a diffuse macular rash. She is confused and tachycardic.",
@@ -806,6 +844,7 @@
           ],
         },
         {
+          caseNum: 12,
           syndrome: 'Scarlet Fever',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 7-year-old presents with sudden-onset sore throat, fever of 39.2°C, a fine sandpaper-textured rash over the trunk, and a bright red 'strawberry' tongue. Tonsillar exudates and tender anterior cervical nodes are present.",
@@ -854,6 +893,7 @@
       flagName: 'PNSP',
       vignettes: [
         {
+          caseNum: 13,
           syndrome: 'Community-Acquired Pneumonia',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 74-year-old man presents with 2 days of fever, rigors, and a productive cough with rust-coloured sputum. Exam reveals right basal bronchial breathing and crackles. Temp 38.9°C, RR 26, SpO2 91% on room air. Chest X-ray shows right lower lobe consolidation.",
@@ -864,6 +904,7 @@
           ],
         },
         {
+          caseNum: 14,
           syndrome: 'Meningitis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 24-year-old man with no past medical history presents with 12 hours of severe headache, neck stiffness, photophobia, and fever of 39.3°C. He had untreated sinusitis the week before. Lumbar puncture shows cloudy CSF with a high neutrophil count and low glucose.",
@@ -874,6 +915,7 @@
           ],
         },
         {
+          caseNum: 15,
           syndrome: 'Bacteraemic Pneumonia — Nursing Home',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "An 82-year-old nursing home resident with dementia presents with fever, delirium, and hypoxia. She completed a course of amoxicillin for a chest infection six weeks ago. Temp 38.6°C, SpO2 89%. Blood and sputum cultures are sent.",
@@ -884,6 +926,7 @@
           ],
         },
         {
+          caseNum: 16,
           syndrome: 'Otitis Media / Sinusitis — Paediatric',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 3-year-old in daycare presents with 2 days of fever, ear tugging, and irritability. Otoscopy shows a bulging, erythematous tympanic membrane. He was treated with amoxicillin for a similar episode 2 months ago.",
@@ -940,6 +983,7 @@
       flagName: 'CRE',
       vignettes: [
         {
+          caseNum: 17,
           syndrome: 'Pyogenic Liver Abscess',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 58-year-old man with poorly controlled diabetes presents with 5 days of fever, rigors, and right upper quadrant pain, with no recent hospital contact. Imaging shows a large, solitary liver abscess. Blood cultures are drawn before drainage.",
@@ -950,6 +994,7 @@
           ],
         },
         {
+          caseNum: 18,
           syndrome: 'Ventilator-Associated Pneumonia — ICU',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 68-year-old man, ventilated for 11 days after major abdominal surgery, develops fever and purulent secretions. He has received three prior broad-spectrum antibiotic courses this admission, including a carbapenem.",
@@ -960,6 +1005,7 @@
           ],
         },
         {
+          caseNum: 19,
           syndrome: 'Catheter-Associated Urosepsis — Nursing Home',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "An 80-year-old nursing home resident with a long-term catheter and multiple hospitalisations in the past year presents with fever and rigors. Urine is cloudy and foul-smelling.",
@@ -970,6 +1016,7 @@
           ],
         },
         {
+          caseNum: 20,
           syndrome: 'Bacteraemia — Repatriated Patient',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 45-year-old woman is repatriated to Singapore after 6 weeks in an overseas ICU following a road traffic accident, where she is known to have been colonised with a carbapenem-resistant organism. She now has fever and a new line-associated bacteraemia.",
@@ -1028,6 +1075,7 @@
       flagName: 'MDR',
       vignettes: [
         {
+          caseNum: 21,
           syndrome: 'Ventilator-Associated Pneumonia',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 70-year-old man, ventilated for 12 days in ICU following a severe stroke, develops fever and thick green-tinged tracheal secretions. He has received multiple prior broad-spectrum antibiotic courses this admission.",
@@ -1038,6 +1086,7 @@
           ],
         },
         {
+          caseNum: 22,
           syndrome: 'Ecthyma Gangrenosum — Neutropenic Sepsis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 34-year-old woman receiving chemotherapy for acute leukaemia develops fever during a neutropenic episode, with a rapidly evolving necrotic black-eschar skin lesion surrounded by a red halo. Absolute neutrophil count is 0.1 x10^9/L.",
@@ -1048,6 +1097,7 @@
           ],
         },
         {
+          caseNum: 23,
           syndrome: 'Malignant Otitis Externa',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 74-year-old man with poorly controlled diabetes presents with 3 weeks of severe ear pain and discharge, unresponsive to topical treatment, with granulation tissue in the ear canal and new facial nerve weakness.",
@@ -1058,6 +1108,7 @@
           ],
         },
         {
+          caseNum: 24,
           syndrome: 'Burn Wound Sepsis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 40-year-old man with 30% total body surface area burns, 10 days post-injury and after two prior antibiotic courses for wound colonisation, develops fever and hypotension. Wound swabs and blood cultures are sent.",
@@ -1119,6 +1170,7 @@
       flagName: 'CRAB',
       vignettes: [
         {
+          caseNum: 25,
           syndrome: 'Ventilator-Associated Pneumonia — Prolonged ICU Stay',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 55-year-old man, ventilated for 3 weeks after a major road traffic accident, develops new fever and purulent secretions. He has received five separate antibiotic courses this admission, including two carbapenem courses.",
@@ -1129,6 +1181,7 @@
           ],
         },
         {
+          caseNum: 26,
           syndrome: 'Central-Line Bacteraemia — Burns ICU',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 48-year-old man with extensive burns and a central venous catheter in place for 2 weeks develops fever and rigors with no other clear source. Blood cultures from the line are sent.",
@@ -1139,6 +1192,7 @@
           ],
         },
         {
+          caseNum: 27,
           syndrome: 'Wound Infection — Repatriated Trauma Patient',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 29-year-old man is transferred to a Singapore hospital after 4 weeks in an overseas ICU following a motorcycle accident, where multidrug-resistant organisms were previously isolated from his wounds. His surgical wound now looks infected, with fever.",
@@ -1149,6 +1203,7 @@
           ],
         },
         {
+          caseNum: 28,
           syndrome: 'Outbreak Context — ICU Surveillance',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "During routine surveillance, a 60-year-old ICU patient on prolonged ventilation is found to have a new positive tracheal culture, in the setting of two other ICU patients recently colonised with the same organism — prompting an infection-control review of shared equipment and surfaces.",
@@ -1206,6 +1261,7 @@
       flagName: 'VRE',
       vignettes: [
         {
+          caseNum: 29,
           syndrome: 'Catheter-Associated UTI',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "An 84-year-old man with a long-term indwelling urinary catheter, his first hospital admission in years, presents with fever and cloudy, foul-smelling urine. He has had no recent antibiotics.",
@@ -1216,6 +1272,7 @@
           ],
         },
         {
+          caseNum: 30,
           syndrome: 'Infective Endocarditis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 68-year-old man with a bicuspid aortic valve presents with 3 weeks of low-grade fever, malaise, and a new murmur, 6 weeks after a cystoscopy for benign prostatic hyperplasia. Echocardiography shows a vegetation on the aortic valve. Multiple blood cultures grow the same organism.",
@@ -1226,6 +1283,7 @@
           ],
         },
         {
+          caseNum: 31,
           syndrome: 'Intra-Abdominal Sepsis — Post-Surgical',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 59-year-old woman develops fever and abdominal pain 8 days after bowel resection surgery, having received broad-spectrum antibiotics including vancomycin for a post-operative complication and a prolonged hospital stay. Imaging shows an intra-abdominal collection.",
@@ -1236,6 +1294,7 @@
           ],
         },
         {
+          caseNum: 32,
           syndrome: 'Bacteraemia — Haematology Ward',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 51-year-old man undergoing treatment for lymphoma, with a long hospital stay and multiple prior antibiotic courses including vancomycin, develops fever and a new bacteraemia with no clear focus.",
@@ -1294,6 +1353,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 33,
           syndrome: 'Meningococcaemia — Classic',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 19-year-old university student presents with 8 hours of fever, severe headache, neck stiffness, and photophobia, with a spreading non-blanching purpuric rash over his trunk and legs. Temp 39.5°C, BP 100/62, HR 128.",
@@ -1304,6 +1364,7 @@
           ],
         },
         {
+          caseNum: 34,
           syndrome: 'Outbreak Setting — Dormitory Contact',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 20-year-old presents with fever and a petechial rash 3 days after a floormate in his university dormitory was hospitalised with confirmed meningococcal disease. He has neck stiffness and a positive Kernig's sign.",
@@ -1314,6 +1375,7 @@
           ],
         },
         {
+          caseNum: 35,
           syndrome: 'Fulminant Meningococcaemia — Waterhouse-Friderichsen',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 26-year-old woman with no significant past history rapidly deteriorates over 6 hours with fever, a widespread purpuric rash, and refractory hypotension. She becomes unresponsive; imaging later reveals bilateral adrenal haemorrhage.",
@@ -1324,6 +1386,7 @@
           ],
         },
         {
+          caseNum: 36,
           syndrome: 'Early Presentation — Fever and Rash Before Meningism',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 16-year-old presents with 4 hours of fever and a few non-blanching spots on her ankle, without yet having neck stiffness or photophobia. She looks well but is tachycardic.",
@@ -1372,6 +1435,7 @@
       flagName: 'BLPAR',
       vignettes: [
         {
+          caseNum: 37,
           syndrome: 'Epiglottitis — Unvaccinated Child',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 4-year-old, who has not received routine childhood vaccinations, presents with sudden high fever, drooling, a muffled voice, and a preference for sitting forward. He appears anxious and unwell, with audible stridor.",
@@ -1382,6 +1446,7 @@
           ],
         },
         {
+          caseNum: 38,
           syndrome: 'COPD Exacerbation / Community-Acquired Pneumonia — Elderly Smoker',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 71-year-old man with COPD and a 40-pack-year smoking history presents with worsening cough, increased purulent sputum, and dyspnoea, having completed a course of amoxicillin for a similar episode 2 months ago.",
@@ -1392,6 +1457,7 @@
           ],
         },
         {
+          caseNum: 39,
           syndrome: 'Periorbital Cellulitis — Unvaccinated Toddler',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 2-year-old with incomplete vaccinations presents with 1 day of eyelid swelling, redness, and fever, without proptosis or visual disturbance. He has had no recent trauma.",
@@ -1402,6 +1468,7 @@
           ],
         },
         {
+          caseNum: 40,
           syndrome: 'Bacteraemic Pneumonia — Post-Splenectomy',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 55-year-old man who underwent splenectomy after a traumatic injury 10 years ago presents with rapid-onset fever, chills, and pneumonia. He did not receive post-splenectomy vaccination.",
@@ -1458,6 +1525,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 41,
           syndrome: 'Recurrent UTI — Struvite Stones',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 62-year-old man with a long-term indwelling catheter and recurrent UTIs presents with fever and flank pain. Imaging reveals a large staghorn calculus filling the renal pelvis. Urine pH is markedly alkaline.",
@@ -1468,6 +1536,7 @@
           ],
         },
         {
+          caseNum: 42,
           syndrome: 'Uncomplicated Cystitis',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 30-year-old otherwise healthy woman presents with 1 day of dysuria and urinary frequency, with no prior UTIs, catheters, or urological abnormalities.",
@@ -1478,6 +1547,7 @@
           ],
         },
         {
+          caseNum: 43,
           syndrome: 'Catheter-Associated Urosepsis — Nursing Home',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 79-year-old nursing home resident with a long-term catheter presents with fever, rigors, and confusion. Urine is thick and strongly ammoniacal-smelling.",
@@ -1488,6 +1558,7 @@
           ],
         },
         {
+          caseNum: 44,
           syndrome: 'Post-Surgical Wound Infection',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 55-year-old man develops a purulent, malodorous wound discharge 6 days after abdominal surgery. The microbiology lab notes an unusual spreading growth pattern on the wound swab plate.",
@@ -1536,6 +1607,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 45,
           syndrome: 'Meningoencephalitis — Immunocompromised',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 68-year-old man on long-term corticosteroids for rheumatoid arthritis presents with 3 days of fever, confusion, and ataxia, without a clear rash or classic meningism. CSF shows a mixed lymphocytic and neutrophilic pleocytosis.",
@@ -1546,6 +1618,7 @@
           ],
         },
         {
+          caseNum: 46,
           syndrome: 'Neonatal Early-Onset Sepsis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A newborn develops respiratory distress, fever, and a diffuse papular rash ('granulomatosis infantiseptica') within hours of a preterm delivery complicated by maternal fever during labour.",
@@ -1556,6 +1629,7 @@
           ],
         },
         {
+          caseNum: 47,
           syndrome: 'Bacteraemia — Foodborne Source in Pregnancy',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 31-year-old pregnant woman at 32 weeks' gestation presents with fever and myalgia after eating soft cheese and deli meats while travelling. She has mild uterine contractions but no other localising symptoms.",
@@ -1566,6 +1640,7 @@
           ],
         },
         {
+          caseNum: 48,
           syndrome: 'Meningitis — Solid-Organ Transplant Recipient',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 57-year-old man, 8 months post-kidney transplant on triple immunosuppression, presents with fever, headache, and new gait unsteadiness suggesting rhombencephalitis.",
@@ -1611,6 +1686,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 49,
           syndrome: 'Healthcare-Associated Diarrhoea',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 74-year-old man develops 8 episodes of watery diarrhoea a day, with new abdominal cramping, 5 days after starting clindamycin for a dental infection during a hospital admission for pneumonia.",
@@ -1621,6 +1697,7 @@
           ],
         },
         {
+          caseNum: 50,
           syndrome: 'Fulminant Colitis — Toxic Megacolon',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "An 80-year-old woman with severe diarrhoea that has now paradoxically stopped, worsening abdominal distension, fever, and hypotension is found to have marked colonic dilatation on imaging, 10 days after a course of fluoroquinolone antibiotics.",
@@ -1631,6 +1708,7 @@
           ],
         },
         {
+          caseNum: 51,
           syndrome: 'Recurrent Infection — Second Episode',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 66-year-old woman has her second relapse of diarrhoea within 8 weeks of completing a course of oral vancomycin for a prior confirmed episode, again after a course of antibiotics for a urinary tract infection.",
@@ -1641,6 +1719,7 @@
           ],
         },
         {
+          caseNum: 52,
           syndrome: 'Community-Acquired Infection — No Recent Antibiotics',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 45-year-old previously well woman develops profuse watery diarrhoea and cramping with no recent hospitalisation and no antibiotic use in the past 6 months.",
@@ -1689,6 +1768,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 53,
           syndrome: 'Urethritis — Symptomatic Male',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 24-year-old man presents with 3 days of dysuria and a purulent yellow urethral discharge, 5 days after unprotected sexual contact with a new partner.",
@@ -1699,6 +1779,7 @@
           ],
         },
         {
+          caseNum: 54,
           syndrome: 'Cervicitis — Asymptomatic Screening',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 22-year-old woman has minimal symptoms but attends after her partner was diagnosed with gonorrhoea. Endocervical swab and NAAT are sent as part of contact screening.",
@@ -1709,6 +1790,7 @@
           ],
         },
         {
+          caseNum: 55,
           syndrome: 'Disseminated Gonococcal Infection',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 27-year-old woman presents with 4 days of migratory joint pain, tenosynovitis of the wrist, and a handful of small pustular lesions on her fingers and forearms. She has no current genital symptoms.",
@@ -1719,6 +1801,7 @@
           ],
         },
         {
+          caseNum: 56,
           syndrome: 'Gonococcal Conjunctivitis — Neonatal',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A newborn develops thick, purulent bilateral eye discharge on day 4 of life. The mother did not receive antenatal STI screening. Untreated, this can rapidly progress to corneal involvement.",
@@ -1764,6 +1847,7 @@
       flagName: 'MDR',
       vignettes: [
         {
+          caseNum: 57,
           syndrome: 'Classic Enteric Fever — Returning Traveller',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 26-year-old presents with 8 days of stepwise rising fever, headache, and abdominal discomfort with constipation, 10 days after returning from a trip to South Asia. Pulse is relatively slow for the degree of fever (relative bradycardia).",
@@ -1774,6 +1858,7 @@
           ],
         },
         {
+          caseNum: 58,
           syndrome: 'Enteric Fever with Rose Spots',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 31-year-old man has a week of fever and malaise, with a few faint, blanching pink macules over his trunk and mild hepatosplenomegaly on exam. He returned from overseas travel two weeks ago.",
@@ -1784,6 +1869,7 @@
           ],
         },
         {
+          caseNum: 59,
           syndrome: 'Complicated Typhoid — Intestinal Perforation',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 34-year-old man, unwell with fever for 3 weeks without treatment, develops sudden severe abdominal pain and rigidity. Imaging shows free air under the diaphragm — a surgical emergency.",
@@ -1794,6 +1880,7 @@
           ],
         },
         {
+          caseNum: 60,
           syndrome: 'Chronic Carriage — Food Handler',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A food-service worker has recurrent positive stool cultures for the same organism despite a febrile illness that resolved months ago, raising concern for chronic gallbladder carriage and a public health referral.",
@@ -1849,6 +1936,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 61,
           syndrome: 'Neonatal Early-Onset Sepsis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A newborn develops respiratory distress, temperature instability, and lethargy within 24 hours of birth. The mother's antenatal Group B strep colonisation status was not documented.",
@@ -1859,6 +1947,7 @@
           ],
         },
         {
+          caseNum: 62,
           syndrome: 'Neonatal Late-Onset Sepsis/Meningitis',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 2-week-old infant presents with fever, poor feeding, irritability, and a bulging fontanelle. Lumbar puncture shows a neutrophilic pleocytosis.",
@@ -1869,6 +1958,7 @@
           ],
         },
         {
+          caseNum: 63,
           syndrome: 'Maternal Peripartum Bacteraemia',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A woman develops fever and chills within hours of an uncomplicated vaginal delivery. Blood cultures are drawn and flag positive.",
@@ -1879,6 +1969,7 @@
           ],
         },
         {
+          caseNum: 64,
           syndrome: 'Invasive Infection — Elderly Diabetic Adult',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 71-year-old man with poorly controlled diabetes presents with cellulitis of the lower leg and bacteraemia, illustrating that this organism isn't only a neonatal pathogen.",
@@ -1924,6 +2015,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 65,
           syndrome: 'Travel-Associated Pneumonia — Hotel Stay',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 58-year-old man presents with 5 days of severe pneumonia, high fever, confusion, watery diarrhoea, and a sodium of 128 mmol/L, 5 days after a hotel stay later linked to a contaminated cooling tower.",
@@ -1934,6 +2026,7 @@
           ],
         },
         {
+          caseNum: 66,
           syndrome: 'Healthcare-Associated Outbreak',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A patient hospitalised for a week develops new severe pneumonia, in the setting of an ongoing hospital water-system investigation after two other cases were linked to the same ward.",
@@ -1944,6 +2037,7 @@
           ],
         },
         {
+          caseNum: 67,
           syndrome: 'Community Case — Immunocompromised Host',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A patient on long-term corticosteroids develops severe pneumonia with diarrhoea and confusion, with no clear exposure history recalled.",
@@ -1954,6 +2048,7 @@
           ],
         },
         {
+          caseNum: 68,
           syndrome: 'Mild Presentation — Pontiac Fever-like Illness',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "An otherwise well person develops a short, self-limited flu-like illness with fever and myalgia — no pneumonia — a few days after using a contaminated spa/whirlpool, illustrating the milder, non-pneumonic form of Legionella infection.",
@@ -1999,6 +2094,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 69,
           syndrome: 'Walking Pneumonia — Young Adult',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 20-year-old university student presents with 10 days of gradually worsening dry cough, low-grade fever, and headache — well enough to have kept attending classes throughout ('walking pneumonia').",
@@ -2009,6 +2105,7 @@
           ],
         },
         {
+          caseNum: 70,
           syndrome: 'Outbreak in a Close-Contact Setting',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "Several students in the same dormitory floor develop a similar prolonged dry cough and low-grade fever over a couple of weeks, consistent with the slow spread typical of this organism in close-contact settings.",
@@ -2019,6 +2116,7 @@
           ],
         },
         {
+          caseNum: 71,
           syndrome: 'Extrapulmonary Manifestation — Erythema Multiforme',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 16-year-old with a week of respiratory symptoms develops target-lesion skin rash consistent with erythema multiforme, illustrating this organism's well-known extrapulmonary associations.",
@@ -2029,6 +2127,7 @@
           ],
         },
         {
+          caseNum: 72,
           syndrome: 'Atypical Pneumonia in a Child with Wheeze',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 9-year-old presents with cough, wheeze, and a patchy infiltrate on chest X-ray, initially treated as an asthma exacerbation before a persistent low-grade fever prompts further work-up.",
@@ -2074,6 +2173,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 73,
           syndrome: 'Candidaemia — Central Line-Associated',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "An ICU patient with a central venous catheter in place for 3 weeks, on broad-spectrum antibiotics and total parenteral nutrition, develops fever unresponsive to antibacterial escalation. Blood cultures eventually flag positive for yeast.",
@@ -2084,6 +2184,7 @@
           ],
         },
         {
+          caseNum: 74,
           syndrome: 'Candiduria — Catheterised, Asymptomatic',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "An elderly catheterised patient is found to have yeast growing on a routine urine culture. She is entirely asymptomatic, with no fever, dysuria, or flank pain.",
@@ -2094,6 +2195,7 @@
           ],
         },
         {
+          caseNum: 75,
           syndrome: 'Oropharyngeal Candidiasis — Immunocompromised',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A patient with poorly controlled HIV presents with white plaques on the tongue and buccal mucosa that scrape off easily, with odynophagia raising concern for oesophageal extension.",
@@ -2104,6 +2206,7 @@
           ],
         },
         {
+          caseNum: 76,
           syndrome: 'Invasive Candidiasis — Neutropenic Fever',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient with prolonged neutropenia after chemotherapy has persistent fever despite broad-spectrum antibacterials; imaging of the liver and spleen shows multiple small rounded lesions.",
@@ -2149,6 +2252,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 77,
           syndrome: 'Meningitis in Advanced HIV',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient with poorly controlled HIV and a low CD4 count presents with 2 weeks of subacute headache, low-grade fever, and visual blurring suggesting raised intracranial pressure. Neck stiffness is subtle or absent.",
@@ -2159,6 +2263,7 @@
           ],
         },
         {
+          caseNum: 78,
           syndrome: 'Meningitis in a Solid-Organ Transplant Recipient',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A kidney transplant recipient on chronic immunosuppression presents with a similar subacute headache and low-grade fever, illustrating that this isn't solely an HIV-associated pathogen.",
@@ -2169,6 +2274,7 @@
           ],
         },
         {
+          caseNum: 79,
           syndrome: 'Pulmonary Cryptococcosis — Incidental Nodule',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A patient is found to have an incidental lung nodule on imaging done for an unrelated reason; biopsy reveals encapsulated yeast. He is minimally symptomatic with no neurological signs.",
@@ -2179,6 +2285,7 @@
           ],
         },
         {
+          caseNum: 80,
           syndrome: 'Cryptococcal Meningitis with Raised Intracranial Pressure',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient with confirmed cryptococcal meningitis develops worsening headache, vomiting, and reduced consciousness despite antifungal therapy. Opening pressure on lumbar puncture is markedly elevated.",
@@ -2227,6 +2334,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 81,
           syndrome: 'Ventilator-Associated Pneumonia — Prior Cephalosporin Exposure',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "An ICU patient, ventilated for 10 days, was treated empirically with ceftriaxone earlier this admission for a presumed infection. He now develops new fever and purulent tracheal secretions.",
@@ -2237,6 +2345,7 @@
           ],
         },
         {
+          caseNum: 82,
           syndrome: 'Post-Surgical Intra-Abdominal Infection',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A patient develops fever and abdominal pain 6 days after bowel resection surgery. Imaging shows an intra-abdominal collection, and cultures from drained fluid are sent.",
@@ -2247,6 +2356,7 @@
           ],
         },
         {
+          caseNum: 83,
           syndrome: 'Catheter-Associated Urosepsis',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A nursing home resident with a long-term urinary catheter presents with fever and rigors. Urine is cloudy, and blood cultures are also sent given systemic signs.",
@@ -2257,6 +2367,7 @@
           ],
         },
         {
+          caseNum: 84,
           syndrome: 'Wound Infection — Diabetic Foot',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A patient with a chronic diabetic foot ulcer develops new purulent discharge, surrounding erythema, and fever. Wound swab and blood cultures are sent.",
@@ -2307,6 +2418,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 85,
           syndrome: 'Urethritis — Symptomatic Male',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 22-year-old man presents with 5 days of mild dysuria and a scant, clear-to-mucoid urethral discharge. He reports a new sexual partner about three weeks ago and inconsistent condom use. He is otherwise well, with no fever or testicular pain.",
@@ -2317,6 +2429,7 @@
           ],
         },
         {
+          caseNum: 86,
           syndrome: 'Cervicitis — Asymptomatic, Detected on Screening',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 24-year-old woman attends a routine sexual health screen with no symptoms. On examination there is mild cervical friability and scant mucopurulent discharge, both easily missed without a targeted exam. She has had two sexual partners in the past year.",
@@ -2327,6 +2440,7 @@
           ],
         },
         {
+          caseNum: 87,
           syndrome: 'Pelvic Inflammatory Disease — Ascending Infection',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 27-year-old woman presents with 4 days of lower abdominal pain, fever, and deep dyspareunia. On examination she has bilateral adnexal tenderness and cervical motion tenderness. She had an untreated episode of 'mild cervicitis' noted incidentally six months ago that was never followed up.",
@@ -2337,6 +2451,7 @@
           ],
         },
         {
+          caseNum: 88,
           syndrome: 'Neonatal Conjunctivitis — Vertical Transmission',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 9-day-old infant is brought in with bilateral eyelid swelling and a watery-to-mucopurulent eye discharge that started on day 6 of life. The mother did not receive antenatal STI screening. There is no fever and the infant is otherwise feeding and behaving normally.",
@@ -2382,6 +2497,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 89,
           syndrome: 'Primary Stage — Genital Chancre',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 29-year-old man presents with a single painless genital ulcer with a clean, indurated base that appeared about three weeks after an unprotected sexual encounter. He has non-tender bilateral inguinal lymphadenopathy. He initially assumed it would resolve on its own and delayed seeking care.",
@@ -2392,6 +2508,7 @@
           ],
         },
         {
+          caseNum: 90,
           syndrome: 'Secondary Syphilis — Disseminated Rash',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A 33-year-old woman presents with a widespread maculopapular rash present for a week, notably involving her palms and soles, along with generalised non-tender lymphadenopathy and mild malaise. She recalls a painless genital sore about two months ago that resolved on its own without treatment.",
@@ -2402,6 +2519,7 @@
           ],
         },
         {
+          caseNum: 91,
           syndrome: 'Neurosyphilis — Late Complication in Advanced HIV',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 46-year-old man with poorly-controlled HIV presents with several weeks of progressive gait unsteadiness, lancinating leg pains, and abnormal pupillary responses that constrict with accommodation but not to light. He recalls a remote, untreated genital ulcer many years ago.",
@@ -2412,6 +2530,7 @@
           ],
         },
         {
+          caseNum: 92,
           syndrome: 'Congenital Syphilis — Vertical Transmission',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A newborn is found to have hepatosplenomegaly, a diffuse maculopapular rash involving the palms and soles, and poor weight gain. The mother did not receive antenatal care and her booking bloods were never done.",
@@ -2466,6 +2585,7 @@
       flagName: 'Oseltamivir-R',
       vignettes: [
         {
+          caseNum: 93,
           syndrome: 'Uncomplicated Influenza — Healthy Adult',
           patientHP: 70,
           // low-risk, previously well, no hospitalisation/severe features — antiviral treatment
@@ -2479,6 +2599,7 @@
           ],
         },
         {
+          caseNum: 94,
           syndrome: 'Influenza in Pregnancy',
           patientHP: 60,
           // pregnancy is an independent risk factor for severe disease — antiviral treatment
@@ -2492,6 +2613,7 @@
           ],
         },
         {
+          caseNum: 95,
           syndrome: 'Severe Influenza Pneumonia — ICU',
           patientHP: 50,
           // hospitalised with severe/progressive disease — an absolute indication for antiviral
@@ -2505,6 +2627,7 @@
           ],
         },
         {
+          caseNum: 96,
           syndrome: 'Prolonged Shedding on Treatment — Immunocompromised Host',
           patientHP: 55,
           // immunocompromised with ongoing infection despite treatment — needs escalation/resistance
@@ -2573,6 +2696,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 97,
           syndrome: 'Uncomplicated Falciparum Malaria — Returning Traveller',
           patientHP: 65,
           text: "A 32-year-old man presents with 3 days of cyclical fever, chills, headache, and myalgia, 10 days after returning from a work trip to sub-Saharan Africa. He took no malaria chemoprophylaxis. He is alert, haemodynamically stable, and tolerating oral intake.",
@@ -2583,6 +2707,7 @@
           ],
         },
         {
+          caseNum: 98,
           syndrome: 'Severe Malaria — Cerebral Malaria',
           patientHP: 50,
           text: "A 45-year-old woman is brought to the emergency department confused and drowsy, 12 days after returning from a trip to Papua New Guinea. She is unable to follow commands, her blood glucose is low, and she has scattered petechiae. Parasitaemia on blood film is 8%.",
@@ -2593,6 +2718,7 @@
           ],
         },
         {
+          caseNum: 99,
           syndrome: 'Uncomplicated Malaria — Pregnant Traveller',
           patientHP: 60,
           text: "A 26-year-old woman at 18 weeks' gestation presents with fever and chills 2 weeks after returning from a holiday in a malaria-endemic area. She is alert and stable, but is concerned about which treatments are considered safe in pregnancy.",
@@ -2603,6 +2729,7 @@
           ],
         },
         {
+          caseNum: 100,
           syndrome: 'Severe Malaria — Acute Kidney Injury and Jaundice',
           patientHP: 50,
           text: "A 50-year-old man presents 9 days after returning from a fishing trip in a malaria-endemic region with fever, dark urine, jaundice, and reduced urine output. Parasitaemia is 12%, creatinine is markedly elevated, and bilirubin is raised.",
@@ -2648,6 +2775,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 101,
           syndrome: 'Chronic Asymptomatic Carriage — Incidental Eosinophilia',
           patientHP: 70,
           text: "A 58-year-old man, originally from rural Southeast Asia and living in Singapore for 30 years, is found to have persistent mild eosinophilia on a routine blood test. He reports vague intermittent abdominal bloating and itchy skin patches on his buttocks and thighs over many years but is otherwise well.",
@@ -2658,6 +2786,7 @@
           ],
         },
         {
+          caseNum: 102,
           syndrome: 'Larva Currens — Recurrent Migratory Rash',
           patientHP: 68,
           text: "A 45-year-old woman with a remote history of living in a rural tropical area presents with an intensely itchy, rapidly migrating serpiginous rash on her trunk that appears and fades within hours, recurring intermittently over several years.",
@@ -2668,6 +2797,7 @@
           ],
         },
         {
+          caseNum: 103,
           syndrome: 'Hyperinfection Syndrome — Pre-Steroid Screening Missed',
           patientHP: 50,
           text: "A 62-year-old man with a remote history of residence in an endemic region is started on high-dose corticosteroids for a presumed autoimmune flare, without prior screening. Two weeks later he develops severe abdominal pain, watery diarrhoea, and new Gram-negative bacteraemia, without eosinophilia.",
@@ -2678,6 +2808,7 @@
           ],
         },
         {
+          caseNum: 104,
           syndrome: 'Disseminated Strongyloidiasis — Solid Organ Transplant Recipient',
           patientHP: 50,
           text: "A 55-year-old man, three weeks post-renal transplant on induction immunosuppression, develops fever, cough, haemoptysis, and abdominal pain. He emigrated from an endemic region many years ago. Chest imaging shows diffuse infiltrates.",
@@ -2723,6 +2854,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 105,
           syndrome: 'Catheter-Associated Urinary Tract Infection',
           patientHP: 65,
           text: "An 82-year-old nursing home resident with a long-term indwelling urinary catheter develops fever and new confusion. The catheter bag contents have a distinctly pink-red tinge that the nursing staff flagged as unusual.",
@@ -2733,6 +2865,7 @@
           ],
         },
         {
+          caseNum: 106,
           syndrome: 'Central-Line-Associated Bloodstream Infection',
           patientHP: 55,
           text: "An ICU patient with a central venous catheter in place for 12 days develops new fever and rigors with no other clear source. Blood cultures are drawn peripherally and through the line.",
@@ -2743,6 +2876,7 @@
           ],
         },
         {
+          caseNum: 107,
           syndrome: 'Hospital-Acquired Pneumonia — Prior Cephalosporin Exposure',
           patientHP: 50,
           text: "A ventilated ICU patient who received ceftriaxone earlier this admission for a different presumed infection now develops new fever and purulent tracheal secretions.",
@@ -2753,6 +2887,7 @@
           ],
         },
         {
+          caseNum: 108,
           syndrome: 'Post-Operative Surgical Site Infection',
           patientHP: 60,
           text: "A patient develops purulent discharge and surrounding erythema at a surgical wound site 5 days after an abdominal procedure. Wound swab and blood cultures are sent.",
@@ -2801,6 +2936,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 109,
           syndrome: 'Complicated UTI — Long-Term Urinary Catheter',
           patientHP: 65,
           text: "A 76-year-old man with a long-term indwelling urinary catheter for neurogenic bladder presents with fever, cloudy urine, and suprapubic tenderness.",
@@ -2812,6 +2948,7 @@
           ],
         },
         {
+          caseNum: 110,
           syndrome: 'Catheter-Associated Bacteraemia',
           patientHP: 55,
           text: "A nursing home resident with a long-term urinary catheter develops fever, rigors, and hypotension. Urine and blood cultures are sent.",
@@ -2823,6 +2960,7 @@
           ],
         },
         {
+          caseNum: 111,
           syndrome: 'Post-Operative Wound Infection — Diabetic Foot',
           patientHP: 60,
           text: "A patient with a chronic diabetic foot ulcer develops new purulent discharge and surrounding erythema. Wound swab and blood cultures are sent.",
@@ -2834,6 +2972,7 @@
           ],
         },
         {
+          caseNum: 112,
           syndrome: 'Hospital-Acquired Pneumonia — Prior Cephalosporin Exposure',
           patientHP: 50,
           text: "A ventilated ICU patient who received ceftriaxone earlier this admission develops new fever and purulent tracheal secretions.",
@@ -2883,6 +3022,7 @@
       flagName: 'Clarithromycin-R',
       vignettes: [
         {
+          caseNum: 113,
           syndrome: 'Peptic Ulcer Disease — Epigastric Pain',
           patientHP: 68,
           text: "A 45-year-old man presents with several weeks of gnawing epigastric pain, worse between meals and partially relieved by eating. Endoscopy shows a duodenal ulcer, and gastric biopsies are taken.",
@@ -2893,6 +3033,7 @@
           ],
         },
         {
+          caseNum: 114,
           syndrome: 'Dyspepsia — Non-Invasive Testing, No Alarm Features',
           patientHP: 70,
           text: "A 34-year-old woman with several months of intermittent upper abdominal discomfort and bloating, no weight loss, bleeding, or dysphagia, is tested non-invasively without endoscopy given her age and absence of alarm features.",
@@ -2903,6 +3044,7 @@
           ],
         },
         {
+          caseNum: 115,
           syndrome: 'Gastric MALT Lymphoma — Incidental Finding',
           patientHP: 60,
           text: "A 58-year-old man undergoing endoscopy for dyspepsia is found to have a low-grade gastric MALT (mucosa-associated lymphoid tissue) lymphoma on biopsy. H. pylori is also identified on the same specimen.",
@@ -2913,6 +3055,7 @@
           ],
         },
         {
+          caseNum: 116,
           syndrome: 'Recurrent Symptoms After Prior Triple Therapy',
           patientHP: 55,
           text: "A 50-year-old woman completed a course of clarithromycin triple therapy for confirmed H. pylori four months ago but now has recurrent dyspeptic symptoms. Repeat stool antigen testing is positive.",
@@ -2966,6 +3109,7 @@
       flagName: 'Ciprofloxacin-R',
       vignettes: [
         {
+          caseNum: 117,
           syndrome: 'Acute Gastroenteritis — Healthy Adult, Self-Limiting',
           patientHP: 70,
           supportiveCareOk: true,
@@ -2977,6 +3121,7 @@
           ],
         },
         {
+          caseNum: 118,
           syndrome: 'Bloody Diarrhoea with High Fever — Early Presentation',
           patientHP: 60,
           supportiveCareOk: false,
@@ -2988,6 +3133,7 @@
           ],
         },
         {
+          caseNum: 119,
           syndrome: 'Immunocompromised Host — HIV, Prolonged Bacteraemia',
           patientHP: 50,
           supportiveCareOk: false,
@@ -2999,6 +3145,7 @@
           ],
         },
         {
+          caseNum: 120,
           syndrome: 'Severe Traveller’s Diarrhoea — Returning from Southeast Asia',
           patientHP: 55,
           supportiveCareOk: false,
@@ -3049,6 +3196,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 121,
           syndrome: 'Acute Watery Diarrhoea — Outbreak Setting',
           patientHP: 60,
           text: "A 35-year-old man presents during a recognised local outbreak with profuse, painless, watery diarrhoea described as looking like 'rice water', with no blood or significant abdominal pain. He appears moderately dehydrated.",
@@ -3059,6 +3207,7 @@
           ],
         },
         {
+          caseNum: 122,
           syndrome: 'Mild-Moderate Dehydration — Early Presentation',
           patientHP: 68,
           text: "A 29-year-old woman presents on day 1 of watery diarrhoea, thirsty and with slightly dry mucous membranes but otherwise alert and haemodynamically stable.",
@@ -3069,6 +3218,7 @@
           ],
         },
         {
+          caseNum: 123,
           syndrome: 'Severe Dehydration with Hypovolaemic Shock',
           patientHP: 50,
           text: "A 50-year-old man presents with profuse watery diarrhoea, sunken eyes, minimal skin turgor, a barely palpable radial pulse, and a blood pressure of 78/44. He requires immediate resuscitation.",
@@ -3079,6 +3229,7 @@
           ],
         },
         {
+          caseNum: 124,
           syndrome: 'Cholera in Pregnancy — Travelling to an Endemic Area',
           patientHP: 58,
           text: "A 27-year-old woman at 20 weeks' gestation, recently returned from an area with an active cholera outbreak, presents with profuse watery diarrhoea and moderate dehydration.",
@@ -3125,6 +3276,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 125,
           syndrome: 'Wound Infection After Seawater Exposure',
           patientHP: 65,
           text: "A 55-year-old man develops spreading erythema, swelling, and pain around a small cut sustained while wading in warm coastal seawater two days earlier.",
@@ -3135,6 +3287,7 @@
           ],
         },
         {
+          caseNum: 126,
           syndrome: 'Necrotising Fasciitis — Cirrhotic Patient',
           patientHP: 50,
           text: "A 61-year-old man with known alcoholic cirrhosis presents with rapidly spreading pain, swelling, and haemorrhagic bullae on his leg, 18 hours after a minor injury while fishing in coastal waters. He is tachycardic and hypotensive.",
@@ -3145,6 +3298,7 @@
           ],
         },
         {
+          caseNum: 127,
           syndrome: 'Primary Septicaemia After Raw Oyster Consumption',
           patientHP: 50,
           text: "A 58-year-old man with known cirrhosis presents with fever, chills, and haemorrhagic bullous skin lesions 36 hours after eating raw oysters, with no antecedent wound. Blood pressure is 82/50.",
@@ -3155,6 +3309,7 @@
           ],
         },
         {
+          caseNum: 128,
           syndrome: 'Wound Infection — Immunocompetent Host, Mild',
           patientHP: 68,
           text: "A 30-year-old otherwise healthy man develops localised cellulitis around a small cut sustained while cleaning fish, without systemic symptoms.",
@@ -3201,6 +3356,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 129,
           syndrome: 'Infant Paroxysmal Cough with Apnoea',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 6-week-old, unvaccinated infant presents with a week of coryza followed by paroxysms of forceful coughing ending in cyanosis and brief apnoea, without the classic inspiratory whoop. There is post-tussive vomiting between spells.",
@@ -3211,6 +3367,7 @@
           ],
         },
         {
+          caseNum: 130,
           syndrome: 'Prolonged Cough in a Waning-Immunity Adult',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 34-year-old office worker, last vaccinated in childhood, presents with 3 weeks of paroxysmal coughing fits with an inspiratory whoop and post-tussive vomiting, well enough throughout to keep working. Two colleagues have a similar prolonged cough.",
@@ -3221,6 +3378,7 @@
           ],
         },
         {
+          caseNum: 131,
           syndrome: 'Household Contact — Post-Exposure Scenario',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A fully vaccinated 8-year-old develops a mild cough and coryza a week after her unvaccinated younger sibling was confirmed to have pertussis. Both are otherwise well, but there is a 2-month-old infant at home.",
@@ -3267,6 +3425,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 132,
           syndrome: 'Classic Respiratory Diphtheria',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "An unvaccinated 7-year-old recently arrived from a region with low vaccine coverage presents with 2 days of sore throat and low-grade fever. Examination shows a grey-white membrane adherent to the tonsils and pharynx that bleeds when gently scraped, with marked cervical lymphadenopathy and neck swelling ('bull neck').",
@@ -3277,6 +3436,7 @@
           ],
         },
         {
+          caseNum: 133,
           syndrome: 'Cutaneous Diphtheria',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A traveller returning from a region with endemic diphtheria presents with a chronic, non-healing leg ulcer covered by a grey membrane, with mild surrounding erythema and no significant systemic symptoms.",
@@ -3287,6 +3447,7 @@
           ],
         },
         {
+          caseNum: 134,
           syndrome: 'Toxic Diphtheria with Myocarditis',
           patientHP: 45, // starting patient life for this vignette's severity
           text: "A patient with untreated pharyngeal diphtheria for 6 days develops new palpitations and a slow, irregular pulse. ECG shows a new high-degree atrioventricular block, and examination reveals emerging palatal weakness with a nasal quality to the voice.",
@@ -3336,6 +3497,7 @@
       flagName: 'MDR',
       vignettes: [
         {
+          caseNum: 135,
           syndrome: 'Bacillary Dysentery — Childcare Outbreak',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 4-year-old in a daycare centre presents with high fever, crampy abdominal pain, and frequent small-volume stools containing visible blood and mucus with tenesmus. Two other children at the same centre have similar symptoms.",
@@ -3346,6 +3508,7 @@
           ],
         },
         {
+          caseNum: 136,
           syndrome: 'Traveller’s Dysentery — Returning from South Asia',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 27-year-old returns from a month of travel through South Asia with 4 days of high fever, crampy abdominal pain, and bloody, mucoid diarrhoea with tenesmus.",
@@ -3356,6 +3519,7 @@
           ],
         },
         {
+          caseNum: 137,
           syndrome: 'Sexually Transmitted Shigellosis',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A sexually active man presents with fever, crampy abdominal pain, and bloody diarrhoea, part of a recognised local cluster of shigellosis among men who have sex with men, some isolates from which have shown extensive drug resistance.",
@@ -3413,6 +3577,7 @@
       flagName: 'Clindamycin-R',
       vignettes: [
         {
+          caseNum: 138,
           syndrome: 'Perforated Appendicitis with Intra-Abdominal Abscess',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 24-year-old presents with 3 days of worsening abdominal pain, fever, and a CT scan showing a perforated appendix with a surrounding periappendiceal abscess. Aspirated pus has a distinctly foul odour.",
@@ -3423,6 +3588,7 @@
           ],
         },
         {
+          caseNum: 139,
           syndrome: 'Complicated Diverticulitis with Pelvic Abscess',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A 68-year-old with known diverticular disease presents with fever, left iliac fossa pain, and a pelvic collection on imaging following a recent episode of diverticulitis treated as an outpatient.",
@@ -3433,6 +3599,7 @@
           ],
         },
         {
+          caseNum: 140,
           syndrome: 'Tubo-Ovarian Abscess',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 32-year-old with a history of pelvic inflammatory disease presents with fever, lower abdominal pain, and a complex adnexal mass on ultrasound consistent with a tubo-ovarian abscess.",
@@ -3492,6 +3659,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 141,
           syndrome: 'Acute Otitis Media — Young Child',
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 3-year-old presents with 2 days of ear pain and fever following a viral upper respiratory infection. Otoscopy shows a bulging, erythematous tympanic membrane with reduced mobility.",
@@ -3502,6 +3670,7 @@
           ],
         },
         {
+          caseNum: 142,
           syndrome: 'Acute Exacerbation of COPD',
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 71-year-old with COPD and a long smoking history presents with 3 days of increased sputum purulence, worsening dyspnoea, and mild fever, without a clear pneumonic infiltrate on chest X-ray.",
@@ -3512,6 +3681,7 @@
           ],
         },
         {
+          caseNum: 143,
           syndrome: 'Bacteraemia in an Immunocompromised Adult',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 66-year-old on long-term corticosteroids for a rheumatological condition presents with fever and rigors. Blood cultures flag positive, illustrating that this usually mucosa-limited organism can occasionally cause invasive disease.",
@@ -3561,6 +3731,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 144,
           syndrome: "Lemierre's Syndrome — Post-Anginal Sepsis",
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A previously healthy 19-year-old presents with high fevers and unilateral neck swelling and tenderness along the sternocleidomastoid, a week after a sore throat that seemed to have resolved. Chest imaging shows multiple peripheral cavitating nodules.",
@@ -3571,6 +3742,7 @@
           ],
         },
         {
+          caseNum: 145,
           syndrome: 'Odontogenic Deep Neck Space Infection',
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A patient with a recent untreated dental abscess develops fever, trismus, and a rapidly spreading floor-of-mouth swelling with airway compromise, in a polymicrobial deep neck space infection.",
@@ -3617,6 +3789,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 146,
           syndrome: 'Generalised Tetanus — Contaminated Puncture Wound',
           patientHP: 45, // starting patient life for this vignette's severity
           text: "A 58-year-old gardener with incomplete/unknown tetanus vaccination presents a week after a deep puncture wound from a rusty garden tool, with jaw stiffness, difficulty swallowing, facial spasm giving a fixed grin (risus sardonicus), and episodes of back-arching (opisthotonus). He remains fully conscious throughout.",
@@ -3627,6 +3800,7 @@
           ],
         },
         {
+          caseNum: 147,
           syndrome: 'Wound Tetanus in a Person Who Injects Drugs',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A person who injects drugs subcutaneously ('skin-popping') presents with a contaminated injection-site wound and 2 days of jaw tightness progressing to generalised muscle rigidity and painful spasms triggered by loud noise and light.",
@@ -3676,6 +3850,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 148,
           syndrome: 'Ventilator-Associated Pneumonia — Prolonged ICU Stay',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient on mechanical ventilation for 3 weeks, having received two prior courses of meropenem for other infections, develops new fever and purulent tracheal secretions with a new infiltrate on chest imaging.",
@@ -3686,6 +3861,7 @@
           ],
         },
         {
+          caseNum: 149,
           syndrome: 'Central-Line-Associated Bloodstream Infection',
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient undergoing chemotherapy for haematological malignancy, on long-term broad-spectrum antibiotic prophylaxis with a central venous catheter, develops fever and rigors. Blood cultures flag positive.",
@@ -3732,6 +3908,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 150,
           syndrome: 'Fulminant Sepsis in an Asplenic Patient',
           patientHP: 35, // starting patient life for this vignette's severity
           text: "A patient who underwent splenectomy after trauma several years ago presents 3 days after a minor dog lick to an existing skin abrasion, with fulminant sepsis, purpuric skin lesions, and laboratory evidence of disseminated intravascular coagulation.",
@@ -3742,6 +3919,7 @@
           ],
         },
         {
+          caseNum: 151,
           syndrome: 'Localised Wound Infection After a Dog Bite',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "An otherwise healthy 40-year-old presents with mild cellulitis around a dog bite wound sustained 2 days earlier, without fever or systemic signs.",
@@ -3788,6 +3966,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 152,
           syndrome: 'Cutaneous Anthrax',
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A worker who handles imported animal hides develops a painless, pruritic papule on the forearm that progresses over several days into a vesicle and then a black eschar, with striking surrounding non-pitting oedema. He is otherwise systemically well.",
@@ -3798,6 +3977,7 @@
           ],
         },
         {
+          caseNum: 153,
           syndrome: 'Inhalational Anthrax',
           patientHP: 40, // starting patient life for this vignette's severity
           text: "A worker at a wool-processing facility develops several days of non-specific fever and malaise, then abruptly deteriorates with severe respiratory distress. Chest imaging shows a widened mediastinum without a typical lobar infiltrate.",
@@ -3847,6 +4027,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 154,
           syndrome: 'Emetic Syndrome — "Fried Rice Syndrome"',
           patientHP: 75, // starting patient life for this vignette's severity
           supportiveCareOk: true,
@@ -3896,6 +4077,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 155,
           syndrome: 'Bacterial Vaginosis',
           patientHP: 80, // starting patient life for this vignette's severity
           text: "A 29-year-old presents with a thin, grey-white, homogeneous vaginal discharge with a fishy odour, worse after intercourse. She reports minimal itching or soreness.",
@@ -3942,6 +4124,7 @@
       flagName: null,
       vignettes: [
         {
+          caseNum: 156,
           syndrome: 'Trichomonal Vaginitis',
           patientHP: 75, // starting patient life for this vignette's severity
           text: "A sexually active 26-year-old presents with a frothy, yellow-green, malodorous vaginal discharge, vulvovaginal itching, and pain with intercourse. Speculum examination shows punctate haemorrhages on the cervix.",
@@ -3980,20 +4163,6 @@
       ],
     },
   ];
-
-  // Assigns a stable, sequential case number to every vignette across all
-  // organisms (in ORGANISMS array order) — used for the on-screen case
-  // label instead of a descriptive title, so the title can't hint at the
-  // answer, and so a specific case can be referenced unambiguously
-  // (e.g. "case 47").
-  (function assignCaseNumbers() {
-    let n = 1;
-    for (const org of ORGANISMS) {
-      for (const v of org.vignettes) {
-        v.caseNum = n++;
-      }
-    }
-  })();
 
 // ===================================================================
 // DEX REFERENCE DATA — organism & drug reference pages ("lite Microbe
