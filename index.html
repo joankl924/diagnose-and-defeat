@@ -30,6 +30,7 @@
     --pseudo-green:   #3fae8a;
     --acineto-grey:   #8a8f9c;
     --entero-mag:     #a8639c;
+    --faecium-indigo: #5c5a9e;
     --mening-red:     #d9636b;
     --hib-blue:       #5f8fd9;
     --proteus-mustard:#c9a23a;
@@ -71,6 +72,19 @@
     --pjirovecii-mist:#9ba3b0;
     --aspergillus-verdigris: #5a8f5c;
     --mucorales-umber: #4a3c30;
+    --dengue-crimson: #a83232;
+    --hiv-violet: #6a4c93;
+    --hepb-amber: #c68a2e;
+    --hepc-ochre: #9c7a2e;
+    --hsv-rose: #b5566f;
+    --vzv-plum: #7a4a70;
+    --cmv-teal: #3a8a82;
+    --sars2-garnet: #8a2e3a;
+    --ebv-gold: #b8963a;
+    --measles-brick: #a8492e;
+    --rabies-charcoal: #3d3d3d;
+    --rsv-sky: #4a7a9e;
+    --chikv-coral: #d1704a;
   }
   * { box-sizing: border-box; }
   @media (prefers-reduced-motion: reduce) {
@@ -264,6 +278,11 @@
   /* GMS silver stain — cup-shaped/crescentic cysts, classically "crushed ping-pong balls" (Pneumocystis) */
   .pcp-art { width:100%; height:100%; border-radius:3px; background:#1c1c1c; position:relative; overflow:hidden; }
   .pcp-art i { position:absolute; border-radius:50%; background:transparent; border:2px solid #8fae9b; }
+
+  /* Tzanck smear — multinucleated giant cell with a fused, irregular nuclear mass (HSV/VZV) */
+  .giant-cell-art { width:100%; height:100%; border-radius:3px; background:#241318; position:relative; overflow:hidden; }
+  .giant-cell-art i.membrane { position:absolute; left:2px; top:2px; width:22px; height:22px; border-radius:45% 55% 50% 50%; background:#5c3a44; }
+  .giant-cell-art i.nucleus { position:absolute; border-radius:50%; background:#c9a0ab; }
 
   .quiz-options { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
   .quiz-opt { text-align:left; background: var(--bg-panel); border:1px solid var(--line); color:var(--text-main); padding:12px 14px; font-size:14.5px; cursor:pointer; font-family:'IBM Plex Sans',sans-serif; }
@@ -1245,7 +1264,7 @@
       id: 'efaecalis',
       kingdom: 'bacteria',
       name: 'Enterococcus faecalis',
-      aliases: ['enterococcus faecalis', 'enterococcus', 'e faecalis'],
+      aliases: ['enterococcus faecalis', 'e faecalis'],
       spriteColor: 'var(--entero-mag)',
       flagName: 'VRE',
       vignettes: [
@@ -1257,7 +1276,7 @@
           clues: [
             { title: "Gram Stain — Urine", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
             { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Small, grey, non-haemolytic (gamma) colonies; also grows on bile-aesculin agar." },
-            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl." },
+            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl. Looks identical to <i>E. faecium</i> on Gram stain and this panel — MALDI-TOF (or molecular testing) confirms the species as <i>E. faecalis</i>." },
           ],
         },
         {
@@ -1268,7 +1287,7 @@
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
             { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Small, grey, non-haemolytic (gamma) colonies; also grows on bile-aesculin agar." },
-            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl." },
+            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl. Looks identical to <i>E. faecium</i> on Gram stain and this panel — MALDI-TOF (or molecular testing) confirms the species as <i>E. faecalis</i>." },
           ],
         },
         {
@@ -1279,7 +1298,7 @@
           clues: [
             { title: "Gram Stain — Collection Fluid", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
             { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Small, grey, non-haemolytic (gamma) colonies; also grows on bile-aesculin agar." },
-            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl." },
+            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl. Looks identical to <i>E. faecium</i> on Gram stain and this panel — MALDI-TOF (or molecular testing) confirms the species as <i>E. faecalis</i>." },
           ],
         },
         {
@@ -1290,13 +1309,13 @@
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
             { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Small, grey, non-haemolytic (gamma) colonies; also grows on bile-aesculin agar." },
-            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl." },
+            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl. Looks identical to <i>E. faecium</i> on Gram stain and this panel — MALDI-TOF (or molecular testing) confirms the species as <i>E. faecalis</i>." },
           ],
         },
       ],
       quizOptions: [
         { name: "Streptococcus pyogenes", correct: false },
-        { name: "Staphylococcus epidermidis", correct: false },
+        { name: "Enterococcus faecium", correct: false },
         { name: "Enterococcus faecalis", correct: true },
         { name: "Streptococcus pneumoniae", correct: false },
       ],
@@ -1304,7 +1323,7 @@
         { name: "Ampicillin", desc: "Aminopenicillin, first-line for susceptible isolates", isDrug: true,
           dmg: (r) => r ? 0 : 35,
           log: (r) => r ? `No effect — vancomycin-resistant enterococci (VRE) are typically also ampicillin-resistant. <span class="cite">(Grade A)</span>`
-                        : `Effective — ampicillin remains first-line for susceptible <i>E. faecalis</i>. <span class="cite">(Grade A)</span>` },
+                        : `Effective — ampicillin remains first-line for susceptible <i>E. faecalis</i>; note this is a real point of difference from <i>E. faecium</i>, which is usually ampicillin-resistant even when vancomycin-susceptible. <span class="cite">(Grade A)</span>` },
         { name: "Ampicillin + Gentamicin (synergy)", desc: "Combination for endocarditis, synergistic bactericidal effect", isDrug: true,
           dmg: (r) => r ? 0 : 48,
           log: (r) => r ? `No effect from the ampicillin component. <span class="cite">(Grade A)</span>`
@@ -1331,6 +1350,74 @@
         `<b>Enterococci are intrinsically resistant to cephalosporins</b> — reaching for ceftriaxone against a suspected enterococcal infection is a common and important pitfall. <span class="cite">(Grade A)</span>`,
         `<b>Enterococcal endocarditis classically needs synergistic combination therapy</b> (a cell-wall-active agent plus an aminoglycoside, or increasingly ampicillin plus ceftriaxone) because enterococci are only tolerant, not killed, by cell-wall agents alone. <span class="cite">(Grade B — ESC/AHA)</span>`,
         `<b>Prior vancomycin exposure and prolonged hospitalisation are the key drivers of VRE acquisition</b> — they should raise suspicion before culture results are back. <span class="cite">(Grade B)</span>`,
+      ],
+    },
+    {
+      id: 'efaecium',
+      kingdom: 'bacteria',
+      name: 'Enterococcus faecium',
+      aliases: ['enterococcus faecium', 'e faecium'],
+      spriteColor: 'var(--faecium-indigo)',
+      flagName: 'VRE',
+      vignettes: [
+        {
+          caseNum: 195,
+          syndrome: 'Central-Line-Associated Bacteraemia — ICU',
+          patientHP: 50, // starting patient life for this vignette's severity
+          text: "A 72-year-old woman remains in the ICU three weeks after an emergency laparotomy for faecal peritonitis, having already completed courses of piperacillin-tazobactam and then vancomycin for a presumed line infection. She now spikes a fever, and blood cultures drawn from both her central venous catheter and a peripheral vein grow the same organism.",
+          clues: [
+            { title: "Gram Stain — Blood Culture Broth", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
+            { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Small, grey, non-haemolytic (gamma) colonies; also grows on bile-aesculin agar — the same growth pattern as <i>E. faecalis</i>." },
+            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl. Indistinguishable from <i>E. faecalis</i> on this panel — MALDI-TOF (or molecular testing) confirms the species as <i>E. faecium</i>." },
+          ],
+        },
+        {
+          caseNum: 196,
+          syndrome: 'Prosthetic Valve Endocarditis',
+          patientHP: 45, // starting patient life for this vignette's severity
+          text: "A 70-year-old man with a bioprosthetic aortic valve, admitted five times in the past year for recurrent line infections and several prolonged courses of vancomycin, presents with fever and worsening breathlessness. Echocardiography shows a new vegetation on the prosthetic valve, and multiple blood cultures grow the same organism.",
+          clues: [
+            { title: "Gram Stain — Blood Culture Broth", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
+            { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Small, grey, non-haemolytic (gamma) colonies; also grows on bile-aesculin agar — the same growth pattern as <i>E. faecalis</i>." },
+            { title: "Biochemical Panel", icon: "test", text: "Catalase negative. PYR positive. Grows in 6.5% NaCl. Indistinguishable from <i>E. faecalis</i> on this panel — MALDI-TOF (or molecular testing) confirms the species as <i>E. faecium</i>." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Enterococcus faecalis", correct: false },
+        { name: "Staphylococcus epidermidis", correct: false },
+        { name: "Enterococcus faecium", correct: true },
+        { name: "Streptococcus pneumoniae", correct: false },
+      ],
+      moves: [
+        { name: "Ampicillin", desc: "Aminopenicillin — usually unreliable for E. faecium", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — unlike <i>E. faecalis</i>, most <i>E. faecium</i> isolates carry an altered, low-affinity PBP5 that confers ampicillin resistance intrinsically, regardless of vancomycin susceptibility. <span class="cite">(Grade B)</span>` },
+        { name: "Ceftriaxone", desc: "3rd-gen cephalosporin — intrinsically ineffective against all enterococci", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — enterococci (<i>E. faecalis</i> and <i>E. faecium</i> alike) are intrinsically resistant to all cephalosporins, regardless of what a lab report says. <span class="cite">(Grade A)</span>` },
+        { name: "Vancomycin", desc: "Glycopeptide — only useful if vancomycin-susceptible", isDrug: true,
+          dmg: (r) => r ? 0 : 28,
+          log: (r) => r ? `No effect — this isolate is vancomycin-resistant (VRE). The great majority of VRE isolated in hospitals today is <i>E. faecium</i>, not <i>E. faecalis</i>. <span class="cite">(Grade B — CDC)</span>`
+                        : `Effective for a susceptible isolate — vancomycin, not ampicillin, is the front-line agent here once susceptibility is confirmed. <span class="cite">(Grade B)</span>` },
+        { name: "Linezolid / High-Dose Daptomycin", desc: "Mainstay for ampicillin-resistant E. faecium, including VRE", isDrug: true,
+          dmg: (r) => r ? 45 : 15,
+          log: (r) => r ? `Effective — linezolid or high-dose daptomycin (10–12 mg/kg/day, higher than standard dosing because VRE isolates tend to have higher MICs) are the mainstay for VRE <i>E. faecium</i> bacteraemia. <span class="cite">(Grade B — cohort data linking higher daptomycin dose to lower mortality)</span>`
+                        : `Works, but this is unnecessary escalation — vancomycin remains preferred first-line once the isolate is confirmed vancomycin-susceptible. <span class="cite">(Grade B — stewardship principle)</span>` },
+        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+          dmg: (r) => 0,
+          log: (r, ctx) => {
+            ctx.setSubtype(r ? 'VRE' : 'Vancomycin-susceptible');
+            const rows = r
+              ? [{drug:'Ampicillin', result:'R'}, {drug:'Ceftriaxone', result:'R'}, {drug:'Vancomycin', result:'R'}, {drug:'Linezolid', result:'S'}]
+              : [{drug:'Ampicillin', result:'R'}, {drug:'Ceftriaxone', result:'R'}, {drug:'Vancomycin', result:'S'}];
+            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Vancomycin-resistant (VRE) <i>E. faecium</i> — ampicillin, ceftriaxone and vancomycin are all out; reach for linezolid or high-dose daptomycin.` : `Vancomycin-susceptible <i>E. faecium</i> — vancomycin is preferred. (Ampicillin R here is typical for this species regardless of VRE status — a key difference from <i>E. faecalis</i>.)`);
+          } },
+      ],
+      pearls: [
+        `<b><i>E. faecium</i> is intrinsically less susceptible than <i>E. faecalis</i></b> — most clinical isolates carry an altered PBP5 conferring ampicillin resistance even when fully vancomycin-susceptible, so the reflex ampicillin that works for <i>E. faecalis</i> is not a safe default here. <span class="cite">(Grade B — standard microbiology teaching)</span>`,
+        `<b>The great majority of vancomycin-resistant enterococci (VRE) isolated in hospitals is <i>E. faecium</i>, not <i>E. faecalis</i></b>, even though <i>E. faecalis</i> causes more enterococcal infections overall. <span class="cite">(Grade B — CDC)</span>`,
+        `<b><i>E. faecalis</i> and <i>E. faecium</i> are indistinguishable on Gram stain and basic biochemical panels</b> — definitive species identification needs MALDI-TOF or molecular methods, and the distinction matters because their intrinsic resistance patterns differ. <span class="cite">(Grade B)</span>`,
       ],
     },
     {
@@ -4446,6 +4533,866 @@
         `<b>Uncontrolled diabetes/DKA, haematological malignancy with neutropenia, and traumatic inoculation are the three classic risk-factor patterns</b>, each producing a different anatomical presentation (rhino-orbito-cerebral, pulmonary, and cutaneous respectively) from the same fungal genus. <span class="cite">(Grade B)</span>`,
       ],
     },
+    {
+      id: 'dengue',
+      kingdom: 'virus',
+      name: 'Dengue Virus',
+      aliases: ['dengue virus', 'dengue', 'dengue fever', 'breakbone fever'],
+      spriteColor: 'var(--dengue-crimson)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 169,
+          syndrome: 'Dengue Fever — Outpatient Management',
+          patientHP: 70,
+          supportiveCareOk: true,
+          text: "A 24-year-old presents with 3 days of high fever, severe retro-orbital headache, myalgia, and a fine maculopapular rash, during a period of high dengue activity in the community. He is tolerating oral fluids well, passing urine normally, and has no bleeding, persistent vomiting, or abdominal pain.",
+          clues: [
+            { title: "NS1 Antigen Test", icon: "antigen-strip", text: "Positive — NS1 antigen is typically detectable from day 1 to day 7 of illness, before an antibody response develops." },
+            { title: "Full Blood Count", icon: "test", text: "Mild leucopenia; platelet count at the lower end of normal. No haematocrit rise on serial testing." },
+            { title: "Clinical Assessment — WHO Warning Signs", icon: "test", text: "No warning signs present (no abdominal pain, persistent vomiting, mucosal bleeding, lethargy, liver enlargement, or rising haematocrit with falling platelets) — able to maintain oral intake and adhere to outpatient monitoring." },
+          ],
+        },
+        {
+          caseNum: 170,
+          syndrome: 'Severe Dengue — Warning Signs and Plasma Leakage',
+          patientHP: 40,
+          supportiveCareOk: false,
+          needsIVFluids: true,
+          text: "On day 4 of confirmed dengue, a patient develops persistent vomiting, worsening abdominal pain, and restlessness. Repeat blood tests show a rapid rise in haematocrit alongside a sharp fall in platelet count, and there are early signs of narrowing pulse pressure.",
+          clues: [
+            { title: "Clinical Assessment — WHO Warning Signs", icon: "test", text: "Multiple warning signs present: persistent vomiting, abdominal pain, restlessness — signalling the critical phase and impending plasma leakage." },
+            { title: "Full Blood Count (Serial)", icon: "test", text: "Rising haematocrit with a concurrent sharp fall in platelet count — the combination that defines plasma leakage, rather than either value alone." },
+            { title: "Vital Signs", icon: "test", text: "Narrowing pulse pressure — an early, subtle sign of impending shock that precedes overt hypotension." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Dengue Virus", correct: true },
+        { name: "Chikungunya Virus", correct: false },
+        { name: "Influenza A", correct: false },
+        { name: "Leptospira interrogans (leptospirosis)", correct: false },
+      ],
+      moves: [
+        { name: "Paracetamol + Oral Rehydration (Supportive Care)", desc: "First-line while no warning signs are present", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — this patient has no warning signs and can maintain oral intake; outpatient management with paracetamol and oral hydration, plus scheduled monitoring, is guideline-concordant. <span class="cite">(Grade A — Singapore National Dengue Clinical Guideline)</span>`
+            : `Not enough on its own — this patient has developed warning signs and early plasma leakage; outpatient supportive measures alone won't address the evolving shock physiology here. <span class="cite">(Grade A)</span>` },
+        { name: "IV Crystalloid Fluid Resuscitation", desc: "Guideline-directed for warning signs/shock — not for uncomplicated disease", isDrug: false,
+          dmg: (r, ctx) => ctx.vignette.needsIVFluids ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsIVFluids
+            ? `Correct and urgent — this patient is showing warning signs and early plasma leakage; IV crystalloid resuscitation following a structured stepwise protocol, with close haematocrit monitoring, is the guideline-directed intervention now. <span class="cite">(Grade A — Singapore National Dengue Clinical Guideline / WHO)</span>`
+            : `Not indicated here — this patient has no warning signs and can maintain oral intake; giving IV fluids to someone who doesn't need them risks fluid overload once the critical phase passes. Outpatient management with oral hydration is preferred. <span class="cite">(Grade B — harm-avoidance principle)</span>` },
+        { name: "Ibuprofen/NSAID for Fever", desc: "Avoid — bleeding risk", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No antiviral effect, and actively dangerous — NSAIDs (and aspirin) increase bleeding risk in dengue via platelet dysfunction and gastric irritation, compounding the thrombocytopenia and vascular fragility dengue itself causes. Paracetamol is the appropriate antipyretic. <span class="cite">(Grade A — Singapore National Dengue Clinical Guideline)</span>` },
+        { name: "Oseltamivir", desc: "Wrong virus family", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — dengue is a flavivirus, not influenza, and there is no dengue-specific antiviral in clinical use at all; oseltamivir's neuraminidase target doesn't exist in this virus. Management of dengue is entirely supportive. <span class="cite">(Grade A)</span>` },
+        { name: "Prophylactic Platelet Transfusion", desc: "Not indicated for isolated thrombocytopenia", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `Not recommended for isolated thrombocytopenia without active bleeding — prophylactic platelet transfusion doesn't reduce bleeding risk or improve outcomes here and exposes the patient to transfusion risk for no proven benefit. Reserve transfusion for significant clinical bleeding. <span class="cite">(Grade B — WHO/Singapore guidance)</span>` },
+      ],
+      pearls: [
+        `<b>WHO warning signs</b> (abdominal pain/tenderness, persistent vomiting, clinical fluid accumulation, mucosal bleeding, lethargy/restlessness, liver enlargement >2cm, and a rising haematocrit with a concurrent falling platelet count) mark the transition to the critical phase and should trigger closer monitoring or admission. <span class="cite">(Grade A — Singapore National Dengue Clinical Guideline / WHO)</span>`,
+        `<b>There is no dengue-specific antiviral</b> — management is entirely supportive, with fluid balance (avoiding both under- and over-resuscitation) and monitoring through the critical phase determining outcome. <span class="cite">(Grade A)</span>`,
+        `<b>Avoid NSAIDs, aspirin, and intramuscular injections</b> in suspected or confirmed dengue given bleeding risk; paracetamol is the antipyretic of choice. <span class="cite">(Grade A — Singapore National Dengue Clinical Guideline)</span>`,
+        `<b>NS1 antigen is most useful in the first 7 days of illness</b>; IgM typically becomes detectable from day 3-5 and IgG by the end of the first week in primary infection — a diagnostic pattern that shifts as illness progresses. <span class="cite">(Grade B)</span>`,
+      ],
+    },
+    {
+      id: 'hiv',
+      kingdom: 'virus',
+      name: 'HIV',
+      aliases: ['hiv', 'human immunodeficiency virus', 'hiv infection', 'aids'],
+      spriteColor: 'var(--hiv-violet)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 171,
+          syndrome: 'Acute Retroviral Syndrome',
+          patientHP: 65,
+          text: "A 28-year-old presents with 10 days of fever, sore throat, diffuse lymphadenopathy, and a diffuse maculopapular rash, two weeks after a high-risk sexual exposure. He initially assumed this was a viral flu-like illness.",
+          clues: [
+            { title: "4th-Generation HIV Antigen/Antibody Combo Test", icon: "antigen-strip", text: "Positive — but combination testing can still be falsely negative very early, within the first 1-2 weeks, during the 'window period' before antibodies develop." },
+            { title: "HIV RNA Viral Load", icon: "pcr-gel", text: "Markedly elevated — viral load rises earlier than antibody-based tests can detect it, and is the most sensitive marker during acute infection." },
+            { title: "Clinical Context", icon: "test", text: "A mononucleosis-like illness (fever, pharyngitis, lymphadenopathy, rash) 2-4 weeks after a high-risk exposure — a presentation very commonly misattributed to another viral illness, contributing to missed or delayed diagnosis." },
+          ],
+        },
+        {
+          caseNum: 172,
+          syndrome: 'Advanced HIV — AIDS-Defining Illness',
+          patientHP: 45,
+          text: "A patient with HIV diagnosed years ago, not engaged in care and off antiretroviral therapy, presents with weight loss, chronic diarrhoea, and a CD4 count of 40 cells/microL, alongside findings that separately raise concern for an opportunistic infection.",
+          clues: [
+            { title: "CD4 Count", icon: "test", text: "40 cells/microL — advanced immunosuppression, placing him at risk for multiple AIDS-defining opportunistic infections and malignancies simultaneously." },
+            { title: "HIV RNA Viral Load", icon: "pcr-gel", text: "Markedly elevated, consistent with untreated infection." },
+            { title: "Opportunistic Infection Screen", icon: "test", text: "Findings prompting further work-up for a co-existing AIDS-defining illness (e.g. disseminated fungal or mycobacterial infection) — advanced HIV rarely presents with just one problem at a time." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "HIV", correct: true },
+        { name: "Epstein-Barr Virus", correct: false },
+        { name: "Cytomegalovirus", correct: false },
+        { name: "Syphilis (secondary)", correct: false },
+      ],
+      moves: [
+        { name: "Tenofovir/Lamivudine + Dolutegravir (ART)", desc: "Preferred first-line regimen", isDrug: true,
+          dmg: (r) => 45,
+          log: (r) => `Highly effective — a dolutegravir-based two-NRTI backbone is the preferred first-line regimen in essentially all current guidelines, combining high potency, a high genetic barrier to resistance, and good tolerability. <span class="cite">(Grade A — WHO/DHHS)</span>` },
+        { name: "Start ART Immediately (Rapid/Same-Day Initiation)", desc: "Recommended regardless of CD4 count", isDrug: false, patientCost: -10,
+          dmg: (r) => 0,
+          log: (r) => `Doesn't itself select a regimen, but same-day or rapid ART initiation after diagnosis — rather than delaying for staging work-up — improves linkage to care and viral suppression rates, and is recommended regardless of CD4 count ('treat all'). <span class="cite">(Grade A — WHO)</span>` },
+        { name: "Withhold ART Pending a CD4 Threshold", desc: "Outdated approach", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `Outdated — older CD4-threshold-based approaches to starting ART have been superseded; current guidelines recommend ART for everyone with HIV regardless of CD4 count, since early treatment reduces both HIV- and non-HIV-related morbidity and prevents onward transmission. <span class="cite">(Grade A — WHO 'treat all')</span>` },
+        { name: "Order CD4 Count and Opportunistic Infection Screen", desc: "Essential staging, not treatment itself — 20 patient life", isDrug: false, patientCost: 20,
+          dmg: (r) => 0,
+          log: (r) => `Doesn't treat the virus directly, but is essential — CD4 count stages immunosuppression and determines which opportunistic infection prophylaxis is needed (e.g. co-trimoxazole for <i>Pneumocystis</i> below 200 cells/microL, azithromycin prophylaxis for disseminated <i>Mycobacterium avium</i> complex below 50 cells/microL), and should be checked at diagnosis and periodically thereafter. <span class="cite">(Grade A)</span>` },
+        { name: "Oseltamivir", desc: "Wrong virus family entirely", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — HIV is a retrovirus with an entirely different replication cycle (reverse transcription, genomic integration) from influenza; neuraminidase inhibitors have no target here. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Acute retroviral syndrome is a mononucleosis-like illness 2-4 weeks post-exposure and is frequently missed</b>; HIV RNA viral load, not antibody testing, is the most sensitive marker during this early window period. <span class="cite">(Grade A)</span>`,
+        `<b>ART is now recommended for everyone with HIV regardless of CD4 count ('test and treat')</b>, ideally started rapidly after diagnosis rather than delayed for staging. <span class="cite">(Grade A — WHO)</span>`,
+        `<b>A dolutegravir-based two-NRTI regimen is preferred first-line therapy</b> in essentially all current guidelines given its potency, high barrier to resistance, and tolerability. <span class="cite">(Grade A — WHO/DHHS)</span>`,
+        `<b>CD4 count guides opportunistic infection risk and prophylaxis thresholds</b> — advanced HIV very often presents with more than one process at once, so a single positive finding shouldn't stop the work-up. <span class="cite">(Grade B)</span>`,
+      ],
+    },
+    {
+      id: 'hepb',
+      kingdom: 'virus',
+      name: 'Hepatitis B Virus',
+      aliases: ['hepatitis b virus', 'hepatitis b', 'hbv'],
+      spriteColor: 'var(--hepb-amber)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 173,
+          syndrome: 'Acute Hepatitis B',
+          patientHP: 65,
+          text: "A 32-year-old presents with 5 days of fatigue, nausea, right upper quadrant discomfort, and jaundice. He reports a new sexual partner approximately 10 weeks ago and has not been vaccinated against hepatitis B.",
+          clues: [
+            { title: "Liver Function Tests", icon: "test", text: "Markedly elevated ALT/AST (in the thousands), with elevated bilirubin — a hepatocellular pattern of injury." },
+            { title: "Hepatitis B Serology", icon: "serology-bars", text: "HBsAg positive, IgM anti-HBc positive, HBeAg positive — the pattern of acute infection with high infectivity." },
+            { title: "Clinical Course Counselling", icon: "test", text: "Over 95% of immunocompetent adults with acute hepatitis B clear the infection spontaneously and do not progress to chronic infection — a very different natural history from infection acquired perinatally or in early childhood." },
+          ],
+        },
+        {
+          caseNum: 174,
+          syndrome: 'Chronic Hepatitis B — Active Disease',
+          patientHP: 60,
+          text: "A patient with hepatitis B known for over a decade (acquired perinatally) is found on routine monitoring to have persistently elevated ALT and a rising HBV DNA level, with ultrasound showing early changes of fibrosis.",
+          clues: [
+            { title: "Hepatitis B Serology", icon: "serology-bars", text: "HBsAg positive for over 6 months (confirming chronicity), HBeAg positive, IgG anti-HBc positive, IgM anti-HBc negative — distinguishing chronic from acute infection." },
+            { title: "HBV DNA Viral Load", icon: "pcr-gel", text: "Rising, alongside persistently elevated ALT — indicating active viral replication with ongoing liver injury, meeting criteria to start treatment rather than continue monitoring alone." },
+            { title: "Liver Ultrasound/Fibrosis Assessment", icon: "test", text: "Early fibrotic changes — reinforcing the need to treat now rather than defer, to prevent progression to cirrhosis." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Hepatitis B Virus", correct: true },
+        { name: "Hepatitis C Virus", correct: false },
+        { name: "Hepatitis A Virus", correct: false },
+        { name: "Cytomegalovirus", correct: false },
+      ],
+      moves: [
+        { name: "Supportive Care Only (No Antiviral)", desc: "Correct for uncomplicated acute infection", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — acute hepatitis B in an immunocompetent adult is managed supportively in the large majority of cases; antivirals are reserved for severe/fulminant acute hepatitis, not used routinely, since spontaneous clearance is expected. <span class="cite">(Grade A)</span>`
+            : `Not sufficient — this patient has active chronic hepatitis B (elevated ALT, rising HBV DNA, early fibrosis) meeting treatment criteria; observation alone risks ongoing liver injury and progression to cirrhosis. <span class="cite">(Grade A)</span>` },
+        { name: "Tenofovir (Nucleotide Analogue)", desc: "First-line for chronic disease meeting treatment criteria", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 15 : 45,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Has activity against the virus, but isn't routinely indicated for acute hepatitis B in an immunocompetent host, which usually resolves spontaneously — reserve antivirals for severe/fulminant acute disease. <span class="cite">(Grade B)</span>`
+            : `Highly effective — tenofovir (or entecavir) is first-line for chronic hepatitis B meeting treatment criteria, given high potency and a high barrier to resistance. <span class="cite">(Grade A — MOH Singapore CPG / APASL)</span>` },
+        { name: "Peginterferon Alfa", desc: "Alternative for selected patients wanting a finite course", isDrug: true,
+          dmg: (r) => 30,
+          log: (r) => `An alternative for selected patients (e.g. those preferring a finite treatment course), though generally less used than nucleos(t)ide analogues given tolerability and a narrower group of good responders. <span class="cite">(Grade B)</span>` },
+        { name: "Oseltamivir", desc: "Wrong virus family entirely", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — hepatitis B is a DNA hepadnavirus with a completely different replication strategy (reverse transcription of an RNA intermediate within the liver) from influenza; neuraminidase inhibitors have no relevant target. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Over 95% of immunocompetent adults with acute HBV clear the infection spontaneously</b>; chronicity risk is far higher with perinatal or early-childhood acquisition, which is why universal infant vaccination (including a birth dose) is a public health priority. <span class="cite">(Grade A)</span>`,
+        `<b>Serology tells the story</b>: HBsAg + IgM anti-HBc = acute infection; HBsAg persisting beyond 6 months with IgG (not IgM) anti-HBc = chronic infection. <span class="cite">(Grade A)</span>`,
+        `<b>Treatment for chronic hepatitis B targets patients with active disease</b> (elevated ALT, significant HBV DNA, and/or fibrosis) rather than everyone who is HBsAg-positive — inactive carriers with normal ALT and low viral load are monitored, not treated. <span class="cite">(Grade A — MOH Singapore CPG: Chronic Hepatitis B Infection / APASL)</span>`,
+        `<b>Tenofovir and entecavir are first-line</b> given potency and a high genetic barrier to resistance; treatment is typically long-term/indefinite rather than a fixed course for most patients with chronic disease. <span class="cite">(Grade A)</span>`,
+      ],
+    },
+    {
+      id: 'hsv',
+      kingdom: 'virus',
+      name: 'Herpes Simplex Virus',
+      aliases: ['herpes simplex virus', 'hsv', 'hsv-1', 'hsv-2', 'genital herpes', 'herpes'],
+      spriteColor: 'var(--hsv-rose)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 175,
+          syndrome: 'Primary Genital Herpes',
+          patientHP: 70,
+          encephalitis: false,
+          text: "A 22-year-old presents with painful grouped vesicles on an erythematous base over the vulva, alongside fever, malaise, and tender inguinal lymphadenopathy — a first episode.",
+          clues: [
+            { title: "Tzanck Smear — Vesicle Base Scraping", icon: "giant-cell", text: "Multinucleated giant cells seen — suggestive of a herpesvirus, but not specific for HSV over VZV." },
+            { title: "PCR — Vesicle Swab", icon: "pcr-gel", text: "Positive for HSV-2 DNA — now the preferred, most sensitive confirmatory test, and able to distinguish HSV-1 from HSV-2." },
+            { title: "Clinical Context", icon: "test", text: "First clinical episode with systemic symptoms (fever, malaise) alongside painful genital lesions — primary infection tends to be more severe and prolonged than recurrent episodes." },
+          ],
+        },
+        {
+          caseNum: 176,
+          syndrome: 'HSV Encephalitis',
+          patientHP: 40,
+          encephalitis: true,
+          text: "A patient presents with fever, headache, altered behaviour, and focal seizures over 3 days. MRI shows temporal lobe changes.",
+          clues: [
+            { title: "MRI Brain", icon: "test", text: "Asymmetric temporal and inferior frontal lobe signal changes — the classic distribution for HSV encephalitis, reflecting the virus's tropism for these regions." },
+            { title: "CSF PCR", icon: "pcr-gel", text: "Positive for HSV DNA — the diagnostic test of choice, with high sensitivity and specificity; it can rarely be falsely negative very early, so treatment should not wait for results if suspicion is high." },
+            { title: "CSF Interpretation", icon: "test", text: "Lymphocytic pleocytosis, mildly elevated protein, red blood cells sometimes present — reflecting the haemorrhagic, necrotising nature of the infection." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Herpes Simplex Virus", correct: true },
+        { name: "Varicella-Zoster Virus", correct: false },
+        { name: "Cytomegalovirus", correct: false },
+        { name: "Neisseria meningitidis", correct: false },
+      ],
+      moves: [
+        { name: "IV Aciclovir (High-Dose)", desc: "Time-critical for encephalitis; effective for severe genital disease", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.encephalitis ? 55 : 35,
+          log: (r, ctx) => ctx.vignette.encephalitis
+            ? `Highly effective and time-critical — IV aciclovir should start empirically on clinical suspicion without waiting for CSF PCR confirmation, since delayed treatment significantly worsens neurological outcomes and mortality in HSV encephalitis. <span class="cite">(Grade A)</span>`
+            : `Effective — reduces duration and severity of the primary episode; oral aciclovir or valaciclovir is usually sufficient for uncomplicated genital herpes, with IV reserved for severe or disseminated disease. <span class="cite">(Grade A)</span>` },
+        { name: "Oral Valaciclovir", desc: "Insufficient CNS penetration for encephalitis; effective for genital herpes", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.encephalitis ? 10 : 38,
+          log: (r, ctx) => ctx.vignette.encephalitis
+            ? `Inadequate — oral therapy does not achieve sufficient CNS drug levels for HSV encephalitis; high-dose IV aciclovir is required. <span class="cite">(Grade A)</span>`
+            : `Effective, with more convenient dosing than aciclovir for genital herpes given better oral bioavailability. <span class="cite">(Grade A)</span>` },
+        { name: "Foscarnet", desc: "Reserved for aciclovir-resistant HSV", isDrug: true,
+          dmg: (r) => 30,
+          log: (r) => `Effective, and reserved for aciclovir-resistant HSV (via thymidine kinase mutation) — most relevant in significantly immunocompromised patients with prolonged aciclovir exposure, not needed as first-line here. <span class="cite">(Grade B)</span>` },
+        { name: "Amoxicillin", desc: "Antibacterial — wrong kingdom entirely", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — HSV is a virus; antibacterials have no antiviral activity regardless of clinical severity. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>HSV encephalitis is a neurological emergency with a distinctive temporal lobe distribution</b>; empirical IV aciclovir should start immediately on suspicion, not held pending CSF PCR, since delay meaningfully worsens outcomes. <span class="cite">(Grade A)</span>`,
+        `<b>Tzanck smear shows multinucleated giant cells but cannot distinguish HSV from VZV</b>; PCR is now preferred for both sensitivity and type-specific diagnosis. <span class="cite">(Grade B)</span>`,
+        `<b>Primary genital herpes is typically more severe/prolonged than recurrent episodes</b> and can include systemic symptoms; oral aciclovir/valaciclovir suffices for most cases, with IV reserved for severe or disseminated disease. <span class="cite">(Grade A)</span>`,
+        `<b>Aciclovir resistance (via thymidine kinase mutations) is rare in immunocompetent hosts</b> but should be considered with prolonged/refractory disease in significant immunosuppression; foscarnet is the standard alternative. <span class="cite">(Grade B)</span>`,
+      ],
+    },
+    {
+      id: 'vzv',
+      kingdom: 'virus',
+      name: 'Varicella-Zoster Virus',
+      aliases: ['varicella-zoster virus', 'vzv', 'varicella', 'chickenpox', 'shingles', 'herpes zoster'],
+      spriteColor: 'var(--vzv-plum)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 177,
+          syndrome: 'Primary Varicella (Chickenpox) — Healthy Child',
+          patientHP: 75,
+          supportiveCareOk: true,
+          text: "A previously well, unvaccinated 6-year-old presents with 2 days of fever and an itchy vesicular rash in crops at different stages (macules, vesicles, crusted lesions) across the trunk and face.",
+          clues: [
+            { title: "Clinical Examination", icon: "test", text: "Lesions in different stages of evolution simultaneously ('crops') — a hallmark distinguishing varicella from other vesicular rashes, which tend to be more uniform in stage." },
+            { title: "PCR — Vesicle Swab", icon: "pcr-gel", text: "Positive for varicella-zoster virus DNA, though testing isn't usually necessary when the clinical picture is classic." },
+            { title: "Risk Assessment", icon: "test", text: "Previously well, immunocompetent host with an uncomplicated, typical presentation." },
+          ],
+        },
+        {
+          caseNum: 178,
+          syndrome: 'Disseminated Herpes Zoster — Immunocompromised Host',
+          patientHP: 40,
+          supportiveCareOk: false,
+          text: "A patient on chemotherapy develops a painful vesicular rash that starts in a single dermatome but progresses over 2 days to widespread vesicles beyond the original dermatome, with new pulmonary symptoms.",
+          clues: [
+            { title: "Clinical Examination", icon: "test", text: "Spread beyond the original dermatome to become generalised — defines disseminated zoster, a marker of significant immunosuppression and a risk for visceral involvement (pneumonitis, hepatitis, encephalitis)." },
+            { title: "PCR — Vesicle Swab/Blood", icon: "pcr-gel", text: "Positive for varicella-zoster virus DNA, with detectable viraemia." },
+            { title: "Chest Imaging", icon: "test", text: "New pulmonary infiltrates raising concern for VZV pneumonitis, a serious complication of disseminated disease." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Varicella-Zoster Virus", correct: true },
+        { name: "Herpes Simplex Virus", correct: false },
+        { name: "Measles Virus", correct: false },
+        { name: "Enterovirus (hand, foot and mouth disease)", correct: false },
+      ],
+      moves: [
+        { name: "Supportive Care (Antipyretics, Antihistamines, Skin Care)", desc: "Correct for uncomplicated varicella in a healthy child", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — uncomplicated varicella in a healthy child is generally self-limited and managed supportively (antipyretics, antihistamines for itch, good skin hygiene to prevent secondary bacterial infection); routine antivirals aren't required in this low-risk group. <span class="cite">(Grade B)</span>`
+            : `Not sufficient — disseminated zoster in an immunocompromised host carries real risk of visceral involvement and needs systemic antiviral therapy, not supportive care alone. <span class="cite">(Grade A)</span>` },
+        { name: "IV Aciclovir", desc: "Indicated for disseminated/visceral disease", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 15 : 50,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Has activity, but isn't routinely needed for uncomplicated varicella in a healthy child — reserve antivirals for adults, adolescents, or anyone with risk factors for severe disease. <span class="cite">(Grade B)</span>`
+            : `Highly effective and indicated — disseminated/visceral zoster in immunocompromised hosts requires IV, not oral, therapy. <span class="cite">(Grade A)</span>` },
+        { name: "Oral Valaciclovir (Started Within 72 Hours of Rash Onset)", desc: "For localised zoster in an immunocompetent host", isDrug: true,
+          dmg: (r) => 35,
+          log: (r) => `Effective for localised herpes zoster when started within 72 hours of rash onset, reducing severity and duration of pain — most relevant for an immunocompetent adult with dermatomal zoster, a different scenario from either case here. <span class="cite">(Grade A)</span>` },
+        { name: "Amoxicillin", desc: "No antiviral activity", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect against the virus — reach for an antibacterial only if secondary bacterial skin infection is separately suspected, not as primary therapy for VZV itself. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Varicella classically shows lesions in different stages simultaneously ('crops')</b> — vesicles, macules, and crusts together — distinguishing it from more uniform vesicular rashes. <span class="cite">(Grade B)</span>`,
+        `<b>Uncomplicated varicella in a healthy child is usually managed supportively</b>; antivirals are reserved for adults/adolescents, immunocompromised patients, or those with risk factors for severe disease. <span class="cite">(Grade B)</span>`,
+        `<b>Zoster spreading beyond the originating dermatome defines disseminated disease</b>, seen in significant immunosuppression, and carries real risk of visceral involvement requiring IV — not oral — antiviral therapy. <span class="cite">(Grade A)</span>`,
+        `<b>Starting oral antivirals within 72 hours of rash onset is what limits severity/duration of localised zoster</b>; benefit is far less certain once that window has passed. <span class="cite">(Grade A)</span>`,
+      ],
+    },
+    {
+      id: 'cmv',
+      kingdom: 'virus',
+      name: 'Cytomegalovirus',
+      aliases: ['cytomegalovirus', 'cmv', 'cmv infection'],
+      spriteColor: 'var(--cmv-teal)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 179,
+          syndrome: 'Congenital CMV Infection',
+          patientHP: 60,
+          text: "A newborn is found to have petechiae, hepatosplenomegaly, microcephaly, and sensorineural hearing loss on newborn screening. The mother had a mild flu-like illness during pregnancy that was not specifically investigated.",
+          clues: [
+            { title: "Urine/Saliva PCR — Within First 3 Weeks of Life", icon: "pcr-gel", text: "Positive for CMV DNA — testing within the first 3 weeks of life is essential to distinguish congenital from postnatally acquired infection." },
+            { title: "Clinical Findings", icon: "test", text: "Microcephaly, sensorineural hearing loss, hepatosplenomegaly, and petechiae — the classic constellation of symptomatic congenital CMV, the most common congenital infection and a leading non-genetic cause of sensorineural hearing loss." },
+            { title: "Cranial Imaging", icon: "test", text: "Periventricular calcifications — a characteristic (though not universal) finding in symptomatic congenital CMV." },
+          ],
+        },
+        {
+          caseNum: 180,
+          syndrome: 'CMV Disease — Post-Transplant',
+          patientHP: 45,
+          text: "A kidney transplant recipient, 2 months post-transplant on maintenance immunosuppression, develops fever, diarrhoea, and abdominal pain.",
+          clues: [
+            { title: "CMV Viral Load (Quantitative PCR)", icon: "pcr-gel", text: "Markedly elevated blood CMV DNA level." },
+            { title: "Colonoscopy/Biopsy", icon: "inclusion-body", text: "Large cells with characteristic 'owl's eye' intranuclear inclusions on histopathology — the classic cytopathic finding of CMV colitis." },
+            { title: "Risk Factor Review", icon: "test", text: "CMV disease risk is highest in the first several months post-transplant, particularly with a CMV-seronegative recipient of a seropositive donor's organ (D+/R- mismatch), the highest-risk serostatus combination." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Cytomegalovirus", correct: true },
+        { name: "Epstein-Barr Virus", correct: false },
+        { name: "Toxoplasma gondii", correct: false },
+        { name: "Clostridioides difficile", correct: false },
+      ],
+      moves: [
+        { name: "Valganciclovir (Oral)", desc: "First-line for most non-severe CMV disease", isDrug: true,
+          dmg: (r) => 42,
+          log: (r) => `Effective — oral valganciclovir has largely replaced IV ganciclovir for most non-life-threatening CMV disease given comparable efficacy and easier administration, sharing the same mechanism (viral DNA polymerase inhibition after intracellular phosphorylation). <span class="cite">(Grade A)</span>` },
+        { name: "IV Ganciclovir", desc: "Preferred for severe/life-threatening disease", isDrug: true,
+          dmg: (r) => 45,
+          log: (r) => `Highly effective, and preferred over oral valganciclovir for severe/life-threatening disease or when oral absorption is unreliable (e.g. severe GI disease). <span class="cite">(Grade A)</span>` },
+        { name: "Foscarnet", desc: "Reserved for ganciclovir resistance/toxicity", isDrug: true,
+          dmg: (r) => 35,
+          log: (r) => `Effective, and reserved for ganciclovir-resistant CMV or when ganciclovir's myelosuppression is dose-limiting, given its different mechanism (direct viral DNA polymerase inhibition without requiring intracellular phosphorylation) and its own significant nephrotoxicity. <span class="cite">(Grade B)</span>` },
+        { name: "Reduce Immunosuppression", desc: "Important adjunct in a transplant recipient", isDrug: false, patientCost: -10,
+          dmg: (r) => 0,
+          log: (r) => `Doesn't directly kill the virus, but is an important adjunct in a transplant recipient with CMV disease — cautiously reducing immunosuppression, balanced against graft rejection risk, supports immune control of the infection alongside antiviral therapy. <span class="cite">(Grade B)</span>` },
+        { name: "Oseltamivir", desc: "Wrong virus family entirely", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — CMV is a herpesvirus with a DNA polymerase target entirely different from influenza's neuraminidase; oseltamivir has no relevant activity. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Congenital CMV is the most common congenital infection and a leading non-genetic cause of sensorineural hearing loss</b> — testing (urine or saliva PCR) must happen within the first 3 weeks of life to distinguish congenital from postnatally acquired infection. <span class="cite">(Grade A)</span>`,
+        `<b>CMV disease risk after transplant is highest in the first few months and greatest with a seronegative recipient receiving a seropositive donor organ (D+/R-)</b> — the highest-risk mismatch, often warranting prophylaxis. <span class="cite">(Grade A)</span>`,
+        `<b>'Owl's eye' intranuclear inclusions on histopathology are the classic cytopathic finding of CMV end-organ disease</b> (colitis, pneumonitis, retinitis). <span class="cite">(Grade B)</span>`,
+        `<b>Oral valganciclovir has replaced IV ganciclovir for most non-severe CMV disease</b>; foscarnet is reserved for ganciclovir resistance or dose-limiting myelosuppression given its own nephrotoxicity trade-off. <span class="cite">(Grade A)</span>`,
+      ],
+    },
+    {
+      id: 'sarscov2',
+      kingdom: 'virus',
+      name: 'SARS-CoV-2',
+      aliases: ['sars-cov-2', 'covid-19', 'covid', 'coronavirus'],
+      spriteColor: 'var(--sars2-garnet)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 181,
+          syndrome: 'Mild COVID-19 — High-Risk Outpatient',
+          patientHP: 65,
+          earlyHighRisk: true,
+          text: "A 68-year-old with type 2 diabetes presents on day 2 of fever, cough, and myalgia. He tests positive on a rapid antigen test and is well enough to manage at home, but his age and comorbidity put him at higher risk of progression.",
+          clues: [
+            { title: "Rapid Antigen Test — Nasal Swab", icon: "antigen-strip", text: "Positive for SARS-CoV-2." },
+            { title: "PCR/NAAT — Respiratory Panel", icon: "pcr-gel", text: "Confirms SARS-CoV-2; negative for influenza and RSV." },
+            { title: "Risk Assessment", icon: "test", text: "Age over 65 and diabetes are recognised risk factors for progression to severe disease — within the treatment window (symptom onset within the last 5 days) for outpatient antiviral therapy." },
+          ],
+        },
+        {
+          caseNum: 182,
+          syndrome: 'Severe COVID-19 Pneumonia — Hypoxic',
+          patientHP: 40,
+          earlyHighRisk: false,
+          text: "An unvaccinated patient presents on day 7 of illness with worsening dyspnoea and hypoxia requiring supplemental oxygen, with bilateral ground-glass opacities on chest imaging.",
+          clues: [
+            { title: "PCR/NAAT", icon: "pcr-gel", text: "Confirms SARS-CoV-2." },
+            { title: "Chest Imaging", icon: "test", text: "Bilateral ground-glass opacities — a typical pattern for COVID-19 pneumonia." },
+            { title: "Oxygenation", icon: "test", text: "Hypoxia requiring supplemental oxygen — meeting severity criteria where corticosteroids become part of management alongside antiviral considerations." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "SARS-CoV-2", correct: true },
+        { name: "Influenza A", correct: false },
+        { name: "Respiratory Syncytial Virus (RSV)", correct: false },
+        { name: "Mycoplasma pneumoniae", correct: false },
+      ],
+      moves: [
+        { name: "Nirmatrelvir/Ritonavir (Paxlovid)", desc: "Best evidence in early, high-risk outpatients", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.earlyHighRisk ? 50 : 15,
+          log: (r, ctx) => ctx.vignette.earlyHighRisk
+            ? `Highly effective when started within 5 days of symptom onset in a high-risk outpatient — a protease inhibitor combination that reduces progression to severe disease; check for significant drug interactions via ritonavir's CYP3A4 inhibition before prescribing. <span class="cite">(Grade A)</span>`
+            : `Limited benefit this late in a hospitalised, already-hypoxic patient — its evidence base is strongest for early outpatient treatment in high-risk, non-hospitalised patients, not established severe disease. <span class="cite">(Grade B)</span>` },
+        { name: "Remdesivir", desc: "Evidence in hospitalised patients needing oxygen", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.earlyHighRisk ? 35 : 40,
+          log: (r, ctx) => ctx.vignette.earlyHighRisk
+            ? `Effective, but IV administration makes it a less practical outpatient option than oral nirmatrelvir/ritonavir for this early, high-risk-but-well outpatient. <span class="cite">(Grade B)</span>`
+            : `Effective — an IV option with evidence in hospitalised patients requiring supplemental oxygen, distinguishing it from nirmatrelvir/ritonavir's outpatient-focused evidence base. <span class="cite">(Grade A)</span>` },
+        { name: "Dexamethasone", desc: "Reduces mortality only with hypoxia present", isDrug: false,
+          dmg: (r, ctx) => ctx.vignette.earlyHighRisk ? 0 : 20,
+          log: (r, ctx) => ctx.vignette.earlyHighRisk
+            ? `Not indicated — corticosteroids in mild, non-hypoxic COVID-19 have shown no benefit and a signal of harm in some studies; reserve for patients with hypoxia. <span class="cite">(Grade A — RECOVERY trial)</span>`
+            : `Reduces mortality specifically in patients requiring supplemental oxygen or ventilation — given too early, in mild non-hypoxic disease, corticosteroids can be harmful by blunting the immune response before it's needed. <span class="cite">(Grade A — RECOVERY trial)</span>` },
+        { name: "Oseltamivir", desc: "Wrong virus family entirely", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — SARS-CoV-2 is a coronavirus, not an influenza virus; its viral machinery has no neuraminidase for this drug to target. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Nirmatrelvir/ritonavir is most effective started within 5 days of symptom onset in high-risk, non-hospitalised patients</b> — its evidence base doesn't extend to established severe/hospitalised disease, where remdesivir and, when hypoxic, corticosteroids take priority instead. <span class="cite">(Grade A)</span>`,
+        `<b>Dexamethasone reduces mortality specifically in patients with hypoxia requiring oxygen or ventilation</b>; given without hypoxia, corticosteroids show no benefit and a possible signal of harm. <span class="cite">(Grade A — RECOVERY trial)</span>`,
+        `<b>Ritonavir (in nirmatrelvir/ritonavir) is a potent CYP3A4 inhibitor with numerous significant drug interactions</b> — always check the patient's medication list before prescribing. <span class="cite">(Grade A)</span>`,
+        `<b>Vaccination and age/comorbidity remain the dominant drivers of outcome</b>; antivirals and immunomodulators matter most, and are targeted, based on where a patient sits on that risk spectrum. <span class="cite">(Grade B)</span>`,
+      ],
+    },
+    {
+      id: 'ebv',
+      kingdom: 'virus',
+      name: 'Epstein-Barr Virus',
+      aliases: ['epstein-barr virus', 'ebv', 'infectious mononucleosis', 'glandular fever'],
+      spriteColor: 'var(--ebv-gold)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 183,
+          syndrome: 'Infectious Mononucleosis',
+          patientHP: 65,
+          supportiveCareOk: true,
+          text: "An 18-year-old university student presents with a week of fever, severe sore throat, and profound fatigue. Examination reveals exudative tonsillitis, bilateral posterior cervical lymphadenopathy, and mild splenomegaly. An urgent care clinic started him on amoxicillin three days ago for presumed bacterial pharyngitis, and he has since developed a widespread pruritic maculopapular rash.",
+          clues: [
+            { title: "Full Blood Count with Film", icon: "test", text: "Lymphocytosis with more than 10% atypical lymphocytes — large, irregular, reactive T-cells — the classic haematological signature of acute EBV infection." },
+            { title: "Heterophile Antibody Test (Monospot)", icon: "serology-bars", text: "Positive — though sensitivity is lower in the first week of illness and in children under 4, where a false-negative result is common and EBV-specific serology is preferred." },
+            { title: "Medication History", icon: "test", text: "Widespread rash after aminopenicillin exposure — a well-recognised, non-allergic phenomenon seen in a large majority of patients with EBV mononucleosis given ampicillin or amoxicillin, and not evidence of true penicillin allergy." },
+          ],
+        },
+        {
+          caseNum: 184,
+          syndrome: 'Post-Transplant Lymphoproliferative Disorder (PTLD)',
+          patientHP: 45,
+          text: "Eight months after a renal transplant, a patient on triple immunosuppression develops fevers, night sweats, and diffuse lymphadenopathy. Lymph node biopsy shows EBV-driven B-cell proliferation with strong CD20 expression, and quantitative EBV PCR shows a markedly rising viral load in blood.",
+          clues: [
+            { title: "Quantitative EBV PCR (Blood)", icon: "pcr-gel", text: "Rising EBV viral load in peripheral blood — used both to support the diagnosis and to monitor response once treatment begins." },
+            { title: "Lymph Node Biopsy", icon: "test", text: "EBV-driven B-cell lymphoproliferation with CD20 positivity on histopathology and EBV-encoded RNA (EBER) in-situ hybridisation — confirms PTLD rather than an alternative cause of lymphadenopathy." },
+            { title: "Transplant/Immunosuppression History", icon: "test", text: "Solid organ transplant on ongoing immunosuppression — loss of EBV-specific cytotoxic T-cell surveillance is the key permissive factor for PTLD." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Epstein-Barr Virus", correct: true },
+        { name: "Cytomegalovirus", correct: false },
+        { name: "HIV", correct: false },
+        { name: "Group A Streptococcus (<i>Streptococcus pyogenes</i>)", correct: false },
+      ],
+      moves: [
+        { name: "Rest + Supportive Care (Avoid Contact Sports)", desc: "Mainstay of uncomplicated mononucleosis", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — uncomplicated infectious mononucleosis is self-limiting; management is supportive (analgesia, hydration, rest), with counselling to avoid contact sports or heavy lifting for at least 3-4 weeks given the risk of splenic rupture from even mild splenomegaly. <span class="cite">(Grade B — UK/Australian primary care guidance)</span>`
+            : `Not sufficient here — this patient has biopsy-confirmed post-transplant lymphoproliferative disease, an EBV-driven malignant process that will not resolve with rest and analgesia alone. <span class="cite">(Grade A)</span>` },
+        { name: "Reduce Immunosuppression", desc: "First-line for PTLD in transplant recipients", isDrug: false,
+          dmg: (r, ctx) => ctx.vignette.syndrome.includes('PTLD') ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.syndrome.includes('PTLD')
+            ? `Correct and first-line — reduction of immunosuppression restores some EBV-specific T-cell immune surveillance and is the initial step in managing PTLD, sometimes sufficient alone in early, localised disease. <span class="cite">(Grade B — international transplant society guidance)</span>`
+            : `Not indicated — this patient has uncomplicated mononucleosis, not a transplant-associated lymphoproliferative process; there is no immunosuppression to reduce here. <span class="cite">(Grade A)</span>` },
+        { name: "Rituximab (Anti-CD20)", desc: "Added for CD20-positive PTLD not responding to immunosuppression reduction alone", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.syndrome.includes('PTLD') ? 800 : 0,
+          log: (r, ctx) => ctx.vignette.syndrome.includes('PTLD')
+            ? `Effective — this lesion is CD20-positive; rituximab is added to (or, in more aggressive disease, alongside) reduced immunosuppression as the next step in a stepwise treatment approach, escalating to chemotherapy only if needed. <span class="cite">(Grade B — international transplant society guidance)</span>`
+            : `Unnecessary and inappropriate — there is no B-cell lymphoproliferative process here to target, and depleting B-cells would not help simple viral mononucleosis. <span class="cite">(Grade A)</span>` },
+        { name: "Aciclovir", desc: "No proven clinical benefit despite in vitro activity", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No meaningful clinical benefit — aciclovir has in vitro activity against EBV lytic replication and can transiently reduce oropharyngeal viral shedding, but randomised trials show no improvement in symptom duration or severity in infectious mononucleosis, and it has no established role in PTLD, which is driven by latent, not lytic, infection. <span class="cite">(Grade A)</span>` },
+        { name: "Amoxicillin/Ampicillin", desc: "Avoid — provokes a characteristic non-allergic rash", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No antiviral effect, and counterproductive — aminopenicillins are classically associated with a florid, itchy maculopapular rash in patients with acute EBV infection through a transient, non-IgE-mediated mechanism, not a true drug allergy; this is precisely why sore throats in young adults should prompt consideration of mononucleosis before empirical amoxicillin. <span class="cite">(Grade B — classic clinical teaching)</span>` },
+      ],
+      pearls: [
+        `<b>The amoxicillin/ampicillin rash in EBV mononucleosis is a well-described, non-allergic reaction</b> seen in a large majority of patients given aminopenicillins during acute infection — it does not predict future true penicillin allergy and should not be labelled as one. <span class="cite">(Grade B — classic clinical teaching)</span>`,
+        `<b>Splenic rupture, though rare, is the most feared acute complication</b> of infectious mononucleosis — contact sports and heavy lifting should be avoided for at least 3-4 weeks regardless of whether splenomegaly is clinically detectable. <span class="cite">(Grade B — UK/Australian primary care guidance)</span>`,
+        `<b>Post-transplant lymphoproliferative disorder reflects loss of EBV-specific T-cell immune control</b> under iatrogenic immunosuppression; management is stepwise — reduce immunosuppression first, add rituximab for CD20-positive disease, and reserve chemotherapy for refractory or aggressive cases. <span class="cite">(Grade B — international transplant society guidance)</span>`,
+        `<b>EBV is also an established driver of Burkitt lymphoma, nasopharyngeal carcinoma, and Hodgkin lymphoma</b> in addition to PTLD — the same latent viral programme, exploiting different host contexts. <span class="cite">(Grade A)</span>`,
+      ],
+    },
+    {
+      id: 'hepc',
+      kingdom: 'virus',
+      name: 'Hepatitis C Virus',
+      aliases: ['hepatitis c virus', 'hcv', 'hepatitis c', 'hep c'],
+      spriteColor: 'var(--hepc-ochre)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 185,
+          syndrome: 'Chronic Hepatitis C — Treatment-Eligible',
+          patientHP: 60,
+          needsDAAnow: true,
+          text: "A 52-year-old with a remote history of injection drug use is found to have persistently mildly elevated ALT on a routine health screen. Anti-HCV antibody is positive, and HCV RNA is detectable at a high viral load, with genotype testing showing genotype 1. Liver ultrasound shows no cirrhosis, and he has no other chronic liver disease.",
+          clues: [
+            { title: "HCV RNA (Quantitative PCR)", icon: "pcr-gel", text: "Detectable viral load more than 6 months after presumed exposure — confirms chronic (rather than resolved or acute) infection." },
+            { title: "Anti-HCV Antibody", icon: "serology-bars", text: "Positive — reflects past or current exposure; requires HCV RNA testing to distinguish chronic infection from spontaneous clearance." },
+            { title: "Liver Ultrasound / Fibrosis Assessment", icon: "test", text: "No evidence of cirrhosis — relevant to prognosis and post-treatment surveillance planning, though it does not change eligibility for curative therapy." },
+          ],
+        },
+        {
+          caseNum: 186,
+          syndrome: 'Acute Hepatitis C — Occupational Needlestick Exposure',
+          patientHP: 75,
+          needsWatchfulWaiting: true,
+          text: "A nurse sustains a needlestick injury from a patient later found to be HCV RNA-positive. Baseline anti-HCV and HCV RNA in the nurse are negative. She asks whether she should start medication now to prevent infection, as she recalls being offered post-exposure prophylaxis after a different needlestick involving HIV years ago.",
+          clues: [
+            { title: "Baseline Serology and HCV RNA", icon: "serology-bars", text: "Both negative at time zero — establishes a true baseline against which follow-up testing will be compared." },
+            { title: "Source Patient Status", icon: "test", text: "Source patient is HCV RNA-positive — confirms a genuine exposure risk requiring structured follow-up testing." },
+            { title: "Available Prevention Options", icon: "test", text: "No vaccine and no post-exposure prophylactic medication exists for hepatitis C, unlike HIV or hepatitis B — the mainstay after exposure is scheduled monitoring." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Hepatitis C Virus", correct: true },
+        { name: "Hepatitis B Virus", correct: false },
+        { name: "HIV", correct: false },
+        { name: "Cytomegalovirus", correct: false },
+      ],
+      moves: [
+        { name: "Pangenotypic Direct-Acting Antiviral (Sofosbuvir/Velpatasvir)", desc: "Curative therapy for chronic hepatitis C", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.needsDAAnow ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsDAAnow
+            ? `Correct — chronic hepatitis C is now curable in the large majority of patients with a 12-week course of a pangenotypic direct-acting antiviral regimen, achieving sustained virologic response (functional cure) in well over 95% of cases, without needing to wait for advanced fibrosis to develop. <span class="cite">(Grade A — WHO/AASLD-IDSA guidance)</span>`
+            : `Premature — this is a fresh occupational exposure, not confirmed infection; direct-acting antivirals are not given prophylactically, and treatment decisions should wait for scheduled follow-up testing to determine whether infection has actually occurred and persisted. <span class="cite">(Grade B)</span>` },
+        { name: "Scheduled Follow-Up HCV RNA and Serology", desc: "Correct approach after exposure — no PEP exists for HCV", isDrug: false,
+          dmg: (r, ctx) => ctx.vignette.needsWatchfulWaiting ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsWatchfulWaiting
+            ? `Correct — because no post-exposure prophylaxis exists for hepatitis C, management after a high-risk exposure is structured monitoring with follow-up HCV RNA and antibody testing; if infection is detected, early treatment can be offered rather than waiting for chronicity to become established. <span class="cite">(Grade B — CDC/UK occupational health guidance)</span>`
+            : `Overly passive here — this patient already has confirmed chronic infection with detectable HCV RNA more than 6 months out; simply monitoring rather than offering curative treatment leaves her at ongoing risk of progressive liver disease. <span class="cite">(Grade A)</span>` },
+        { name: "Interferon-Based Therapy", desc: "Obsolete — direct-acting antivirals have replaced it", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `Outdated — pegylated interferon-based regimens have been superseded by direct-acting antivirals, which achieve far higher cure rates with a shorter course and dramatically fewer side effects; interferon-based therapy is no longer recommended where DAAs are available. <span class="cite">(Grade A — WHO/AASLD-IDSA guidance)</span>` },
+        { name: "Hepatitis C Immunoglobulin", desc: "Does not exist for HCV post-exposure prophylaxis", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `Not a real option — unlike hepatitis B, there is no immunoglobulin preparation with proven efficacy for HCV post-exposure prophylaxis; structured serologic and virologic follow-up remains the standard of care after exposure. <span class="cite">(Grade B)</span>` },
+        { name: "Reassure and Discharge with No Follow-Up", desc: "Incorrect — exposure still requires monitoring", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `Incomplete — a confirmed exposure to an HCV RNA-positive source still warrants scheduled follow-up testing (typically HCV RNA at several weeks and antibody at several months) to detect infection early, even though no prophylactic medication is available. <span class="cite">(Grade B — CDC/UK occupational health guidance)</span>` },
+      ],
+      pearls: [
+        `<b>Chronic hepatitis C is curable</b> — a 12-week course of a pangenotypic direct-acting antiviral regimen achieves sustained virologic response in well over 95% of patients, regardless of genotype or prior treatment history. <span class="cite">(Grade A — WHO/AASLD-IDSA guidance)</span>`,
+        `<b>There is no vaccine and no post-exposure prophylaxis for hepatitis C</b> — after a needlestick or other high-risk exposure, management is structured serologic and virologic follow-up, with treatment offered promptly if infection is confirmed. <span class="cite">(Grade B — CDC/UK occupational health guidance)</span>`,
+        `<b>Cure does not eliminate hepatocellular carcinoma risk</b> in patients who already have cirrhosis at the time of treatment — ongoing HCC surveillance is still required even after sustained virologic response. <span class="cite">(Grade A)</span>`,
+        `<b>Acute HCV infection clears spontaneously in only a minority of patients</b> — meta-analyses put this at roughly 20% by 3 months, rising to around 35-37% by 12-24 months, after which further spontaneous clearance is unlikely — which is why persistent viraemia beyond approximately 6-12 months defines chronic infection and prompts consideration of treatment. <span class="cite">(Grade B — systematic review/meta-analysis)</span>`,
+      ],
+    },
+    {
+      id: 'measles',
+      kingdom: 'virus',
+      name: 'Measles Virus',
+      aliases: ['measles virus', 'measles', 'rubeola'],
+      spriteColor: 'var(--measles-brick)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 187,
+          syndrome: 'Measles — Uncomplicated',
+          patientHP: 60,
+          supportiveCareOk: true,
+          needsVitaminA: true,
+          text: "An unvaccinated 4-year-old presents with 3 days of fever, cough, coryza, and conjunctivitis, followed by the appearance of small white spots on the buccal mucosa opposite the molars. A day later, a blotchy erythematous rash begins on the face and spreads downward to the trunk and limbs.",
+          clues: [
+            { title: "Clinical Examination — Koplik Spots", icon: "test", text: "Small white/grey spots on an erythematous buccal mucosal base, appearing 1-2 days before the rash — pathognomonic for measles." },
+            { title: "Rash Pattern", icon: "test", text: "Cephalocaudal spread — a blotchy, erythematous, blanching maculopapular rash beginning on the face and hairline before spreading down the trunk and limbs, classic for measles." },
+            { title: "Vaccination History", icon: "test", text: "No documented measles-containing vaccine — the key epidemiological risk factor, alongside contact with a confirmed case or travel to an area with ongoing transmission." },
+          ],
+        },
+        {
+          caseNum: 188,
+          syndrome: 'Measles with Severe Pneumonia',
+          patientHP: 35,
+          needsVitaminA: true,
+          isSevere: true,
+          text: "An unvaccinated 18-month-old with confirmed measles develops worsening tachypnoea, hypoxia, and new bilateral infiltrates on chest imaging on day 5 of the rash. He is malnourished and has not received vitamin A supplementation in the community.",
+          clues: [
+            { title: "Chest Imaging", icon: "test", text: "Bilateral infiltrates consistent with measles giant-cell (Hecht) pneumonia — a direct viral pneumonitis, distinct from secondary bacterial pneumonia, which can also complicate measles." },
+            { title: "Nutritional Status", icon: "test", text: "Malnutrition and vitamin A deficiency are established risk factors for severe measles complications and death, which is why vitamin A supplementation is recommended for every child with measles, not only those who are malnourished." },
+            { title: "Clinical Course", icon: "test", text: "Deterioration around day 5 of rash with respiratory compromise — the timeframe in which measles' most severe complications (pneumonia, and less commonly acute encephalitis) typically present." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Measles Virus", correct: true },
+        { name: "Rubella Virus", correct: false },
+        { name: "Parvovirus B19", correct: false },
+        { name: "Human Herpesvirus 6 (Roseola)", correct: false },
+      ],
+      moves: [
+        { name: "Supportive Care (Antipyretics, Fluids, Isolation)", desc: "Mainstay for uncomplicated measles", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : (ctx.vignette.isSevere ? 300 : 0),
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — measles has no specific antiviral treatment; management of uncomplicated disease is supportive, with airborne isolation to prevent transmission (measles is among the most contagious infections known) and notification to public health authorities. <span class="cite">(Grade A — WHO)</span>`
+            : `Helpful but not sufficient alone — this child has severe pneumonia and is at high risk of death; supportive care should continue but must be paired with vitamin A supplementation and close monitoring for respiratory failure. <span class="cite">(Grade A — WHO)</span>` },
+        { name: "Vitamin A Supplementation", desc: "WHO-recommended for every child diagnosed with measles", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.needsVitaminA ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsVitaminA
+            ? `Correct — WHO recommends two age-appropriate doses of vitamin A, given 24 hours apart, for every child diagnosed with measles regardless of country or apparent nutritional status, as it reduces the risk of severe complications and death. <span class="cite">(Grade A — WHO)</span>`
+            : `Not indicated for this presentation.` },
+        { name: "Empirical Broad-Spectrum Antibiotics", desc: "Reserve for suspected secondary bacterial infection", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.isSevere ? 200 : 0,
+          log: (r, ctx) => ctx.vignette.isSevere
+            ? `Reasonable adjunct if secondary bacterial pneumonia cannot be excluded in a severely unwell child, but it treats a possible complication, not the measles virus itself — it does not replace vitamin A or supportive respiratory care as the core interventions. <span class="cite">(Grade C)</span>`
+            : `Not indicated — this is uncomplicated viral measles with no clinical evidence of secondary bacterial infection; antibiotics would not address the underlying illness. <span class="cite">(Grade A)</span>` },
+        { name: "Ribavirin", desc: "No proven benefit — not routinely recommended", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `Not established — ribavirin has in vitro activity against measles and has been used anecdotally in severe or complicated cases, but there is no controlled trial evidence supporting its routine use, and vitamin A remains the only intervention with strong evidence for reducing measles mortality. <span class="cite">(Grade C)</span>` },
+        { name: "MMR Vaccination (Post-Exposure, Within 72 Hours)", desc: "A prevention tool for susceptible contacts, not treatment for active infection", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `Not useful here — MMR vaccine given within 72 hours of exposure can prevent or attenuate disease in a susceptible contact who has not yet developed symptoms, but it has no role once a child already has active measles infection. <span class="cite">(Grade B — WHO/CDC)</span>` },
+      ],
+      pearls: [
+        `<b>Vitamin A supplementation (two doses, 24 hours apart) is recommended by WHO for every child diagnosed with measles</b>, regardless of country of residence or nutritional status, because it measurably reduces morbidity and mortality. <span class="cite">(Grade A — WHO)</span>`,
+        `<b>Koplik spots are pathognomonic and typically precede the rash by 1-2 days</b> — recognising them allows earlier isolation and public health notification, which matters given how highly contagious measles is. <span class="cite">(Grade B — classic clinical teaching)</span>`,
+        `<b>Measles causes transient but profound immune suppression ("immune amnesia")</b> that can persist for months after recovery, increasing susceptibility to other infections — a major driver of measles-associated mortality beyond the acute illness itself. <span class="cite">(Grade A)</span>`,
+        `<b>Subacute sclerosing panencephalitis (SSPE)</b> is a rare, fatal, delayed complication of measles presenting years after the acute infection, disproportionately affecting those infected as infants — a stark reminder of why sustained high vaccination coverage matters even where acute measles is now rare. <span class="cite">(Grade A)</span>`,
+        `<b>Vitamin A dosing should not exceed the recommended two-dose (or, rarely, three-dose) regimen</b> — during the 2025 measles outbreaks in the United States, several children developed clinically significant vitamin A toxicity (including abnormal liver function) after receiving repeated, unsupervised high doses in the mistaken belief that more vitamin A prevents or treats measles independent of vaccination; it does neither, and dosing should stay within guideline limits and under medical supervision. <span class="cite">(Grade B — CDC/AAP clinical alerts, 2025)</span>`,
+      ],
+    },
+    {
+      id: 'rabies',
+      kingdom: 'virus',
+      name: 'Rabies Virus',
+      aliases: ['rabies virus', 'rabies'],
+      spriteColor: 'var(--rabies-charcoal)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 189,
+          syndrome: 'Post-Exposure Prophylaxis — Category III Bite',
+          patientHP: 70,
+          needsPEP: true,
+          text: "A traveller is bitten by a stray dog while on holiday in a rabies-endemic country, sustaining a single deep bleeding puncture wound to the calf. The dog cannot be located for observation. She presents to a local clinic within an hour of the bite, before any wound care has been given.",
+          clues: [
+            { title: "Wound Assessment", icon: "test", text: "Single deep, bleeding puncture wound from an unprovoked stray dog bite in an endemic area, source animal unavailable for observation — meets WHO Category III exposure criteria, the highest-risk category." },
+            { title: "Exposure Timing", icon: "test", text: "Presents within 1 hour of the bite, before any wound care — an opportunity to intervene before the virus has travelled far from the inoculation site along peripheral nerves." },
+            { title: "Epidemiological Context", icon: "test", text: "Dog-mediated rabies remains endemic in many parts of Asia and Africa; once clinical symptoms of rabies begin, the disease is essentially always fatal, which is what makes prompt post-exposure management so critical." },
+          ],
+        },
+        {
+          caseNum: 190,
+          syndrome: 'Established (Symptomatic) Rabies',
+          patientHP: 20,
+          isEncephalitic: true,
+          text: "A man presents with agitation, hydrophobia (spasms triggered by attempts to drink water), hypersalivation, and fluctuating consciousness, six weeks after an unreported dog bite while travelling abroad that he never sought treatment for. Rabies is confirmed on saliva PCR and serology.",
+          clues: [
+            { title: "Clinical Presentation", icon: "test", text: "Hydrophobia and aerophobia (spasms triggered by air currents) with hypersalivation and agitation — the classic \"furious\" form of clinical rabies." },
+            { title: "Exposure History", icon: "test", text: "Unreported, untreated dog bite abroad weeks earlier — the incubation period for rabies is typically 1-3 months, during which post-exposure prophylaxis would still have been effective." },
+            { title: "Confirmatory Testing", icon: "pcr-gel", text: "Saliva PCR and serum/CSF serology positive for rabies virus — once clinical symptoms have begun, confirmatory testing no longer changes management, as no treatment reliably alters the outcome at this stage." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Rabies Virus", correct: true },
+        { name: "Herpes Simplex Virus (Encephalitis)", correct: false },
+        { name: "Japanese Encephalitis Virus", correct: false },
+        { name: "Tetanus (<i>Clostridium tetani</i>)", correct: false },
+      ],
+      moves: [
+        { name: "Immediate Wound Washing (Soap and Water, 15 Minutes)", desc: "First and most important step after any potential rabies exposure", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.needsPEP ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsPEP
+            ? `Correct and time-critical — thorough washing of the wound with soap and water (or a virucidal agent) for a full 15 minutes is the single most effective intervention to reduce the local viral inoculum, and should be done immediately, before or alongside immunoglobulin and vaccine. <span class="cite">(Grade A — WHO)</span>`
+            : `Too late to change the outcome — once clinical rabies has developed, local wound care no longer influences a virus that has already reached the central nervous system. <span class="cite">(Grade A)</span>` },
+        { name: "Rabies Immunoglobulin (Wound Infiltration)", desc: "Indicated for Category III exposures", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.needsPEP ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsPEP
+            ? `Correct — this is a WHO Category III exposure (a deep bleeding bite from an animal that cannot be observed or tested); rabies immunoglobulin should be infiltrated around and into the wound to provide immediate passive immunity while the active vaccine series builds a lasting antibody response. <span class="cite">(Grade A — WHO)</span>`
+            : `No longer of any use — passive immunoglobulin only works before the virus has disseminated; it has no role once clinical rabies has developed. <span class="cite">(Grade A)</span>` },
+        { name: "Rabies Vaccine Series (Essen Regimen)", desc: "Complete active immunisation course after Category II/III exposure", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.needsPEP ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.needsPEP
+            ? `Correct — a full intramuscular vaccine series (the WHO Essen regimen: doses on days 0, 3, 7, and 14) generates active immunity that, together with immunoglobulin and wound care, is essentially 100% effective if started promptly after exposure and before symptoms begin. <span class="cite">(Grade A — WHO)</span>`
+            : `No benefit at this stage — active vaccination takes days to weeks to generate protective antibody, far too slow to help once the virus has already reached the brain and symptoms have begun. <span class="cite">(Grade A)</span>` },
+        { name: "Palliative and Supportive Care", desc: "The only appropriate goal of care once rabies is clinically symptomatic", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.isEncephalitic ? 999 : 0,
+          log: (r, ctx) => ctx.vignette.isEncephalitic
+            ? `Correct and appropriate — once clinical rabies has developed, case fatality approaches 100%, and no treatment (including intensive, aggressive protocols) has been reliably shown to alter this outcome; care should shift to symptom control, sedation, and support for the patient and family, with strict adherence to infection control precautions. <span class="cite">(Grade B — WHO)</span>`
+            : `Premature — this patient has not yet developed symptoms and remains in the window where active prevention (wound care, immunoglobulin, vaccine) can still be fully effective; shifting to palliation now would forgo a near-certain chance of preventing the disease altogether. <span class="cite">(Grade A)</span>` },
+        { name: "Aggressive ICU / Experimental Induced-Coma Protocol", desc: "Not validated as effective — extremely rare survivors are not attributable to this approach with confidence", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `Not supported by reliable evidence — experimental intensive protocols (sometimes referred to as the \"Milwaukee protocol\") have been attempted in a handful of symptomatic patients, with a small number of reported survivors, but there is no controlled evidence that the protocol itself was responsible, and case fatality for clinical rabies remains essentially universal. It should not be presented to patients or families as an effective treatment. <span class="cite">(Grade C)</span>` },
+      ],
+      pearls: [
+        `<b>Immediate, thorough wound washing with soap and water for 15 minutes is the single most effective rabies prevention measure</b> available, and should never be delayed while immunoglobulin or vaccine are arranged. <span class="cite">(Grade A — WHO)</span>`,
+        `<b>WHO Category III exposures — transdermal bites, scratches breaking skin, mucous membrane or broken-skin contamination with saliva, or any bat exposure — require both rabies immunoglobulin and the full vaccine series</b>; lower categories (I: touching/feeding, II: minor scratches without bleeding) have different, less intensive management. <span class="cite">(Grade A — WHO)</span>`,
+        `<b>Once clinical symptoms of rabies begin, the disease is essentially always fatal</b> — this stark asymmetry between near-100% preventability before symptoms and near-100% mortality after is the central teaching point of rabies management. <span class="cite">(Grade A — WHO)</span>`,
+        `<b>Rabies has one of the longest and most variable incubation periods of any acute viral infection</b> (commonly 1-3 months, but ranging from days to over a year depending on bite site and viral inoculum), which is why post-exposure prophylaxis is still worthwhile even weeks after a bite, as long as it is given before symptoms start. <span class="cite">(Grade B)</span>`,
+      ],
+    },
+    {
+      id: 'rsv',
+      kingdom: 'virus',
+      name: 'Respiratory Syncytial Virus (RSV)',
+      aliases: ['respiratory syncytial virus', 'rsv', 'rsv bronchiolitis'],
+      spriteColor: 'var(--rsv-sky)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 191,
+          syndrome: 'Bronchiolitis — Previously Well Infant',
+          patientHP: 65,
+          supportiveCareOk: true,
+          text: "A 4-month-old presents with 2 days of coryza followed by cough, wheeze, and mild-to-moderate increased work of breathing. She is maintaining oxygen saturations above 92% on room air and continuing to feed adequately, though slightly more slowly than usual. A nasopharyngeal swab confirms RSV.",
+          clues: [
+            { title: "Rapid Antigen/PCR — Nasopharyngeal Swab", icon: "antigen-strip", text: "Positive for RSV — the most common cause of bronchiolitis in infants, with a seasonal winter pattern in temperate climates." },
+            { title: "Clinical Assessment", icon: "test", text: "Mild-to-moderate work of breathing, oxygen saturation above 92%, and adequate oral intake — criteria consistent with safe outpatient or ward-level supportive management rather than escalation of care." },
+            { title: "Auscultation", icon: "test", text: "Diffuse wheeze and fine crackles bilaterally — the auscultatory hallmark of bronchiolitis, reflecting small airway inflammation and mucus plugging rather than focal bacterial consolidation." },
+          ],
+        },
+        {
+          caseNum: 192,
+          syndrome: 'Severe RSV Pneumonia — Post-Transplant Immunocompromise',
+          patientHP: 35,
+          isSevereImmunocompromised: true,
+          text: "Three weeks after allogeneic haematopoietic stem cell transplant, a patient develops progressive hypoxia, cough, and new diffuse ground-glass opacities on CT chest. RSV is confirmed on a respiratory viral panel, and lower respiratory tract involvement is suspected given the imaging and oxygen requirement.",
+          clues: [
+            { title: "Respiratory Viral Panel (PCR)", icon: "pcr-gel", text: "Positive for RSV, with clinical and radiological evidence of progression from the upper to the lower respiratory tract — a recognised, high-mortality pattern in the early post-transplant period." },
+            { title: "CT Chest", icon: "test", text: "New diffuse ground-glass opacities — consistent with RSV lower respiratory tract disease, though radiologically nonspecific and requiring correlation with the confirmed viral panel result." },
+            { title: "Immune Status", icon: "test", text: "Early post-allogeneic transplant with minimal reconstituted cellular immunity — the population in whom RSV carries the highest risk of progression to severe or fatal pneumonia." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Respiratory Syncytial Virus (RSV)", correct: true },
+        { name: "Influenza A", correct: false },
+        { name: "Human Metapneumovirus", correct: false },
+        { name: "<i>Bordetella pertussis</i>", correct: false },
+      ],
+      moves: [
+        { name: "Supportive Care (Oxygen if Hypoxic, Feeding Support)", desc: "Evidence-based mainstay of bronchiolitis management", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 200,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — supportive care (supplemental oxygen only if saturations fall below the recommended threshold, and support with feeding via nasogastric tube if oral intake becomes inadequate) is the evidence-based mainstay of bronchiolitis management; bronchodilators, corticosteroids, and antibiotics have not been shown to improve outcomes in typical bronchiolitis and are not routinely recommended. <span class="cite">(Grade A — NICE/AAP bronchiolitis guidelines)</span>`
+            : `Reasonable but not sufficient alone in this severely immunocompromised patient with progressive lower respiratory tract disease — supportive care should continue, but the degree of immunosuppression and disease progression here warrants considering additional targeted therapy. <span class="cite">(Grade C)</span>` },
+        { name: "Bronchodilators (Salbutamol) or Corticosteroids", desc: "Not routinely recommended for bronchiolitis", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `Not recommended — multiple trials and clinical practice guidelines show no consistent benefit from bronchodilators or corticosteroids in typical viral bronchiolitis, unlike in asthma; routine use exposes infants to side effects without proven benefit. <span class="cite">(Grade A — NICE/AAP bronchiolitis guidelines)</span>` },
+        { name: "Empirical Antibiotics", desc: "Not indicated without evidence of bacterial co-infection", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `Not indicated — bronchiolitis is a viral illness, and antibiotics should be reserved for cases with clear evidence of secondary bacterial infection (such as bacterial pneumonia or otitis media), not given empirically for uncomplicated RSV bronchiolitis. <span class="cite">(Grade A — NICE/AAP bronchiolitis guidelines)</span>` },
+        { name: "Aerosolised Ribavirin ± IVIG", desc: "Considered in select severe cases in immunocompromised hosts, though evidence is limited", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.isSevereImmunocompromised ? 700 : 0,
+          log: (r, ctx) => ctx.vignette.isSevereImmunocompromised
+            ? `A reasonable option here — aerosolised ribavirin, sometimes combined with high-titre RSV immunoglobulin or a monoclonal antibody, has been used for severe RSV lower respiratory tract disease in profoundly immunocompromised transplant recipients, where the risk of progression and death is highest, although the supporting evidence base remains limited and guidance varies between centres. <span class="cite">(Grade C — expert/transplant society guidance)</span>`
+            : `Not appropriate — ribavirin carries meaningful toxicity and cost, and is not justified for typical bronchiolitis in an immunocompetent infant who is expected to recover with supportive care alone. <span class="cite">(Grade A)</span>` },
+        { name: "Nirsevimab (Monoclonal Antibody)", desc: "A prevention tool for high-risk infants, not a treatment for active infection", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `Not applicable here — nirsevimab is a long-acting monoclonal antibody given to infants before or during RSV season to prevent severe disease; it is prophylaxis, not treatment, and has no role once RSV infection is already established. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Bronchiolitis is a clinical diagnosis managed with supportive care</b> — bronchodilators, corticosteroids, and antibiotics have no proven benefit in typical cases and should be avoided outside specific indications. <span class="cite">(Grade A — NICE/AAP bronchiolitis guidelines)</span>`,
+        `<b>RSV causes disproportionately severe disease at the extremes of immune competence</b> — young infants (especially former premature babies) and immunocompromised or transplant patients are at the highest risk of progression to severe lower respiratory tract disease. <span class="cite">(Grade A)</span>`,
+        `<b>Nirsevimab and palivizumab are prevention tools, not treatments</b> — long-acting monoclonal antibodies given to high-risk infants before or during RSV season to reduce the risk of severe disease, with no role once infection has already occurred. <span class="cite">(Grade A)</span>`,
+        `<b>Treatment options for established severe RSV disease remain limited</b> even in high-risk hosts — aerosolised ribavirin is used selectively in severely immunocompromised patients despite a modest evidence base, underscoring why prevention is emphasised so heavily in this population. <span class="cite">(Grade C)</span>`,
+      ],
+    },
+    {
+      id: 'chikv',
+      kingdom: 'virus',
+      name: 'Chikungunya Virus',
+      aliases: ['chikungunya virus', 'chikungunya', 'chikv'],
+      spriteColor: 'var(--chikv-coral)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 193,
+          syndrome: 'Acute Chikungunya Fever',
+          patientHP: 65,
+          supportiveCareOk: true,
+          text: "A 35-year-old returns from a region with an active chikungunya outbreak with 2 days of high fever, a maculopapular rash, and severe, symmetric pain and swelling in the small joints of the hands, wrists, and ankles that is out of proportion to the mild fatigue she otherwise feels. Dengue has not yet been excluded.",
+          clues: [
+            { title: "Clinical Pattern", icon: "test", text: "Severe, symmetric small-joint polyarthralgia disproportionate to systemic symptoms — a distinguishing feature from dengue, where haemorrhagic and plasma-leakage risk dominate rather than joint pain." },
+            { title: "Serology / RT-PCR for Chikungunya", icon: "pcr-gel", text: "Positive chikungunya RT-PCR (in the first week) or IgM (from around day 5 onward) — confirms the diagnosis; co-testing for dengue is essential given overlapping geography and presentation." },
+            { title: "Full Blood Count", icon: "test", text: "Platelet count and haematocrit within normal limits, without the thrombocytopenia and haemoconcentration that would raise concern for dengue with plasma leakage." },
+          ],
+        },
+        {
+          caseNum: 194,
+          syndrome: 'Chronic Chikungunya Arthritis',
+          patientHP: 55,
+          isChronicArthritis: true,
+          text: "Four months after a confirmed chikungunya infection, a patient continues to have persistent, symmetric pain, swelling, and morning stiffness in the wrists and small joints of the hands, resembling an inflammatory arthritis. Dengue and other alternative diagnoses have been excluded, and there is no longer any concern about bleeding risk.",
+          clues: [
+            { title: "Clinical Course", icon: "test", text: "Persistent inflammatory-pattern joint symptoms beyond 3 months of the acute illness — chikungunya's hallmark chronic complication, occurring in a substantial minority of patients in published cohorts." },
+            { title: "Joint Examination", icon: "test", text: "Symmetric small-joint synovitis with morning stiffness, mimicking rheumatoid arthritis — a pattern that can lead to diagnostic confusion if the preceding chikungunya infection is not recognised." },
+            { title: "Exclusion of Alternative Causes", icon: "test", text: "No evidence of an alternative rheumatological diagnosis or ongoing dengue risk — the bleeding-risk caveat that limits NSAID use in the acute phase no longer applies at this stage." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Chikungunya Virus", correct: true },
+        { name: "Dengue Virus", correct: false },
+        { name: "Rheumatoid Arthritis (Non-Infectious)", correct: false },
+        { name: "Zika Virus", correct: false },
+      ],
+      moves: [
+        { name: "Paracetamol (Supportive Care)", desc: "First-line antipyretic/analgesic while dengue is not yet excluded", isDrug: false, isSupportiveCare: true,
+          dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 200,
+          log: (r, ctx) => ctx.vignette.supportiveCareOk
+            ? `Correct — there is no specific antiviral for chikungunya; paracetamol is the preferred agent for fever and pain while dengue has not yet been excluded, since NSAIDs and aspirin carry a bleeding risk if this turns out to be dengue (or a dengue-chikungunya co-infection, which is well described in co-endemic areas). <span class="cite">(Grade B — WHO/PAHO chikungunya guidance)</span>`
+            : `Reasonable as a baseline analgesic, but insufficient alone for persistent inflammatory arthritis at this stage — once dengue is excluded, more effective anti-inflammatory options should be considered for ongoing joint symptoms. <span class="cite">(Grade C)</span>` },
+        { name: "NSAIDs / Aspirin (Acute Phase)", desc: "Avoid until dengue is excluded — bleeding risk", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `Avoid at this stage — while dengue has not yet been excluded, NSAIDs and aspirin carry the same bleeding-risk concern as in dengue itself, and dengue-chikungunya co-infection is well recognised in areas where both circulate; paracetamol is the safer choice for pain and fever until dengue is ruled out. <span class="cite">(Grade B — WHO/PAHO chikungunya guidance)</span>` },
+        { name: "NSAIDs (Chronic Phase, Dengue Excluded)", desc: "Reasonable first-line for persistent chikungunya arthritis once bleeding risk is no longer a concern", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.isChronicArthritis ? 700 : 0,
+          log: (r, ctx) => ctx.vignette.isChronicArthritis
+            ? `Appropriate — now that dengue and other bleeding-risk concerns have been excluded, NSAIDs are a reasonable first-line option for the persistent inflammatory arthritis that follows chikungunya in a substantial minority of patients. <span class="cite">(Grade C — rheumatology case series/expert guidance)</span>`
+            : `Not the right stage for this — bleeding risk from dengue or co-infection has not yet been excluded in the acute phase; paracetamol is the safer first choice until that risk has passed. <span class="cite">(Grade B)</span>` },
+        { name: "Disease-Modifying Antirheumatic Drugs (e.g. Methotrexate)", desc: "Considered for refractory chronic chikungunya arthritis unresponsive to NSAIDs", isDrug: true,
+          dmg: (r, ctx) => ctx.vignette.isChronicArthritis ? 500 : 0,
+          log: (r, ctx) => ctx.vignette.isChronicArthritis
+            ? `A reasonable escalation for chronic, NSAID-refractory chikungunya arthritis that mimics inflammatory arthritis — case series and expert guidance support conventional DMARDs such as methotrexate in this setting, though this reflects a smaller and lower-certainty evidence base than for primary rheumatoid arthritis. <span class="cite">(Grade C — rheumatology case series/expert guidance)</span>`
+            : `Not appropriate for acute infection — DMARDs are reserved for persistent, refractory post-chikungunya arthritis, not the initial febrile illness. <span class="cite">(Grade C)</span>` },
+        { name: "Specific Antiviral Therapy", desc: "Does not exist for chikungunya", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No such option exists — there is no licensed antiviral with proven efficacy against chikungunya virus; management is entirely symptomatic and supportive, in both the acute and chronic phases. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Chikungunya's hallmark is severe, often symmetric small-joint polyarthralgia disproportionate to other symptoms</b> — this helps distinguish it clinically from dengue, where haemorrhagic and plasma-leakage risk dominate rather than joint pain. <span class="cite">(Grade B — WHO/PAHO chikungunya guidance)</span>`,
+        `<b>Avoid NSAIDs and aspirin until dengue has been excluded</b>, given overlapping geography, shared vectors, and the well-described possibility of dengue-chikungunya co-infection — paracetamol is the safer initial choice. <span class="cite">(Grade B — WHO/PAHO chikungunya guidance)</span>`,
+        `<b>A substantial proportion of patients develop persistent, inflammatory-pattern joint symptoms lasting months to years</b> after acute chikungunya infection, which can mimic rheumatoid arthritis and may respond to NSAIDs or, if refractory, conventional DMARDs. <span class="cite">(Grade C — rheumatology case series/expert guidance)</span>`,
+        `<b>There is no specific antiviral treatment for chikungunya</b> — management is entirely supportive throughout both the acute febrile illness and any chronic arthritic sequelae. <span class="cite">(Grade A)</span>`,
+      ],
+    },
   ];
 
   // Every vignette now carries its own fixed, hand-assigned caseNum (set directly
@@ -4584,6 +5531,7 @@ const DEX_INFO = {
       'Catalase-negative',
       'Grows in 6.5% NaCl and on bile-esculin agar (both positive) — key identifying features',
       'Group D Lancefield antigen; intrinsically tolerant to many antibiotics',
+      'Identical Gram stain and colony appearance to <i>E. faecium</i> — the two share this basic phenotype, so definitive species identification needs MALDI-TOF or molecular methods, not the panel above alone',
     ],
     manifestations: [
       'Urinary tract infection, particularly catheter-associated and healthcare-related',
@@ -4595,12 +5543,39 @@ const DEX_INFO = {
       'Intrinsic low-level resistance to ALL cephalosporins and clindamycin — never use regardless of in-vitro report',
       'Intrinsic tolerance to beta-lactams and aminoglycosides individually — necessitates synergy combinations for endocarditis',
       'VRE: acquired vanA/vanB gene clusters alter the peptidoglycan precursor target, conferring vancomycin resistance',
+      'Typically ampicillin-susceptible when non-VRE — a real point of difference from <i>E. faecium</i>, which is usually ampicillin-resistant (altered PBP5) even without vancomycin resistance',
     ],
     treatment: 'Uncomplicated UTI: amoxicillin/ampicillin if susceptible, or nitrofurantoin. Endocarditis: ampicillin plus gentamicin (synergy) exploits bactericidal killing beyond either agent alone (Grade A, IDSA/AHA). VRE or ampicillin-resistant strains: linezolid or daptomycin — daptomycin should NOT be used for pulmonary infection (surfactant inactivates it).',
     references: [
       "2015 ESC Guidelines for the Management of Infective Endocarditis (Habib et al., Eur Heart J) (Grade A)",
       "2015 AHA Scientific Statement: Infective Endocarditis in Adults (Baddour et al., Circulation) (Grade A)",
       "Fernández-Hidalgo N et al., Ampicillin plus Ceftriaxone is as Effective as Ampicillin plus Gentamicin for Treating <i>Enterococcus faecalis</i> Infective Endocarditis, Clin Infect Dis 2013 (Grade B)",
+    ],
+  },
+  efaecium: {
+    group: 'Gram-Positive Cocci',
+    characteristics: [
+      'Gram-positive coccus in pairs/short chains — identical to <i>E. faecalis</i> on Gram stain',
+      'Catalase-negative',
+      'Grows in 6.5% NaCl and on bile-esculin agar (both positive), same as <i>E. faecalis</i> — species-level identification needs MALDI-TOF or molecular methods, not phenotypic panels alone',
+      'Group D Lancefield antigen',
+    ],
+    manifestations: [
+      'Bacteraemia, particularly nosocomial and line-associated in ICU or heavily antibiotic-exposed patients',
+      'Prosthetic valve and healthcare-associated infective endocarditis (less often native-valve than <i>E. faecalis</i>)',
+      'Intra-abdominal and biliary infection in the healthcare setting',
+      'Urinary tract infection, typically catheter-associated in institutionalised patients',
+    ],
+    resistance: [
+      'Intrinsic resistance to ALL cephalosporins and clindamycin, like all enterococci',
+      'Usually ampicillin-resistant (altered, low-affinity PBP5) regardless of vancomycin susceptibility — unlike <i>E. faecalis</i>, which is typically ampicillin-susceptible when non-VRE',
+      'The majority of hospital VRE isolates are <i>E. faecium</i> — acquired vanA/vanB gene clusters add vancomycin resistance on top of the baseline ampicillin resistance',
+    ],
+    treatment: 'Vancomycin-susceptible: vancomycin (ampicillin is NOT a reliable option here, unlike for E. faecalis). VRE or ampicillin-resistant strains: linezolid or high-dose daptomycin (10–12 mg/kg/day) — higher doses are associated with lower mortality in VRE bacteraemia, likely reflecting the higher daptomycin MICs typically seen in this species (Grade B).',
+    references: [
+      "Vancomycin-Resistant Enterococci, StatPearls [Internet], NCBI Bookshelf (Grade B — review, species-level susceptibility patterns)",
+      "CASP Vancomycin-Resistant Enterococcus faecium Treatment Guideline, UNC Division of Infectious Diseases, Jan 2023 — cohort data supporting high-dose (10–12 mg/kg) daptomycin (Grade B)",
+      "CDC Antibiotic Resistance & Patient Safety Portal: Vancomycin-Resistant Enterococcus faecium (Grade B — national surveillance data)",
     ],
   },
   sagalactiae: {
@@ -5746,6 +6721,333 @@ const DEX_INFO = {
       "John TM et al., When Uncontrolled Diabetes Mellitus and Severe COVID-19 Converge: The Perfect Storm for Mucormycosis, J Fungi 2021 (Grade B)",
     ],
   },
+  dengue: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, positive-sense RNA flavivirus with four distinct serotypes (DENV-1 to DENV-4) — infection with one serotype gives lifelong immunity to that serotype only, and secondary infection with a different serotype is a major risk factor for severe disease (antibody-dependent enhancement)',
+      'Transmitted by <i>Aedes aegypti</i> and <i>Aedes albopictus</i> mosquitoes, which bite predominantly during daylight hours, in contrast to the night-biting <i>Anopheles</i> vectors of malaria',
+      'The illness classically progresses through febrile, critical, and recovery phases — the critical phase, around days 3-7, is when plasma leakage and shock risk peak, often just as fever is subsiding',
+      'NS1 antigen detection allows early diagnosis (day 1-7), while IgM/IgG serology becomes useful later in the course',
+    ],
+    manifestations: [
+      'Uncomplicated dengue fever: high fever, severe retro-orbital headache, myalgia/arthralgia ("breakbone fever"), and a maculopapular rash',
+      'WHO warning signs marking transition to the critical phase: abdominal pain/tenderness, persistent vomiting, clinical fluid accumulation, mucosal bleeding, lethargy/restlessness, liver enlargement, and a rising haematocrit with falling platelets',
+      'Severe dengue: plasma leakage leading to shock, severe bleeding, or significant organ impairment (liver, CNS, heart)',
+      'Endemic across much of the tropics and subtropics, including Southeast Asia, with periodic large outbreaks',
+    ],
+    resistance: [
+      'Not applicable in the antimicrobial-resistance sense — there is no antiviral drug in clinical use against dengue for resistance to develop against',
+      'The key "resistance" concept clinically relevant to dengue is serotype-specific immunity: secondary infection with a heterologous serotype is a major severe-dengue risk factor rather than a protective re-exposure',
+    ],
+    treatment: 'There is no dengue-specific antiviral. Management of uncomplicated disease is supportive and outpatient-based — paracetamol for fever/pain, oral hydration, and avoidance of NSAIDs/aspirin given bleeding risk (Grade A, Singapore National Dengue Clinical Guideline / WHO). Warning signs mandate closer monitoring or admission, with structured, stepwise IV crystalloid resuscitation guided by serial haematocrit for those progressing to plasma leakage or shock (Grade A). Platelet transfusion is reserved for significant clinical bleeding, not isolated thrombocytopenia.',
+    references: [
+      "Ministry of Health Singapore, National Dengue Clinical Practice Guideline (Grade A)",
+      "WHO, Dengue Guidelines for Diagnosis, Treatment, Prevention and Control (Grade A)",
+      "WHO, Comprehensive Guideline for Prevention and Control of Dengue and Dengue Haemorrhagic Fever, SEARO (Grade B)",
+    ],
+  },
+  hiv: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, positive-sense RNA retrovirus that uses reverse transcriptase to convert its genome into DNA, which integrates into the host cell genome — the basis of lifelong latent infection even under fully suppressive treatment',
+      'Preferentially infects and depletes CD4+ T-lymphocytes, producing progressive immunodeficiency over years if untreated',
+      'Diagnosis relies on 4th-generation antigen/antibody combination immunoassays, with HIV RNA viral load the most sensitive marker during the early "window period" before seroconversion',
+      'Two types exist (HIV-1, the dominant global cause; HIV-2, largely confined to West Africa with generally slower progression)',
+    ],
+    manifestations: [
+      'Acute retroviral syndrome: a mononucleosis-like illness (fever, pharyngitis, lymphadenopathy, rash) 2-4 weeks post-exposure, frequently missed or misattributed',
+      'A long, often clinically silent chronic phase with progressive CD4 decline if untreated',
+      'Advanced HIV/AIDS: CD4 count below 200 cells/microL (or an AIDS-defining illness) — opportunistic infections (<i>Pneumocystis jirovecii</i> pneumonia, disseminated <i>Mycobacterium avium</i> complex, cryptococcal meningitis, CMV retinitis) and malignancies (Kaposi sarcoma, certain lymphomas)',
+      'Untreated, HIV is also a major driver of tuberculosis reactivation and severity worldwide',
+    ],
+    resistance: [
+      'Resistance can develop against every antiretroviral class through selection of resistance mutations, particularly with poor adherence or interrupted therapy',
+      'Integrase strand transfer inhibitors (e.g. dolutegravir) have a high genetic barrier to resistance, contributing to their preferred first-line status, though WHO surveillance (2024) has documented rising real-world dolutegravir resistance (roughly 4-9% in surveyed cohorts, up to around 20% in treatment-experienced patients switching with an unsuppressed viral load) — underscoring the importance of adherence support and viral load monitoring rather than changing first-line recommendations',
+      'Baseline resistance testing is recommended where feasible before starting therapy, given transmitted drug resistance in some populations',
+    ],
+    treatment: 'Antiretroviral therapy (ART) is recommended for everyone diagnosed with HIV regardless of CD4 count ("test and treat"), ideally started rapidly/same-day after diagnosis rather than delayed for staging (Grade A, WHO). A dolutegravir-based two-NRTI backbone (e.g. tenofovir/lamivudine + dolutegravir) is preferred first-line therapy in essentially all current guidelines given potency, a high barrier to resistance, and tolerability (Grade A, WHO/DHHS). CD4 count and an opportunistic infection screen at diagnosis guide prophylaxis needs (e.g. co-trimoxazole below 200 cells/microL).',
+    references: [
+      "WHO Consolidated Guidelines on HIV Prevention, Testing, Treatment, Service Delivery and Monitoring (Grade A)",
+      "DHHS Panel on Antiretroviral Guidelines for Adults and Adolescents (Grade A)",
+      "Ministry of Health Singapore, National HIV/AIDS Programme — Clinical Management Guidelines (Grade B)",
+    ],
+  },
+  hepb: {
+    group: 'Viruses',
+    characteristics: [
+      'A small, partially double-stranded DNA hepadnavirus that replicates via reverse transcription of an RNA intermediate within hepatocytes',
+      'Transmitted parenterally, sexually, and perinatally — perinatal and early-childhood acquisition carries a far higher risk of chronic infection than adult acquisition',
+      'Serology tells the clinical story: HBsAg + IgM anti-HBc marks acute infection; HBsAg persisting beyond 6 months with IgG (not IgM) anti-HBc marks chronic infection; HBeAg reflects high replicative activity and infectivity',
+      'Universal infant vaccination, including a timely birth dose, is the cornerstone of global prevention',
+    ],
+    manifestations: [
+      'Acute hepatitis B: fatigue, nausea, right upper quadrant discomfort, and jaundice with markedly elevated transaminases — over 95% of immunocompetent adults clear the infection spontaneously',
+      'Chronic hepatitis B: a spectrum from an inactive carrier state (normal ALT, low viral load) to active chronic hepatitis (elevated ALT, significant HBV DNA, progressive fibrosis)',
+      'Long-term complications of untreated active chronic disease include cirrhosis and hepatocellular carcinoma, which can occur even without cirrhosis in chronic HBV specifically',
+      'Reactivation is a recognised risk with immunosuppressive therapy (e.g. chemotherapy, biologics) in previously infected or inactive-carrier patients',
+    ],
+    resistance: [
+      'Older agents (lamivudine, adefovir) have high rates of resistance with prolonged use and have been largely superseded',
+      'Tenofovir and entecavir have a high genetic barrier to resistance and are now preferred first-line agents for this reason',
+      'Resistance surveillance matters most in patients previously exposed to older, low-barrier agents',
+    ],
+    treatment: 'Acute hepatitis B in an immunocompetent adult is managed supportively in the large majority of cases; antivirals are reserved for severe or fulminant acute disease (Grade A). Chronic hepatitis B is treated when criteria for active disease are met (elevated ALT, significant HBV DNA, and/or fibrosis) — tenofovir or entecavir are first-line given potency and a high barrier to resistance, typically continued long-term/indefinitely (Grade A, MOH Singapore CPG / APASL). Peginterferon alfa is an alternative for selected patients wanting a finite treatment course (Grade B).',
+    references: [
+      "Ministry of Health Singapore, Clinical Practice Guidelines: Chronic Hepatitis B Infection (Grade A)",
+      "Asian Pacific Association for the Study of the Liver (APASL) Hepatitis B Guidelines (Grade A)",
+      "WHO Guidelines for the Prevention, Care and Treatment of Persons with Chronic Hepatitis B Infection (Grade B)",
+    ],
+  },
+  hsv: {
+    group: 'Viruses',
+    characteristics: [
+      'A double-stranded DNA herpesvirus with two types — HSV-1 (classically orolabial, increasingly a cause of genital disease) and HSV-2 (classically genital) — both capable of causing disease at either site',
+      'Establishes lifelong latency in sensory ganglia after primary infection, with periodic reactivation causing recurrent, typically milder, episodes',
+      'PCR of vesicle fluid or CSF is now the preferred diagnostic method — more sensitive than viral culture and able to distinguish HSV type',
+      'Tzanck smear shows multinucleated giant cells but cannot distinguish HSV from VZV',
+    ],
+    manifestations: [
+      'Primary genital or orolabial herpes: painful grouped vesicles on an erythematous base, often with systemic symptoms (fever, malaise, tender regional lymphadenopathy) — more severe/prolonged than recurrent episodes',
+      'Recurrent episodes: typically milder and shorter, sometimes preceded by a prodrome',
+      'HSV encephalitis: fever, headache, altered behaviour, and focal seizures with a characteristic asymmetric temporal/inferior frontal lobe distribution on MRI — a neurological emergency',
+      'Neonatal HSV, HSV keratitis, and disseminated disease in immunocompromised hosts are important, higher-stakes presentations beyond mucocutaneous disease',
+    ],
+    resistance: [
+      'Aciclovir resistance (typically via thymidine kinase mutations) is rare in immunocompetent hosts',
+      'Resistance should be considered with prolonged or refractory disease in significantly immunocompromised patients with extensive prior aciclovir exposure',
+      'Foscarnet is the standard alternative for aciclovir-resistant HSV, acting via direct viral DNA polymerase inhibition without requiring thymidine-kinase-mediated activation',
+    ],
+    treatment: 'HSV encephalitis is a neurological emergency — empirical high-dose IV aciclovir should start immediately on clinical suspicion without waiting for CSF PCR confirmation, since delay meaningfully worsens neurological outcomes and mortality (Grade A). For genital or orolabial disease, oral aciclovir or valaciclovir is usually sufficient, with IV reserved for severe or disseminated disease (Grade A). Foscarnet is reserved for aciclovir-resistant HSV (Grade B).',
+    references: [
+      "IDSA/ACTG Guidelines for the Management of Encephalitis (Grade A)",
+      "CDC Sexually Transmitted Infections Treatment Guidelines — Genital HSV (Grade A)",
+      "British Association for Sexual Health and HIV (BASHH) UK National Guideline for Genital Herpes (Grade B)",
+    ],
+  },
+  vzv: {
+    group: 'Viruses',
+    characteristics: [
+      'A double-stranded DNA herpesvirus causing two distinct clinical syndromes from a single lifelong infection: primary infection (varicella/chickenpox) and reactivation from dorsal root ganglia (herpes zoster/shingles)',
+      'Highly contagious via respiratory droplets and direct contact with vesicle fluid during primary infection; zoster is contagious via direct contact with vesicles but not via the respiratory route',
+      'Varicella classically produces lesions in different stages simultaneously ("crops") — vesicles, macules, and crusts together — distinguishing it from more uniform vesicular rashes',
+      'Live-attenuated and recombinant subunit vaccines exist for both primary prevention (varicella vaccine) and shingles prevention in older adults (recombinant zoster vaccine)',
+    ],
+    manifestations: [
+      'Primary varicella: fever with an itchy vesicular rash in crops, typically self-limited in healthy children but potentially more severe in adults, pregnant women, and immunocompromised hosts',
+      'Localised herpes zoster: a painful, dermatomal vesicular eruption, most often thoracic, arising from reactivation in a single sensory ganglion',
+      'Disseminated zoster: spread beyond the originating dermatome, defining significant immunosuppression and carrying risk of visceral involvement (pneumonitis, hepatitis, encephalitis)',
+      'Post-herpetic neuralgia is the most common complication of zoster, particularly in older adults',
+    ],
+    resistance: [
+      'Aciclovir resistance is uncommon but can occur with prolonged exposure in significantly immunocompromised hosts, via mechanisms similar to HSV (thymidine kinase mutations)',
+      'Foscarnet is the standard alternative where resistance is suspected',
+    ],
+    treatment: 'Uncomplicated varicella in a healthy child is generally managed supportively (antipyretics, antihistamines for itch, skin hygiene); routine antivirals aren\'t required in this low-risk group (Grade B). Localised zoster in an immunocompetent adult benefits from oral valaciclovir or aciclovir started within 72 hours of rash onset, reducing severity and duration (Grade A). Disseminated or visceral zoster in immunocompromised hosts requires IV, not oral, aciclovir (Grade A).',
+    references: [
+      "CDC Chickenpox (Varicella) and Shingles (Herpes Zoster) Clinical Guidance (Grade A)",
+      "IDSA Guidelines for the Management of Varicella-Zoster Virus Infections (Grade A)",
+      "NICE Clinical Knowledge Summary — Shingles (Grade B)",
+    ],
+  },
+  cmv: {
+    group: 'Viruses',
+    characteristics: [
+      'A double-stranded DNA betaherpesvirus that, like other herpesviruses, establishes lifelong latency after primary infection, with reactivation risk under immunosuppression',
+      'The most common congenital infection worldwide and a leading non-genetic cause of sensorineural hearing loss',
+      'Diagnosis relies on quantitative PCR (blood, urine, or tissue) for active disease, with characteristic "owl\'s eye" intranuclear inclusions on histopathology in end-organ disease',
+      'Donor/recipient CMV serostatus mismatch (particularly D+/R-, a seronegative recipient of a seropositive donor organ) is the key risk stratifier in solid organ transplantation',
+    ],
+    manifestations: [
+      'Congenital CMV: microcephaly, sensorineural hearing loss, hepatosplenomegaly, petechiae, and periventricular calcifications in symptomatic cases — testing must occur within the first 3 weeks of life to confirm congenital (rather than postnatal) acquisition',
+      'CMV mononucleosis-like syndrome in immunocompetent hosts, often clinically similar to EBV mononucleosis but heterophile-antibody negative',
+      'CMV end-organ disease in immunocompromised hosts (transplant recipients, advanced HIV): retinitis, colitis, pneumonitis, and hepatitis, among others',
+      'Risk of CMV disease after transplant is highest in the first several months, especially with D+/R- serostatus mismatch',
+    ],
+    resistance: [
+      'Ganciclovir resistance (via UL97 or UL54 mutations) can occur with prolonged or repeated treatment courses, particularly in transplant recipients',
+      'Foscarnet is the standard alternative for ganciclovir-resistant CMV, or when ganciclovir\'s myelosuppression is dose-limiting, given its different mechanism and its own significant nephrotoxicity trade-off',
+    ],
+    treatment: 'Oral valganciclovir has largely replaced IV ganciclovir for most non-life-threatening CMV disease given comparable efficacy and easier administration (Grade A). IV ganciclovir is preferred for severe/life-threatening disease or unreliable oral absorption (Grade A). Foscarnet is reserved for ganciclovir resistance or dose-limiting toxicity (Grade B). Cautiously reducing immunosuppression is an important adjunct in transplant recipients, balanced against rejection risk (Grade B).',
+    references: [
+      "American Society of Transplantation (AST) Infectious Diseases Community of Practice — CMV Guidelines (Grade A)",
+      "CDC Congenital CMV Infection Clinical Overview (Grade A)",
+      "Transplantation Society International CMV Consensus Guidelines (Grade B)",
+    ],
+  },
+  sarscov2: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, positive-sense RNA betacoronavirus, the causative agent of COVID-19, first identified in late 2019',
+      'Spreads predominantly via respiratory droplets and aerosols; antigenic evolution through variants has driven successive pandemic waves and periodic vaccine reformulation',
+      'Diagnosis via rapid antigen testing (fast, less sensitive, most useful early and when viral load is high) or PCR/NAAT (more sensitive, the reference standard)',
+      'Disease severity is strongly stratified by age, vaccination status, and comorbidity, with a wide clinical spectrum from asymptomatic infection to critical illness',
+    ],
+    manifestations: [
+      'Mild disease: fever, cough, myalgia, anosmia/ageusia in some patients, and upper respiratory symptoms, generally self-limited',
+      'Moderate-to-severe pneumonia: dyspnoea and hypoxia with bilateral ground-glass opacities on chest imaging, typically presenting in the second week of illness',
+      'Critical illness: ARDS, thromboembolic complications, and multi-organ dysfunction in a minority of patients',
+      'Post-acute sequelae ("long COVID") — a range of persistent symptoms (fatigue, dyspnoea, cognitive symptoms) that can follow both mild and severe acute illness',
+    ],
+    resistance: [
+      'Nirmatrelvir resistance-associated mutations in the main protease have been described but remain uncommon in circulating strains',
+      'Ritonavir (the pharmacokinetic booster in nirmatrelvir/ritonavir) is a potent CYP3A4 inhibitor with numerous significant drug interactions that must be checked before prescribing, distinct from viral resistance itself',
+    ],
+    treatment: 'Nirmatrelvir/ritonavir is most effective when started within 5 days of symptom onset in high-risk, non-hospitalised outpatients, reducing progression to severe disease (Grade A). Remdesivir has evidence in hospitalised patients requiring supplemental oxygen (Grade A). Dexamethasone reduces mortality specifically in patients with hypoxia requiring oxygen or ventilation, but shows no benefit — and a possible signal of harm — when given without hypoxia (Grade A, RECOVERY trial).',
+    references: [
+      "NIH COVID-19 Treatment Guidelines (Grade A)",
+      "WHO Living Guideline on Therapeutics and COVID-19 (Grade A)",
+      "RECOVERY Collaborative Group, Dexamethasone in Hospitalized Patients with Covid-19, NEJM 2021 (Grade A)",
+    ],
+  },
+  ebv: {
+    group: 'Viruses',
+    characteristics: [
+      'A double-stranded DNA gammaherpesvirus, transmitted primarily via saliva, that establishes lifelong latency in B-lymphocytes',
+      'The classic cause of infectious mononucleosis in adolescents and young adults, and an established driver of several malignancies (Burkitt lymphoma, nasopharyngeal carcinoma, Hodgkin lymphoma, and post-transplant lymphoproliferative disorder)',
+      'Diagnosis of acute infection uses heterophile antibody testing (Monospot, less sensitive early and in young children) or EBV-specific serology; quantitative PCR monitors viral load in immunocompromised hosts',
+      'A well-known non-allergic maculopapular rash occurs in a large majority of mononucleosis patients given aminopenicillins (amoxicillin/ampicillin)',
+    ],
+    manifestations: [
+      'Infectious mononucleosis: fever, exudative pharyngitis, lymphadenopathy (classically posterior cervical), splenomegaly, and atypical lymphocytosis on blood film',
+      'Splenic rupture is a rare but feared acute complication — contact sports and heavy lifting should be avoided for at least 3-4 weeks',
+      'Post-transplant lymphoproliferative disorder (PTLD): EBV-driven B-cell proliferation in solid organ or haematopoietic transplant recipients under immunosuppression',
+      'EBV also causes oral hairy leukoplakia and is linked to several EBV-associated malignancies in both immunocompetent and immunocompromised populations',
+    ],
+    resistance: [
+      'Not applicable in the conventional antimicrobial-resistance sense — aciclovir has in vitro activity against EBV lytic replication but no established clinical role, so resistance to it is not a clinically relevant concept here',
+      'For PTLD, "resistance" to first-line management is framed as failure to respond to reduced immunosuppression, prompting escalation to rituximab or chemotherapy',
+    ],
+    treatment: 'Uncomplicated infectious mononucleosis is managed supportively (analgesia, hydration, rest, avoiding contact sports) — aciclovir has no proven clinical benefit despite in vitro activity (Grade A). Post-transplant lymphoproliferative disorder is managed stepwise: reduce immunosuppression first, add rituximab for CD20-positive disease not responding to reduced immunosuppression alone, and reserve chemotherapy for refractory or aggressive disease (Grade B, international transplant society guidance).',
+    references: [
+      "American Society of Transplantation (AST) Guidelines — Post-Transplant Lymphoproliferative Disorder (Grade B)",
+      "UpToDate/CDC Clinical Overview of Infectious Mononucleosis (Grade B)",
+      "British Society for Haematology Guidelines on the Management of PTLD (Grade B)",
+    ],
+  },
+  hepc: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, positive-sense RNA flavivirus (family Flaviviridae) with multiple genotypes, transmitted predominantly parenterally (injection drug use, unscreened blood products in some settings, occupational exposure)',
+      'Chronic infection is defined by persistent viraemia beyond approximately 6 months; a minority of acute infections clear spontaneously',
+      'Diagnosis: anti-HCV antibody as an initial screen, confirmed with HCV RNA (quantitative PCR) to distinguish active from cleared infection; genotyping is now less critical given pangenotypic regimens',
+      'There is no vaccine and no post-exposure prophylaxis for HCV, unlike hepatitis B — management after exposure relies on structured serologic and virologic follow-up',
+    ],
+    manifestations: [
+      'Acute infection is usually asymptomatic or mild, which is why most diagnoses are made incidentally or through risk-based screening rather than during the acute illness itself',
+      'Chronic hepatitis C: often asymptomatic for years, detected via incidentally elevated ALT or risk-based screening, with progressive fibrosis in a proportion of untreated patients',
+      'Established complications of untreated chronic infection: cirrhosis, decompensated liver disease, and hepatocellular carcinoma',
+      'Extrahepatic manifestations (e.g. mixed cryoglobulinaemia, membranoproliferative glomerulonephritis) are recognised but less common than the hepatic disease itself',
+    ],
+    resistance: [
+      'Resistance-associated substitutions to direct-acting antivirals can occur but rarely compromise pangenotypic regimens at standard treatment durations',
+      'Treatment failure is now uncommon with modern regimens; retreatment options exist for the rare patient who does not achieve sustained virologic response',
+    ],
+    treatment: 'Chronic hepatitis C is curable — a 12-week course of a pangenotypic direct-acting antiviral regimen (e.g. sofosbuvir/velpatasvir) achieves sustained virologic response in well over 95% of patients, regardless of genotype (Grade A, WHO/AASLD-IDSA). Interferon-based regimens are obsolete. After a needlestick or other high-risk exposure, because no post-exposure prophylaxis exists, management is scheduled follow-up HCV RNA and antibody testing, with prompt treatment if infection is confirmed (Grade B).',
+    references: [
+      "AASLD-IDSA HCV Guidance: Recommendations for Testing, Managing, and Treating Hepatitis C (Grade A)",
+      "WHO Guidelines for the Care and Treatment of Persons Diagnosed with Chronic Hepatitis C Virus Infection (Grade A)",
+      "CDC Viral Hepatitis Surveillance and Occupational Exposure Guidance (Grade B)",
+    ],
+  },
+  measles: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, negative-sense RNA paramyxovirus and one of the most contagious pathogens known, spread via respiratory droplets and airborne transmission',
+      'Humans are the only natural host, which is what makes global eradication through vaccination theoretically achievable',
+      'Koplik spots (small white/grey spots on an erythematous buccal mucosal base) are pathognomonic and typically precede the rash by 1-2 days',
+      'The rash follows a classic cephalocaudal spread — beginning on the face and hairline before moving down the trunk and limbs',
+    ],
+    manifestations: [
+      'Prodrome of fever, cough, coryza, and conjunctivitis ("the three Cs"), followed by Koplik spots and then the characteristic descending maculopapular rash',
+      'Complications: otitis media (most common), pneumonia (including measles giant-cell/Hecht pneumonia and secondary bacterial pneumonia), and acute encephalitis',
+      'Measles causes transient but profound immune suppression ("immune amnesia") that can persist for months, increasing susceptibility to other infections',
+      'Subacute sclerosing panencephalitis (SSPE) is a rare, fatal, delayed complication presenting years after acute infection, disproportionately affecting those infected as infants',
+    ],
+    resistance: [
+      'Not applicable in the antimicrobial-resistance sense — there is no antiviral in routine clinical use against measles',
+      'The relevant population-level "resistance" concern is waning herd immunity when vaccination coverage falls, which permits outbreak transmission even where measles was previously well controlled',
+    ],
+    treatment: 'There is no specific antiviral treatment for measles — management is supportive. WHO recommends two age-appropriate doses of vitamin A, given 24 hours apart, for every child diagnosed with measles regardless of country or apparent nutritional status, since it reduces morbidity and mortality (Grade A, WHO). Antibiotics are reserved for suspected secondary bacterial infection, not given empirically. MMR vaccination within 72 hours of exposure can prevent or attenuate disease in a susceptible contact, but has no role once infection is established (Grade B).',
+    references: [
+      "WHO Guideline: Vitamin A Supplementation for Children with Measles (Grade A)",
+      "CDC Measles Clinical Overview and Case Management (Grade A)",
+      "WHO Measles Fact Sheet and Surveillance Guidance (Grade B)",
+    ],
+  },
+  rabies: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, negative-sense RNA rhabdovirus transmitted through the saliva of an infected mammal, most often via a bite, and travelling to the central nervous system along peripheral nerves',
+      'Incubation is typically 1-3 months but can range from days to over a year, depending on bite site and viral inoculum — the reason post-exposure prophylaxis remains worthwhile even weeks after exposure, provided it is given before symptoms start',
+      'WHO exposure categories guide management: Category I (touching/feeding, intact skin) needs no treatment; Category II (minor scratches without bleeding) needs wound care and vaccine; Category III (transdermal bites/scratches, mucous membrane or broken-skin contamination with saliva, or any bat exposure) needs wound care, immunoglobulin, and vaccine',
+      'Diagnosis in suspected clinical rabies uses saliva PCR and serum/CSF serology, though confirmatory testing does not change management once symptoms have begun',
+    ],
+    manifestations: [
+      'Prodrome: fever, malaise, and paraesthesia or pain at the bite site',
+      '"Furious" rabies (the more common form): agitation, hydrophobia (spasms triggered by attempts to drink water), aerophobia, and hypersalivation',
+      '"Paralytic" (dumb) rabies: an ascending flaccid paralysis, less dramatic and more often missed clinically',
+      'Once clinical symptoms begin, rabies is essentially always fatal — case fatality approaches 100%',
+    ],
+    resistance: [
+      'Not applicable in the conventional sense — there is no antiviral treatment for established rabies to develop resistance against',
+      'Experimental intensive-care protocols (sometimes called the "Milwaukee protocol") have been attempted in a handful of symptomatic patients, but there is no controlled evidence they alter the outcome, and rabies fatality remains essentially universal once symptoms appear',
+    ],
+    treatment: 'Post-exposure management for Category III exposures requires all three elements: immediate, thorough wound washing with soap and water for 15 minutes (the single most effective intervention), rabies immunoglobulin infiltrated around the wound, and a full vaccine series (e.g. the WHO Essen regimen: days 0, 3, 7, 14) — together essentially 100% effective if started before symptoms begin (Grade A, WHO). Once clinical rabies develops, no treatment reliably alters the outcome; care shifts to palliation and infection control precautions (Grade B, WHO).',
+    references: [
+      "WHO Rabies Vaccines and Immunoglobulins: WHO Position Paper (Grade A)",
+      "WHO Guide for Post-Exposure Prophylaxis (Grade A)",
+      "CDC Rabies Clinical Overview and Human Vaccine Recommendations (Grade B)",
+    ],
+  },
+  rsv: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, negative-sense RNA pneumovirus and the most common cause of bronchiolitis in infants, with a seasonal winter pattern in temperate climates',
+      'Also causes significant disease at the other extreme of immune function — older adults and immunocompromised patients (including transplant recipients)',
+      'Diagnosis via rapid antigen testing or PCR/NAAT respiratory panel on a nasopharyngeal swab',
+      'Two monoclonal antibody products (palivizumab, and the newer, longer-acting nirsevimab) provide passive prevention for high-risk infants — prophylaxis, not treatment',
+    ],
+    manifestations: [
+      'Bronchiolitis in infants: coryza followed by cough, wheeze, and increased work of breathing, with diffuse wheeze and fine crackles on auscultation',
+      'Most cases in previously healthy infants are managed safely with outpatient or ward-level supportive care',
+      'Severe lower respiratory tract disease with progression to hypoxic pneumonia is seen disproportionately in former premature infants, and in severely immunocompromised patients (e.g. early post-haematopoietic stem cell transplant), where mortality risk is highest',
+      'RSV in older adults can present as bronchitis or pneumonia and is an under-recognised cause of respiratory hospitalisation in this age group',
+    ],
+    resistance: [
+      'Not a clinically significant issue for RSV given the limited antiviral options available',
+      'The main "resistance" consideration is the limited and controversial evidence base for aerosolised ribavirin in severe disease, rather than viral resistance to a well-established agent',
+    ],
+    treatment: 'Bronchiolitis is managed with supportive care — supplemental oxygen only if saturations fall below the recommended threshold, and feeding support if oral intake becomes inadequate; bronchodilators, corticosteroids, and antibiotics have no proven benefit in typical bronchiolitis and are not routinely recommended (Grade A, NICE/AAP). In severely immunocompromised patients with progressive lower respiratory tract disease, aerosolised ribavirin (sometimes with high-titre RSV immunoglobulin) has been used, though the evidence base remains limited (Grade C). Nirsevimab and palivizumab are prevention tools for high-risk infants, not treatments for active infection.',
+    references: [
+      "NICE Guideline NG9: Bronchiolitis in Children — Diagnosis and Management (Grade A)",
+      "American Academy of Pediatrics Clinical Practice Guideline: Bronchiolitis (Grade A)",
+      "American Society of Transplantation ID Community of Practice — RSV in Solid Organ Transplant Guidance (Grade C)",
+    ],
+  },
+  chikv: {
+    group: 'Viruses',
+    characteristics: [
+      'A single-stranded, positive-sense RNA alphavirus transmitted by the same <i>Aedes aegypti</i> and <i>Aedes albopictus</i> mosquitoes responsible for dengue transmission, and often co-circulating in the same regions',
+      'Named from a Makonde word meaning roughly "that which bends up," describing the stooped posture caused by severe joint pain',
+      'Diagnosis via RT-PCR in the first week of illness or IgM serology from around day 5 onward; dengue co-testing is essential given overlapping geography, vectors, and presentation',
+      'Co-infection with dengue is well described in areas where both viruses circulate',
+    ],
+    manifestations: [
+      'Acute illness: high fever with severe, often symmetric small-joint polyarthralgia (hands, wrists, ankles) disproportionate to other symptoms, plus a maculopapular rash — the joint pain is the key distinguishing feature from dengue',
+      'Unlike dengue, chikungunya is not typically associated with clinically significant bleeding or plasma-leakage/shock physiology',
+      'A substantial proportion of patients develop persistent, inflammatory-pattern joint symptoms lasting months to years after the acute illness — reported rates vary widely by cohort and follow-up duration, with some longitudinal studies finding symptoms in roughly a third to over half of patients at long-term follow-up',
+      'Severe or fatal disease is uncommon but can occur, particularly in neonates infected perinatally, older adults, and those with significant comorbidity',
+    ],
+    resistance: [
+      'Not applicable — there is no licensed antiviral against chikungunya to develop resistance against',
+    ],
+    treatment: 'There is no specific antiviral for chikungunya — management is supportive throughout. In the acute phase, while dengue has not yet been excluded, paracetamol is preferred over NSAIDs/aspirin given shared bleeding-risk concerns and the possibility of co-infection (Grade B, WHO/PAHO). Once dengue is excluded, NSAIDs are reasonable first-line for persistent chronic arthritis, escalating to conventional DMARDs (e.g. methotrexate) for refractory, NSAID-unresponsive cases (Grade C, rheumatology case series/expert guidance).',
+    references: [
+      "WHO Guidelines on Clinical Management of Chikungunya Fever (Grade B)",
+      "Pan American Health Organization (PAHO) Preparedness and Response for Chikungunya Virus (Grade B)",
+      "EULAR/expert consensus case series on post-chikungunya chronic arthritis management (Grade C)",
+    ],
+  },
 };
 
 // ===================================================================
@@ -5767,7 +7069,13 @@ const DRUG_CLASSES = [
   { label: 'Other Antibacterials', keys: ['aztreonam', 'chloramphenicol', 'colistin', 'linezolid_daptomycin', 'fidaxomicin'] },
   { label: '<i>H. pylori</i> Eradication Therapy', keys: ['clarithromycin_triple', 'bismuth_quad'] },
   { label: 'Antifungals', keys: ['fluconazole', 'caspofungin', 'amphotericin_b', 'ambisome_flucytosine', 'voriconazole', 'isavuconazole', 'iv_pentamidine', 'clinda_primaquine'] },
-  { label: 'Antivirals', keys: ['oseltamivir', 'baloxavir', 'amantadine'] },
+  { label: 'Antivirals', keys: ['oseltamivir', 'baloxavir', 'amantadine', 'nirmatrelvir_ritonavir', 'remdesivir', 'ribavirin'] },
+  { label: 'Anti-Herpesvirus Agents', keys: ['aciclovir', 'valaciclovir', 'foscarnet', 'ganciclovir'] },
+  { label: 'Antiretrovirals', keys: ['art_dolutegravir'] },
+  { label: 'Hepatitis Antivirals', keys: ['tenofovir', 'peginterferon', 'sofosbuvir_velpatasvir'] },
+  { label: 'Immunotherapies & Immunoglobulins', keys: ['rituximab', 'rabies_immunoglobulin'] },
+  { label: 'Vaccines', keys: ['rabies_vaccine', 'nirsevimab'] },
+  { label: 'Other Supportive/Symptomatic Agents', keys: ['ibuprofen', 'vitamin_a', 'empirical_broad_spectrum', 'salbutamol', 'dmards'] },
   { label: 'Antimalarials', keys: ['artesunate', 'act', 'chloroquine'] },
   { label: 'Anthelmintics', keys: ['ivermectin', 'albendazole', 'praziquantel'] },
 ];
@@ -6395,9 +7703,219 @@ const DRUG_INFO = {
     ],
     notes: 'A reasonable alternative for moderate-severe disease when first-line therapy cannot be used, but G6PD status should be checked first given the haemolysis risk with primaquine.',
   },
+  ibuprofen: {
+    name: 'Ibuprofen (NSAID)',
+    class: 'Non-steroidal anti-inflammatory drug',
+    route: 'Oral',
+    moa: 'Non-selective cyclo-oxygenase (COX-1/COX-2) inhibition, reducing prostaglandin synthesis — provides analgesic, antipyretic, and anti-inflammatory effects, with no direct antiviral or antibacterial activity.',
+    coverage: ['No antimicrobial coverage — a symptomatic anti-inflammatory/analgesic only', 'Reasonable for inflammatory joint pain once bleeding-risk conditions (e.g. dengue, active haemorrhagic disease) have been excluded'],
+    sideEffects: ['Gastrointestinal irritation/bleeding, especially with prolonged use', 'Platelet dysfunction — contraindicated or discouraged where bleeding risk is already elevated', 'Nephrotoxicity with prolonged use or in volume-depleted patients'],
+    notes: 'Avoid in suspected or confirmed dengue, chikungunya with dengue not yet excluded, or any condition with significant bleeding risk — paracetamol is the safer antipyretic/analgesic choice in those settings.',
+  },
+  art_dolutegravir: {
+    name: 'Tenofovir/Lamivudine + Dolutegravir (ART)',
+    class: 'Antiretroviral — NRTI backbone + integrase strand transfer inhibitor',
+    route: 'Oral',
+    moa: 'Tenofovir and lamivudine (nucleos(t)ide reverse transcriptase inhibitors) block HIV reverse transcription; dolutegravir blocks integration of viral DNA into the host genome — combined, the regimen suppresses HIV replication at two distinct steps of the viral life cycle.',
+    coverage: ['HIV-1 — preferred first-line regimen in essentially all current guidelines'],
+    sideEffects: ['Generally well tolerated', 'Weight gain has been described with integrase inhibitor-based regimens', 'Tenofovir requires renal function monitoring'],
+    notes: 'Preferred for potency, a high genetic barrier to resistance, and good tolerability; recommended for everyone diagnosed with HIV regardless of CD4 count, started as soon as feasible after diagnosis.',
+  },
+  tenofovir: {
+    name: 'Tenofovir',
+    class: 'Nucleotide reverse transcriptase inhibitor / HBV polymerase inhibitor',
+    route: 'Oral',
+    moa: 'Inhibits the viral reverse transcriptase/polymerase used by both HIV and hepatitis B virus, terminating viral DNA chain elongation.',
+    coverage: ['Chronic hepatitis B meeting treatment criteria — first-line given potency and a high barrier to resistance', 'Also a backbone component of HIV antiretroviral regimens'],
+    sideEffects: ['Renal impairment and reduced bone mineral density with long-term use', 'Requires periodic renal function monitoring'],
+    notes: 'Not routinely indicated for acute hepatitis B in an immunocompetent host, which usually resolves spontaneously; reserved for chronic disease meeting treatment criteria or severe/fulminant acute disease.',
+  },
+  peginterferon: {
+    name: 'Peginterferon Alfa',
+    class: 'Immunomodulator (pegylated interferon)',
+    route: 'Subcutaneous injection',
+    moa: 'Augments host innate antiviral immune responses via interferon signalling pathways, rather than directly targeting a specific viral enzyme.',
+    coverage: ['Chronic hepatitis B — an alternative for selected patients wanting a finite treatment course'],
+    sideEffects: ['Flu-like symptoms, fatigue, cytopenias', 'Mood disturbance, including depression', 'Contraindicated in decompensated cirrhosis and several other conditions'],
+    notes: 'Generally less used than nucleos(t)ide analogues given tolerability and a narrower group of good responders; superseded entirely by direct-acting antivirals for hepatitis C.',
+  },
+  aciclovir: {
+    name: 'Aciclovir',
+    class: 'Nucleoside analogue antiviral (anti-herpesvirus)',
+    route: 'Oral or IV',
+    moa: 'A guanosine analogue selectively phosphorylated by viral thymidine kinase in HSV/VZV-infected cells, then incorporated into viral DNA to terminate chain elongation — this selective activation gives it a wide therapeutic index.',
+    coverage: ['HSV encephalitis (high-dose IV) — time-critical, started empirically on clinical suspicion', 'Genital/orolabial HSV and localised or disseminated VZV (varicella/zoster)', 'No proven clinical benefit in EBV infectious mononucleosis despite in vitro activity'],
+    sideEffects: ['Nephrotoxicity (crystalline nephropathy), especially with rapid IV administration or dehydration', 'Neurotoxicity at high doses, particularly in renal impairment'],
+    notes: 'Resistance (via thymidine kinase mutations) is rare in immunocompetent hosts but should be considered with prolonged/refractory disease in significant immunosuppression — foscarnet is the standard alternative.',
+  },
+  valaciclovir: {
+    name: 'Valaciclovir',
+    class: 'Nucleoside analogue antiviral (aciclovir prodrug)',
+    route: 'Oral',
+    moa: 'A prodrug rapidly converted to aciclovir after absorption, giving substantially better oral bioavailability while sharing the same mechanism and selectivity for herpesvirus-infected cells.',
+    coverage: ['Genital/orolabial HSV', 'Localised herpes zoster, most effective started within 72 hours of rash onset'],
+    sideEffects: ['Generally well tolerated', 'Rare thrombotic microangiopathy reported at very high doses in immunocompromised patients'],
+    notes: 'Does not achieve sufficient CNS drug levels for HSV encephalitis — high-dose IV aciclovir is required for that indication regardless of valaciclovir\'s convenience elsewhere.',
+  },
+  foscarnet: {
+    name: 'Foscarnet',
+    class: 'Pyrophosphate analogue antiviral',
+    route: 'IV',
+    moa: 'Directly inhibits viral DNA polymerase (herpesviruses) or reverse transcriptase without requiring intracellular phosphorylation/activation — this is what preserves its activity against thymidine-kinase-deficient, aciclovir-resistant HSV/VZV strains.',
+    coverage: ['Aciclovir-resistant HSV/VZV', 'Ganciclovir-resistant CMV, or when ganciclovir myelosuppression is dose-limiting'],
+    sideEffects: ['Significant nephrotoxicity', 'Electrolyte disturbances (hypocalcaemia, hypomagnesaemia, hypokalaemia)', 'Genital ulceration'],
+    notes: 'Reserved for resistant or refractory herpesvirus infections rather than first-line use, given its toxicity profile.',
+  },
+  ganciclovir: {
+    name: 'Ganciclovir / Valganciclovir',
+    class: 'Nucleoside analogue antiviral (anti-CMV)',
+    route: 'IV (ganciclovir) or Oral (valganciclovir, an oral prodrug)',
+    moa: 'A guanosine analogue phosphorylated preferentially in CMV-infected cells (via the viral UL97 kinase), then incorporated into viral DNA to inhibit the viral DNA polymerase.',
+    coverage: ['CMV disease — congenital CMV, and CMV end-organ disease (colitis, retinitis, pneumonitis) in immunocompromised hosts'],
+    sideEffects: ['Myelosuppression (neutropenia, thrombocytopenia) — often dose-limiting', 'Renal dose adjustment required'],
+    notes: 'Oral valganciclovir has largely replaced IV ganciclovir for most non-life-threatening CMV disease given comparable efficacy and easier administration; IV is preferred for severe/life-threatening disease or unreliable oral absorption.',
+  },
+  nirmatrelvir_ritonavir: {
+    name: 'Nirmatrelvir/Ritonavir',
+    class: 'Viral protease inhibitor + pharmacokinetic booster',
+    route: 'Oral',
+    moa: 'Nirmatrelvir inhibits the SARS-CoV-2 main protease (Mpro), blocking viral polyprotein processing; ritonavir inhibits CYP3A4-mediated metabolism of nirmatrelvir, boosting its plasma levels.',
+    coverage: ['Mild-to-moderate COVID-19 in high-risk, non-hospitalised outpatients — most effective within 5 days of symptom onset'],
+    sideEffects: ['Dysgeusia (altered taste)', 'Numerous significant drug interactions via ritonavir\'s potent CYP3A4 inhibition — always check the medication list before prescribing'],
+    notes: 'Evidence base is strongest for early outpatient treatment in high-risk patients; not established for severe/hospitalised disease, where remdesivir and, if hypoxic, dexamethasone take priority.',
+  },
+  remdesivir: {
+    name: 'Remdesivir',
+    class: 'Nucleotide analogue antiviral (RNA-dependent RNA polymerase inhibitor)',
+    route: 'IV',
+    moa: 'A prodrug metabolised to an active nucleotide analogue that is incorporated by the viral RNA-dependent RNA polymerase, causing delayed chain termination.',
+    coverage: ['Hospitalised COVID-19 patients requiring supplemental oxygen'],
+    sideEffects: ['Transaminase elevation', 'Nausea', 'Requires IV administration, limiting outpatient use'],
+    notes: 'Its evidence base and practical administration route make it more suited to hospitalised patients than to early outpatient treatment, where oral nirmatrelvir/ritonavir is preferred instead.',
+  },
+  rituximab: {
+    name: 'Rituximab',
+    class: 'Anti-CD20 monoclonal antibody',
+    route: 'IV',
+    moa: 'Binds CD20 on the surface of B-lymphocytes, triggering antibody-dependent and complement-mediated B-cell depletion — used here to target CD20-positive, EBV-driven lymphoproliferation rather than the virus directly.',
+    coverage: ['CD20-positive post-transplant lymphoproliferative disorder (PTLD) not responding to reduced immunosuppression alone'],
+    sideEffects: ['Infusion reactions', 'Increased infection risk from B-cell depletion', 'Hepatitis B reactivation risk — screening recommended before use'],
+    notes: 'Added in a stepwise approach after reduction of immunosuppression; chemotherapy is reserved for more aggressive or refractory PTLD.',
+  },
+  sofosbuvir_velpatasvir: {
+    name: 'Sofosbuvir/Velpatasvir',
+    class: 'Direct-acting antiviral combination (NS5B polymerase inhibitor + NS5A inhibitor)',
+    route: 'Oral',
+    moa: 'Sofosbuvir inhibits the HCV NS5B RNA-dependent RNA polymerase; velpatasvir inhibits the NS5A protein required for viral replication and assembly — the combination is active against all major HCV genotypes.',
+    coverage: ['Chronic hepatitis C — a pangenotypic, curative regimen typically given for 12 weeks'],
+    sideEffects: ['Generally very well tolerated', 'Headache and fatigue are the most commonly reported effects'],
+    notes: 'Achieves sustained virologic response (functional cure) in well over 95% of patients; has essentially replaced interferon-based regimens.',
+  },
+  vitamin_a: {
+    name: 'Vitamin A (Retinol)',
+    class: 'Vitamin supplementation',
+    route: 'Oral',
+    moa: 'Corrects the relative vitamin A insufficiency induced by acute measles infection, supporting epithelial integrity and immune function — not an antiviral mechanism.',
+    coverage: ['Measles — recommended for every diagnosed child, two age-appropriate doses 24 hours apart, regardless of country or baseline nutritional status'],
+    sideEffects: ['Generally safe at recommended doses', 'Excessive/repeated high dosing can cause vitamin A toxicity'],
+    notes: 'One of the only interventions with strong evidence for reducing measles-associated morbidity and mortality; does not treat any other viral infection.',
+  },
+  empirical_broad_spectrum: {
+    name: 'Empirical Broad-Spectrum Antibiotics',
+    class: 'Antibacterial (non-specific, pending culture/clinical data)',
+    route: 'Variable (oral or IV depending on regimen)',
+    moa: 'Provides presumptive coverage against likely bacterial pathogens while a specific organism/susceptibility profile is pending — has no activity against the viral pathogens causing the underlying illness itself.',
+    coverage: ['Suspected secondary bacterial infection complicating a primary viral illness (e.g. bacterial pneumonia complicating measles or severe viral bronchiolitis)'],
+    sideEffects: ['Depends on the specific agent(s) chosen', 'Unnecessary use contributes to antimicrobial resistance and side effects without benefit when no bacterial infection is present'],
+    notes: 'Should be reserved for clear evidence or strong suspicion of bacterial co-infection, not given routinely for uncomplicated viral illness.',
+  },
+  ribavirin: {
+    name: 'Ribavirin',
+    class: 'Nucleoside analogue antiviral (broad-spectrum)',
+    route: 'Oral, IV, or aerosolised depending on indication',
+    moa: 'A guanosine analogue with multiple proposed antiviral mechanisms, including RNA-dependent RNA polymerase inhibition and induction of lethal viral mutagenesis.',
+    coverage: ['Historically used for chronic hepatitis C (now obsolete, replaced by direct-acting antivirals)', 'Aerosolised ribavirin considered in select severe RSV disease in profoundly immunocompromised hosts, though evidence is limited', 'No proven benefit in measles despite occasional anecdotal use in severe cases'],
+    sideEffects: ['Haemolytic anaemia', 'Teratogenic — contraindicated in pregnancy and requires contraception precautions', 'Significant cost and administration complexity for the aerosolised route'],
+    notes: 'Evidence supporting its use varies substantially by indication and is generally weaker than for other antivirals in this reference — always weigh against the limited evidence base and toxicity before use.',
+  },
+  rabies_immunoglobulin: {
+    name: 'Rabies Immunoglobulin',
+    class: 'Passive immunisation (human or equine anti-rabies immunoglobulin)',
+    route: 'Infiltrated around and into the wound, with any remainder given intramuscularly',
+    moa: 'Provides immediate passive neutralising antibody at the exposure site, bridging the gap before active vaccination generates the patient\'s own antibody response.',
+    coverage: ['WHO Category III rabies exposures (deep bleeding bites, mucous membrane/broken-skin contamination with saliva, or any bat exposure)'],
+    sideEffects: ['Local pain/swelling at infiltration site', 'Rare hypersensitivity reactions, particularly with equine-derived product'],
+    notes: 'No benefit once clinical rabies has developed — effective only when given before symptoms begin, alongside wound care and the vaccine series.',
+  },
+  rabies_vaccine: {
+    name: 'Rabies Vaccine (Essen Regimen)',
+    class: 'Inactivated viral vaccine (active immunisation)',
+    route: 'Intramuscular',
+    moa: 'Stimulates active production of neutralising antibody against rabies virus glycoprotein, given as a four-dose intramuscular series (days 0, 3, 7, 14 in the WHO Essen regimen).',
+    coverage: ['Post-exposure prophylaxis after Category II or III rabies exposure', 'Pre-exposure prophylaxis for high-risk occupational or travel exposure'],
+    sideEffects: ['Local injection site reactions', 'Rare hypersensitivity reactions'],
+    notes: 'Combined with immunoglobulin and wound care for Category III exposures, this is essentially 100% effective if started before symptoms begin; no benefit once clinical rabies has developed.',
+  },
+  salbutamol: {
+    name: 'Salbutamol (Bronchodilator)',
+    class: 'Short-acting beta-2 agonist',
+    route: 'Inhaled/nebulised',
+    moa: 'Stimulates bronchial smooth muscle beta-2 adrenergic receptors, causing bronchodilation — effective in reversible bronchospasm such as asthma, but bronchiolitis\'s pathophysiology (mucosal oedema and mucus plugging) responds poorly to this mechanism.',
+    coverage: ['Not recommended for routine use in viral bronchiolitis', 'Indicated for reversible bronchospasm in asthma and some other wheezing disorders'],
+    sideEffects: ['Tachycardia, tremor', 'Hypokalaemia with high or repeated doses'],
+    notes: 'Multiple trials and clinical guidelines show no consistent benefit from bronchodilators in typical viral bronchiolitis, unlike in asthma — routine use is discouraged.',
+  },
+  nirsevimab: {
+    name: 'Nirsevimab',
+    class: 'Long-acting monoclonal antibody (RSV prevention)',
+    route: 'Intramuscular injection',
+    moa: 'A monoclonal antibody targeting the RSV fusion (F) protein, providing passive immunity that lasts through a typical RSV season after a single dose.',
+    coverage: ['Prevention of severe RSV disease in infants entering their first RSV season (and select high-risk infants in their second season)'],
+    sideEffects: ['Injection site reactions', 'Rash'],
+    notes: 'A prevention tool, not a treatment — given before or during RSV season to reduce the risk of severe disease; has no role once RSV infection is already established.',
+  },
+  dmards: {
+    name: 'Disease-Modifying Antirheumatic Drugs (e.g. Methotrexate)',
+    class: 'Conventional DMARD',
+    route: 'Oral or subcutaneous (methotrexate)',
+    moa: 'Suppresses aberrant immune/inflammatory activity driving persistent joint inflammation — used here for post-viral inflammatory arthritis rather than a primary autoimmune disease, though the drugs and general approach are shared.',
+    coverage: ['Chronic, NSAID-refractory post-chikungunya inflammatory arthritis'],
+    sideEffects: ['Hepatotoxicity, myelosuppression (methotrexate)', 'Requires regular monitoring bloods', 'Teratogenic — contraception required'],
+    notes: 'Reflects a smaller and lower-certainty evidence base (case series/expert guidance) than for primary rheumatoid arthritis, but is a reasonable escalation for refractory post-chikungunya arthritis.',
+  },
 };
 
 const DRUG_MOVE_MAP = {
+  'Ibuprofen/NSAID for Fever': 'ibuprofen',
+  'NSAIDs / Aspirin (Acute Phase)': 'ibuprofen',
+  'NSAIDs (Chronic Phase, Dengue Excluded)': 'ibuprofen',
+  'Tenofovir/Lamivudine + Dolutegravir (ART)': 'art_dolutegravir',
+  'Tenofovir (Nucleotide Analogue)': 'tenofovir',
+  'Peginterferon Alfa': 'peginterferon',
+  'Interferon-Based Therapy': 'peginterferon',
+  'IV Aciclovir (High-Dose)': 'aciclovir',
+  'IV Aciclovir': 'aciclovir',
+  'Aciclovir': 'aciclovir',
+  'Oral Valaciclovir': 'valaciclovir',
+  'Oral Valaciclovir (Started Within 72 Hours of Rash Onset)': 'valaciclovir',
+  'Foscarnet': 'foscarnet',
+  'Amoxicillin/Ampicillin': 'amoxicillin',
+  'Valganciclovir (Oral)': 'ganciclovir',
+  'IV Ganciclovir': 'ganciclovir',
+  'Nirmatrelvir/Ritonavir (Paxlovid)': 'nirmatrelvir_ritonavir',
+  'Remdesivir': 'remdesivir',
+  'Rituximab (Anti-CD20)': 'rituximab',
+  'Pangenotypic Direct-Acting Antiviral (Sofosbuvir/Velpatasvir)': 'sofosbuvir_velpatasvir',
+  'Vitamin A Supplementation': 'vitamin_a',
+  'Empirical Broad-Spectrum Antibiotics': 'empirical_broad_spectrum',
+  'Empirical Antibiotics': 'empirical_broad_spectrum',
+  'Ribavirin': 'ribavirin',
+  'Aerosolised Ribavirin ± IVIG': 'ribavirin',
+  'Rabies Immunoglobulin (Wound Infiltration)': 'rabies_immunoglobulin',
+  'Rabies Vaccine Series (Essen Regimen)': 'rabies_vaccine',
+  'Bronchodilators (Salbutamol) or Corticosteroids': 'salbutamol',
+  'Nirsevimab (Monoclonal Antibody)': 'nirsevimab',
+  'Disease-Modifying Antirheumatic Drugs (e.g. Methotrexate)': 'dmards',
   'Liposomal Amphotericin B': 'amphotericin_b',
   'Liposomal Amphotericin B (High-Dose)': 'amphotericin_b',
   'Voriconazole': 'voriconazole',
@@ -6839,7 +8357,27 @@ const DRUG_MOVE_MAP = {
   // name such as "Influenza A" is not italicised at all.
   function italicOrgName(name, upper) {
     const xf = s => upper ? s.toUpperCase() : s;
-    if (name === 'Influenza A') return xf(name);
+    const NON_ITALIC_NAMES = new Set([
+      'Influenza A',
+      'Mucorales (Rhizopus/Mucor spp.)',
+      'HIV',
+      'Dengue Virus',
+      'Hepatitis B Virus',
+      'Herpes Simplex Virus',
+      'Varicella-Zoster Virus',
+      'Cytomegalovirus',
+      'SARS-CoV-2',
+      'Epstein-Barr Virus',
+      'Hepatitis C Virus',
+      'Measles Virus',
+      'Rabies Virus',
+      'Respiratory Syncytial Virus (RSV)',
+      'Chikungunya Virus',
+      'Rubella Virus',
+      'Human Metapneumovirus',
+      'Zika Virus',
+    ]);
+    if (NON_ITALIC_NAMES.has(name)) return xf(name);
     let m = name.match(/^([A-Z][a-z]+)( spp\.| species)$/);
     if (m) return `<i>${xf(m[1])}</i>${xf(m[2])}`;
     m = name.match(/^([A-Z][a-z]+) ([A-Z][a-z]+)$/); // Genus Serovar, e.g. Salmonella Typhi
@@ -6965,6 +8503,10 @@ const DRUG_MOVE_MAP = {
       case 'pcp-cyst': { // cup-shaped/crescentic cysts on GMS silver stain (Pneumocystis jirovecii)
         const cells = [[3,4,10,10],[14,3,9,9],[4,15,10,10],[15,14,9,9]];
         return `<div class="pcp-art">${cells.map(([x,y,w,h]) => `<i style="left:${x}px; top:${y}px; width:${w}px; height:${h}px;"></i>`).join('')}</div>`;
+      }
+      case 'giant-cell': { // Tzanck smear — multinucleated giant cell (HSV/VZV)
+        const nuclei = [[6,7,6,6],[13,5,5,5],[9,12,6,6],[15,13,5,5]];
+        return `<div class="giant-cell-art"><i class="membrane"></i>${nuclei.map(([x,y,w,h]) => `<i class="nucleus" style="left:${x}px; top:${y}px; width:${w}px; height:${h}px;"></i>`).join('')}</div>`;
       }
       case 'test':
       default:
