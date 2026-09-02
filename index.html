@@ -944,7 +944,7 @@
           dmg: (r) => r ? 40 : 10,
           log: (r) => r ? `Correct move for suspected meningitis — vancomycin is added empirically to ceftriaxone until penicillin/cephalosporin susceptibility is confirmed. <span class="cite">(Grade A — empirical meningitis therapy)</span>`
                         : `Works, but is unnecessary outside the CNS or once susceptibility is confirmed — added toxicity without added benefit here. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Penicillin Susceptibility (E-test)", desc: "PBP-mediated resistance profile — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Penicillin Susceptibility (E-test)", desc: "PBP-mediated resistance profile — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'PNSP' : 'Penicillin-susceptible');
@@ -978,7 +978,7 @@
           text: "A 58-year-old man with poorly controlled diabetes presents with 5 days of fever, rigors, and right upper quadrant pain, with no recent hospital contact. Imaging shows a large, solitary liver abscess. Blood cultures are drawn before drainage.",
           clues: [
             { title: "Gram Stain — Blood/Pus", icon: "rods", text: "Gram-negative rods." },
-            { title: "Culture — MacConkey Agar, 24h", icon: "gold", text: "Large, glistening, mucoid pink (lactose-fermenting) colonies." },
+            { title: "Culture — MacConkey Agar, 24h", icon: "gold", text: "Large, glistening, mucoid pink (lactose-fermenting) colonies. Hypermucoviscosity demonstrable." },
             { title: "Biochemical Panel", icon: "test", text: "Indole negative. Urease positive. Voges-Proskauer positive." },
           ],
         },
