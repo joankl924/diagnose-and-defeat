@@ -1443,7 +1443,7 @@
           caseNum: 34,
           syndrome: 'Outbreak Setting — Dormitory Contact',
           patientHP: 55, // starting patient life for this vignette's severity
-          text: "A 20-year-old presents with fever and a petechial rash 3 days after a floormate in his university dormitory was hospitalised with confirmed meningococcal disease. He has neck stiffness and a positive Kernig's sign.",
+          text: "A 20-year-old presents with fever and a petechial rash 3 days after a floormate in his university dormitory was hospitalised with suspected bacterial meningitis. He has neck stiffness and a positive Kernig's sign.",
           clues: [
             { title: "Gram Stain — CSF", icon: "diplo-pink", text: "Gram-negative diplococci, kidney-bean shaped, many within neutrophils." },
             { title: "Culture — Chocolate Agar, 24h, 5-10% CO2", icon: "gold", text: "Small, grey, glistening colonies; fastidious growth requiring an enriched, CO2-rich atmosphere." },
@@ -1858,7 +1858,7 @@
           caseNum: 54,
           syndrome: 'Cervicitis — Asymptomatic Screening',
           patientHP: 70, // starting patient life for this vignette's severity
-          text: "A 22-year-old woman has minimal symptoms but attends after her partner was diagnosed with gonorrhoea. Endocervical swab and NAAT are sent as part of contact screening.",
+          text: "A 22-year-old woman has minimal symptoms but attends after her partner was diagnosed with a sexually transmitted infection. Endocervical swab and NAAT are sent as part of contact screening.",
           clues: [
             { title: "Gram Stain — Endocervical Swab", icon: "diplo-pink", text: "Gram-negative diplococci, kidney-bean shaped, seen within neutrophils." },
             { title: "Culture — Thayer-Martin Selective Agar", icon: "gold", text: "Small, grey, glistening colonies on selective medium." },
@@ -2017,7 +2017,7 @@
           caseNum: 61,
           syndrome: 'Neonatal Early-Onset Sepsis',
           patientHP: 50, // starting patient life for this vignette's severity
-          text: "A newborn develops respiratory distress, temperature instability, and lethargy within 24 hours of birth. The mother's antenatal Group B strep colonisation status was not documented.",
+          text: "A newborn develops respiratory distress, temperature instability, and lethargy within 24 hours of birth. The mother's antenatal screening status was not documented.",
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "chains", text: "Gram-positive cocci in chains." },
             { title: "Culture — Blood Agar, 24h", icon: "gold", text: "Grey-white colonies with a narrow zone of beta-haemolysis." },
@@ -2098,7 +2098,7 @@
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 58-year-old man presents with 5 days of severe pneumonia, high fever, confusion, watery diarrhoea, and a sodium of 128 mmol/L, 5 days after a hotel stay later linked to a contaminated cooling tower.",
           clues: [
-            { title: "Gram Stain — Sputum", icon: "test", text: "Abundant neutrophils but few or no organisms seen — <i>Legionella</i> stains poorly with standard Gram stain." },
+            { title: "Gram Stain — Sputum", icon: "test", text: "Abundant neutrophils but few or no organisms seen, despite a clinical picture of pneumonia — a fastidious, atypical organism that stains poorly with standard Gram stain and needs special culture media or antigen testing to identify." },
             { title: "Urinary Antigen Test", icon: "test", text: "Positive for <i>Legionella pneumophila</i> serogroup 1 — rapid, but only reliably detects serogroup 1. That serogroup causes roughly 70-90% of culture-confirmed cases in the US/Europe, but in Australia and New Zealand non-pneumophila species (chiefly <i>L. longbeachae</i>) — entirely missed by this test — cause an equal or greater share of cases." },
             { title: "Culture — Buffered Charcoal Yeast Extract (BCYE) Agar", icon: "gold", text: "Requires special cysteine-supplemented media; won't grow on standard blood or MacConkey agar." },
           ],
@@ -2132,7 +2132,7 @@
           text: "An otherwise well person develops a short, self-limited flu-like illness with fever and myalgia — no pneumonia — a few days after using a contaminated spa/whirlpool, illustrating the milder, non-pneumonic form of <i>Legionella</i> infection.",
           clues: [
             { title: "Clinical Course", icon: "test", text: "Self-limited fever and myalgia without pneumonia, resolving within a week without antibiotics." },
-            { title: "Urinary Antigen Test", icon: "test", text: "Often negative in this milder, non-pneumonic form (Pontiac fever), unlike in Legionnaires' disease." },
+            { title: "Urinary Antigen Test", icon: "test", text: "Often negative in this milder, non-pneumonic form (Pontiac fever), unlike in the more severe pneumonic form of this same infection." },
             { title: "Exposure History", icon: "test", text: "Recent use of a contaminated spa/whirlpool, consistent with an aerosol-source exposure." },
           ],
         },
@@ -2175,11 +2175,11 @@
           caseNum: 69,
           syndrome: 'Walking Pneumonia — Young Adult',
           patientHP: 70, // starting patient life for this vignette's severity
-          text: "A 20-year-old university student presents with 10 days of gradually worsening dry cough, low-grade fever, and headache — well enough to have kept attending classes throughout ('walking pneumonia').",
+          text: "A 20-year-old university student presents with 10 days of gradually worsening dry cough, low-grade fever, and headache — well enough to have kept attending classes throughout.",
           clues: [
-            { title: "Gram Stain — Sputum", icon: "test", text: "No organisms seen — <i>Mycoplasma</i> lacks a cell wall and cannot be visualised by Gram stain." },
-            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive; IgM positive. The primary diagnostic method, since culture is rarely performed clinically." },
+            { title: "Gram Stain — Sputum", icon: "test", text: "No organisms seen, despite a clinical picture in keeping with pneumonia — this pathogen cannot be reliably visualised by standard Gram stain." },
             { title: "Cold Agglutinins", icon: "test", text: "Positive cold agglutinin titre — a classic, though nonspecific, bedside clue reflecting IgM autoantibodies against red cell antigens." },
+            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive; IgM positive. The primary diagnostic method, since culture is rarely performed clinically." },
           ],
         },
         {
@@ -2189,8 +2189,8 @@
           text: "Several students in the same dormitory floor develop a similar prolonged dry cough and low-grade fever over a couple of weeks, consistent with the slow spread typical of this organism in close-contact settings.",
           clues: [
             { title: "Gram Stain — Sputum", icon: "test", text: "No organisms seen." },
-            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive." },
             { title: "Cold Agglutinins", icon: "test", text: "Positive cold agglutinin titre." },
+            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive." },
           ],
         },
         {
@@ -2200,8 +2200,8 @@
           text: "A 16-year-old with a week of respiratory symptoms develops target-lesion skin rash consistent with erythema multiforme, illustrating this organism's well-known extrapulmonary associations.",
           clues: [
             { title: "Gram Stain — Sputum", icon: "test", text: "No organisms seen." },
-            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive." },
             { title: "Skin Examination", icon: "test", text: "Target-shaped lesions (erythema multiforme) — a recognised extrapulmonary association." },
+            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive." },
           ],
         },
         {
@@ -2211,8 +2211,8 @@
           text: "A 9-year-old presents with cough, wheeze, and a patchy infiltrate on chest X-ray, initially treated as an asthma exacerbation before a persistent low-grade fever prompts further work-up.",
           clues: [
             { title: "Gram Stain — Sputum", icon: "test", text: "No organisms seen." },
-            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive." },
             { title: "Cold Agglutinins", icon: "test", text: "Positive cold agglutinin titre." },
+            { title: "PCR / Serology — Throat Swab", icon: "test", text: "<i>Mycoplasma pneumoniae</i> PCR positive." },
           ],
         },
       ],
@@ -2257,8 +2257,8 @@
           text: "An ICU patient with a central venous catheter in place for 3 weeks, on broad-spectrum antibiotics and total parenteral nutrition, develops fever unresponsive to antibacterial escalation. Blood cultures eventually flag positive for yeast.",
           clues: [
             { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells with pseudohyphae." },
-            { title: "Germ Tube Test", icon: "test", text: "Positive — a short hyphal projection forms within 2-3 hours in serum, a rapid presumptive test characteristic of <i>C. albicans</i>, though not fully specific: <i>C. dubliniensis</i> also produces germ tubes and needs further tests (e.g. growth at 45°C, chlamydospore formation) to distinguish it." },
             { title: "Culture — Sabouraud Dextrose Agar", icon: "gold", text: "Smooth, creamy white colonies." },
+            { title: "Germ Tube Test", icon: "test", text: "Positive — a short hyphal projection forms within 2-3 hours in serum, a rapid presumptive test characteristic of <i>C. albicans</i>, though not fully specific: <i>C. dubliniensis</i> also produces germ tubes and needs further tests (e.g. growth at 45°C, chlamydospore formation) to distinguish it." },
           ],
         },
         {
@@ -2268,8 +2268,8 @@
           text: "An elderly catheterised patient is found to have yeast growing on a routine urine culture. She is entirely asymptomatic, with no fever, dysuria, or flank pain.",
           clues: [
             { title: "Gram/KOH Stain — Urine", icon: "yeast", text: "Budding yeast cells." },
-            { title: "Germ Tube Test", icon: "test", text: "Positive for <i>C. albicans</i>." },
             { title: "Culture — Sabouraud Dextrose Agar", icon: "gold", text: "Smooth, creamy white colonies." },
+            { title: "Germ Tube Test", icon: "test", text: "Positive for <i>C. albicans</i>." },
           ],
         },
         {
@@ -2279,8 +2279,8 @@
           text: "A patient with poorly controlled HIV presents with white plaques on the tongue and buccal mucosa that scrape off easily, with odynophagia raising concern for oesophageal extension.",
           clues: [
             { title: "Gram/KOH Stain — Oral Scraping", icon: "yeast", text: "Budding yeast cells with pseudohyphae." },
-            { title: "Germ Tube Test", icon: "test", text: "Positive for <i>C. albicans</i>." },
             { title: "Culture — Sabouraud Dextrose Agar", icon: "gold", text: "Smooth, creamy white colonies." },
+            { title: "Germ Tube Test", icon: "test", text: "Positive for <i>C. albicans</i>." },
           ],
         },
         {
@@ -2290,8 +2290,8 @@
           text: "A patient with prolonged neutropenia after chemotherapy has persistent fever despite broad-spectrum antibacterials; imaging of the liver and spleen shows multiple small rounded lesions.",
           clues: [
             { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells with pseudohyphae." },
-            { title: "Germ Tube Test", icon: "test", text: "Positive for <i>C. albicans</i>." },
             { title: "Culture — Sabouraud Dextrose Agar", icon: "gold", text: "Smooth, creamy white colonies." },
+            { title: "Germ Tube Test", icon: "test", text: "Positive for <i>C. albicans</i>." },
           ],
         },
       ],
@@ -2366,7 +2366,7 @@
           caseNum: 80,
           syndrome: 'Cryptococcal Meningitis with Raised Intracranial Pressure',
           patientHP: 50, // starting patient life for this vignette's severity
-          text: "A patient with confirmed cryptococcal meningitis develops worsening headache, vomiting, and reduced consciousness despite antifungal therapy. Opening pressure on lumbar puncture is markedly elevated.",
+          text: "A patient on antifungal therapy for a fungal meningitis develops worsening headache, vomiting, and reduced consciousness. Opening pressure on lumbar puncture is markedly elevated.",
           clues: [
             { title: "CSF Interpretation", icon: "test", text: "Opening pressure markedly elevated — a major independent driver of mortality in this disease, especially once sustained above roughly 25 cmH2O — despite ongoing antifungal therapy. White cell count and protein are non-specifically abnormal; the opening pressure itself is the actionable finding driving management here." },
             { title: "India Ink Preparation — CSF", icon: "yeast-capsule", text: "Encapsulated budding yeast with a wide, clear halo." },
@@ -2502,7 +2502,7 @@
           text: "A 22-year-old man presents with 5 days of mild dysuria and a scant, clear-to-mucoid urethral discharge. He reports a new sexual partner about three weeks ago and inconsistent condom use. He is otherwise well, with no fever or testicular pain.",
           clues: [
             { title: "Microscopy — Urethral Smear", icon: "inclusion-body", text: "Epithelial cells show intracytoplasmic inclusions on special staining — a classic but now largely historical finding, superseded by molecular testing in routine practice." },
-            { title: "Culture — Standard Bacterial Media, 48h", icon: "test", text: "No growth. <i>Chlamydia</i> is an obligate intracellular organism and will not grow on cell-free bacterial culture media." },
+            { title: "Culture — Standard Bacterial Media, 48h", icon: "test", text: "No growth. This organism is obligate intracellular and will not grow on cell-free bacterial culture media." },
             { title: "NAAT — First-Catch Urine", icon: "test", text: "Positive for <i>Chlamydia trachomatis</i> DNA by nucleic acid amplification testing — the current gold-standard diagnostic method." },
           ],
         },
@@ -2524,8 +2524,8 @@
           text: "A 27-year-old woman presents with 4 days of lower abdominal pain, fever, and deep dyspareunia. On examination she has bilateral adnexal tenderness and cervical motion tenderness. She had an untreated episode of 'mild cervicitis' noted incidentally six months ago that was never followed up.",
           clues: [
             { title: "Examination", icon: "test", text: "Cervical motion tenderness with bilateral adnexal tenderness — the clinical triad supporting a diagnosis of pelvic inflammatory disease." },
-            { title: "NAAT — Endocervical Swab", icon: "test", text: "Positive for <i>Chlamydia trachomatis</i> DNA by nucleic acid amplification testing." },
             { title: "Pelvic Ultrasound", icon: "test", text: "Mildly thickened, fluid-filled fallopian tubes bilaterally, without a discrete tubo-ovarian abscess — consistent with early salpingitis." },
+            { title: "NAAT — Endocervical Swab", icon: "test", text: "Positive for <i>Chlamydia trachomatis</i> DNA by nucleic acid amplification testing." },
           ],
         },
         {
@@ -2534,7 +2534,7 @@
           patientHP: 60, // starting patient life for this vignette's severity
           text: "A 9-day-old infant is brought in with bilateral eyelid swelling and a watery-to-mucopurulent eye discharge that started on day 6 of life. The mother did not receive antenatal STI screening. There is no fever and the infant is otherwise feeding and behaving normally.",
           clues: [
-            { title: "Examination", icon: "test", text: "Bilateral conjunctival injection and mucopurulent discharge beginning between 5–14 days of life — the classic timing for chlamydial (as opposed to earlier-onset gonococcal) ophthalmia neonatorum." },
+            { title: "Examination", icon: "test", text: "Bilateral conjunctival injection and mucopurulent discharge beginning between 5–14 days of life — timing this late, rather than within the first few days of life, narrows the likely causes of ophthalmia neonatorum considerably." },
             { title: "Microscopy — Conjunctival Scraping", icon: "inclusion-body", text: "Intracytoplasmic inclusion bodies seen within conjunctival epithelial cells on Giemsa-stained scraping." },
             { title: "NAAT — Conjunctival Swab", icon: "test", text: "Positive for <i>Chlamydia trachomatis</i> DNA by nucleic acid amplification testing." },
           ],
@@ -2602,7 +2602,7 @@
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 46-year-old man with poorly-controlled HIV presents with several weeks of progressive gait unsteadiness, lancinating leg pains, and abnormal pupillary responses that constrict with accommodation but not to light. He recalls a remote, untreated genital ulcer many years ago.",
           clues: [
-            { title: "Examination", icon: "test", text: "Argyll Robertson pupils (accommodate but do not react to light) and sensory ataxia — classic tabes dorsalis findings of late (tertiary) neurosyphilis." },
+            { title: "Examination", icon: "test", text: "Argyll Robertson pupils (accommodate but do not react to light) and sensory ataxia — a classic combination of findings in tabes dorsalis, a late complication of a chronic untreated infection." },
             { title: "Serum Treponemal Serology (TPPA)", icon: "test", text: "Reactive, indicating past or current infection — cannot by itself confirm active neurosyphilis." },
             { title: "CSF-VDRL", icon: "test", text: "Reactive — a positive CSF-VDRL is highly specific for neurosyphilis, though a negative result does not fully exclude it." },
           ],
@@ -2669,11 +2669,11 @@
           // low-risk, previously well, no hospitalisation/severe features — antiviral treatment
           // is not mandatory here, so supportive care alone is a guideline-concordant choice
           supportiveCareOk: true,
-          text: "A 27-year-old previously well teacher presents with abrupt-onset fever, myalgia, dry cough, and sore throat for 24 hours, during a period of high influenza activity in the community. She has no shortness of breath and is haemodynamically stable.",
+          text: "A 27-year-old previously well teacher presents with abrupt-onset fever, myalgia, dry cough, and sore throat for 24 hours, during a period of high community respiratory-illness activity. She has no shortness of breath and is haemodynamically stable.",
           clues: [
+            { title: "Clinical Context", icon: "test", text: "Abrupt symptom onset within 48 hours, during a period of confirmed high community respiratory-illness activity — the window in which antiviral treatment offers the greatest benefit, once a specific cause is confirmed." },
             { title: "Rapid Antigen Test — Nasopharyngeal Swab", icon: "antigen-strip", text: "Positive for Influenza A." },
             { title: "PCR/NAAT — Respiratory Viral Panel", icon: "pcr-gel", text: "Confirms Influenza A (H3N2 subtype); negative for SARS-CoV-2, RSV, and the other respiratory viruses tested." },
-            { title: "Clinical Context", icon: "test", text: "Abrupt symptom onset within 48 hours, during a period of confirmed high community influenza activity — the window in which antiviral treatment offers the greatest benefit." },
           ],
         },
         {
@@ -2685,9 +2685,9 @@
           supportiveCareOk: false,
           text: "A 30-year-old woman at 28 weeks' gestation presents with fever, cough, and myalgia for 36 hours. She is mildly tachypnoeic but maintaining oxygen saturations of 95% on room air. She is hesitant about taking medication in pregnancy.",
           clues: [
+            { title: "Clinical Context", icon: "test", text: "Pregnancy is an independent risk factor for progression to severe viral respiratory illness — antiviral treatment is recommended regardless of trimester once a specific cause is confirmed or strongly suspected, and the benefit outweighs the theoretical medication concern." },
             { title: "Rapid Antigen Test — Nasopharyngeal Swab", icon: "antigen-strip", text: "Positive for Influenza A." },
             { title: "PCR/NAAT — Respiratory Viral Panel", icon: "pcr-gel", text: "Confirms Influenza A." },
-            { title: "Clinical Context", icon: "test", text: "Pregnancy is an independent risk factor for progression to severe influenza — antiviral treatment is recommended regardless of trimester once influenza is confirmed or strongly suspected, and the benefit outweighs the theoretical medication concern." },
           ],
         },
         {
@@ -2699,9 +2699,9 @@
           supportiveCareOk: false,
           text: "A 68-year-old man with type 2 diabetes and chronic kidney disease presents on day 4 of influenza-like illness with worsening dyspnoea, new bilateral infiltrates on chest imaging, and hypoxia requiring high-flow oxygen. He was not vaccinated this season.",
           clues: [
-            { title: "PCR/NAAT — Respiratory Viral Panel", icon: "pcr-gel", text: "Confirms Influenza A." },
-            { title: "Chest Imaging", icon: "test", text: "New bilateral infiltrates consistent with primary influenza viral pneumonia rather than a typical bacterial lobar pattern." },
+            { title: "Chest Imaging", icon: "test", text: "New bilateral infiltrates consistent with a primary viral pneumonia pattern rather than a typical bacterial lobar consolidation." },
             { title: "Clinical Context", icon: "test", text: "Significant comorbidity and unvaccinated status are recognised risk factors for progression to severe disease." },
+            { title: "PCR/NAAT — Respiratory Viral Panel", icon: "pcr-gel", text: "Confirms Influenza A." },
           ],
         },
         {
@@ -2711,10 +2711,10 @@
           // immunocompromised with ongoing infection despite treatment — needs escalation/resistance
           // workup, not withdrawal of antiviral therapy in favour of supportive care alone
           supportiveCareOk: false,
-          text: "A 58-year-old man on chemotherapy for lymphoma, day 6 of oseltamivir treatment for confirmed influenza A, has ongoing fever with no clinical improvement, and viral RNA is still detected on repeat PCR.",
+          text: "A 58-year-old man on chemotherapy for lymphoma, day 6 of oseltamivir treatment for a respiratory illness diagnosed by PCR several days ago, has ongoing fever with no clinical improvement, and viral RNA is still detected on repeat PCR.",
           clues: [
-            { title: "PCR/NAAT — Repeat Testing", icon: "pcr-gel", text: "Still positive for Influenza A despite 6 days of oseltamivir — persistent detectable viral RNA this far into treatment is unusual and worth investigating further." },
             { title: "Clinical Context", icon: "test", text: "Immunocompromised host with prolonged antiviral exposure — the classic risk factors for antiviral resistance emerging during treatment." },
+            { title: "PCR/NAAT — Repeat Testing", icon: "pcr-gel", text: "Still positive for Influenza A despite 6 days of oseltamivir — persistent detectable viral RNA this far into treatment is unusual and worth investigating further." },
           ],
         },
       ],
@@ -2777,21 +2777,21 @@
           caseNum: 97,
           syndrome: 'Uncomplicated Falciparum Malaria — Returning Traveller',
           patientHP: 65,
-          text: "A 32-year-old man presents with 3 days of cyclical fever, chills, headache, and myalgia, 10 days after returning from a work trip to sub-Saharan Africa. He took no malaria chemoprophylaxis. He is alert, haemodynamically stable, and tolerating oral intake.",
+          text: "A 32-year-old man presents with 3 days of cyclical fever, chills, headache, and myalgia, 10 days after returning from a work trip to sub-Saharan Africa. He took no pre-travel chemoprophylaxis. He is alert, haemodynamically stable, and tolerating oral intake.",
           clues: [
             { title: "Blood Film — Thick and Thin Smear", icon: "blood-film-ring", text: "Ring-form trophozoites within red cells, parasitaemia 0.8%; no gametocytes, schizonts, or other developmental stages seen on this smear." },
-            { title: "Rapid Diagnostic Test — HRP2 Antigen", icon: "antigen-strip", text: "Positive for <i>P. falciparum</i>-specific histidine-rich protein 2 (HRP2)." },
             { title: "Travel/Exposure History", icon: "test", text: "Travel to a malaria-endemic region within the past month, no chemoprophylaxis taken — the single most important clue in any unexplained febrile illness in a returning traveller." },
+            { title: "Rapid Diagnostic Test — HRP2 Antigen", icon: "antigen-strip", text: "Positive for <i>P. falciparum</i>-specific histidine-rich protein 2 (HRP2)." },
           ],
         },
         {
           caseNum: 98,
           syndrome: 'Severe Malaria — Cerebral Malaria',
           patientHP: 50,
-          text: "A 45-year-old woman is brought to the emergency department confused and drowsy, 12 days after returning from a trip to Papua New Guinea. She is unable to follow commands, her blood glucose is low, and she has scattered petechiae. Parasitaemia on blood film is 8%.",
+          text: "A 45-year-old woman is brought to the emergency department confused and drowsy, 12 days after returning from a trip to Papua New Guinea. She is unable to follow commands, her blood glucose is low, and she has scattered petechiae.",
           clues: [
             { title: "Blood Film — Thick and Thin Smear", icon: "blood-film-ring", text: "Ring forms and occasional gametocytes; parasitaemia 8% — a high parasite burden supporting severe disease." },
-            { title: "Examination", icon: "test", text: "Impaired consciousness (unable to follow commands) and hypoglycaemia, together with this level of parasitaemia, meet WHO criteria for severe/complicated malaria." },
+            { title: "Examination", icon: "test", text: "Impaired consciousness (unable to follow commands) and hypoglycaemia, together with this level of parasitaemia, meet WHO criteria for severe/complicated disease." },
             { title: "Travel/Exposure History", icon: "test", text: "Recent travel to a malaria-endemic region." },
           ],
         },
@@ -2801,7 +2801,7 @@
           patientHP: 60,
           text: "A 26-year-old woman at 18 weeks' gestation presents with fever and chills 2 weeks after returning from a holiday in a malaria-endemic area. She is alert and stable, but is concerned about which treatments are considered safe in pregnancy.",
           clues: [
-            { title: "Blood Film — Thick and Thin Smear", icon: "blood-film-ring", text: "Ring-form trophozoites, parasitaemia 1.2% — consistent with <i>P. falciparum</i>." },
+            { title: "Blood Film — Thick and Thin Smear", icon: "blood-film-ring", text: "Ring-form trophozoites, parasitaemia 1.2%." },
             { title: "Rapid Diagnostic Test — HRP2 Antigen", icon: "antigen-strip", text: "Positive." },
             { title: "Travel/Exposure History", icon: "test", text: "Recent travel to a malaria-endemic region without chemoprophylaxis; pregnancy itself is a risk factor for more severe disease and for placental parasite sequestration." },
           ],
@@ -2810,10 +2810,10 @@
           caseNum: 100,
           syndrome: 'Severe Malaria — Acute Kidney Injury and Jaundice',
           patientHP: 50,
-          text: "A 50-year-old man presents 9 days after returning from a fishing trip in a malaria-endemic region with fever, dark urine, jaundice, and reduced urine output. Parasitaemia is 12%, creatinine is markedly elevated, and bilirubin is raised.",
+          text: "A 50-year-old man presents 9 days after returning from a fishing trip in a malaria-endemic region with fever, dark urine, jaundice, and reduced urine output. Creatinine is markedly elevated and bilirubin is raised.",
           clues: [
             { title: "Blood Film — Thick and Thin Smear", icon: "blood-film-ring", text: "Ring forms and schizonts; parasitaemia 12% — a very high burden." },
-            { title: "Examination/Labs", icon: "test", text: "Jaundice, oliguria, and markedly elevated creatinine — acute kidney injury and jaundice are both WHO severity criteria, and this combination with parasitaemia this high meets criteria for severe malaria." },
+            { title: "Examination/Labs", icon: "test", text: "Jaundice, oliguria, and markedly elevated creatinine — acute kidney injury and jaundice are both WHO severity criteria, and this combination with parasitaemia this high meets criteria for severe disease." },
             { title: "Travel/Exposure History", icon: "test", text: "Recent travel to a malaria-endemic region." },
           ],
         },
@@ -3194,8 +3194,8 @@
           text: "A 26-year-old previously well man presents with 2 days of crampy abdominal pain, fever, and watery-to-loose stools after a barbecue three days ago. He is mildly dehydrated but haemodynamically stable and tolerating oral fluids.",
           clues: [
             { title: "Stool Microscopy/Culture — Selective Media, 42°C Microaerophilic", icon: "curved-rods", text: "Curved to gull-wing-shaped Gram-negative rods; darting motility on wet mount." },
-            { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>; negative for <i>Salmonella</i>, <i>Shigella</i>, and the other pathogens tested." },
             { title: "Clinical Context", icon: "test", text: "Mild-moderate illness, tolerating oral intake, no high fever or bloody stool — most cases in healthy hosts are self-limiting within about a week without antibiotics." },
+            { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>; negative for <i>Salmonella</i>, <i>Shigella</i>, and the other pathogens tested." },
           ],
         },
         {
@@ -3206,8 +3206,8 @@
           text: "A 40-year-old woman presents on day 1 of illness with high fever, severe crampy abdominal pain, and grossly bloody stools.",
           clues: [
             { title: "Stool Microscopy/Culture — Selective Media, 42°C Microaerophilic", icon: "curved-rods", text: "Curved to gull-wing-shaped Gram-negative rods." },
-            { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>." },
             { title: "Clinical Context", icon: "test", text: "High fever, bloody stool, and early presentation (within 3 days of onset) — antibiotic treatment shortens illness duration and reduces onward transmission in this setting." },
+            { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>." },
           ],
         },
         {
@@ -3218,8 +3218,8 @@
           text: "A 38-year-old man with advanced HIV and a low CD4 count presents with ongoing fever and diarrhoea for over two weeks. Blood cultures are also sent given the systemic symptoms and grow the same organism as stool.",
           clues: [
             { title: "Blood Culture", icon: "curved-rods", text: "Curved Gram-negative rods — bacteraemia is an uncommon but recognised complication of this organism in advanced immunosuppression." },
-            { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>." },
             { title: "Clinical Context", icon: "test", text: "Advanced immunosuppression with bacteraemia and prolonged symptoms — antibiotic treatment is indicated, unlike in a healthy host with mild self-limiting disease." },
+            { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>." },
           ],
         },
         {
@@ -3230,8 +3230,8 @@
           text: "A 29-year-old man presents with severe watery-to-bloody diarrhoea, high fever, and dehydration, 5 days after returning from a trip to Southeast Asia.",
           clues: [
             { title: "Stool Microscopy/Culture — Selective Media, 42°C Microaerophilic", icon: "curved-rods", text: "Curved to gull-wing-shaped Gram-negative rods." },
+            { title: "Clinical Context", icon: "test", text: "Severe, high-fever illness in a returning traveller from a region with high rates of fluoroquinolone-resistant isolates — empiric ciprofloxacin is unreliable in this setting." },
             { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Campylobacter jejuni</i>." },
-            { title: "Clinical Context", icon: "test", text: "Severe, high-fever illness in a returning traveller from a region with high rates of fluoroquinolone-resistant <i>Campylobacter</i> — empiric ciprofloxacin is unreliable in this setting." },
           ],
         },
       ],
@@ -3291,8 +3291,8 @@
           text: "A 29-year-old woman presents on day 1 of watery diarrhoea, thirsty and with slightly dry mucous membranes but otherwise alert and haemodynamically stable.",
           clues: [
             { title: "Stool Gram Stain", icon: "curved-rods", text: "Comma-shaped, curved Gram-negative rods." },
-            { title: "Rapid Cholera Dipstick Test", icon: "antigen-strip", text: "Positive." },
             { title: "Clinical Context", icon: "test", text: "Mild-moderate dehydration — appropriate for oral rehydration solution rather than IV fluids at this stage." },
+            { title: "Rapid Cholera Dipstick Test", icon: "antigen-strip", text: "Positive." },
           ],
         },
         {
@@ -3310,11 +3310,11 @@
           caseNum: 124,
           syndrome: 'Cholera in Pregnancy — Travelling to an Endemic Area',
           patientHP: 58,
-          text: "A 27-year-old woman at 20 weeks' gestation, recently returned from an area with an active cholera outbreak, presents with profuse watery diarrhoea and moderate dehydration.",
+          text: "A 27-year-old woman at 20 weeks' gestation, recently returned from an area experiencing an active outbreak of severe watery diarrhoeal illness, presents with profuse watery diarrhoea and moderate dehydration.",
           clues: [
             { title: "Stool Gram Stain", icon: "curved-rods", text: "Comma-shaped, curved Gram-negative rods." },
-            { title: "Rapid Cholera Dipstick Test", icon: "antigen-strip", text: "Positive." },
             { title: "Clinical Context", icon: "test", text: "Pregnancy does not change the priority: rehydration remains the essential intervention, and azithromycin is generally preferred over doxycycline for the antibiotic component in pregnancy." },
+            { title: "Rapid Cholera Dipstick Test", icon: "antigen-strip", text: "Positive." },
           ],
         },
       ],
@@ -3439,9 +3439,9 @@
           patientHP: 55, // starting patient life for this vignette's severity
           text: "A 6-week-old, unvaccinated infant presents with a week of coryza followed by paroxysms of forceful coughing ending in cyanosis and brief apnoea, without the classic inspiratory whoop. There is post-tussive vomiting between spells.",
           clues: [
-            { title: "Nasopharyngeal PCR", icon: "pcr-gel", text: "Positive for <i>Bordetella pertussis</i> toxin gene — the primary diagnostic method at this stage of illness." },
-            { title: "Full Blood Count", icon: "test", text: "Marked absolute lymphocytosis, out of proportion to the mild-appearing coryzal symptoms — a classic finding driven by pertussis toxin." },
             { title: "Gram Stain — Nasopharyngeal Swab", icon: "coccobacilli", text: "Gram-negative coccobacilli seen, though Gram stain is neither sensitive nor specific enough to rely on for diagnosis." },
+            { title: "Full Blood Count", icon: "test", text: "Marked absolute lymphocytosis, out of proportion to the mild-appearing coryzal symptoms — a classic finding driven by this organism's toxin." },
+            { title: "Nasopharyngeal PCR", icon: "pcr-gel", text: "Positive for <i>Bordetella pertussis</i> toxin gene — the primary diagnostic method at this stage of illness." },
           ],
         },
         {
@@ -3450,20 +3450,20 @@
           patientHP: 70, // starting patient life for this vignette's severity
           text: "A 34-year-old office worker, last vaccinated in childhood, presents with 3 weeks of paroxysmal coughing fits with an inspiratory whoop and post-tussive vomiting, well enough throughout to keep working. Two colleagues have a similar prolonged cough.",
           clues: [
-            { title: "Nasopharyngeal PCR", icon: "pcr-gel", text: "Positive for <i>Bordetella pertussis</i>." },
             { title: "Culture — Regan-Lowe/Bordet-Gengou Agar", icon: "gold", text: "Small, shiny 'mercury droplet' colonies after 3-7 days — sensitivity drops sharply once the paroxysmal phase is underway, which is why PCR is preferred by this stage." },
             { title: "Vaccination History", icon: "test", text: "Primary childhood series only, no adolescent/adult booster — consistent with waning vaccine-induced immunity." },
+            { title: "Nasopharyngeal PCR", icon: "pcr-gel", text: "Positive for <i>Bordetella pertussis</i>." },
           ],
         },
         {
           caseNum: 131,
           syndrome: 'Household Contact — Post-Exposure Scenario',
           patientHP: 65, // starting patient life for this vignette's severity
-          text: "A fully vaccinated 8-year-old develops a mild cough and coryza a week after her unvaccinated younger sibling was confirmed to have pertussis. Both are otherwise well, but there is a 2-month-old infant at home.",
+          text: "A fully vaccinated 8-year-old develops a mild cough and coryza a week after her unvaccinated younger sibling was diagnosed with a prolonged paroxysmal coughing illness. Both are otherwise well, but there is a 2-month-old infant at home.",
           clues: [
-            { title: "Nasopharyngeal PCR", icon: "pcr-gel", text: "Positive for <i>Bordetella pertussis</i>, despite prior vaccination — breakthrough infection with milder disease is well described." },
             { title: "Exposure History", icon: "test", text: "Confirmed household contact with an index case; an unimmunised 2-month-old infant in the same household is at highest risk of severe disease." },
             { title: "Full Blood Count", icon: "test", text: "Mild lymphocytosis — less pronounced than the classic infant presentation." },
+            { title: "Nasopharyngeal PCR", icon: "pcr-gel", text: "Positive for <i>Bordetella pertussis</i>, despite prior vaccination — breakthrough infection with milder disease is well described." },
           ],
         },
       ],
@@ -3517,7 +3517,7 @@
           caseNum: 133,
           syndrome: 'Cutaneous Diphtheria',
           patientHP: 70, // starting patient life for this vignette's severity
-          text: "A traveller returning from a region with endemic diphtheria presents with a chronic, non-healing leg ulcer covered by a grey membrane, with mild surrounding erythema and no significant systemic symptoms.",
+          text: "A traveller returning from a region with low childhood vaccination coverage presents with a chronic, non-healing leg ulcer covered by a grey membrane, with mild surrounding erythema and no significant systemic symptoms.",
           clues: [
             { title: "Gram Stain — Ulcer Swab", icon: "rods-violet", text: "Gram-positive pleomorphic rods in palisade arrangement." },
             { title: "Culture — Tellurite Agar, 24-48h", icon: "gold", text: "Grey-black colonies from tellurite reduction." },
@@ -3528,7 +3528,7 @@
           caseNum: 134,
           syndrome: 'Toxic Diphtheria with Myocarditis',
           patientHP: 45, // starting patient life for this vignette's severity
-          text: "A patient with untreated pharyngeal diphtheria for 6 days develops new palpitations and a slow, irregular pulse. ECG shows a new high-degree atrioventricular block, and examination reveals emerging palatal weakness with a nasal quality to the voice.",
+          text: "A patient with 6 days of an untreated severe pharyngitis with a thick grey pseudomembrane develops new palpitations and a slow, irregular pulse. ECG shows a new high-degree atrioventricular block, and examination reveals emerging palatal weakness with a nasal quality to the voice.",
           clues: [
             { title: "ECG", icon: "test", text: "High-degree AV block — a recognised toxin-mediated cardiac complication, occurring roughly 1-2 weeks into untreated illness." },
             { title: "Cranial Nerve Examination", icon: "test", text: "New palatal weakness with nasal regurgitation of fluids — diphtheritic neuropathy, another classic toxin-mediated complication." },
@@ -3592,8 +3592,8 @@
           text: "A 27-year-old returns from a month of travel through South Asia with 4 days of high fever, crampy abdominal pain, and bloody, mucoid diarrhoea with tenesmus.",
           clues: [
             { title: "Stool Culture — XLD/MacConkey Agar, 24h", icon: "colony-pale", text: "Non-lactose-fermenting, non-motile colonies; H2S negative." },
+            { title: "Clinical Context", icon: "test", text: "Travel to a region with high rates of fluoroquinolone-resistant isolates — empirical ciprofloxacin is unreliable in this setting." },
             { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Shigella</i> species." },
-            { title: "Clinical Context", icon: "test", text: "Travel to a region with high rates of fluoroquinolone-resistant <i>Shigella</i> — empirical ciprofloxacin is unreliable in this setting." },
           ],
         },
         {
@@ -3603,8 +3603,8 @@
           text: "A sexually active man presents with fever, crampy abdominal pain, and bloody diarrhoea, part of a recognised local cluster of shigellosis among men who have sex with men, some isolates from which have shown extensive drug resistance.",
           clues: [
             { title: "Stool Culture — XLD/MacConkey Agar, 24h", icon: "colony-pale", text: "Non-lactose-fermenting, non-motile colonies; H2S negative." },
+            { title: "Sexual History & Exposure Context", icon: "test", text: "Sexual contact is an increasingly recognised transmission route for this infection, distinct from the classic faecal-oral/food-and-water pathway, and is associated with extensively drug-resistant strains in some clusters." },
             { title: "Stool Multiplex PCR Panel", icon: "pcr-gel", text: "Positive for <i>Shigella</i> species." },
-            { title: "Sexual History & Exposure Context", icon: "test", text: "Sexual contact is an increasingly recognised transmission route for shigellosis, distinct from the classic faecal-oral/food-and-water pathway, and is associated with extensively drug-resistant strains in some clusters." },
           ],
         },
       ],
@@ -3870,11 +3870,11 @@
           caseNum: 146,
           syndrome: 'Generalised Tetanus — Contaminated Puncture Wound',
           patientHP: 45, // starting patient life for this vignette's severity
-          text: "A 58-year-old gardener with incomplete/unknown tetanus vaccination presents a week after a deep puncture wound from a rusty garden tool, with jaw stiffness, difficulty swallowing, facial spasm giving a fixed grin (risus sardonicus), and episodes of back-arching (opisthotonus). He remains fully conscious throughout.",
+          text: "A 58-year-old gardener with an incomplete or unknown vaccination history presents a week after a deep puncture wound from a rusty garden tool, with jaw stiffness, difficulty swallowing, facial spasm giving a fixed grin (risus sardonicus), and episodes of back-arching (opisthotonus). He remains fully conscious throughout.",
           clues: [
             { title: "Clinical Diagnosis", icon: "test", text: "Diagnosis is entirely clinical — trismus, risus sardonicus, and generalised muscle rigidity with preserved consciousness in a patient with a compatible wound history; do not wait for microbiological confirmation to start treatment." },
             { title: "Gram Stain — Wound Swab (if sent)", icon: "rods", text: "Gram-positive rods with round terminal spores, giving a characteristic 'drumstick' appearance — though a positive Gram stain/culture is neither sensitive nor required for diagnosis." },
-            { title: "Vaccination History", icon: "test", text: "Incomplete or unknown tetanus vaccination status, with no booster within the recommended interval for this wound type." },
+            { title: "Vaccination History", icon: "test", text: "Incomplete or unknown vaccination status, with no booster within the recommended interval for this wound type." },
           ],
         },
         {
@@ -3884,8 +3884,8 @@
           text: "A person who injects drugs subcutaneously ('skin-popping') presents with a contaminated injection-site wound and 2 days of jaw tightness progressing to generalised muscle rigidity and painful spasms triggered by loud noise and light.",
           clues: [
             { title: "Clinical Diagnosis", icon: "test", text: "Generalised rigidity and reflex spasms triggered by stimuli, with preserved consciousness, in the setting of a contaminated wound — a clinical diagnosis." },
-            { title: "Wound Examination", icon: "test", text: "Contaminated, poorly cared-for injection site — subcutaneous ('skin-popping') injection is a recognised, persistent risk factor for tetanus even in resource-rich settings." },
-            { title: "Vaccination History", icon: "test", text: "No documented tetanus booster in over a decade." },
+            { title: "Wound Examination", icon: "test", text: "Contaminated, poorly cared-for injection site — subcutaneous ('skin-popping') injection is a recognised, persistent risk factor for this condition even in resource-rich settings." },
+            { title: "Vaccination History", icon: "test", text: "No documented booster vaccination in over a decade." },
           ],
         },
       ],
@@ -4049,8 +4049,8 @@
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A worker who handles imported animal hides develops a painless, pruritic papule on the forearm that progresses over several days into a vesicle and then a black eschar, with striking surrounding non-pitting oedema. He is otherwise systemically well.",
           clues: [
-            { title: "Gram Stain — Vesicle Fluid", icon: "rods-violet", text: "Large, Gram-positive, box-car-shaped rods in long chains, with a 'bamboo-like' jointed appearance; non-motile, unlike the closely related and much more common <i>Bacillus cereus</i>." },
-            { title: "Culture — Blood/Nutrient Agar, 24h", icon: "gold", text: "Large, grey-white, non-haemolytic colonies with an irregular, curled ('Medusa head') edge — non-haemolytic on blood agar, unlike most other <i>Bacillus</i> species." },
+            { title: "Gram Stain — Vesicle Fluid", icon: "rods-violet", text: "Large, Gram-positive, box-car-shaped rods in long chains, with a 'bamboo-like' jointed appearance; non-motile — an important distinguishing feature from other similar-looking, more commonly encountered spore-forming rods." },
+            { title: "Culture — Blood/Nutrient Agar, 24h", icon: "gold", text: "Large, grey-white, non-haemolytic colonies with an irregular, curled ('Medusa head') edge — non-haemolytic on blood agar, an unusual and distinguishing feature for this morphological group." },
             { title: "Wound Examination", icon: "test", text: "A painless black eschar with striking surrounding non-pitting oedema, notably without significant pain — a distinguishing feature from most other causes of skin/soft tissue infection." },
           ],
         },
@@ -4254,8 +4254,8 @@
           patientHP: 45, // starting patient life for this vignette's severity
           text: "An ICU patient transferred from another hospital's long-term care ward, with multiple prior admissions and broad antifungal exposure, develops fever and hypotension. Blood cultures flag positive for yeast, and the lab flags the isolate for confirmatory identification given a colony morphology that standard biochemical panels misidentify.",
           clues: [
-            { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells, no pseudohyphae — unlike most other <i>Candida</i> species, <i>C. auris</i> classically does not form pseudohyphae." },
-            { title: "Identification Method", icon: "test", text: "Standard biochemical/phenotypic panels frequently misidentify this organism as other <i>Candida</i> or <i>Rhodotorula</i> species; confirmed as <i>C. auris</i> only by MALDI-TOF with an updated database or by sequencing." },
+            { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells, no pseudohyphae seen — an unusual absence for a yeast isolate, and something the lab has flagged for further work-up." },
+            { title: "Identification Method", icon: "test", text: "Standard biochemical/phenotypic panels frequently misidentify this organism as other <i>Candida</i> or <i>Rhodotorula</i> species; the lab has flagged it for confirmatory identification by MALDI-TOF with an updated database or by sequencing." },
             { title: "Interfacility Transfer History", icon: "chart", text: "Transferred from a facility with a known outbreak; <i>C. auris</i> persists on skin and environmental surfaces for weeks, and healthcare-associated clusters are well described." },
           ],
         },
@@ -4266,8 +4266,8 @@
           text: "A separate patient with a central venous catheter and prolonged ICU stay develops candidaemia. Empirical fluconazole is started while cultures are pending but the patient remains febrile with persistently positive blood cultures 72 hours later.",
           clues: [
             { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells, no pseudohyphae." },
-            { title: "Antifungal Susceptibility Testing", icon: "test", text: "Fluconazole minimum inhibitory concentration markedly elevated, consistent with the near-universal intrinsic fluconazole resistance seen in <i>C. auris</i>." },
             { title: "Culture — CHROMagar Candida Plus", icon: "gold", text: "Distinctive blue colonies on a chromogenic medium designed specifically to help flag this species at the bench." },
+            { title: "Antifungal Susceptibility Testing", icon: "test", text: "Fluconazole minimum inhibitory concentration markedly elevated, consistent with the near-universal intrinsic fluconazole resistance seen in <i>C. auris</i>." },
           ],
         },
         {
@@ -4344,14 +4344,14 @@
           clues: [
             { title: "Chest CT", icon: "chart", text: "Diffuse bilateral ground-glass opacities." },
             { title: "Induced Sputum — Immunofluorescent Stain", icon: "pcp-cyst", text: "Cysts and trophozoites identified by direct immunofluorescence, now generally preferred over silver stain alone for sensitivity where available." },
-            { title: "Risk Factor Review", icon: "chart", text: "Prolonged corticosteroid use (typically defined as ≥20mg prednisone-equivalent daily for ≥4 weeks) without <i>Pneumocystis</i> prophylaxis — a major, often under-recognised, non-HIV risk group." },
+            { title: "Risk Factor Review", icon: "chart", text: "Prolonged corticosteroid use (typically defined as ≥20mg prednisone-equivalent daily for ≥4 weeks) without antimicrobial prophylaxis — a major, often under-recognised, non-HIV risk group." },
           ],
         },
         {
           caseNum: 162,
           syndrome: 'Moderate-Severe Pneumonia with Hypoxaemia',
           patientHP: 45, // starting patient life for this vignette's severity
-          text: "A patient with confirmed <i>Pneumocystis</i> pneumonia has a room-air PaO2 of 65mmHg and a widened alveolar-arterial oxygen gradient, meeting criteria for moderate-severe disease.",
+          text: "A patient with a subacute atypical pneumonia in the setting of immunosuppression has a room-air PaO2 of 65mmHg and a widened alveolar-arterial oxygen gradient, meeting criteria for moderate-severe disease.",
           clues: [
             { title: "Arterial Blood Gas — Room Air", icon: "chart", text: "PaO2 65mmHg; calculated A-a gradient markedly widened (>35mmHg) — meeting the threshold used to define moderate-severe disease and to trigger adjunctive corticosteroid therapy." },
             { title: "Bronchoalveolar Lavage — Silver Stain (GMS)", icon: "pcp-cyst", text: "Cup-shaped cysts identified." },
@@ -4404,8 +4404,8 @@
           text: "A patient with prolonged neutropenia following induction chemotherapy for acute leukaemia develops fever, pleuritic chest pain, and haemoptysis unresponsive to broad-spectrum antibacterials. CT chest shows a nodule with a surrounding ground-glass halo.",
           clues: [
             { title: "CT Chest", icon: "chart", text: "Nodular lesion with a surrounding 'halo sign' (ground-glass opacity from haemorrhage around the nodule) — an early finding in angioinvasive disease, later followed by cavitation (the 'air crescent sign') as neutrophils recover." },
-            { title: "Serum Galactomannan Antigen", icon: "test", text: "Positive — a useful, moderately sensitive biomarker for invasive aspergillosis in neutropenic/haematology patients, though less reliable in other host groups." },
-            { title: "Histopathology/Culture — Lung Biopsy", icon: "hyphae-septate", text: "Septate hyphae with acute-angle (~45°), dichotomous branching — the classic <i>Aspergillus</i> morphology, distinguishing it from the broad, wide-angle-branching hyphae of Mucorales." },
+            { title: "Histopathology/Culture — Lung Biopsy", icon: "hyphae-septate", text: "Septate hyphae with acute-angle (~45°), dichotomous branching — a pattern that helps distinguish this mould from the broad, wide-angle-branching hyphae seen in other invasive mould infections." },
+            { title: "Serum Galactomannan Antigen", icon: "test", text: "Positive — a useful, moderately sensitive biomarker for invasive mould infection in neutropenic/haematology patients, though less reliable in other host groups." },
           ],
         },
         {
@@ -4414,9 +4414,9 @@
           patientHP: 65, // starting patient life for this vignette's severity
           text: "A patient with long-standing, difficult-to-control asthma has recurrent episodes of wheeze, brown-flecked sputum plugs, and transient chest X-ray infiltrates, with bronchiectasis on CT centred on the central/proximal airways.",
           clues: [
-            { title: "Total Serum IgE", icon: "chart", text: "Markedly elevated, alongside <i>Aspergillus</i>-specific IgE and IgG — reflecting an allergic hypersensitivity response to airway colonisation rather than tissue-invasive infection." },
+            { title: "Total Serum IgE", icon: "chart", text: "Markedly elevated, alongside organism-specific IgE and IgG — reflecting an allergic hypersensitivity response to airway colonisation rather than tissue-invasive infection." },
             { title: "Full Blood Count", icon: "chart", text: "Peripheral eosinophilia." },
-            { title: "CT Chest", icon: "chart", text: "Central/proximal bronchiectasis with mucus plugging — a distribution pattern that helps distinguish ABPA from other causes of bronchiectasis." },
+            { title: "CT Chest", icon: "chart", text: "Central/proximal bronchiectasis with mucus plugging — a distribution pattern that helps distinguish this allergic hypersensitivity syndrome from other causes of bronchiectasis." },
           ],
         },
         {
@@ -4486,8 +4486,8 @@
           patientHP: 40, // starting patient life for this vignette's severity
           text: "A neutropenic patient with acute leukaemia on voriconazole prophylaxis develops fever and pleuritic chest pain despite this prophylaxis. CT chest shows a reverse halo sign.",
           clues: [
-            { title: "CT Chest", icon: "chart", text: "'Reverse halo sign' — a focal area of ground-glass opacity surrounded by a denser ring of consolidation, a pattern more suggestive of mucormycosis than the halo sign more typical of early invasive aspergillosis." },
-            { title: "Prophylaxis History", icon: "chart", text: "Breakthrough infection while on voriconazole prophylaxis — voriconazole (and other triazoles without Mucorales activity) can select for breakthrough mould infections with intrinsically resistant organisms, mucormycosis being the best-recognised example." },
+            { title: "CT Chest", icon: "chart", text: "'Reverse halo sign' — a focal area of ground-glass opacity surrounded by a denser ring of consolidation, a pattern radiologically distinct from the halo sign seen in other invasive mould infections." },
+            { title: "Prophylaxis History", icon: "chart", text: "Breakthrough infection while on voriconazole prophylaxis — voriconazole (and other triazoles lacking activity against certain moulds) can select for breakthrough infection with an intrinsically resistant organism." },
             { title: "Histopathology — Lung Biopsy", icon: "hyphae-ribbon", text: "Broad, ribbon-like, pauci-septate hyphae with wide-angle branching." },
           ],
         },
@@ -4624,7 +4624,7 @@
           caseNum: 172,
           syndrome: 'Advanced HIV — AIDS-Defining Illness',
           patientHP: 45,
-          text: "A patient with HIV diagnosed years ago, not engaged in care and off antiretroviral therapy, presents with weight loss, chronic diarrhoea, and a CD4 count of 40 cells/microL, alongside findings that separately raise concern for an opportunistic infection.",
+          text: "A patient with a long-standing blood-borne viral infection, not engaged in care and off antiviral therapy, presents with weight loss, chronic diarrhoea, and findings that separately raise concern for an opportunistic infection.",
           clues: [
             { title: "CD4 Count", icon: "test", text: "40 cells/microL — advanced immunosuppression, placing him at risk for multiple AIDS-defining opportunistic infections and malignancies simultaneously." },
             { title: "HIV RNA Viral Load", icon: "pcr-gel", text: "Markedly elevated, consistent with untreated infection." },
@@ -4674,18 +4674,18 @@
           caseNum: 173,
           syndrome: 'Acute Hepatitis B',
           patientHP: 65,
-          text: "A 32-year-old presents with 5 days of fatigue, nausea, right upper quadrant discomfort, and jaundice. He reports a new sexual partner approximately 10 weeks ago and has not been vaccinated against hepatitis B.",
+          text: "A 32-year-old presents with 5 days of fatigue, nausea, right upper quadrant discomfort, and jaundice. He reports a new sexual partner approximately 10 weeks ago and an incomplete vaccination history.",
           clues: [
             { title: "Liver Function Tests", icon: "test", text: "Markedly elevated ALT/AST (in the thousands), with elevated bilirubin — a hepatocellular pattern of injury." },
+            { title: "Clinical Course Counselling", icon: "test", text: "Over 95% of immunocompetent adults with this acute viral hepatitis clear the infection spontaneously and do not progress to chronic infection — a very different natural history from infection acquired perinatally or in early childhood." },
             { title: "Hepatitis B Serology", icon: "serology-bars", text: "HBsAg positive, IgM anti-HBc positive, HBeAg positive — the pattern of acute infection with high infectivity." },
-            { title: "Clinical Course Counselling", icon: "test", text: "Over 95% of immunocompetent adults with acute hepatitis B clear the infection spontaneously and do not progress to chronic infection — a very different natural history from infection acquired perinatally or in early childhood." },
           ],
         },
         {
           caseNum: 174,
           syndrome: 'Chronic Hepatitis B — Active Disease',
           patientHP: 60,
-          text: "A patient with hepatitis B known for over a decade (acquired perinatally) is found on routine monitoring to have persistently elevated ALT and a rising HBV DNA level, with ultrasound showing early changes of fibrosis.",
+          text: "A patient with a chronic viral hepatitis infection, acquired perinatally over a decade ago, is found on routine monitoring to have persistently elevated ALT and a rising viral load, with ultrasound showing early changes of fibrosis.",
           clues: [
             { title: "Hepatitis B Serology", icon: "serology-bars", text: "HBsAg positive for over 6 months (confirming chronicity), HBeAg positive, IgG anti-HBc positive, IgM anti-HBc negative — distinguishing chronic from acute infection." },
             { title: "HBV DNA Viral Load", icon: "pcr-gel", text: "Rising, alongside persistently elevated ALT — indicating active viral replication with ongoing liver injury, meeting criteria to start treatment rather than continue monitoring alone." },
@@ -4740,8 +4740,8 @@
           text: "A 22-year-old presents with painful grouped vesicles on an erythematous base over the vulva, alongside fever, malaise, and tender inguinal lymphadenopathy — a first episode.",
           clues: [
             { title: "Tzanck Smear — Vesicle Base Scraping", icon: "giant-cell", text: "Multinucleated giant cells seen — suggestive of a herpesvirus, but not specific for HSV over VZV." },
-            { title: "PCR — Vesicle Swab", icon: "pcr-gel", text: "Positive for HSV-2 DNA — now the preferred, most sensitive confirmatory test, and able to distinguish HSV-1 from HSV-2." },
             { title: "Clinical Context", icon: "test", text: "First clinical episode with systemic symptoms (fever, malaise) alongside painful genital lesions — primary infection tends to be more severe and prolonged than recurrent episodes." },
+            { title: "PCR — Vesicle Swab", icon: "pcr-gel", text: "Positive for HSV-2 DNA — now the preferred, most sensitive confirmatory test, and able to distinguish HSV-1 from HSV-2." },
           ],
         },
         {
@@ -4751,9 +4751,9 @@
           encephalitis: true,
           text: "A patient presents with fever, headache, altered behaviour, and focal seizures over 3 days. MRI shows temporal lobe changes.",
           clues: [
-            { title: "MRI Brain", icon: "test", text: "Asymmetric temporal and inferior frontal lobe signal changes — the classic distribution for HSV encephalitis, reflecting the virus's tropism for these regions." },
-            { title: "CSF PCR", icon: "pcr-gel", text: "Positive for HSV DNA — the diagnostic test of choice, with high sensitivity and specificity; it can rarely be falsely negative very early, so treatment should not wait for results if suspicion is high." },
+            { title: "MRI Brain", icon: "test", text: "Asymmetric temporal and inferior frontal lobe signal changes — a distribution reflecting the virus's tropism for these regions, though not fully specific on imaging alone." },
             { title: "CSF Interpretation", icon: "test", text: "Lymphocytic pleocytosis, mildly elevated protein, red blood cells sometimes present — reflecting the haemorrhagic, necrotising nature of the infection." },
+            { title: "CSF PCR", icon: "pcr-gel", text: "Positive for HSV DNA — the diagnostic test of choice, with high sensitivity and specificity; it can rarely be falsely negative very early, so treatment should not wait for results if suspicion is high." },
           ],
         },
       ],
@@ -4803,9 +4803,9 @@
           supportiveCareOk: true,
           text: "A previously well, unvaccinated 6-year-old presents with 2 days of fever and an itchy vesicular rash in crops at different stages (macules, vesicles, crusted lesions) across the trunk and face.",
           clues: [
-            { title: "Clinical Examination", icon: "test", text: "Lesions in different stages of evolution simultaneously ('crops') — a hallmark distinguishing varicella from other vesicular rashes, which tend to be more uniform in stage." },
-            { title: "PCR — Vesicle Swab", icon: "pcr-gel", text: "Positive for varicella-zoster virus DNA, though testing isn't usually necessary when the clinical picture is classic." },
+            { title: "Clinical Examination", icon: "test", text: "Lesions in different stages of evolution simultaneously ('crops') — a hallmark distinguishing this presentation from other vesicular rashes, which tend to be more uniform in stage." },
             { title: "Risk Assessment", icon: "test", text: "Previously well, immunocompetent host with an uncomplicated, typical presentation." },
+            { title: "PCR — Vesicle Swab", icon: "pcr-gel", text: "Positive for varicella-zoster virus DNA, though testing isn't usually necessary when the clinical picture is classic." },
           ],
         },
         {
@@ -4815,9 +4815,9 @@
           supportiveCareOk: false,
           text: "A patient on chemotherapy develops a painful vesicular rash that starts in a single dermatome but progresses over 2 days to widespread vesicles beyond the original dermatome, with new pulmonary symptoms.",
           clues: [
-            { title: "Clinical Examination", icon: "test", text: "Spread beyond the original dermatome to become generalised — defines disseminated zoster, a marker of significant immunosuppression and a risk for visceral involvement (pneumonitis, hepatitis, encephalitis)." },
+            { title: "Clinical Examination", icon: "test", text: "Spread beyond the original dermatome to become generalised — defines disseminated disease, a marker of significant immunosuppression and a risk for visceral involvement (pneumonitis, hepatitis, encephalitis)." },
+            { title: "Chest Imaging", icon: "test", text: "New pulmonary infiltrates raising concern for viral pneumonitis, a serious complication of disseminated disease." },
             { title: "PCR — Vesicle Swab/Blood", icon: "pcr-gel", text: "Positive for varicella-zoster virus DNA, with detectable viraemia." },
-            { title: "Chest Imaging", icon: "test", text: "New pulmonary infiltrates raising concern for VZV pneumonitis, a serious complication of disseminated disease." },
           ],
         },
       ],
@@ -4866,9 +4866,9 @@
           patientHP: 60,
           text: "A newborn is found to have petechiae, hepatosplenomegaly, microcephaly, and sensorineural hearing loss on newborn screening. The mother had a mild flu-like illness during pregnancy that was not specifically investigated.",
           clues: [
+            { title: "Clinical Findings", icon: "test", text: "Microcephaly, sensorineural hearing loss, hepatosplenomegaly, and petechiae — the classic constellation of a symptomatic congenital viral infection, the most common congenital infection overall and a leading non-genetic cause of sensorineural hearing loss." },
+            { title: "Cranial Imaging", icon: "test", text: "Periventricular calcifications — a characteristic (though not universal) finding in this congenital infection." },
             { title: "Urine/Saliva PCR — Within First 3 Weeks of Life", icon: "pcr-gel", text: "Positive for CMV DNA — testing within the first 3 weeks of life is essential to distinguish congenital from postnatally acquired infection." },
-            { title: "Clinical Findings", icon: "test", text: "Microcephaly, sensorineural hearing loss, hepatosplenomegaly, and petechiae — the classic constellation of symptomatic congenital CMV, the most common congenital infection and a leading non-genetic cause of sensorineural hearing loss." },
-            { title: "Cranial Imaging", icon: "test", text: "Periventricular calcifications — a characteristic (though not universal) finding in symptomatic congenital CMV." },
           ],
         },
         {
@@ -4877,9 +4877,9 @@
           patientHP: 45,
           text: "A kidney transplant recipient, 2 months post-transplant on maintenance immunosuppression, develops fever, diarrhoea, and abdominal pain.",
           clues: [
+            { title: "Colonoscopy/Biopsy", icon: "inclusion-body", text: "Large cells with characteristic 'owl's eye' intranuclear inclusions on histopathology — a classic viral cytopathic finding in colitis of this type." },
+            { title: "Risk Factor Review", icon: "test", text: "Reactivation/disease risk from this virus is highest in the first several months post-transplant, particularly with a seronegative recipient of a seropositive donor's organ (D+/R- mismatch), the highest-risk serostatus combination." },
             { title: "CMV Viral Load (Quantitative PCR)", icon: "pcr-gel", text: "Markedly elevated blood CMV DNA level." },
-            { title: "Colonoscopy/Biopsy", icon: "inclusion-body", text: "Large cells with characteristic 'owl's eye' intranuclear inclusions on histopathology — the classic cytopathic finding of CMV colitis." },
-            { title: "Risk Factor Review", icon: "test", text: "CMV disease risk is highest in the first several months post-transplant, particularly with a CMV-seronegative recipient of a seropositive donor's organ (D+/R- mismatch), the highest-risk serostatus combination." },
           ],
         },
       ],
@@ -4928,9 +4928,9 @@
           earlyHighRisk: true,
           text: "A 68-year-old with type 2 diabetes presents on day 2 of fever, cough, and myalgia. He tests positive on a rapid antigen test and is well enough to manage at home, but his age and comorbidity put him at higher risk of progression.",
           clues: [
+            { title: "Risk Assessment", icon: "test", text: "Age over 65 and diabetes are recognised risk factors for progression to severe disease — within the treatment window (symptom onset within the last 5 days) for outpatient antiviral therapy." },
             { title: "Rapid Antigen Test — Nasal Swab", icon: "antigen-strip", text: "Positive for SARS-CoV-2." },
             { title: "PCR/NAAT — Respiratory Panel", icon: "pcr-gel", text: "Confirms SARS-CoV-2; negative for influenza and RSV." },
-            { title: "Risk Assessment", icon: "test", text: "Age over 65 and diabetes are recognised risk factors for progression to severe disease — within the treatment window (symptom onset within the last 5 days) for outpatient antiviral therapy." },
           ],
         },
         {
@@ -4940,9 +4940,9 @@
           earlyHighRisk: false,
           text: "An unvaccinated patient presents on day 7 of illness with worsening dyspnoea and hypoxia requiring supplemental oxygen, with bilateral ground-glass opacities on chest imaging.",
           clues: [
-            { title: "PCR/NAAT", icon: "pcr-gel", text: "Confirms SARS-CoV-2." },
-            { title: "Chest Imaging", icon: "test", text: "Bilateral ground-glass opacities — a typical pattern for COVID-19 pneumonia." },
             { title: "Oxygenation", icon: "test", text: "Hypoxia requiring supplemental oxygen — meeting severity criteria where corticosteroids become part of management alongside antiviral considerations." },
+            { title: "Chest Imaging", icon: "test", text: "Bilateral ground-glass opacities — a typical pattern for primary viral pneumonia in this context." },
+            { title: "PCR/NAAT", icon: "pcr-gel", text: "Confirms SARS-CoV-2." },
           ],
         },
       ],
@@ -4994,8 +4994,8 @@
           supportiveCareOk: true,
           text: "An 18-year-old university student presents with a week of fever, severe sore throat, and profound fatigue. Examination reveals exudative tonsillitis, bilateral posterior cervical lymphadenopathy, and mild splenomegaly. An urgent care clinic started him on amoxicillin three days ago for presumed bacterial pharyngitis, and he has since developed a widespread pruritic maculopapular rash.",
           clues: [
-            { title: "Full Blood Count with Film", icon: "test", text: "Lymphocytosis with more than 10% atypical lymphocytes — large, irregular, reactive T-cells — the classic haematological signature of acute EBV infection." },
-            { title: "Heterophile Antibody Test (Monospot)", icon: "serology-bars", text: "Positive — though sensitivity is lower in the first week of illness and in children under 4, where a false-negative result is common and EBV-specific serology is preferred." },
+            { title: "Full Blood Count with Film", icon: "test", text: "Lymphocytosis with more than 10% atypical lymphocytes — large, irregular, reactive T-cells — the classic haematological signature of this acute viral infection." },
+            { title: "Heterophile Antibody Test (Monospot)", icon: "serology-bars", text: "Positive — though sensitivity is lower in the first week of illness and in children under 4, where a false-negative result is common and specific viral serology is preferred." },
             { title: "Medication History", icon: "test", text: "Widespread rash after aminopenicillin exposure — a well-recognised, non-allergic phenomenon seen in a large majority of patients with EBV mononucleosis given ampicillin or amoxicillin, and not evidence of true penicillin allergy." },
           ],
         },
@@ -5003,11 +5003,11 @@
           caseNum: 184,
           syndrome: 'Post-Transplant Lymphoproliferative Disorder (PTLD)',
           patientHP: 45,
-          text: "Eight months after a renal transplant, a patient on triple immunosuppression develops fevers, night sweats, and diffuse lymphadenopathy. Lymph node biopsy shows EBV-driven B-cell proliferation with strong CD20 expression, and quantitative EBV PCR shows a markedly rising viral load in blood.",
+          text: "Eight months after a renal transplant, a patient on triple immunosuppression develops fevers, night sweats, and diffuse lymphadenopathy. Lymph node biopsy shows atypical B-cell lymphoproliferation with strong CD20 expression, and a quantitative viral PCR panel shows a markedly rising viral load in blood.",
           clues: [
-            { title: "Quantitative EBV PCR (Blood)", icon: "pcr-gel", text: "Rising EBV viral load in peripheral blood — used both to support the diagnosis and to monitor response once treatment begins." },
+            { title: "Transplant/Immunosuppression History", icon: "test", text: "Solid organ transplant on ongoing immunosuppression — loss of virus-specific cytotoxic T-cell surveillance is the key permissive factor for this lymphoproliferative complication." },
+            { title: "Quantitative Viral PCR (Blood)", icon: "pcr-gel", text: "Rising viral load in peripheral blood — used both to support the diagnosis and to monitor response once treatment begins." },
             { title: "Lymph Node Biopsy", icon: "test", text: "EBV-driven B-cell lymphoproliferation with CD20 positivity on histopathology and EBV-encoded RNA (EBER) in-situ hybridisation — confirms PTLD rather than an alternative cause of lymphadenopathy." },
-            { title: "Transplant/Immunosuppression History", icon: "test", text: "Solid organ transplant on ongoing immunosuppression — loss of EBV-specific cytotoxic T-cell surveillance is the key permissive factor for PTLD." },
           ],
         },
       ],
@@ -5060,11 +5060,11 @@
           syndrome: 'Chronic Hepatitis C — Treatment-Eligible',
           patientHP: 60,
           needsDAAnow: true,
-          text: "A 52-year-old with a remote history of injection drug use is found to have persistently mildly elevated ALT on a routine health screen. Anti-HCV antibody is positive, and HCV RNA is detectable at a high viral load, with genotype testing showing genotype 1. Liver ultrasound shows no cirrhosis, and he has no other chronic liver disease.",
+          text: "A 52-year-old with a remote history of injection drug use is found to have persistently mildly elevated ALT on a routine health screen. He has no other chronic liver disease.",
           clues: [
-            { title: "HCV RNA (Quantitative PCR)", icon: "pcr-gel", text: "Detectable viral load more than 6 months after presumed exposure — confirms chronic (rather than resolved or acute) infection." },
-            { title: "Anti-HCV Antibody", icon: "serology-bars", text: "Positive — reflects past or current exposure; requires HCV RNA testing to distinguish chronic infection from spontaneous clearance." },
             { title: "Liver Ultrasound / Fibrosis Assessment", icon: "test", text: "No evidence of cirrhosis — relevant to prognosis and post-treatment surveillance planning, though it does not change eligibility for curative therapy." },
+            { title: "Anti-HCV Antibody", icon: "serology-bars", text: "Positive — reflects past or current exposure; requires HCV RNA testing to distinguish chronic infection from spontaneous clearance." },
+            { title: "HCV RNA (Quantitative PCR)", icon: "pcr-gel", text: "Detectable viral load more than 6 months after presumed exposure — confirms chronic (rather than resolved or acute) infection." },
           ],
         },
         {
@@ -5130,8 +5130,8 @@
           needsVitaminA: true,
           text: "An unvaccinated 4-year-old presents with 3 days of fever, cough, coryza, and conjunctivitis, followed by the appearance of small white spots on the buccal mucosa opposite the molars. A day later, a blotchy erythematous rash begins on the face and spreads downward to the trunk and limbs.",
           clues: [
-            { title: "Clinical Examination — Koplik Spots", icon: "test", text: "Small white/grey spots on an erythematous buccal mucosal base, appearing 1-2 days before the rash — pathognomonic for measles." },
-            { title: "Rash Pattern", icon: "test", text: "Cephalocaudal spread — a blotchy, erythematous, blanching maculopapular rash beginning on the face and hairline before spreading down the trunk and limbs, classic for measles." },
+            { title: "Clinical Examination — Koplik Spots", icon: "test", text: "Small white/grey spots on an erythematous buccal mucosal base, appearing 1-2 days before the rash — a pathognomonic sign." },
+            { title: "Rash Pattern", icon: "test", text: "Cephalocaudal spread — a blotchy, erythematous, blanching maculopapular rash beginning on the face and hairline before spreading down the trunk and limbs, a classic pattern." },
             { title: "Vaccination History", icon: "test", text: "No documented measles-containing vaccine — the key epidemiological risk factor, alongside contact with a confirmed case or travel to an area with ongoing transmission." },
           ],
         },
@@ -5141,10 +5141,10 @@
           patientHP: 35,
           needsVitaminA: true,
           isSevere: true,
-          text: "An unvaccinated 18-month-old with confirmed measles develops worsening tachypnoea, hypoxia, and new bilateral infiltrates on chest imaging on day 5 of the rash. He is malnourished and has not received vitamin A supplementation in the community.",
+          text: "An unvaccinated 18-month-old, five days into a febrile illness with Koplik spots and a cephalocaudal rash, develops worsening tachypnoea, hypoxia, and new bilateral infiltrates on chest imaging. He is malnourished and has not received vitamin A supplementation in the community.",
           clues: [
-            { title: "Chest Imaging", icon: "test", text: "Bilateral infiltrates consistent with measles giant-cell (Hecht) pneumonia — a direct viral pneumonitis, distinct from secondary bacterial pneumonia, which can also complicate measles." },
-            { title: "Nutritional Status", icon: "test", text: "Malnutrition and vitamin A deficiency are established risk factors for severe measles complications and death, which is why vitamin A supplementation is recommended for every child with measles, not only those who are malnourished." },
+            { title: "Chest Imaging", icon: "test", text: "Bilateral infiltrates consistent with giant-cell (Hecht) pneumonia — a direct viral pneumonitis, distinct from secondary bacterial pneumonia, which can also complicate this illness." },
+            { title: "Nutritional Status", icon: "test", text: "Malnutrition and vitamin A deficiency are established risk factors for severe complications and death from this illness, which is why vitamin A supplementation is recommended for every affected child, not only those who are malnourished." },
             { title: "Clinical Course", icon: "test", text: "Deterioration around day 5 of rash with respiratory compromise — the timeframe in which measles' most severe complications (pneumonia, and less commonly acute encephalitis) typically present." },
           ],
         },
@@ -5211,10 +5211,10 @@
           syndrome: 'Established (Symptomatic) Rabies',
           patientHP: 20,
           isEncephalitic: true,
-          text: "A man presents with agitation, hydrophobia (spasms triggered by attempts to drink water), hypersalivation, and fluctuating consciousness, six weeks after an unreported dog bite while travelling abroad that he never sought treatment for. Rabies is confirmed on saliva PCR and serology.",
+          text: "A man presents with agitation, hydrophobia (spasms triggered by attempts to drink water), hypersalivation, and fluctuating consciousness, six weeks after an unreported dog bite while travelling abroad that he never sought treatment for.",
           clues: [
-            { title: "Clinical Presentation", icon: "test", text: "Hydrophobia and aerophobia (spasms triggered by air currents) with hypersalivation and agitation — the classic \"furious\" form of clinical rabies." },
-            { title: "Exposure History", icon: "test", text: "Unreported, untreated dog bite abroad weeks earlier — the incubation period for rabies is typically 1-3 months, during which post-exposure prophylaxis would still have been effective." },
+            { title: "Clinical Presentation", icon: "test", text: "Hydrophobia and aerophobia (spasms triggered by air currents) with hypersalivation and agitation — the classic \"furious\" form of this encephalitic illness." },
+            { title: "Exposure History", icon: "test", text: "Unreported, untreated dog bite abroad weeks earlier — the incubation period for this infection is typically 1-3 months, during which post-exposure prophylaxis would still have been effective." },
             { title: "Confirmatory Testing", icon: "pcr-gel", text: "Saliva PCR and serum/CSF serology positive for rabies virus — once clinical symptoms have begun, confirmatory testing no longer changes management, as no treatment reliably alters the outcome at this stage." },
           ],
         },
@@ -5270,11 +5270,11 @@
           syndrome: 'Bronchiolitis — Previously Well Infant',
           patientHP: 65,
           supportiveCareOk: true,
-          text: "A 4-month-old presents with 2 days of coryza followed by cough, wheeze, and mild-to-moderate increased work of breathing. She is maintaining oxygen saturations above 92% on room air and continuing to feed adequately, though slightly more slowly than usual. A nasopharyngeal swab confirms RSV.",
+          text: "A 4-month-old presents with 2 days of coryza followed by cough, wheeze, and mild-to-moderate increased work of breathing. She is maintaining oxygen saturations above 92% on room air and continuing to feed adequately, though slightly more slowly than usual.",
           clues: [
-            { title: "Rapid Antigen/PCR — Nasopharyngeal Swab", icon: "antigen-strip", text: "Positive for RSV — the most common cause of bronchiolitis in infants, with a seasonal winter pattern in temperate climates." },
-            { title: "Clinical Assessment", icon: "test", text: "Mild-to-moderate work of breathing, oxygen saturation above 92%, and adequate oral intake — criteria consistent with safe outpatient or ward-level supportive management rather than escalation of care." },
             { title: "Auscultation", icon: "test", text: "Diffuse wheeze and fine crackles bilaterally — the auscultatory hallmark of bronchiolitis, reflecting small airway inflammation and mucus plugging rather than focal bacterial consolidation." },
+            { title: "Clinical Assessment", icon: "test", text: "Mild-to-moderate work of breathing, oxygen saturation above 92%, and adequate oral intake — criteria consistent with safe outpatient or ward-level supportive management rather than escalation of care." },
+            { title: "Rapid Antigen/PCR — Nasopharyngeal Swab", icon: "antigen-strip", text: "Positive for RSV — the most common cause of bronchiolitis in infants, with a seasonal winter pattern in temperate climates." },
           ],
         },
         {
@@ -5282,11 +5282,11 @@
           syndrome: 'Severe RSV Pneumonia — Post-Transplant Immunocompromise',
           patientHP: 35,
           isSevereImmunocompromised: true,
-          text: "Three weeks after allogeneic haematopoietic stem cell transplant, a patient develops progressive hypoxia, cough, and new diffuse ground-glass opacities on CT chest. RSV is confirmed on a respiratory viral panel, and lower respiratory tract involvement is suspected given the imaging and oxygen requirement.",
+          text: "Three weeks after allogeneic haematopoietic stem cell transplant, a patient develops progressive hypoxia, cough, and new diffuse ground-glass opacities on CT chest, with lower respiratory tract involvement suspected given the imaging and oxygen requirement.",
           clues: [
+            { title: "CT Chest", icon: "test", text: "New diffuse ground-glass opacities — consistent with viral lower respiratory tract disease, though radiologically nonspecific and requiring correlation with viral panel testing." },
+            { title: "Immune Status", icon: "test", text: "Early post-allogeneic transplant with minimal reconstituted cellular immunity — a population in whom this virus carries the highest risk of progression to severe or fatal pneumonia." },
             { title: "Respiratory Viral Panel (PCR)", icon: "pcr-gel", text: "Positive for RSV, with clinical and radiological evidence of progression from the upper to the lower respiratory tract — a recognised, high-mortality pattern in the early post-transplant period." },
-            { title: "CT Chest", icon: "test", text: "New diffuse ground-glass opacities — consistent with RSV lower respiratory tract disease, though radiologically nonspecific and requiring correlation with the confirmed viral panel result." },
-            { title: "Immune Status", icon: "test", text: "Early post-allogeneic transplant with minimal reconstituted cellular immunity — the population in whom RSV carries the highest risk of progression to severe or fatal pneumonia." },
           ],
         },
       ],
@@ -5337,11 +5337,11 @@
           syndrome: 'Acute Chikungunya Fever',
           patientHP: 65,
           supportiveCareOk: true,
-          text: "A 35-year-old returns from a region with an active chikungunya outbreak with 2 days of high fever, a maculopapular rash, and severe, symmetric pain and swelling in the small joints of the hands, wrists, and ankles that is out of proportion to the mild fatigue she otherwise feels. Dengue has not yet been excluded.",
+          text: "A 35-year-old returns from a region experiencing an active outbreak of a mosquito-borne viral illness with 2 days of high fever, a maculopapular rash, and severe, symmetric pain and swelling in the small joints of the hands, wrists, and ankles that is out of proportion to the mild fatigue she otherwise feels. Dengue has not yet been excluded.",
           clues: [
             { title: "Clinical Pattern", icon: "test", text: "Severe, symmetric small-joint polyarthralgia disproportionate to systemic symptoms — a distinguishing feature from dengue, where haemorrhagic and plasma-leakage risk dominate rather than joint pain." },
-            { title: "Serology / RT-PCR for Chikungunya", icon: "pcr-gel", text: "Positive chikungunya RT-PCR (in the first week) or IgM (from around day 5 onward) — confirms the diagnosis; co-testing for dengue is essential given overlapping geography and presentation." },
             { title: "Full Blood Count", icon: "test", text: "Platelet count and haematocrit within normal limits, without the thrombocytopenia and haemoconcentration that would raise concern for dengue with plasma leakage." },
+            { title: "Arboviral Serology / RT-PCR Panel", icon: "pcr-gel", text: "Positive chikungunya RT-PCR (in the first week) or IgM (from around day 5 onward) — confirms the diagnosis; co-testing for dengue is essential given overlapping geography and presentation." },
           ],
         },
         {
@@ -5349,10 +5349,10 @@
           syndrome: 'Chronic Chikungunya Arthritis',
           patientHP: 55,
           isChronicArthritis: true,
-          text: "Four months after a confirmed chikungunya infection, a patient continues to have persistent, symmetric pain, swelling, and morning stiffness in the wrists and small joints of the hands, resembling an inflammatory arthritis. Dengue and other alternative diagnoses have been excluded, and there is no longer any concern about bleeding risk.",
+          text: "Four months after an acute mosquito-borne febrile illness with joint pains, a patient continues to have persistent, symmetric pain, swelling, and morning stiffness in the wrists and small joints of the hands, resembling an inflammatory arthritis. Dengue and other alternative diagnoses have been excluded, and there is no longer any concern about bleeding risk.",
           clues: [
-            { title: "Clinical Course", icon: "test", text: "Persistent inflammatory-pattern joint symptoms beyond 3 months of the acute illness — chikungunya's hallmark chronic complication, occurring in a substantial minority of patients in published cohorts." },
-            { title: "Joint Examination", icon: "test", text: "Symmetric small-joint synovitis with morning stiffness, mimicking rheumatoid arthritis — a pattern that can lead to diagnostic confusion if the preceding chikungunya infection is not recognised." },
+            { title: "Clinical Course", icon: "test", text: "Persistent inflammatory-pattern joint symptoms beyond 3 months of the acute illness — a hallmark chronic complication of this infection, occurring in a substantial minority of patients in published cohorts." },
+            { title: "Joint Examination", icon: "test", text: "Symmetric small-joint synovitis with morning stiffness, mimicking rheumatoid arthritis — a pattern that can lead to diagnostic confusion if the preceding viral infection is not recognised." },
             { title: "Exclusion of Alternative Causes", icon: "test", text: "No evidence of an alternative rheumatological diagnosis or ongoing dengue risk — the bleeding-risk caveat that limits NSAID use in the acute phase no longer applies at this stage." },
           ],
         },
@@ -8307,8 +8307,6 @@ const DRUG_MOVE_MAP = {
       shuffledMoves: null,  // fixed once battle is entered, so a hint reveal mid-battle doesn't reshuffle button positions
     };
     game.lastOrgId = org.id;
-    if (!game.dex[org.id]) game.dex[org.id] = { encountered: false, defeated: false };
-    game.dex[org.id].encountered = true;
     renderSidebar();
     saveState();
 
@@ -8553,10 +8551,14 @@ const DRUG_MOVE_MAP = {
     if (!val.trim()) return;
     if (matchesOrganism(val, run.org)) {
       run.diagnosed = true;
+      // Diagnosis achieved via jump-ahead guess — reveal in the Dex here too.
+      if (!game.dex[run.org.id]) game.dex[run.org.id] = { encountered: false, defeated: false };
+      game.dex[run.org.id].encountered = true;
       const firstTry = run.dxAttempts === 0;
       const dxCoins = firstTry ? 100 : 0; // 50 base + 50 jump-ahead bonus, first try only
       run.dxCoinsAwarded = dxCoins;
-      if (dxCoins > 0) { game.coins += dxCoins; saveState(); renderSidebar(); }
+      if (dxCoins > 0) { game.coins += dxCoins; }
+      saveState(); renderSidebar();
       hide('jump-block'); hide('btn-next-clue'); hide('btn-jump'); $('btn-maldi').classList.add('hidden');
       $('quiz-feedback').innerHTML = '';
       const coinLine = dxCoins > 0
@@ -8581,6 +8583,9 @@ const DRUG_MOVE_MAP = {
     if (game.coins < 500 || run.diagnosed) return;
     game.coins -= 500;
     run.diagnosed = true;
+    // Diagnosis achieved via bought MALDI-TOF result — reveal in the Dex here too.
+    if (!game.dex[run.org.id]) game.dex[run.org.id] = { encountered: false, defeated: false };
+    game.dex[run.org.id].encountered = true;
     run.dxCoinsAwarded = 0; // bought the answer — no diagnosis points for reasoning you didn't do
     saveState(); renderSidebar();
     hide('btn-next-clue'); hide('btn-jump'); hide('jump-block'); $('btn-maldi').classList.add('hidden');
@@ -8612,10 +8617,15 @@ const DRUG_MOVE_MAP = {
     if (opt.correct) {
       btnEl.classList.add('correct');
       run.diagnosed = true;
+      // Diagnosis achieved — this is the moment the organism is revealed in the sidebar
+      // Dex, not at case start (which would give the answer away before the workup).
+      if (!game.dex[run.org.id]) game.dex[run.org.id] = { encountered: false, defeated: false };
+      game.dex[run.org.id].encountered = true;
       const firstTry = run.dxAttempts === 0;
       const dxCoins = firstTry ? 50 : 0;
       run.dxCoinsAwarded = dxCoins;
-      if (dxCoins > 0) { game.coins += dxCoins; saveState(); renderSidebar(); }
+      if (dxCoins > 0) { game.coins += dxCoins; }
+      saveState(); renderSidebar();
       const coinLine = dxCoins > 0
         ? `<span class="coin-award">+${dxCoins} coins</span> — correct on the first try.`
         : `No diagnosis coins this time — the first-try bonus was already used up on an earlier wrong guess.`;
