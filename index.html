@@ -67,6 +67,10 @@
     --cereus-wheat: #c4ad5e;
     --gardnerella-grey: #8f7a85;
     --trichomonas-jade: #5a9e7c;
+    --auris-amber:    #d97a3a;
+    --pjirovecii-mist:#9ba3b0;
+    --aspergillus-verdigris: #5a8f5c;
+    --mucorales-umber: #4a3c30;
   }
   * { box-sizing: border-box; }
   @media (prefers-reduced-motion: reduce) {
@@ -248,6 +252,18 @@
      morphology group covering Campylobacter, Vibrio, and Helicobacter */
   .curve-art { width:100%; height:100%; border-radius:3px; background: var(--bg-void); position:relative; overflow:hidden; }
   .curve-art i { position:absolute; width:9px; height:4px; border-radius:2px; background: var(--safranin-pink); }
+
+  /* septate hyphae, acute-angle (~45°) dichotomous branching on KOH/silver stain (Aspergillus, Fusarium) */
+  .hyphaeA-art { width:100%; height:100%; border-radius:3px; background:#0a0a0a; position:relative; overflow:hidden; }
+  .hyphaeA-art i { position:absolute; height:3px; border-radius:1px; background:#7fbf8a; }
+
+  /* broad, ribbon-like pauci-septate hyphae, wide-angle (~90°) branching on KOH prep (Mucorales) */
+  .hyphaeM-art { width:100%; height:100%; border-radius:3px; background:#0a0a0a; position:relative; overflow:hidden; }
+  .hyphaeM-art i { position:absolute; height:6px; border-radius:2px; background:#c9c2b0; }
+
+  /* GMS silver stain — cup-shaped/crescentic cysts, classically "crushed ping-pong balls" (Pneumocystis) */
+  .pcp-art { width:100%; height:100%; border-radius:3px; background:#1c1c1c; position:relative; overflow:hidden; }
+  .pcp-art i { position:absolute; border-radius:50%; background:transparent; border:2px solid #8fae9b; }
 
   .quiz-options { display:flex; flex-direction:column; gap:8px; margin-top:6px; }
   .quiz-opt { text-align:left; background: var(--bg-panel); border:1px solid var(--line); color:var(--text-main); padding:12px 14px; font-size:14.5px; cursor:pointer; font-family:'IBM Plex Sans',sans-serif; }
@@ -4137,6 +4153,299 @@
         `<b>Unlike bacterial vaginosis, this is a true STI</b> — all sexual partners must be treated concurrently, with abstinence advised until both partners have completed treatment and are symptom-free, to prevent reinfection. <span class="cite">(Grade A)</span>`,
       ],
     },
+    {
+      id: 'cauris',
+      kingdom: 'fungus',
+      name: 'Candida auris',
+      aliases: ['candida auris', 'c auris', 'auris'],
+      spriteColor: 'var(--auris-amber)',
+      flagName: 'MDR',
+      vignettes: [
+        {
+          caseNum: 157,
+          syndrome: 'Candidaemia — Interfacility Transfer',
+          patientHP: 45, // starting patient life for this vignette's severity
+          text: "An ICU patient transferred from another hospital's long-term care ward, with multiple prior admissions and broad antifungal exposure, develops fever and hypotension. Blood cultures flag positive for yeast, and the lab flags the isolate for confirmatory identification given a colony morphology that standard biochemical panels misidentify.",
+          clues: [
+            { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells, no pseudohyphae — unlike most other <i>Candida</i> species, <i>C. auris</i> classically does not form pseudohyphae." },
+            { title: "Identification Method", icon: "test", text: "Standard biochemical/phenotypic panels frequently misidentify this organism as other <i>Candida</i> or <i>Rhodotorula</i> species; confirmed as <i>C. auris</i> only by MALDI-TOF with an updated database or by sequencing." },
+            { title: "Interfacility Transfer History", icon: "chart", text: "Transferred from a facility with a known outbreak; <i>C. auris</i> persists on skin and environmental surfaces for weeks, and healthcare-associated clusters are well described." },
+          ],
+        },
+        {
+          caseNum: 158,
+          syndrome: 'Candidaemia — Fluconazole-Resistant',
+          patientHP: 45, // starting patient life for this vignette's severity
+          text: "A separate patient with a central venous catheter and prolonged ICU stay develops candidaemia. Empirical fluconazole is started while cultures are pending but the patient remains febrile with persistently positive blood cultures 72 hours later.",
+          clues: [
+            { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells, no pseudohyphae." },
+            { title: "Antifungal Susceptibility Testing", icon: "test", text: "Fluconazole minimum inhibitory concentration markedly elevated, consistent with the near-universal intrinsic fluconazole resistance seen in <i>C. auris</i>." },
+            { title: "Culture — CHROMagar Candida Plus", icon: "gold", text: "Distinctive blue colonies on a chromogenic medium designed specifically to help flag this species at the bench." },
+          ],
+        },
+        {
+          caseNum: 159,
+          syndrome: 'Candidaemia — Pan-Resistant Isolate',
+          patientHP: 40, // starting patient life for this vignette's severity
+          text: "A critically ill, previously treated patient has recurrent candidaemia despite an appropriate initial antifungal choice. The laboratory is asked to run a full antifungal susceptibility panel given the lack of clinical response.",
+          clues: [
+            { title: "Gram/KOH Stain — Blood Culture Broth", icon: "yeast", text: "Budding yeast cells, no pseudohyphae." },
+            { title: "Treatment History", icon: "chart", text: "Prior prolonged echinocandin exposure — a recognised risk factor for acquired echinocandin resistance developing on therapy." },
+            { title: "Culture — CHROMagar Candida Plus", icon: "gold", text: "Distinctive blue colonies." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Candida albicans", correct: false },
+        { name: "Candida auris", correct: true },
+        { name: "Cryptococcus neoformans", correct: false },
+        { name: "Rhodotorula species (contaminant)", correct: false },
+      ],
+      moves: [
+        { name: "Fluconazole", desc: "Assume resistant — do not use empirically", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No reliable effect — around 90% of <i>C. auris</i> isolates are intrinsically fluconazole-resistant, so empirical azole therapy should never be relied upon here regardless of the individual isolate. <span class="cite">(Grade A — CDC surveillance data)</span>` },
+        { name: "Caspofungin (echinocandin)", desc: "First-line pending susceptibility results", isDrug: true,
+          dmg: (r) => r ? 15 : 45,
+          log: (r) => r ? `Markedly reduced effect — this isolate belongs to the small minority (under 2% by CDC surveillance) with acquired echinocandin resistance, usually following prolonged echinocandin exposure. Combination therapy or a newer agent (e.g. fosmanogepix, ibrexafungerp, where available) should be considered, guided by susceptibility testing. <span class="cite">(Grade B)</span>`
+                        : `Highly effective — echinocandins are first-line for <i>C. auris</i> candidaemia in essentially all current guidance, pending susceptibility confirmation. <span class="cite">(Grade A — CDC/IDSA)</span>` },
+        { name: "Amphotericin B", desc: "Variable susceptibility — reserve for resistant/refractory disease", isDrug: true,
+          dmg: (r) => r ? 15 : 30,
+          log: (r) => r ? `Reduced effect — around 30% of <i>C. auris</i> isolates show reduced amphotericin B susceptibility per CDC surveillance; this isolate is one of them. <span class="cite">(Grade B)</span>`
+                        : `Effective, though generally reserved rather than first-line given toxicity and the good efficacy of echinocandins in susceptible isolates. <span class="cite">(Grade B)</span>` },
+        { name: "Order Antifungal Susceptibility Testing", desc: "Essential given unpredictable resistance — 25 patient life", isDrug: false, patientCost: 25,
+          dmg: (r) => 0,
+          log: (r, ctx) => {
+            ctx.setSubtype(r ? 'Pan-resistant pattern' : 'Echinocandin-susceptible');
+            const rows = r
+              ? [{drug:'Fluconazole', result:'R'}, {drug:'Amphotericin B', result:'R'}, {drug:'Caspofungin (echinocandin)', result:'R'}]
+              : [{drug:'Fluconazole', result:'R'}, {drug:'Amphotericin B', result:'S'}, {drug:'Caspofungin (echinocandin)', result:'S'}];
+            return `Susceptibility panel reported:` + susceptPanel(rows, r ? `A pan-resistant isolate — combination therapy and expert/ID consultation are warranted; this pattern, while still uncommon, is exactly why routine susceptibility testing matters for this species.` : `Fluconazole-resistant as expected, but echinocandin- and amphotericin-susceptible — proceed with an echinocandin.`);
+          } },
+      ],
+      pearls: [
+        `<b><i>Candida auris</i> is frequently misidentified by standard phenotypic/biochemical methods</b> (commonly as other <i>Candida</i> or <i>Rhodotorula</i> species) — accurate identification needs MALDI-TOF with an updated library or molecular sequencing. <span class="cite">(Grade A — CDC)</span>`,
+        `<b>It persists on skin and environmental surfaces for weeks and spreads readily in healthcare settings</b>, making contact precautions, single-room isolation, and environmental decontamination with an effective disinfectant central to management — independent of antifungal choice. <span class="cite">(Grade A — CDC/ECDC)</span>`,
+        `<b>Resistance is unpredictable and can span multiple drug classes</b> — around 90% of isolates are fluconazole-resistant, around 30% show reduced amphotericin B susceptibility, and under 2% show echinocandin resistance (per CDC surveillance), though a small minority are resistant across multiple classes; susceptibility testing should guide therapy rather than a fixed empirical regimen. <span class="cite">(Grade A — CDC)</span>`,
+        `<b>Echinocandins remain first-line pending susceptibility results</b> in essentially all current guidance, reflecting that most isolates remain echinocandin-susceptible even as azole and (less commonly) polyene resistance are widespread. <span class="cite">(Grade A — CDC/IDSA)</span>`,
+      ],
+    },
+    {
+      id: 'pjirovecii',
+      kingdom: 'fungus',
+      name: 'Pneumocystis jirovecii',
+      aliases: ['pneumocystis jirovecii', 'pneumocystis', 'pcp', 'pjp', 'pneumocystis pneumonia'],
+      spriteColor: 'var(--pjirovecii-mist)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 160,
+          syndrome: 'Pneumonia in Advanced HIV',
+          patientHP: 55, // starting patient life for this vignette's severity
+          text: "A patient with newly diagnosed HIV and a CD4 count below 100 presents with several weeks of progressive dry cough, exertional dyspnoea, and low-grade fever. Chest X-ray shows bilateral perihilar infiltrates that look modest relative to how hypoxic he is on exertion.",
+          clues: [
+            { title: "Pulse Oximetry", icon: "chart", text: "Resting saturation preserved, but desaturates markedly on exertion — a classic pattern, and oxygenation is often far worse than the chest X-ray suggests." },
+            { title: "Bronchoalveolar Lavage — Silver Stain (GMS)", icon: "pcp-cyst", text: "Cup-shaped and crescentic cysts identified — this organism cannot be cultured on standard media, so microscopy (or PCR) of induced sputum or BAL fluid is the diagnostic mainstay." },
+            { title: "Serum (1,3)-beta-D-glucan", icon: "test", text: "Markedly elevated — a sensitive, though non-specific, adjunct supporting the diagnosis." },
+          ],
+        },
+        {
+          caseNum: 161,
+          syndrome: 'Pneumonia in a Non-HIV Immunosuppressed Host',
+          patientHP: 50, // starting patient life for this vignette's severity
+          text: "A patient on long-term high-dose corticosteroids for a rheumatological condition, not on any prophylaxis, develops a similar subacute dry cough and dyspnoea. He is more acutely unwell than the typical presentation in HIV, with faster progression over days rather than weeks.",
+          clues: [
+            { title: "Chest CT", icon: "chart", text: "Diffuse bilateral ground-glass opacities." },
+            { title: "Induced Sputum — Immunofluorescent Stain", icon: "pcp-cyst", text: "Cysts and trophozoites identified by direct immunofluorescence, now generally preferred over silver stain alone for sensitivity where available." },
+            { title: "Risk Factor Review", icon: "chart", text: "Prolonged corticosteroid use (typically defined as ≥20mg prednisone-equivalent daily for ≥4 weeks) without <i>Pneumocystis</i> prophylaxis — a major, often under-recognised, non-HIV risk group." },
+          ],
+        },
+        {
+          caseNum: 162,
+          syndrome: 'Moderate-Severe Pneumonia with Hypoxaemia',
+          patientHP: 45, // starting patient life for this vignette's severity
+          text: "A patient with confirmed <i>Pneumocystis</i> pneumonia has a room-air PaO2 of 65mmHg and a widened alveolar-arterial oxygen gradient, meeting criteria for moderate-severe disease.",
+          clues: [
+            { title: "Arterial Blood Gas — Room Air", icon: "chart", text: "PaO2 65mmHg; calculated A-a gradient markedly widened (>35mmHg) — meeting the threshold used to define moderate-severe disease and to trigger adjunctive corticosteroid therapy." },
+            { title: "Bronchoalveolar Lavage — Silver Stain (GMS)", icon: "pcp-cyst", text: "Cup-shaped cysts identified." },
+            { title: "Timing Consideration", icon: "test", text: "Adjunctive corticosteroids are most beneficial when started early — within 72 hours of starting antimicrobial therapy — rather than added later once respiratory failure is established." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Pneumocystis jirovecii", correct: true },
+        { name: "Mycoplasma pneumoniae", correct: false },
+        { name: "Cryptococcus neoformans", correct: false },
+        { name: "Cytomegalovirus", correct: false },
+      ],
+      moves: [
+        { name: "Trimethoprim-Sulfamethoxazole (High-Dose)", desc: "First-line for all severities", isDrug: true,
+          dmg: (r) => 55,
+          log: (r) => `Highly effective and first-line across all severities, at a higher dose than used for typical bacterial infections. <span class="cite">(Grade A)</span>` },
+        { name: "IV Pentamidine", desc: "Alternative for sulfa allergy/intolerance or treatment failure", isDrug: true,
+          dmg: (r) => 40,
+          log: (r) => `Effective, and the standard parenteral alternative when trimethoprim-sulfamethoxazole cannot be used, but meaningfully more toxic — nephrotoxicity, hypoglycaemia (sometimes followed by hyperglycaemia), pancreatitis, and QT prolongation are all recognised. <span class="cite">(Grade A)</span>` },
+        { name: "Clindamycin + Primaquine", desc: "Alternative for moderate-severe disease — check G6PD first", isDrug: true,
+          dmg: (r) => 40,
+          log: (r) => `Effective for moderate-severe disease intolerant of first-line therapy, but primaquine can cause severe haemolysis in G6PD deficiency, so G6PD status should be checked before starting wherever feasible. <span class="cite">(Grade B)</span>` },
+        { name: "Adjunctive Corticosteroids", desc: "Essential in moderate-severe hypoxaemia — start early, with or just before antimicrobials", isDrug: false, patientCost: -15,
+          dmg: (r) => 0,
+          log: (r) => `Doesn't kill the organism, but critically improves survival in moderate-severe disease (PaO2 <70mmHg or A-a gradient ≥35mmHg on room air) by dampening the host inflammatory response that drives respiratory failure as organisms die off — most beneficial when started early, within 72 hours of antimicrobial therapy. <span class="cite">(Grade A — HIV-associated disease; extrapolated with somewhat weaker evidence to non-HIV immunosuppression, Grade B/C)</span>` },
+        { name: "Fluconazole", desc: "Wrong target — no useful role", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — <i>Pneumocystis</i> has an atypical cell membrane that does not depend on the same ergosterol-synthesis pathway most other fungi use, so azoles (and amphotericin B) have no meaningful clinical role against it. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b><i>Pneumocystis jirovecii</i> cannot be cultured on standard media</b> — diagnosis relies on direct visualisation (silver or immunofluorescent stain) or PCR of induced sputum or bronchoalveolar lavage fluid, a genuinely different diagnostic pathway from most other fungi. <span class="cite">(Grade A)</span>`,
+        `<b>Hypoxia is often disproportionate to the chest X-ray appearance</b>, particularly with exertional desaturation — a clue that should raise suspicion even when resting oxygenation looks reassuring. <span class="cite">(Grade B)</span>`,
+        `<b>Non-HIV immunosuppressed hosts (e.g. prolonged high-dose corticosteroids without prophylaxis) are an important and often under-recognised at-risk group</b>, and paradoxically can have a more fulminant course with a more robust (and more damaging) inflammatory response than typically seen in advanced HIV. <span class="cite">(Grade B)</span>`,
+        `<b>Adjunctive corticosteroids reduce mortality in moderate-severe disease</b> (PaO2 <70mmHg or A-a gradient ≥35mmHg on room air) and should be started early, ideally within 72 hours of starting antimicrobial therapy. <span class="cite">(Grade A — HIV-associated disease)</span>`,
+      ],
+    },
+    {
+      id: 'afumigatus',
+      kingdom: 'fungus',
+      name: 'Aspergillus fumigatus',
+      aliases: ['aspergillus fumigatus', 'aspergillus', 'invasive aspergillosis', 'abpa', 'aspergilloma'],
+      spriteColor: 'var(--aspergillus-verdigris)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 163,
+          syndrome: 'Invasive Pulmonary Aspergillosis — Neutropenic Fever',
+          patientHP: 45, // starting patient life for this vignette's severity
+          text: "A patient with prolonged neutropenia following induction chemotherapy for acute leukaemia develops fever, pleuritic chest pain, and haemoptysis unresponsive to broad-spectrum antibacterials. CT chest shows a nodule with a surrounding ground-glass halo.",
+          clues: [
+            { title: "CT Chest", icon: "chart", text: "Nodular lesion with a surrounding 'halo sign' (ground-glass opacity from haemorrhage around the nodule) — an early finding in angioinvasive disease, later followed by cavitation (the 'air crescent sign') as neutrophils recover." },
+            { title: "Serum Galactomannan Antigen", icon: "test", text: "Positive — a useful, moderately sensitive biomarker for invasive aspergillosis in neutropenic/haematology patients, though less reliable in other host groups." },
+            { title: "Histopathology/Culture — Lung Biopsy", icon: "hyphae-septate", text: "Septate hyphae with acute-angle (~45°), dichotomous branching — the classic <i>Aspergillus</i> morphology, distinguishing it from the broad, wide-angle-branching hyphae of Mucorales." },
+          ],
+        },
+        {
+          caseNum: 164,
+          syndrome: 'Allergic Bronchopulmonary Aspergillosis — Poorly Controlled Asthma',
+          patientHP: 65, // starting patient life for this vignette's severity
+          text: "A patient with long-standing, difficult-to-control asthma has recurrent episodes of wheeze, brown-flecked sputum plugs, and transient chest X-ray infiltrates, with bronchiectasis on CT centred on the central/proximal airways.",
+          clues: [
+            { title: "Total Serum IgE", icon: "chart", text: "Markedly elevated, alongside <i>Aspergillus</i>-specific IgE and IgG — reflecting an allergic hypersensitivity response to airway colonisation rather than tissue-invasive infection." },
+            { title: "Full Blood Count", icon: "chart", text: "Peripheral eosinophilia." },
+            { title: "CT Chest", icon: "chart", text: "Central/proximal bronchiectasis with mucus plugging — a distribution pattern that helps distinguish ABPA from other causes of bronchiectasis." },
+          ],
+        },
+        {
+          caseNum: 165,
+          syndrome: 'Aspergilloma — Old Tuberculous Cavity',
+          patientHP: 70, // starting patient life for this vignette's severity
+          text: "A patient with a residual apical cavity from tuberculosis treated years earlier is found to have a mobile, rounded density within the cavity on chest X-ray, with an air crescent visible above it. He reports occasional streaky haemoptysis but is otherwise well.",
+          clues: [
+            { title: "Chest X-ray/CT", icon: "chart", text: "A rounded, mobile intracavitary mass with a surrounding air crescent ('fungus ball') within a pre-existing cavity — the mass shifts position with patient posture on serial imaging, a distinguishing feature from a fixed tumour." },
+            { title: "Histopathology/Culture", icon: "hyphae-septate", text: "Septate, acute-angle-branching hyphae — a saprophytic fungal ball colonising the cavity rather than invading surrounding tissue." },
+            { title: "Serum Precipitins/IgG", icon: "test", text: "<i>Aspergillus</i>-specific IgG precipitins positive, supporting chronic colonisation." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Aspergillus fumigatus", correct: true },
+        { name: "Mucorales (Rhizopus spp.)", correct: false },
+        { name: "Cryptococcus neoformans", correct: false },
+        { name: "Mycobacterium tuberculosis (reactivation)", correct: false },
+      ],
+      moves: [
+        { name: "Voriconazole", desc: "First-line for invasive disease", isDrug: true,
+          dmg: (r) => 50,
+          log: (r) => `Highly effective — voriconazole is first-line for invasive aspergillosis in essentially all current guidelines, based on a landmark trial showing a clear survival benefit over conventional amphotericin B. <span class="cite">(Grade A — IDSA Aspergillosis Guidelines, 2016)</span>` },
+        { name: "Isavuconazole", desc: "Non-inferior alternative, better tolerated", isDrug: true,
+          dmg: (r) => 48,
+          log: (r) => `Highly effective — non-inferior to voriconazole in the pivotal SECURE trial, with a more favourable side-effect and drug-interaction profile, making it an increasingly used alternative first-line option. <span class="cite">(Grade A — SECURE trial)</span>` },
+        { name: "Liposomal Amphotericin B", desc: "Alternative when triazoles are contraindicated/not tolerated", isDrug: true,
+          dmg: (r) => 35,
+          log: (r) => `Effective, but reserved as an alternative given greater toxicity and inferior outcomes compared to voriconazole in head-to-head data. <span class="cite">(Grade A)</span>` },
+        { name: "Oral Corticosteroids", desc: "Primary therapy for ABPA specifically — not an antifungal decision", isDrug: false, patientCost: -15,
+          dmg: (r) => 0,
+          log: (r) => `Doesn't act on the fungus at all, but is the primary therapy for allergic bronchopulmonary aspergillosis (ABPA) — the problem there is an allergic hypersensitivity response to airway colonisation, not tissue invasion, so treatment targets the immune response; itraconazole is sometimes added as a steroid-sparing adjunct rather than to eradicate the organism. <span class="cite">(Grade B)</span>` },
+        { name: "Fluconazole", desc: "No mould activity", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — fluconazole has no activity against <i>Aspergillus</i> or other moulds; this is a fundamental spectrum gap, not a resistance issue. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>The same organism produces three very different diseases depending entirely on host immune status</b> — angioinvasive infection in the neutropenic/immunosuppressed host, an allergic hypersensitivity syndrome (ABPA) in asthma/cystic fibrosis, and saprophytic colonisation of a pre-existing cavity (aspergilloma) in an otherwise structurally damaged but largely intact immune host. <span class="cite">(Grade B)</span>`,
+        `<b>ABPA is treated with corticosteroids, not primarily antifungals</b> — the pathology is an allergic response to airway colonisation rather than tissue invasion, a genuinely different treatment logic from invasive aspergillosis. <span class="cite">(Grade B)</span>`,
+        `<b>Aspergilloma is often managed conservatively (observation) unless there is significant haemoptysis</b>, in which case surgical resection — not antifungal therapy — is the definitive treatment, since a fungus ball sitting in a cavity has poor antifungal penetration. <span class="cite">(Grade B)</span>`,
+        `<b>Voriconazole's survival advantage over amphotericin B for invasive aspergillosis is one of the best-established comparative outcome findings in medical mycology</b>, and underpins its first-line status. <span class="cite">(Grade A — IDSA 2016)</span>`,
+      ],
+    },
+    {
+      id: 'mucorales',
+      kingdom: 'fungus',
+      name: 'Mucorales (Rhizopus/Mucor spp.)',
+      aliases: ['mucorales', 'rhizopus', 'mucor', 'mucormycosis', 'zygomycosis', 'black fungus'],
+      spriteColor: 'var(--mucorales-umber)',
+      flagName: null,
+      vignettes: [
+        {
+          caseNum: 166,
+          syndrome: 'Rhino-Orbito-Cerebral Mucormycosis — Diabetic Ketoacidosis',
+          patientHP: 40, // starting patient life for this vignette's severity
+          text: "A patient presenting in diabetic ketoacidosis develops facial pain, unilateral periorbital swelling, and a black necrotic eschar over the hard palate over the following two days, with rapidly progressive proptosis.",
+          clues: [
+            { title: "Nasal Endoscopy", icon: "chart", text: "Black necrotic eschar over the nasal turbinate/hard palate — a hallmark of angioinvasive tissue necrosis, reflecting the organism's propensity to invade blood vessels and cause thrombosis." },
+            { title: "MRI Brain/Orbit", icon: "chart", text: "Extension into the orbit and evidence of early intracranial involvement — the 'rhino-orbito-cerebral' pattern classically seen in uncontrolled diabetes/DKA." },
+            { title: "Histopathology — Tissue Biopsy", icon: "hyphae-ribbon", text: "Broad, ribbon-like, pauci-septate (near-aseptate) hyphae with wide-angle (~90°), haphazard branching — distinguishing it from the narrower, septate, acute-angle-branching hyphae of <i>Aspergillus</i>." },
+          ],
+        },
+        {
+          caseNum: 167,
+          syndrome: 'Pulmonary Mucormycosis — Breakthrough on Voriconazole Prophylaxis',
+          patientHP: 40, // starting patient life for this vignette's severity
+          text: "A neutropenic patient with acute leukaemia on voriconazole prophylaxis develops fever and pleuritic chest pain despite this prophylaxis. CT chest shows a reverse halo sign.",
+          clues: [
+            { title: "CT Chest", icon: "chart", text: "'Reverse halo sign' — a focal area of ground-glass opacity surrounded by a denser ring of consolidation, a pattern more suggestive of mucormycosis than the halo sign more typical of early invasive aspergillosis." },
+            { title: "Prophylaxis History", icon: "chart", text: "Breakthrough infection while on voriconazole prophylaxis — voriconazole (and other triazoles without Mucorales activity) can select for breakthrough mould infections with intrinsically resistant organisms, mucormycosis being the best-recognised example." },
+            { title: "Histopathology — Lung Biopsy", icon: "hyphae-ribbon", text: "Broad, ribbon-like, pauci-septate hyphae with wide-angle branching." },
+          ],
+        },
+        {
+          caseNum: 168,
+          syndrome: 'Cutaneous Mucormycosis — Post-Traumatic',
+          patientHP: 55, // starting patient life for this vignette's severity
+          text: "A patient with a contaminated soft-tissue wound following a road traffic accident develops rapidly expanding necrotic skin and soft-tissue changes around the wound over 48 hours, with pain out of proportion to examination findings.",
+          clues: [
+            { title: "Wound Examination", icon: "chart", text: "Rapidly progressive black necrotic eschar with surrounding erythema and pain disproportionate to visible findings — reflecting rapid angioinvasion and tissue infarction." },
+            { title: "Histopathology — Wound Biopsy", icon: "hyphae-ribbon", text: "Broad, ribbon-like, pauci-septate hyphae with wide-angle branching invading blood vessels." },
+            { title: "Risk Factor Review", icon: "chart", text: "Traumatic inoculation directly into soft tissue — a distinct acquisition route from the sinus/pulmonary inhalational route seen in the diabetic and neutropenic presentations." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Mucorales (Rhizopus spp.)", correct: true },
+        { name: "Aspergillus fumigatus", correct: false },
+        { name: "Candida albicans", correct: false },
+        { name: "Fusarium species", correct: false },
+      ],
+      moves: [
+        { name: "Liposomal Amphotericin B (High-Dose)", desc: "First-line — start immediately, do not wait for confirmation", isDrug: true,
+          dmg: (r) => 50,
+          log: (r) => `Highly effective, and the guideline-recommended first-line agent, used at higher doses than for most other invasive fungal infections given the organism's intrinsically reduced susceptibility relative to other moulds; therapy should start empirically on strong clinical suspicion rather than waiting for tissue confirmation, given how rapidly this disease progresses. <span class="cite">(Grade A — ECMM/MSG Global Mucormycosis Guideline, 2019)</span>` },
+        { name: "Isavuconazole", desc: "Approved alternative/step-down", isDrug: true,
+          dmg: (r) => 35,
+          log: (r) => `Effective — an approved alternative or step-down option (VITAL trial data) when amphotericin B is contraindicated, not tolerated, or for consolidation after initial control. <span class="cite">(Grade B — ECMM/MSG Guideline)</span>` },
+        { name: "Urgent Surgical Debridement", desc: "Essential adjunct — antifungals alone often fail", isDrug: false, patientCost: -25,
+          dmg: (r) => 0,
+          log: (r) => `Doesn't act as an antifungal, but is an essential, often life-saving adjunct — this is a necrotising, angioinvasive infection with poor blood supply to affected tissue, so antifungal drug penetration alone is frequently inadequate; aggressive surgical debridement of necrotic tissue alongside antifungal therapy is standard of care. <span class="cite">(Grade A — ECMM/MSG Guideline)</span>` },
+        { name: "Voriconazole", desc: "No Mucorales activity — a dangerous mismatch", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — Mucorales are intrinsically resistant to voriconazole and most other triazoles used against <i>Aspergillus</i>. This is more than an inert choice: voriconazole (and posaconazole/itraconazole) prophylaxis has itself been implicated as a risk factor for breakthrough mucormycosis, by suppressing susceptible moulds and allowing an intrinsically resistant organism to emerge. <span class="cite">(Grade A)</span>` },
+        { name: "Fluconazole", desc: "No mould activity at all", isDrug: true,
+          dmg: (r) => 0,
+          log: (r) => `No effect — fluconazole has no activity against any mould, Mucorales included; not every azole covers every fungus, and assuming otherwise is a common and dangerous error. <span class="cite">(Grade A)</span>` },
+      ],
+      pearls: [
+        `<b>Broad, ribbon-like, pauci-septate hyphae with wide-angle (~90°) branching distinguish Mucorales from the narrower, septate, acute-angle-branching hyphae of <i>Aspergillus</i></b> on histopathology — a distinction with direct treatment implications given how differently the two are managed. <span class="cite">(Grade B)</span>`,
+        `<b>Voriconazole (and other triazoles lacking Mucorales activity) has no role and can actively predispose to breakthrough mucormycosis</b> by selecting for this intrinsically resistant organism during prophylaxis or treatment of other mould infections — one of the more important antifungal-mismatch teaching points in medical mycology. <span class="cite">(Grade A)</span>`,
+        `<b>Aggressive surgical debridement alongside high-dose liposomal amphotericin B is standard of care</b> — this is a rapidly angioinvasive, necrotising infection, and antifungal therapy alone, without source control, frequently fails. <span class="cite">(Grade A — ECMM/MSG Guideline, 2019)</span>`,
+        `<b>Uncontrolled diabetes/DKA, haematological malignancy with neutropenia, and traumatic inoculation are the three classic risk-factor patterns</b>, each producing a different anatomical presentation (rhino-orbito-cerebral, pulmonary, and cutaneous respectively) from the same fungal genus. <span class="cite">(Grade B)</span>`,
+      ],
+    },
   ];
 
   // Every vignette now carries its own fixed, hand-assigned caseNum (set directly
@@ -5336,6 +5645,107 @@ const DEX_INFO = {
       "WHO Guidelines for the Management of Symptomatic Sexually Transmitted Infections, 2021 (Grade B)",
     ],
   },
+  cauris: {
+    group: 'Fungi',
+    characteristics: [
+      'Yeast — budding cells, typically without pseudohyphae (unlike most other <i>Candida</i> species)',
+      'Frequently misidentified by standard biochemical/phenotypic panels as other <i>Candida</i> or <i>Rhodotorula</i> species; reliable identification needs MALDI-TOF with an updated database or sequencing',
+      'Thermotolerant and salt-tolerant, contributing to its ability to persist on skin and inanimate surfaces',
+      'Grows as distinctive blue colonies on CHROMagar Candida Plus, a chromogenic medium developed to help flag it at the bench',
+    ],
+    manifestations: [
+      'Candidaemia and invasive candidiasis — the dominant clinically significant presentation, typically in ICU patients with central lines, prior antifungal exposure, or interfacility transfer from a facility with known transmission',
+      'Colonisation (skin, especially axillae/groin, wounds, respiratory and urinary tract) is common and can persist for months, distinct from invasive infection',
+      'Outbreaks in healthcare facilities, driven by environmental persistence and person-to-person/fomite transmission',
+    ],
+    resistance: [
+      'Around 90% of isolates are intrinsically fluconazole-resistant (CDC surveillance data)',
+      'Around 30% show reduced amphotericin B susceptibility (CDC surveillance data)',
+      'Echinocandin resistance remains uncommon (under 2% by CDC surveillance) but can emerge on therapy with prolonged exposure',
+      'A small but growing minority of isolates are resistant to all three major antifungal classes ("pan-resistant")',
+    ],
+    treatment: 'Echinocandins (e.g. caspofungin) are first-line pending susceptibility results in essentially all current guidance, given that most isolates remain echinocandin-susceptible despite widespread azole resistance (Grade A, CDC/IDSA). Amphotericin B is an alternative for resistant or refractory disease. For isolates with resistance spanning multiple classes, combination therapy and expert/infectious diseases consultation are warranted; newer agents (e.g. fosmanogepix, ibrexafungerp) are emerging options where available. Equally important as antifungal choice: contact precautions, single-room isolation, and environmental decontamination, given how readily this organism spreads in healthcare settings.',
+    references: [
+      "CDC Clinical Overview of Candida auris (cdc.gov/candida-auris) (Grade A)",
+      "ECMM/ISHAM/ASM Global Guideline for the Diagnosis and Management of Candidiasis, Lancet Infect Dis 2024 (Grade A)",
+      "Rhodes J & Fisher MC, Global epidemiology of emerging Candida auris, Curr Opin Microbiol 2019 (Grade B)",
+    ],
+  },
+  pjirovecii: {
+    group: 'Fungi',
+    characteristics: [
+      'An atypical fungus — cannot be cultured on standard mycological media; diagnosis relies on direct microscopy (silver or immunofluorescent stain) or PCR of respiratory specimens',
+      'Cell membrane lacks the ergosterol-dependent structure targeted by most antifungals, and cell wall composition differs from typical fungi — the basis for its unusual antimicrobial susceptibility pattern',
+      'Life cycle includes a cyst form (visualised on silver stain as cup-shaped/crescentic structures) and a trophozoite form',
+      'Host-species-specific — human infection is caused specifically by <i>P. jirovecii</i>, distinct from <i>P. carinii</i> which infects rodents',
+    ],
+    manifestations: [
+      'Subacute pneumonia in advanced HIV (typically CD4 <200) — progressive dry cough and dyspnoea over weeks, with hypoxia often disproportionate to chest X-ray findings',
+      'Pneumonia in non-HIV immunosuppression — prolonged high-dose corticosteroids without prophylaxis, haematological malignancy, solid organ/haematopoietic stem cell transplant, and biologic immunosuppressive therapy are all recognised risk factors, sometimes with a more fulminant course than in HIV',
+      'Bilateral perihilar or diffuse ground-glass infiltrates are the typical (though non-specific) radiological pattern',
+    ],
+    resistance: [
+      'Intrinsically resistant to azoles and amphotericin B, reflecting its atypical membrane biology rather than acquired resistance',
+      'No validated in vitro susceptibility testing exists given the organism cannot be cultured, so treatment choice is guided entirely by clinical trial evidence rather than isolate-specific testing',
+    ],
+    treatment: 'High-dose trimethoprim-sulfamethoxazole is first-line across all severities (Grade A). IV pentamidine or clindamycin-primaquine (after excluding G6PD deficiency) are standard alternatives for sulfa allergy/intolerance or treatment failure, with atovaquone reserved for milder disease given lower potency. Adjunctive corticosteroids, started early (ideally within 72 hours of antimicrobial therapy), reduce mortality in moderate-severe disease (room-air PaO2 <70mmHg or A-a gradient ≥35mmHg) — well established in HIV-associated disease (Grade A) and generally extrapolated to non-HIV immunosuppression despite less robust trial evidence (Grade B/C). Prophylaxis (typically low-dose co-trimoxazole) is indicated for at-risk groups, including HIV with CD4 <200 and patients on prolonged high-dose corticosteroids.',
+    references: [
+      "Kaplan JE et al., Guidelines for Prevention and Treatment of Opportunistic Infections in Adults and Adolescents with HIV (NIH/CDC/HIVMA), continually updated (Grade A)",
+      "Limper AH et al., An Official ATS Statement: Treatment of Fungal Infections in Adult Pulmonary and Critical Care Patients, Am J Respir Crit Care Med 2011 (Grade A)",
+      "Thomas CF & Limper AH, Pneumocystis Pneumonia, NEJM 2004 (Grade B)",
+    ],
+  },
+  afumigatus: {
+    group: 'Fungi',
+    characteristics: [
+      'Ubiquitous environmental mould — thermotolerant, airborne conidia are inhaled routinely; disease depends heavily on host immune status rather than exposure alone',
+      'Septate hyphae with characteristic acute-angle (~45°), dichotomous branching on histopathology/KOH prep',
+      'Grows readily on Sabouraud agar as blue-green, powdery colonies',
+      'Produces a spectrum of disease from tissue-invasive infection to pure allergic hypersensitivity, depending entirely on host immune competence rather than organism virulence differences',
+    ],
+    manifestations: [
+      'Invasive pulmonary aspergillosis — angioinvasive infection in neutropenic patients, haematopoietic stem cell/solid organ transplant recipients, and other profoundly immunosuppressed hosts; halo sign early, air crescent sign as neutrophils recover',
+      'Allergic bronchopulmonary aspergillosis (ABPA) — an allergic hypersensitivity response to airway colonisation in asthma/cystic fibrosis, with eosinophilia, markedly elevated total and specific IgE, and central bronchiectasis',
+      'Aspergilloma (fungus ball) — saprophytic colonisation of a pre-existing cavity (classically post-tuberculous), usually in an immunocompetent host, presenting with haemoptysis or as an incidental finding',
+      'Chronic pulmonary aspergillosis — a more indolent, cavitary/fibrotic pattern in structural lung disease without profound immunosuppression',
+    ],
+    resistance: [
+      'Voriconazole resistance (commonly via cyp51A mutations, increasingly linked to agricultural azole fungicide use) is an emerging concern in some regions and warrants susceptibility testing when response is inadequate',
+      'No mould in this genus has useful susceptibility to fluconazole — a spectrum gap rather than acquired resistance',
+    ],
+    treatment: 'Voriconazole is first-line for invasive pulmonary aspergillosis (Grade A, IDSA 2016), based on a clear survival advantage over conventional amphotericin B; isavuconazole is a non-inferior, better-tolerated alternative (Grade A, SECURE trial). Liposomal amphotericin B is reserved for triazole intolerance/contraindication. ABPA is treated primarily with corticosteroids to control the allergic response, with itraconazole sometimes added as a steroid-sparing adjunct rather than to eradicate the organism (Grade B). Aspergilloma is often managed conservatively unless significant haemoptysis occurs, in which case surgical resection — not antifungal therapy — is definitive, given poor antifungal penetration into a cavity.',
+    references: [
+      "Patterson TF et al., Practice Guidelines for the Diagnosis and Management of Aspergillosis, IDSA 2016 (Clin Infect Dis) (Grade A)",
+      "Maertens JA et al., Isavuconazole versus Voriconazole for Primary Treatment of Invasive Mould Disease (SECURE trial), Lancet 2016 (Grade A)",
+      "Denning DW et al., Chronic Pulmonary Aspergillosis: Rationale and Clinical Guidelines for Diagnosis and Management, ERS/ESCMID 2016 (Grade B)",
+    ],
+  },
+  mucorales: {
+    group: 'Fungi',
+    characteristics: [
+      'An order of environmental moulds (genera include <i>Rhizopus</i>, <i>Mucor</i>, <i>Lichtheimia</i>) rather than a single species',
+      'Broad, ribbon-like, pauci-septate (near-aseptate) hyphae with wide-angle (~90°), haphazard branching on histopathology — distinct from the narrower, septate, acute-angle-branching hyphae of <i>Aspergillus</i>',
+      'Rapidly angioinvasive, causing vascular thrombosis and tissue infarction/necrosis — the basis for the characteristic black eschar seen clinically',
+      'Intrinsically resistant to voriconazole and most triazoles used against <i>Aspergillus</i>, a clinically important distinguishing feature from other invasive moulds',
+    ],
+    manifestations: [
+      'Rhino-orbito-cerebral mucormycosis — classically in uncontrolled diabetes/diabetic ketoacidosis, presenting with facial pain, black necrotic eschar (palate/nasal turbinate), and rapidly progressive orbital/intracranial extension',
+      'Pulmonary mucormycosis — typically in neutropenic haematology patients, sometimes as a breakthrough infection during triazole (e.g. voriconazole) prophylaxis; reverse halo sign on CT',
+      'Cutaneous/soft-tissue mucormycosis — typically following traumatic inoculation (e.g. contaminated wounds, natural disasters, burns) rather than inhalation',
+      'Gastrointestinal mucormycosis — rarer, typically in severely malnourished or premature infants',
+    ],
+    resistance: [
+      'Intrinsically resistant to voriconazole, itraconazole, and most other triazoles active against <i>Aspergillus</i>',
+      'Reduced susceptibility to amphotericin B relative to other invasive moulds, necessitating higher doses than typically used for other fungal infections',
+      'Isavuconazole and posaconazole retain useful activity and serve as alternative/step-down options',
+    ],
+    treatment: 'High-dose liposomal amphotericin B is first-line and should be started empirically on strong clinical suspicion given how rapidly this disease progresses, without waiting for tissue confirmation (Grade A, ECMM/MSG Global Guideline 2019). Isavuconazole or posaconazole are approved alternatives or step-down options. Urgent, often repeated, surgical debridement of necrotic tissue is an essential adjunct — antifungal therapy alone frequently fails given poor drug penetration into angioinvasive, poorly perfused necrotic tissue. Reversing the underlying risk factor (e.g. correcting diabetic ketoacidosis, minimising immunosuppression where possible) is an important parallel priority. Voriconazole and other Mucorales-inactive triazoles used as prophylaxis have themselves been implicated as a risk factor for breakthrough mucormycosis.',
+    references: [
+      "Cornely OA et al., Global Guideline for the Diagnosis and Management of Mucormycosis (ECMM/MSG), Lancet Infect Dis 2019 (Grade A)",
+      "Skiada A et al., Diagnosis and Treatment of Mucormycosis in Patients with Haematological Malignancies, Blood 2018 (Grade B)",
+      "John TM et al., When Uncontrolled Diabetes Mellitus and Severe COVID-19 Converge: The Perfect Storm for Mucormycosis, J Fungi 2021 (Grade B)",
+    ],
+  },
 };
 
 // ===================================================================
@@ -5356,7 +5766,7 @@ const DRUG_CLASSES = [
   { label: 'Nitrofurans & Nitroimidazoles', keys: ['nitrofurantoin', 'metronidazole'] },
   { label: 'Other Antibacterials', keys: ['aztreonam', 'chloramphenicol', 'colistin', 'linezolid_daptomycin', 'fidaxomicin'] },
   { label: '<i>H. pylori</i> Eradication Therapy', keys: ['clarithromycin_triple', 'bismuth_quad'] },
-  { label: 'Antifungals', keys: ['fluconazole', 'caspofungin', 'amphotericin_b', 'ambisome_flucytosine'] },
+  { label: 'Antifungals', keys: ['fluconazole', 'caspofungin', 'amphotericin_b', 'ambisome_flucytosine', 'voriconazole', 'isavuconazole', 'iv_pentamidine', 'clinda_primaquine'] },
   { label: 'Antivirals', keys: ['oseltamivir', 'baloxavir', 'amantadine'] },
   { label: 'Antimalarials', keys: ['artesunate', 'act', 'chloroquine'] },
   { label: 'Anthelmintics', keys: ['ivermectin', 'albendazole', 'praziquantel'] },
@@ -5682,7 +6092,7 @@ const DRUG_INFO = {
     class: 'Folate pathway inhibitor combination',
     route: 'Oral/IV',
     moa: 'Sequential blockade of bacterial folate synthesis — sulfamethoxazole inhibits dihydropteroate synthase and trimethoprim inhibits dihydrofolate reductase, two consecutive steps in the same pathway; the combined blockade is synergistic and bactericidal, unlike either drug alone.',
-    coverage: ['Uncomplicated UTI (if local resistance permits)', '<i>Listeria monocytogenes</i> — key alternative for penicillin allergy'],
+    coverage: ['Uncomplicated UTI (if local resistance permits)', '<i>Listeria monocytogenes</i> — key alternative for penicillin allergy', '<i>Pneumocystis jirovecii</i> pneumonia (at higher dose) — first-line across all severities, exploiting the same folate-pathway enzymes in this atypical fungus'],
     sideEffects: [
       'Hyperkalaemia, particularly in renal impairment/elderly',
       'Hypersensitivity reactions, including rare severe cutaneous reactions (SJS/TEN)',
@@ -5927,9 +6337,74 @@ const DRUG_INFO = {
     sideEffects: ['Abdominal pain, nausea', 'Dizziness/drowsiness — advise against driving on the day of treatment', "Can provoke a marked inflammatory reaction where it kills flukes/tapeworms in situ (e.g. neurocysticercosis) — not relevant to nematode infections it doesn't treat"],
     notes: 'A useful illustration that anthelmintic classes are not interchangeable across helminth taxa — the right drug depends on which class of helminth is actually present.',
   },
+  voriconazole: {
+    name: 'Voriconazole',
+    class: 'Triazole antifungal (mould-active, second-generation)',
+    route: 'Oral/IV',
+    moa: 'Inhibits fungal cytochrome P450 14-alpha-demethylase (Erg11/Cyp51A), blocking ergosterol synthesis, as for other azoles — but with substantially improved activity against <i>Aspergillus</i> and other moulds compared to first-generation triazoles like fluconazole.',
+    coverage: [
+      '<i>Aspergillus</i> species — first-line for invasive aspergillosis',
+      'Many other moulds, though notably NOT Mucorales (intrinsically resistant)',
+      'Some <i>Candida</i> species, though generally not preferred over echinocandins/fluconazole for straightforward candidaemia',
+    ],
+    sideEffects: [
+      'Visual disturbances (photopsia) — common, usually transient, occurring early in therapy',
+      'Hepatotoxicity',
+      'Photosensitivity and, with prolonged use, an association with skin malignancy and periostitis',
+      'Numerous CYP450 drug-drug interactions; requires therapeutic drug monitoring given unpredictable, non-linear pharmacokinetics',
+    ],
+    notes: 'Demonstrated a clear survival advantage over conventional amphotericin B for invasive aspergillosis in a landmark trial, underpinning its first-line status; has no useful activity against Mucorales, and prophylactic use has itself been implicated as a risk factor for breakthrough mucormycosis.',
+  },
+  isavuconazole: {
+    name: 'Isavuconazole',
+    class: 'Triazole antifungal (mould-active, second-generation)',
+    route: 'Oral/IV',
+    moa: 'Same ergosterol-synthesis-inhibiting mechanism as other triazoles, via cytochrome P450 14-alpha-demethylase inhibition.',
+    coverage: [
+      '<i>Aspergillus</i> species — non-inferior alternative to voriconazole for invasive aspergillosis',
+      'Mucorales — one of only two triazoles (with posaconazole) with useful activity against this otherwise triazole-resistant group',
+    ],
+    sideEffects: ['Generally better tolerated than voriconazole — fewer visual disturbances, less hepatotoxicity', 'Can shorten the QT interval (opposite effect to most azoles, which prolong it)', 'Fewer drug-drug interactions than voriconazole, though still CYP450-metabolised'],
+    notes: 'Non-inferior to voriconazole for invasive aspergillosis with a more favourable tolerability profile, and one of the few triazoles with genuine Mucorales activity, making it useful both for invasive aspergillosis and as a step-down/alternative for mucormycosis.',
+  },
+  iv_pentamidine: {
+    name: 'IV Pentamidine',
+    class: 'Aromatic diamidine (antiprotozoal/antifungal)',
+    route: 'IV',
+    moa: 'Mechanism against <i>Pneumocystis</i> is incompletely understood but likely involves interference with polyamine synthesis and nucleic acid/protein synthesis; distinct from the folate-pathway mechanism of trimethoprim-sulfamethoxazole.',
+    coverage: ['<i>Pneumocystis jirovecii</i> pneumonia — standard parenteral alternative when trimethoprim-sulfamethoxazole cannot be used'],
+    sideEffects: [
+      'Nephrotoxicity',
+      'Hypoglycaemia (sometimes followed by hyperglycaemia/diabetes) from pancreatic beta-cell toxicity',
+      'Pancreatitis',
+      'QT prolongation and other cardiac arrhythmias',
+      'Hypotension with rapid infusion',
+    ],
+    notes: 'Meaningfully more toxic than trimethoprim-sulfamethoxazole, so reserved for sulfa allergy/intolerance or documented treatment failure rather than used first-line.',
+  },
+  clinda_primaquine: {
+    name: 'Clindamycin + Primaquine',
+    class: 'Lincosamide + 8-aminoquinoline combination',
+    route: 'Oral/IV (clindamycin) + Oral (primaquine)',
+    moa: "Clindamycin inhibits protein synthesis via the 50S ribosomal subunit; primaquine's antimicrobial mechanism against <i>Pneumocystis</i> is not fully defined but is thought to involve mitochondrial disruption, similar to its antimalarial activity.",
+    coverage: ['<i>Pneumocystis jirovecii</i> pneumonia of moderate-severe disease — an alternative for patients intolerant of trimethoprim-sulfamethoxazole'],
+    sideEffects: [
+      'Primaquine can cause severe haemolysis in G6PD deficiency — screening is recommended before starting wherever feasible',
+      'Methaemoglobinaemia (primaquine)',
+      'GI upset, <i>C. difficile</i> risk (clindamycin)',
+    ],
+    notes: 'A reasonable alternative for moderate-severe disease when first-line therapy cannot be used, but G6PD status should be checked first given the haemolysis risk with primaquine.',
+  },
 };
 
 const DRUG_MOVE_MAP = {
+  'Liposomal Amphotericin B': 'amphotericin_b',
+  'Liposomal Amphotericin B (High-Dose)': 'amphotericin_b',
+  'Voriconazole': 'voriconazole',
+  'Isavuconazole': 'isavuconazole',
+  'Trimethoprim-Sulfamethoxazole (High-Dose)': 'cotrimoxazole',
+  'IV Pentamidine': 'iv_pentamidine',
+  'Clindamycin + Primaquine': 'clinda_primaquine',
   'Penicillin G': 'penicillin_g',
   'Cloxacillin': 'cloxacillin',
   'Vancomycin': 'vancomycin_iv',
@@ -6473,6 +6948,23 @@ const DRUG_MOVE_MAP = {
           {x:5,y:20,rot:-25}, {x:12,y:17,rot:15}, {x:18,y:20,rot:50},
         ];
         return `<div class="curve-art">${segs.map(s => `<i style="left:${s.x}px; top:${s.y}px; transform:rotate(${s.rot}deg);"></i>`).join('')}</div>`;
+      }
+      case 'hyphae-septate': { // septate hyphae, acute-angle dichotomous branching (Aspergillus, Fusarium)
+        const segs = [
+          {x:4,y:20,w:10,rot:-40}, {x:11,y:13,w:9,rot:35}, {x:9,y:9,w:8,rot:-40},
+          {x:14,y:5,w:8,rot:35}, {x:16,y:16,w:7,rot:35},
+        ];
+        return `<div class="hyphaeA-art">${segs.map(s => `<i style="left:${s.x}px; top:${s.y}px; width:${s.w}px; transform:rotate(${s.rot}deg);"></i>`).join('')}</div>`;
+      }
+      case 'hyphae-ribbon': { // broad, ribbon-like pauci-septate hyphae, wide-angle branching (Mucorales)
+        const segs = [
+          {x:2,y:18,w:14,rot:-20}, {x:12,y:8,w:13,rot:60}, {x:10,y:16,w:12,rot:15},
+        ];
+        return `<div class="hyphaeM-art">${segs.map(s => `<i style="left:${s.x}px; top:${s.y}px; width:${s.w}px; transform:rotate(${s.rot}deg);"></i>`).join('')}</div>`;
+      }
+      case 'pcp-cyst': { // cup-shaped/crescentic cysts on GMS silver stain (Pneumocystis jirovecii)
+        const cells = [[3,4,10,10],[14,3,9,9],[4,15,10,10],[15,14,9,9]];
+        return `<div class="pcp-art">${cells.map(([x,y,w,h]) => `<i style="left:${x}px; top:${y}px; width:${w}px; height:${h}px;"></i>`).join('')}</div>`;
       }
       case 'test':
       default:
