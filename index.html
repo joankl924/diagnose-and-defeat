@@ -1809,6 +1809,8 @@
         `<b>Ceftriaxone monotherapy — not the older ceftriaxone-plus-azithromycin combination — is now the standard first-line regimen.</b> A real guideline shift trainees should know, driven by rising macrolide resistance and evidence that dual therapy didn't slow resistance emergence. <span class="cite">(Grade A — CDC/MOH STI Guidelines)</span>`,
         `<b>Always treat presumptively for (or test and treat) Chlamydia trachomatis co-infection</b> when gonorrhoea is diagnosed, given how frequently they occur together. <span class="cite">(Grade A)</span>`,
         `<b>Partner notification and treatment is essential</b> to prevent reinfection and interrupt onward transmission — a case isn't fully managed until contacts are addressed. <span class="cite">(Grade A — public health principle)</span>`,
+        `<b>Neonatal treatment differs from the adult single-dose regimen shown above, and guidelines diverge on which cephalosporin to use.</b> CDC recommends ceftriaxone as first-line even in neonates (25-50 mg/kg IV/IM, single dose for uncomplicated ophthalmia neonatorum; extended to a 7-14 day course if disseminated or CNS disease is present), but reserves cefotaxime for infants who cannot receive ceftriaxone. UK national guidance instead recommends cefotaxime first-line for neonates (100 mg/kg single IV dose for ophthalmia). <span class="cite">(Grade A — CDC STI Treatment Guidelines 2021; UK national guideline for gonorrhoea)</span>`,
+        `<b>Two distinct neonatal cautions with ceftriaxone are often conflated.</b> Ceftriaxone is highly protein-bound and can displace bilirubin from albumin — a theoretical concern for kernicterus, particularly in hyperbilirubinaemic or premature neonates, and the main reason UK guidance favours cefotaxime (far less protein-bound) as first-line. Separately, and with actual reported fatalities rather than just a theoretical risk, ceftriaxone must never be co-administered with IV calcium-containing solutions in neonates — insoluble calcium-ceftriaxone precipitates in the vasculature and lungs have caused deaths. CDC's own guidance is explicit on this: switch to cefotaxime whenever a neonate needs concurrent IV calcium (e.g. on parenteral nutrition), regardless of which guideline is otherwise being followed. <span class="cite">(Grade A — manufacturer/FDA safety warning; CDC STI Treatment Guidelines 2021)</span>`,
       ],
     },
     {
@@ -2230,9 +2232,9 @@
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient with poorly controlled HIV and a low CD4 count presents with 2 weeks of subacute headache, low-grade fever, and visual blurring suggesting raised intracranial pressure. Neck stiffness is subtle or absent.",
           clues: [
+            { title: "CSF Interpretation", icon: "test", text: "Opening pressure markedly elevated. White cell count is only mildly elevated or even near-normal despite a heavy organism burden — a blunted inflammatory response characteristic of advanced HIV that should not be mistaken for reassurance. Glucose is low-normal; protein mildly elevated." },
             { title: "India Ink Preparation — CSF", icon: "yeast-capsule", text: "Encapsulated budding yeast with a wide, clear halo against the ink background." },
             { title: "Cryptococcal Antigen (CrAg) — Serum/CSF", icon: "test", text: "Positive — a highly sensitive and specific rapid test, now often used ahead of or instead of India ink." },
-            { title: "Culture — Sabouraud Agar", icon: "gold", text: "Smooth, mucoid, cream-to-tan colonies after several days." },
           ],
         },
         {
@@ -2241,9 +2243,9 @@
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A kidney transplant recipient on chronic immunosuppression presents with a similar subacute headache and low-grade fever, illustrating that this isn't solely an HIV-associated pathogen.",
           clues: [
+            { title: "CSF Interpretation", icon: "test", text: "Opening pressure elevated. Unlike the often minimally inflammatory picture seen in advanced HIV, transplant recipients typically mount a more robust lymphocytic pleocytosis, reflecting comparatively preserved cell-mediated immunity. Glucose is low-normal; protein mildly elevated." },
             { title: "India Ink Preparation — CSF", icon: "yeast-capsule", text: "Encapsulated budding yeast with a wide, clear halo against the ink background." },
             { title: "Cryptococcal Antigen (CrAg) — Serum/CSF", icon: "test", text: "Positive." },
-            { title: "Culture — Sabouraud Agar", icon: "gold", text: "Smooth, mucoid, cream-to-tan colonies." },
           ],
         },
         {
@@ -2263,8 +2265,8 @@
           patientHP: 50, // starting patient life for this vignette's severity
           text: "A patient with confirmed cryptococcal meningitis develops worsening headache, vomiting, and reduced consciousness despite antifungal therapy. Opening pressure on lumbar puncture is markedly elevated.",
           clues: [
+            { title: "CSF Interpretation", icon: "test", text: "Opening pressure markedly elevated — a major independent driver of mortality in this disease, especially once sustained above roughly 25 cmH2O — despite ongoing antifungal therapy. White cell count and protein are non-specifically abnormal; the opening pressure itself is the actionable finding driving management here." },
             { title: "India Ink Preparation — CSF", icon: "yeast-capsule", text: "Encapsulated budding yeast with a wide, clear halo." },
-            { title: "CSF Opening Pressure", icon: "test", text: "Markedly elevated — raised intracranial pressure is common and is a major independent driver of mortality in this disease." },
             { title: "Cryptococcal Antigen (CrAg) — CSF", icon: "test", text: "Positive, often at a high titre." },
           ],
         },
@@ -4115,9 +4117,9 @@
         { name: "Neisseria gonorrhoeae", correct: false },
       ],
       moves: [
-        { name: "Metronidazole (7-Day Course)", desc: "Preferred regimen in women", isDrug: true,
-          dmg: (r) => 46,
-          log: (r) => `Highly effective — a 7-day course of oral metronidazole is now preferred over a single 2g dose in women, given meaningfully better cure rates in trials. <span class="cite">(Grade A — CDC 2021)</span>` },
+        { name: "Metronidazole (7-Day Course)", desc: "Preferred regimen in women — curative", isDrug: true,
+          dmg: (r) => 100,
+          log: (r) => `Curative — a 7-day course of oral metronidazole is now preferred over a single 2g dose in women, given meaningfully better cure rates in trials; this regimen clears the infection outright. <span class="cite">(Grade A — CDC 2021)</span>` },
         { name: "Metronidazole (Single 2g Dose)", desc: "Older regimen — still an option", isDrug: true,
           dmg: (r) => 30,
           log: (r) => `Effective, and still an option (particularly in men or where adherence to a multi-day course is a concern), but current guidance favours the 7-day course in women given better cure rates. <span class="cite">(Grade A/B — CDC 2021)</span>` },
