@@ -682,7 +682,7 @@
           dmg: (r) => r ? 40 : 22,
           log: (r) => r ? `Vancomycin lands a solid hit — appropriate first-line for confirmed MRSA. <span class="cite">(Grade A)</span>`
                         : `Vancomycin works, but it's a weaker hit than cloxacillin would be for MSSA. <span class="cite">(Grade B)</span>` },
-        { name: "Order MRSA Screen", desc: "Cefoxitin/oxacillin screen — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order MRSA Screen", desc: "Cefoxitin/oxacillin screen — 10 patient life", isDrug: false, patientCost: 10,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'MRSA' : 'MSSA');
@@ -735,7 +735,7 @@
           caseNum: 7,
           syndrome: 'Biliary Sepsis — Post-Travel',
           patientHP: 55, // starting patient life for this vignette's severity
-          text: "A 64-year-old woman presents with fever, right upper quadrant pain, and jaundice 10 days after returning from a region with high rates of extended-spectrum beta-lactamase carriage. Ultrasound shows cholelithiasis with a dilated common bile duct. Blood cultures grow gram-negative rods.",
+          text: "A 64-year-old woman presents with fever, right upper quadrant pain, and jaundice 10 days after returning from a region with high rates of extended-spectrum beta-lactamase carriage. Ultrasound shows cholelithiasis with a dilated common bile duct.",
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "rods", text: "Gram-negative rods, no particular arrangement." },
             { title: "Culture — MacConkey Agar, 24h", icon: "gold", text: "Pink, lactose-fermenting colonies." },
@@ -772,7 +772,7 @@
           dmg: (r) => r ? 45 : 15,
           log: (r) => r ? `Effective — carbapenems remain reliably active against ESBL producers. <span class="cite">(Grade A)</span>`
                         : `It works, but this is antimicrobial overkill for a non-ESBL organism — poor stewardship. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order ESBL Testing", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order ESBL Testing", desc: "Cascade susceptibility panel — 10 patient life", isDrug: false, patientCost: 10,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'ESBL+' : 'ESBL-');
