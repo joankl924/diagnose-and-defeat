@@ -346,6 +346,7 @@
   .end-banner { font-family:'Press Start 2P',monospace; font-size:16px; line-height:1.7; text-align:center; margin-bottom:6px; }
   .end-banner.win { color: var(--hp-green); }
   .end-banner.lose { color: var(--hp-red); }
+  .end-banner.handover { color: var(--hp-amber); }
   .pearl-list { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
   .pearl { border-left:3px solid var(--agar-gold); background: var(--bg-panel); padding:12px 14px; font-size:14px; line-height:1.6; color:var(--text-dim); }
   .pearl b { color: var(--text-main); }
@@ -1109,7 +1110,7 @@
           dmg: (r) => r ? 45 : 20,
           log: (r) => r ? `Highly effective against KPC-producing carbapenem-resistant Enterobacterales — a targeted option once CRE is confirmed. <span class="cite">(Grade B — emerging evidence, ID input advised)</span>`
                         : `Works, but this is significant overkill for a susceptible isolate — reserve novel agents for confirmed CRE. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Carbapenemase/CRE Screen", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Carbapenemase/CRE Screen", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'CRE' : 'Carbapenem-susceptible');
@@ -1200,7 +1201,7 @@
           dmg: (r) => r ? 35 : 15,
           log: (r) => r ? `Effective — one of the few remaining options once an isolate is resistant to anti-pseudomonal penicillins and carbapenems, though it carries significant nephrotoxicity and needs careful dosing and monitoring, ideally with infectious diseases input. <span class="cite">(Grade B — limited alternatives)</span>`
                         : `Works, but this is an unnecessarily toxic choice for a susceptible isolate — reach for piperacillin-tazobactam or meropenem first. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Susceptibility Testing", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'MDR' : 'Susceptible');
@@ -1292,7 +1293,7 @@
           dmg: (r) => r ? 35 : 15,
           log: (r) => r ? `Effective — often one of the few remaining options for confirmed CRAB, though it carries significant nephrotoxicity and needs careful dosing and monitoring. <span class="cite">(Grade B — limited alternatives)</span>`
                         : `Works, but this is an unnecessarily toxic choice for a susceptible isolate. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Susceptibility Testing", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'CRAB' : 'Carbapenem-susceptible');
@@ -1387,7 +1388,7 @@
           dmg: (r) => r ? 40 : 12,
           log: (r) => r ? `Effective — one of the few reliable options for confirmed VRE. <span class="cite">(Grade A — for confirmed VRE)</span>`
                         : `Works, but this is unnecessary escalation for a fully susceptible isolate. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'VRE' : 'Vancomycin-susceptible');
@@ -1455,7 +1456,7 @@
           dmg: (r) => r ? 45 : 15,
           log: (r) => r ? `Effective — linezolid or high-dose daptomycin (10–12 mg/kg/day, higher than standard dosing because VRE isolates tend to have higher MICs) are the mainstay for VRE <i>E. faecium</i> bacteraemia. <span class="cite">(Grade B — cohort data linking higher daptomycin dose to lower mortality)</span>`
                         : `Works, but this is unnecessary escalation — vancomycin remains preferred first-line once the isolate is confirmed vancomycin-susceptible. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'VRE' : 'Vancomycin-susceptible');
@@ -1624,7 +1625,7 @@
         { name: "Ceftriaxone", desc: "Reserved for severe disease (e.g. epiglottitis, meningitis)", isDrug: true,
           dmg: (r) => 45,
           log: (r) => `Highly effective regardless of beta-lactamase status, and the right choice for severe or airway-threatening disease such as epiglottitis. <span class="cite">(Grade A)</span>` },
-        { name: "Order Beta-Lactamase Test", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Beta-Lactamase Test", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'BLPAR' : 'Beta-lactamase negative');
@@ -1722,7 +1723,7 @@
       pearls: [
         `<b><i>Proteus mirabilis</i> produces urease, which hydrolyses urea to ammonia</b>, alkalinising the urine and driving the formation of struvite (magnesium ammonium phosphate) staghorn calculi — antibiotics alone won't cure the infection while the stone remains. <span class="cite">(Grade A)</span>`,
         `<b>Swarming motility — a thin film with concentric rings on agar — is a classic and easily recognised lab clue</b> unique among the common Enterobacterales. <span class="cite">(Grade B)</span>`,
-        `<b>Unlike <i>E. coli</i>, nitrofurantoin is a poor choice for <i>Proteus</i> UTIs</b> — a good example of why "first-line for UTI" isn't organism-independent. <span class="cite">(Grade B)</span>`,
+        `<b>Unlike <i>E. coli</i>, nitrofurantoin is a poor choice for <i>Proteus</i> UTIs</b> — a good example of why "first-line for UTI" is organism-dependent. <span class="cite">(Grade B)</span>`,
       ],
     },
     {
@@ -1946,9 +1947,9 @@
         { name: "Trichomonas vaginalis", correct: false },
       ],
       moves: [
-        { name: "Ceftriaxone (single dose)", desc: "Now recommended as monotherapy", isDrug: true,
-          dmg: (r) => 50,
-          log: (r) => `Highly effective, and now the recommended monotherapy — the older ceftriaxone-plus-azithromycin combination was dropped because it didn't slow resistance emergence, and single-agent high-dose ceftriaxone is highly effective alone. <span class="cite">(Grade A — CDC/MOH STI Guidelines)</span>` },
+        { name: "Ceftriaxone (single dose)", desc: "Now recommended as monotherapy — curative", isDrug: true,
+          dmg: (r) => 100,
+          log: (r) => `Curative — now the recommended single-agent monotherapy; the older ceftriaxone-plus-azithromycin combination was dropped because it didn't slow resistance emergence, and a single dose of high-dose ceftriaxone clears the infection outright. <span class="cite">(Grade A — CDC/MOH STI Guidelines)</span>` },
         { name: "Azithromycin (as sole agent)", desc: "Macrolide", isDrug: true,
           dmg: (r) => 10,
           log: (r) => `Poor choice alone — macrolide resistance in <i>N. gonorrhoeae</i> is now widespread, which is exactly why it was dropped from routine combination therapy. <span class="cite">(Grade A)</span>` },
@@ -2037,7 +2038,7 @@
         { name: "Azithromycin", desc: "Oral option", isDrug: true,
           dmg: (r) => 32,
           log: (r) => `Effective — a reasonable oral option for uncomplicated enteric fever, and useful when fluoroquinolone resistance is a concern. <span class="cite">(Grade A)</span>` },
-        { name: "Order Fluoroquinolone Susceptibility", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Fluoroquinolone Susceptibility", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'MDR' : 'Fluoroquinolone-susceptible');
@@ -2799,7 +2800,7 @@
           log: (r, ctx) => ctx.vignette.supportiveCareOk
             ? `Correct — this is a previously well, low-risk patient with uncomplicated influenza outside any recognised indication for antiviral therapy. Supportive care alone (antipyretics, fluids, rest) is guideline-concordant, and the infection resolves on its own as expected. <span class="cite">(Grade B — MOH/CDC)</span>`
             : `Not enough on its own — this patient has a specific risk factor (pregnancy, hospitalisation/severe disease, or immunocompromise) that warrants antiviral therapy regardless of how well supportive measures are otherwise managed. Withholding an indicated antiviral here leaves the underlying infection unaddressed. <span class="cite">(Grade A)</span>` },
-        { name: "Order Antiviral Resistance Testing", desc: "Genotypic/phenotypic resistance panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Antiviral Resistance Testing", desc: "Genotypic/phenotypic resistance panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'Oseltamivir-resistant (H275Y)' : 'Oseltamivir-susceptible');
@@ -3680,7 +3681,7 @@
         { name: "Loperamide (Antimotility Agent)", desc: "Contraindicated in invasive/bloody diarrhoea — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r) => `Wrong choice — antimotility agents are contraindicated in bloody/invasive diarrhoea such as shigellosis; they can worsen outcomes by prolonging organism/toxin contact with the gut mucosa. <span class="cite">(Grade A)</span>` },
-        { name: "Order Stool Susceptibility Testing", desc: "Cascade susceptibility panel — 25 patient life", isDrug: false, patientCost: 25,
+        { name: "Order Stool Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'MDR' : 'susceptible');
@@ -3759,7 +3760,7 @@
         { name: "Penicillin G", desc: "Beta-lactam — no beta-lactamase protection", isDrug: true,
           dmg: (r) => 0,
           log: (r) => `No effect — <i>B. fragilis</i> produces an intrinsic chromosomal beta-lactamase (cepA) that hydrolyses penicillin; this is essentially universal in this species, unlike the variable clindamycin resistance you might test for. <span class="cite">(Grade A)</span>` },
-        { name: "Order Anaerobic Susceptibility Testing", desc: "Cascade susceptibility panel — 30 patient life", isDrug: false, patientCost: 30,
+        { name: "Order Anaerobic Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'Clindamycin-R' : 'Clindamycin-S');
@@ -4344,14 +4345,19 @@
           dmg: (r) => 0,
           log: (r) => `No reliable effect — around 90% of <i>C. auris</i> isolates are intrinsically fluconazole-resistant, so empirical azole therapy should never be relied upon here regardless of the individual isolate. <span class="cite">(Grade A — CDC surveillance data)</span>` },
         { name: "Caspofungin (echinocandin)", desc: "First-line pending susceptibility results", isDrug: true,
-          dmg: (r) => r ? 15 : 45,
-          log: (r) => r ? `Markedly reduced effect — this isolate belongs to the small minority (under 2% by CDC surveillance) with acquired echinocandin resistance, usually following prolonged echinocandin exposure. Combination therapy or a newer agent (e.g. fosmanogepix, ibrexafungerp, where available) should be considered, guided by susceptibility testing. <span class="cite">(Grade B)</span>`
+          dmg: (r) => r ? 0 : 45,
+          log: (r) => r ? `No reliable effect — this isolate belongs to the small minority (under 2% by CDC surveillance) with acquired echinocandin resistance, usually following prolonged echinocandin exposure, and the susceptibility panel confirms it as resistant. Persisting with echinocandin monotherapy will not clear this isolate — combination therapy and infectious diseases/CDC consultation are needed. <span class="cite">(Grade B)</span>`
                         : `Highly effective — echinocandins are first-line for <i>C. auris</i> candidaemia in essentially all current guidance, pending susceptibility confirmation. <span class="cite">(Grade A — CDC/IDSA)</span>` },
         { name: "Amphotericin B", desc: "Variable susceptibility — reserve for resistant/refractory disease", isDrug: true,
-          dmg: (r) => r ? 15 : 30,
-          log: (r) => r ? `Reduced effect — around 30% of <i>C. auris</i> isolates show reduced amphotericin B susceptibility per CDC surveillance; this isolate is one of them. <span class="cite">(Grade B)</span>`
+          dmg: (r) => r ? 0 : 30,
+          log: (r) => r ? `No reliable effect — around 30% of <i>C. auris</i> isolates show reduced amphotericin B susceptibility per CDC surveillance, and this isolate's panel confirms full resistance. Amphotericin B monotherapy will not clear this isolate — combination therapy and infectious diseases/CDC consultation are needed. <span class="cite">(Grade B)</span>`
                         : `Effective, though generally reserved rather than first-line given toxicity and the good efficacy of echinocandins in susceptible isolates. <span class="cite">(Grade B)</span>` },
-        { name: "Order Antifungal Susceptibility Testing", desc: "Essential given unpredictable resistance — 25 patient life", isDrug: false, patientCost: 25,
+        { name: "Combination Therapy + Urgent ID/CDC Consultation", desc: "Echinocandin + high-dose liposomal amphotericin B, with expert input", isDrug: true,
+          handoverIfResistant: true,
+          dmg: (r) => r ? 0 : 25,
+          log: (r) => r ? `No single-agent regimen reliably clears a truly pan-resistant isolate (resistant across all three major antifungal classes on the panel) — this remains rare but is well described. Combination antifungal therapy (typically an echinocandin plus high-dose liposomal amphotericin B) alongside urgent infectious diseases/CDC consultation — including discussion of newer or investigational agents such as fosmanogepix or ibrexafungerp where accessible — is the correct next step, even though it does not guarantee cure. <span class="cite">(Grade B — CDC/expert opinion; no controlled trial data exists for genuinely pan-resistant <i>C. auris</i>)</span>`
+                        : `Effective, but broader and more toxic than necessary once susceptibility testing confirms the isolate remains echinocandin- and/or amphotericin-susceptible — narrow to a single targeted agent where possible. <span class="cite">(Grade B — antifungal stewardship principle)</span>` },
+        { name: "Order Antifungal Susceptibility Testing", desc: "Essential given unpredictable resistance — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'Pan-resistant pattern' : 'Echinocandin-susceptible');
@@ -4366,6 +4372,7 @@
         `<b>It persists on skin and environmental surfaces for weeks and spreads readily in healthcare settings</b>, making contact precautions, single-room isolation, and environmental decontamination with an effective disinfectant central to management — independent of antifungal choice. <span class="cite">(Grade A — CDC/ECDC)</span>`,
         `<b>Resistance is unpredictable and can span multiple drug classes</b> — around 90% of isolates are fluconazole-resistant, around 30% show reduced amphotericin B susceptibility, and under 2% show echinocandin resistance (per CDC surveillance), though a small minority are resistant across multiple classes; susceptibility testing should guide therapy rather than a fixed empirical regimen. <span class="cite">(Grade A — CDC)</span>`,
         `<b>Echinocandins remain first-line pending susceptibility results</b> in essentially all current guidance, reflecting that most isolates remain echinocandin-susceptible even as azole and (less commonly) polyene resistance are widespread. <span class="cite">(Grade A — CDC/IDSA)</span>`,
+        `<b>A truly pan-resistant isolate (resistant across all three major classes) is uncommon but real, and has no reliable single-agent cure</b> — recognising this and escalating to combination therapy with urgent infectious diseases/CDC consultation is itself the correct management, even though it doesn't guarantee clearance. <span class="cite">(Grade B — CDC/expert opinion)</span>`,
       ],
     },
     {
@@ -5622,11 +5629,11 @@ const DEX_INFO = {
       'Usually ampicillin-resistant (altered, low-affinity PBP5) regardless of vancomycin susceptibility — unlike <i>E. faecalis</i>, which is typically ampicillin-susceptible when non-VRE',
       'The majority of hospital VRE isolates are <i>E. faecium</i> — acquired vanA/vanB gene clusters add vancomycin resistance on top of the baseline ampicillin resistance',
     ],
-    treatment: 'Vancomycin-susceptible: vancomycin (ampicillin is NOT a reliable option here, unlike for E. faecalis). VRE or ampicillin-resistant strains: linezolid or high-dose daptomycin (10–12 mg/kg/day) — higher doses are associated with lower mortality in VRE bacteraemia, likely reflecting the higher daptomycin MICs typically seen in this species (Grade B).',
+    treatment: 'Vancomycin-susceptible: vancomycin (ampicillin is NOT a reliable option here, unlike for <i>E. faecalis</i>). VRE or ampicillin-resistant strains: linezolid or high-dose daptomycin (10–12 mg/kg/day) — higher doses are associated with lower mortality in VRE bacteraemia, likely reflecting the higher daptomycin MICs typically seen in this species (Grade B).',
     references: [
       "Vancomycin-Resistant Enterococci, StatPearls [Internet], NCBI Bookshelf (Grade B — review, species-level susceptibility patterns)",
-      "CASP Vancomycin-Resistant Enterococcus faecium Treatment Guideline, UNC Division of Infectious Diseases, Jan 2023 — cohort data supporting high-dose (10–12 mg/kg) daptomycin (Grade B)",
-      "CDC Antibiotic Resistance & Patient Safety Portal: Vancomycin-Resistant Enterococcus faecium (Grade B — national surveillance data)",
+      "CASP Vancomycin-Resistant <i>Enterococcus faecium</i> Treatment Guideline, UNC Division of Infectious Diseases, Jan 2023 — cohort data supporting high-dose (10–12 mg/kg) daptomycin (Grade B)",
+      "CDC Antibiotic Resistance & Patient Safety Portal: Vancomycin-Resistant <i>Enterococcus faecium</i> (Grade B — national surveillance data)",
     ],
   },
   sagalactiae: {
@@ -6692,9 +6699,9 @@ const DEX_INFO = {
     ],
     treatment: 'Echinocandins (e.g. caspofungin) are first-line pending susceptibility results in essentially all current guidance, given that most isolates remain echinocandin-susceptible despite widespread azole resistance (Grade A, CDC/IDSA). Amphotericin B is an alternative for resistant or refractory disease. For isolates with resistance spanning multiple classes, combination therapy and expert/infectious diseases consultation are warranted; newer agents (e.g. fosmanogepix, ibrexafungerp) are emerging options where available. Equally important as antifungal choice: contact precautions, single-room isolation, and environmental decontamination, given how readily this organism spreads in healthcare settings.',
     references: [
-      "CDC Clinical Overview of Candida auris (cdc.gov/candida-auris) (Grade A)",
+      "CDC Clinical Overview of <i>Candida auris</i> (cdc.gov/candida-auris) (Grade A)",
       "ECMM/ISHAM/ASM Global Guideline for the Diagnosis and Management of Candidiasis, Lancet Infect Dis 2024 (Grade A)",
-      "Rhodes J & Fisher MC, Global epidemiology of emerging Candida auris, Curr Opin Microbiol 2019 (Grade B)",
+      "Rhodes J & Fisher MC, Global epidemiology of emerging <i>Candida auris</i>, Curr Opin Microbiol 2019 (Grade B)",
     ],
   },
   pjirovecii: {
@@ -6718,7 +6725,7 @@ const DEX_INFO = {
     references: [
       "Kaplan JE et al., Guidelines for Prevention and Treatment of Opportunistic Infections in Adults and Adolescents with HIV (NIH/CDC/HIVMA), continually updated (Grade A)",
       "Limper AH et al., An Official ATS Statement: Treatment of Fungal Infections in Adult Pulmonary and Critical Care Patients, Am J Respir Crit Care Med 2011 (Grade A)",
-      "Thomas CF & Limper AH, Pneumocystis Pneumonia, NEJM 2004 (Grade B)",
+      "Thomas CF & Limper AH, <i>Pneumocystis</i> Pneumonia, NEJM 2004 (Grade B)",
     ],
   },
   afumigatus: {
@@ -8853,6 +8860,17 @@ function renderMap() {
       run.ampcInduced = true;
       logText += ` <div class="suscept-note">⚠ This class of agent can select for stably derepressed AmpC — reach for it again and expect it to stop working.</div>`;
     }
+    if (move.handoverIfResistant && run.resistant) {
+      // For a genuinely pan-resistant isolate, no single agent (or repeated attempts at one)
+      // should be able to grind the pathogen down to zero — that would misrepresent true
+      // pan-resistance as just a slow fight. Recognising this and escalating is itself the
+      // correct clinical action, so the case ends here as a distinct third outcome rather
+      // than the usual win/lose — see endBattle('handover').
+      $('battle-log').innerHTML = logText;
+      updateBars();
+      setTimeout(() => { endBattle('handover'); }, 900);
+      return;
+    }
     run.bugHP -= dmg;
     if (typeof move.patientCost === 'number') {
       run.patientHP -= move.patientCost;
@@ -8878,15 +8896,26 @@ function renderMap() {
     }, 900);
   }
 
-  function endBattle(won) {
+  function endBattle(outcome) {
+    // `outcome` is true (win), false (patient deteriorated), or the string 'handover' — a
+    // third ending for the rare case where no single agent can be relied on to clear the
+    // pathogen and escalating (rather than grinding away at it) is itself the correct move.
     hide('screen-battle'); show('screen-end');
-    $('end-banner').className = 'end-banner ' + (won ? 'win' : 'lose');
-    $('end-banner').textContent = won ? 'PATHOGEN CLEARED' : 'PATIENT DETERIORATED';
+    const won = outcome === true;
+    const handover = outcome === 'handover';
+    $('end-banner').className = 'end-banner ' + (won ? 'win' : handover ? 'handover' : 'lose');
+    $('end-banner').textContent = won ? 'PATHOGEN CLEARED' : handover ? 'REFERRED TO INFECTIOUS DISEASES' : 'PATIENT DETERIORATED';
     if (won) {
       run.txCoinsAwarded = 50;
       game.coins += run.txCoinsAwarded;
       run.coinsLost = 0;
       game.dex[run.org.id].defeated = true;
+    } else if (handover) {
+      // Neither a clean cure nor a mismanaged case — no treatment coins (the infection wasn't
+      // actually cleared) but no coin penalty either (recognising this and escalating was the
+      // guideline-concordant response, not an error).
+      run.txCoinsAwarded = 0;
+      run.coinsLost = 0;
     } else {
       // patient deteriorated (patientHP hit zero) — a 500-coin penalty for the fatal outcome,
       // capped so the coin balance never goes negative
@@ -8896,11 +8925,13 @@ function renderMap() {
     }
     saveState(); renderSidebar();
     const total = run.dxCoinsAwarded + run.txCoinsAwarded - run.coinsLost;
-    const dxLabel = won ? `Diagnosis +${run.dxCoinsAwarded}` : `Diagnosis +${run.dxCoinsAwarded}${run.dxCoinsAwarded > 0 ? ' (already banked)' : ''}`;
-    const lossLabel = won ? '' : ` · -${run.coinsLost} coins (patient lost)`;
+    const dxLabel = won || handover ? `Diagnosis +${run.dxCoinsAwarded}` : `Diagnosis +${run.dxCoinsAwarded}${run.dxCoinsAwarded > 0 ? ' (already banked)' : ''}`;
+    const lossLabel = won || handover ? '' : ` · -${run.coinsLost} coins (patient lost)`;
     $('reward-line').textContent = `${dxLabel} · Treatment +${run.txCoinsAwarded}${lossLabel} · ${total} net coins this case`;
     $('end-subtitle').innerHTML = won
       ? `You identified ${italicOrgName(run.org.name)} and selected an effective, guideline-concordant treatment.`
+      : handover
+      ? `You identified ${italicOrgName(run.org.name)} and recognised that a truly pan-resistant isolate has no reliable single-agent cure — escalating to combination therapy and urgent infectious diseases/CDC consultation was the right call, even though the case doesn't end in a clean cure.`
       : `The infection outpaced treatment. Review the pearls below and try this organism again next time you meet it.`;
     $('pearl-list').innerHTML = run.org.pearls.map(p => `<div class="pearl">${p}</div>`).join('');
   }
