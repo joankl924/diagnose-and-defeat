@@ -744,11 +744,11 @@
       moves: [
         { name: "Penicillin G", desc: "Beta-lactam, no beta-lactamase stability", isDrug: true,
           dmg: (r) => 0,
-          log: (r) => `Penicillin G has no effect. Over 90% of <i>S. aureus</i> isolates produce beta-lactamase. <span class="cite">(Grade A — MOH Antibiotic Guidelines)</span>` },
+          log: (r) => `Penicillin G has no effect. Over 90% of <i>S. aureus</i> isolates produce beta-lactamase. <span class="cite">(Grade A — general microbiology principle, not a specific guideline)</span>` },
         { name: "Cloxacillin", desc: "Anti-staphylococcal penicillin", isDrug: true,
           dmg: (r) => r ? 0 : 45,
           log: (r) => r ? `Cloxacillin has no effect — this isolate carries mecA and is methicillin-resistant. <span class="cite">(Grade A)</span>`
-                        : `Super effective! Cloxacillin is first-line for MSSA and outperforms vancomycin for MSSA bacteraemia. <span class="cite">(Grade A — MOH/IDSA)</span>` },
+                        : `Super effective! Cloxacillin is first-line for MSSA and outperforms vancomycin for MSSA bacteraemia. <span class="cite">(Grade A — IDSA)</span>` },
         { name: "Vancomycin", desc: "Glycopeptide, active vs MRSA + MSSA", isDrug: true,
           dmg: (r) => r ? 40 : 22,
           log: (r) => r ? `Vancomycin lands a solid hit — appropriate first-line for confirmed MRSA. <span class="cite">(Grade A)</span>`
@@ -768,7 +768,7 @@
       ],
       pearls: [
         `<b>Empirical penicillin fails almost universally</b> against <i>S. aureus</i> due to near-ubiquitous beta-lactamase production. <span class="cite">(Grade A)</span>`,
-        `<b>MSSA vs MRSA changes the correct first-line agent.</b> Cloxacillin outperforms vancomycin for MSSA bacteraemia; vancomycin is reserved for confirmed/high-risk MRSA. <span class="cite">(Grade A — MOH/IDSA)</span>`,
+        `<b>MSSA vs MRSA changes the correct first-line agent.</b> Cloxacillin outperforms vancomycin for MSSA bacteraemia; vancomycin is reserved for confirmed/high-risk MRSA. <span class="cite">(Grade A — IDSA)</span>`,
         `<b>Risk factors such as recent hospitalisation, prior MRSA infection, or healthcare exposure raise the pre-test probability of MRSA</b>, but only culture and susceptibility testing (or a rapid screen) can confirm it. <span class="cite">(Grade B)</span>`,
       ],
     },
@@ -1007,7 +1007,7 @@
         { name: "High-dose Amoxicillin", desc: "Aminopenicillin, high dose overcomes reduced PBP affinity", isDrug: true,
           dmg: (r) => r ? 30 : 45,
           log: (r) => r ? `Still lands a meaningful hit — for non-meningeal infection, high-dose amoxicillin overcomes most PBP-mediated resistance because achievable tissue levels exceed the MIC. <span class="cite">(Grade A)</span>`
-                        : `Highly effective — first-line for pneumococcal pneumonia. <span class="cite">(Grade A — MOH CAP Guidelines)</span>` },
+                        : `Highly effective — first-line for pneumococcal pneumonia. <span class="cite">(Grade A — IDSA/ATS CAP Guidelines)</span>` },
         { name: "Ceftriaxone", desc: "Third-generation cephalosporin, good CNS penetration", isDrug: true,
           dmg: (r) => r ? 35 : 40,
           log: (r) => `Effective, and the right empirical choice whenever CNS infection is possible — reliable CSF penetration at meningitic dosing. <span class="cite">(Grade A)</span>` },
@@ -1192,7 +1192,7 @@
         { name: "Piperacillin-Tazobactam", desc: "Anti-pseudomonal penicillin/inhibitor", isDrug: true,
           dmg: (r) => r ? 0 : 38,
           log: (r) => r ? `No effect — this MDR isolate is resistant to standard anti-pseudomonal penicillins, as the susceptibility panel would show. <span class="cite">(Grade A)</span>`
-                        : `Effective — a good anti-pseudomonal choice for a susceptible isolate. <span class="cite">(Grade A — MOH Antibiotic Guidelines)</span>` },
+                        : `Effective — a good anti-pseudomonal choice for a susceptible isolate. <span class="cite">(Grade A — general antimicrobial pharmacology principle, not a specific guideline)</span>` },
         { name: "Meropenem", desc: "Anti-pseudomonal carbapenem", isDrug: true,
           dmg: (r) => r ? 0 : 40,
           log: (r) => r ? `No effect — this is a carbapenem-resistant <i>P. aeruginosa</i> (CRPA) isolate; reaching for a different carbapenem-class agent won't help once resistance is this broad. <span class="cite">(Grade A)</span>`
@@ -1551,7 +1551,7 @@
       pearls: [
         `<b>Suspected meningococcal disease is a "treat first, confirm later" emergency</b> — empirical antibiotics should never be delayed for lumbar puncture or culture confirmation. <span class="cite">(Grade A)</span>`,
         `<b>A non-blanching petechial or purpuric rash with fever is a red flag</b> even before classic meningism develops — early meningococcaemia can present with rash alone. <span class="cite">(Grade A)</span>`,
-        `<b>Close contacts of a confirmed case need chemoprophylaxis</b> (e.g. ciprofloxacin or rifampicin) regardless of their own treatment, to interrupt further transmission. <span class="cite">(Grade A — MOH public health guidance)</span>`,
+        `<b>Close contacts of a confirmed case need chemoprophylaxis</b> (e.g. ciprofloxacin or rifampicin) regardless of their own treatment, to interrupt further transmission. <span class="cite">(Grade A — CDC/UK guidance; MOH/CDA advises prophylaxis without specifying agents)</span>`,
       ],
     },
     {
@@ -1949,7 +1949,7 @@
       moves: [
         { name: "Ceftriaxone (single dose)", desc: "Now recommended as monotherapy — curative", isDrug: true,
           dmg: (r) => 100,
-          log: (r) => `Curative — now the recommended single-agent monotherapy; the older ceftriaxone-plus-azithromycin combination was dropped because it didn't slow resistance emergence, and a single dose of high-dose ceftriaxone clears the infection outright. <span class="cite">(Grade A — CDC/MOH STI Guidelines)</span>` },
+          log: (r) => `Curative — now the recommended single-agent monotherapy; the older ceftriaxone-plus-azithromycin combination was dropped because it didn't slow resistance emergence, and a single dose of high-dose ceftriaxone clears the infection outright. <span class="cite">(Grade A — CDC 2021 STI Treatment Guidelines)</span>` },
         { name: "Azithromycin (as sole agent)", desc: "Macrolide", isDrug: true,
           dmg: (r) => 10,
           log: (r) => `Poor choice alone — macrolide resistance in <i>N. gonorrhoeae</i> is now widespread, which is exactly why it was dropped from routine combination therapy. <span class="cite">(Grade A)</span>` },
@@ -1961,7 +1961,8 @@
           log: (r) => `No effect — penicillinase-producing strains (PPNG) and chromosomal resistance made penicillin obsolete for this organism decades ago. <span class="cite">(Grade A)</span>` },
       ],
       pearls: [
-        `<b>Ceftriaxone monotherapy — not the older ceftriaxone-plus-azithromycin combination — is now the standard first-line regimen.</b> A real guideline shift trainees should know, driven by rising macrolide resistance and evidence that dual therapy didn't slow resistance emergence. <span class="cite">(Grade A — CDC/MOH STI Guidelines)</span>`,
+        `<b>Ceftriaxone monotherapy — not the older ceftriaxone-plus-azithromycin combination — is now the standard first-line regimen.</b> A real guideline shift trainees should know, driven by rising macrolide resistance and evidence that dual therapy didn't slow resistance emergence. <span class="cite">(Grade A — CDC 2021 STI Treatment Guidelines)</span>`,
+        `<b>Singapore practice currently defers from this.</b> The DSC (Department of STI Control, National Skin Centre) 2021 STI Management Guidelines, which underpin Singapore's national gonorrhoea guidance, still recommend dual therapy — ceftriaxone 500mg IM single dose plus doxycycline 100mg orally twice daily for 7 days — primarily for concurrent <i>Chlamydia</i> coverage rather than as gonococcal-resistance mitigation. <span class="cite">(Grade A — DSC 2021 / CDA Singapore)</span>`,
         `<b>Always treat presumptively for (or test and treat) <i>Chlamydia trachomatis</i> co-infection</b> when gonorrhoea is diagnosed, given how frequently they occur together. <span class="cite">(Grade A)</span>`,
         `<b>Partner notification and treatment is essential</b> to prevent reinfection and interrupt onward transmission — a case isn't fully managed until contacts are addressed. <span class="cite">(Grade A — public health principle)</span>`,
         `<b>Neonatal treatment differs from the adult single-dose regimen shown above, and guidelines diverge on which cephalosporin to use.</b> CDC recommends ceftriaxone as first-line even in neonates (25-50 mg/kg IV/IM, single dose for uncomplicated ophthalmia neonatorum; extended to a 7-14 day course if disseminated or CNS disease is present), but reserves cefotaxime for infants who cannot receive ceftriaxone. UK national guidance instead recommends cefotaxime first-line for neonates (100 mg/kg single IV dose for ophthalmia). <span class="cite">(Grade A — CDC STI Treatment Guidelines 2021; UK national guideline for gonorrhoea)</span>`,
@@ -2780,7 +2781,7 @@
         { name: "Oseltamivir", desc: "Neuraminidase inhibitor — first-line", isDrug: true,
           dmg: (r) => r ? 0 : 42,
           log: (r) => r ? `No effect — this strain carries a neuraminidase mutation (commonly H275Y) conferring high-level oseltamivir resistance. <span class="cite">(Grade A)</span>`
-                        : `Effective — oseltamivir is first-line and provides the greatest benefit within 48 hours of onset, though it is still indicated beyond that window in hospitalised, severe, or high-risk patients. <span class="cite">(Grade A — MOH/CDC)</span>` },
+                        : `Effective — oseltamivir is first-line and provides the greatest benefit within 48 hours of onset, though it is still indicated beyond that window in hospitalised, severe, or high-risk patients. <span class="cite">(Grade A — CDC)</span>` },
         { name: "Baloxavir Marboxil", desc: "Cap-dependent endonuclease inhibitor — different target", isDrug: true,
           dmg: (r) => r ? 40 : 38,
           log: (r) => r ? `Effective — baloxavir targets the viral cap-dependent endonuclease, a different mechanism from neuraminidase inhibitors, so oseltamivir resistance (H275Y) does not affect it. A reasonable choice once resistance is suspected or confirmed. <span class="cite">(Grade B)</span>`
@@ -2798,7 +2799,7 @@
           // that actually needs treatment, it deals no damage and costs time the patient didn't have
           dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 999 : 0,
           log: (r, ctx) => ctx.vignette.supportiveCareOk
-            ? `Correct — this is a previously well, low-risk patient with uncomplicated influenza outside any recognised indication for antiviral therapy. Supportive care alone (antipyretics, fluids, rest) is guideline-concordant, and the infection resolves on its own as expected. <span class="cite">(Grade B — MOH/CDC)</span>`
+            ? `Correct — this is a previously well, low-risk patient with uncomplicated influenza outside any recognised indication for antiviral therapy. Supportive care alone (antipyretics, fluids, rest) is guideline-concordant, and the infection resolves on its own as expected. <span class="cite">(Grade B — CDC)</span>`
             : `Not enough on its own — this patient has a specific risk factor (pregnancy, hospitalisation/severe disease, or immunocompromise) that warrants antiviral therapy regardless of how well supportive measures are otherwise managed. Withholding an indicated antiviral here leaves the underlying infection unaddressed. <span class="cite">(Grade A)</span>` },
         { name: "Order Antiviral Resistance Testing", desc: "Genotypic/phenotypic resistance panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
@@ -2811,10 +2812,10 @@
           } },
       ],
       pearls: [
-        `<b>Antiviral treatment provides the greatest benefit within 48 hours of symptom onset</b>, though hospitalised, severe, or high-risk patients (pregnancy, extremes of age, immunocompromise, significant comorbidity) still warrant treatment beyond this window. <span class="cite">(Grade A — MOH/CDC/WHO)</span>`,
+        `<b>Antiviral treatment provides the greatest benefit within 48 hours of symptom onset</b>, though hospitalised, severe, or high-risk patients (pregnancy, extremes of age, immunocompromise, significant comorbidity) still warrant treatment beyond this window. <span class="cite">(Grade A — CDC/WHO)</span>`,
         `<b>Oseltamivir resistance (commonly H275Y) remains uncommon in circulating seasonal influenza</b> but should be considered in immunocompromised patients with prolonged shedding despite treatment — baloxavir's different mechanism makes it a reasonable option here. <span class="cite">(Grade B)</span>`,
         `<b>Unlike bacterial infections, influenza cannot be treated with antibacterial agents</b> — apparent deterioration on antivirals more often reflects secondary bacterial pneumonia (a recognised complication, classically <i>S. aureus</i> or <i>S. pneumoniae</i>) than antiviral failure, and should prompt reassessment rather than simply escalating antiviral dosing. <span class="cite">(Grade B)</span>`,
-        `<b>Most influenza does not need an antiviral at all</b> — for a previously well, low-risk outpatient presenting without severe or progressive features, supportive care alone (antipyretics, fluids, rest) is entirely guideline-concordant. Antiviral treatment becomes indicated specifically for hospitalisation, severe/progressive illness, or a recognised high-risk group (pregnancy, extremes of age, immunocompromise, significant comorbidity) — knowing when NOT to treat is as much a part of good antimicrobial stewardship as choosing the right drug when treatment is needed. <span class="cite">(Grade A — MOH/CDC)</span>`,
+        `<b>Most influenza does not need an antiviral at all</b> — for a previously well, low-risk outpatient presenting without severe or progressive features, supportive care alone (antipyretics, fluids, rest) is entirely guideline-concordant. Antiviral treatment becomes indicated specifically for hospitalisation, severe/progressive illness, or a recognised high-risk group (pregnancy, extremes of age, immunocompromise, significant comorbidity) — knowing when NOT to treat is as much a part of good antimicrobial stewardship as choosing the right drug when treatment is needed. <span class="cite">(Grade A — CDC)</span>`,
       ],
     },
     {
@@ -2882,10 +2883,10 @@
           log: (r) => `Highly effective — IV artesunate is first-line for severe/complicated falciparum malaria. Artemisinin derivatives clear parasitaemia faster than any other available antimalarial class, but IV artesunate is not recommended for uncomplicated disease when oral therapy can be tolerated — oral ACT is preferred there, given the risk of post-artesunate delayed haemolysis (a recognised complication, more common with high pre-treatment parasitaemia, requiring follow-up blood counts for several weeks) and no added benefit when severe features are absent. <span class="cite">(Grade A — WHO/CDC)</span>` },
         { name: "Oral Artemisinin-based Combination Therapy (ACT)", desc: "First-line for uncomplicated disease, oral route", isDrug: true,
           dmg: (r) => 42,
-          log: (r) => `Effective — ACT (e.g. artemether-lumefantrine) is first-line for uncomplicated falciparum malaria in a patient able to tolerate oral therapy. It is not appropriate alone when severe features are present — those patients need parenteral treatment. <span class="cite">(Grade A — WHO/MOH)</span>` },
+          log: (r) => `Effective — ACT (e.g. artemether-lumefantrine) is first-line for uncomplicated falciparum malaria in a patient able to tolerate oral therapy. It is not appropriate alone when severe features are present — those patients need parenteral treatment. <span class="cite">(Grade A — WHO)</span>` },
         { name: "Chloroquine", desc: "Aminoquinoline — resistance now near-universal in P. falciparum", isDrug: true,
           dmg: (r) => 0,
-          log: (r) => `No effect — chloroquine resistance in <i>P. falciparum</i> is now near-universal across almost all malaria-endemic regions worldwide. Unlike most resistance in this dex, this isn't a coin-flip on an individual isolate — it's a fixed global epidemiological pattern, so chloroquine shouldn't be relied on for falciparum malaria regardless of travel origin. It remains useful for <i>P. vivax</i> and <i>P. ovale</i>, where resistance is far less widespread. <span class="cite">(Grade A — WHO/MOH)</span>` },
+          log: (r) => `No effect — chloroquine resistance in <i>P. falciparum</i> is now near-universal across almost all malaria-endemic regions worldwide. Unlike most resistance in this dex, this isn't a coin-flip on an individual isolate — it's a fixed global epidemiological pattern, so chloroquine shouldn't be relied on for falciparum malaria regardless of travel origin. It remains useful for <i>P. vivax</i> and <i>P. ovale</i>, where resistance is far less widespread. <span class="cite">(Grade A — WHO)</span>` },
         { name: "Doxycycline (monotherapy)", desc: "Real activity, but too slow-acting alone", isDrug: true,
           dmg: (r) => 8,
           log: (r) => `Minimal effect — doxycycline has genuine, but slow-onset, antimalarial activity. It has a real role as a partner drug (e.g. with quinine) or as chemoprophylaxis, but it's too slow-acting to rely on as sole therapy for acute falciparum malaria. <span class="cite">(Grade B)</span>` },
@@ -3224,7 +3225,7 @@
           log: (r) => `No effect on eradication — <i>H. pylori</i> is never treated with a single antibiotic; every evidence-based regimen combines acid suppression with at least two antimicrobial agents to achieve reliable eradication and limit resistance selection. <span class="cite">(Grade A)</span>` },
       ],
       pearls: [
-        `<b>Non-invasive "test-and-treat" (urea breath test or stool antigen) is appropriate in dyspepsia without alarm features</b>, avoiding the need for upfront endoscopy — reserve endoscopy for alarm symptoms or age/risk-appropriate indications. <span class="cite">(Grade A — MOH/ACG)</span>`,
+        `<b>Non-invasive "test-and-treat" (urea breath test or stool antigen) is appropriate in dyspepsia without alarm features</b>, avoiding the need for upfront endoscopy — reserve endoscopy for alarm symptoms or age/risk-appropriate indications. <span class="cite">(Grade A — ACG)</span>`,
         `<b>The 2024 ACG guideline removed clarithromycin triple therapy from first-line status</b> — bismuth quadruple therapy is now preferred first-line for treatment-naive patients regardless of presumed local resistance, with clarithromycin triple reserved for cases where susceptibility testing confirms sensitivity. <span class="cite">(Grade A — ACG 2024)</span>`,
         `<b>Eradication therapy alone can induce regression of low-grade gastric MALT lymphoma</b> in a substantial proportion of early-stage cases — a strikingly direct organism-to-oncology treatment link unique among the bugs in this dex. <span class="cite">(Grade A)</span>`,
         `<b>Confirm eradication with a repeat non-invasive test</b> at least 4 weeks after completing therapy and at least 2 weeks after stopping the PPI, since acid suppression can suppress the organism enough to cause a false-negative result if tested too soon. <span class="cite">(Grade A)</span>`,
@@ -3379,7 +3380,7 @@
       moves: [
         { name: "Oral/IV Rehydration Therapy (First Priority)", desc: "The life-saving intervention — does not itself clear the organism", isDrug: false, patientCost: -20,
           dmg: (r) => 0,
-          log: (r) => `Correct priority — rehydration (oral rehydration solution for mild-moderate dehydration, IV fluids for severe dehydration or shock) is THE life-saving intervention in cholera. It doesn't clear the organism itself, but nothing else matters if this isn't addressed first. <span class="cite">(Grade A — WHO/MOH)</span>` },
+          log: (r) => `Correct priority — rehydration (oral rehydration solution for mild-moderate dehydration, IV fluids for severe dehydration or shock) is THE life-saving intervention in cholera. It doesn't clear the organism itself, but nothing else matters if this isn't addressed first. <span class="cite">(Grade A — WHO/CDA)</span>` },
         { name: "Doxycycline (Single Dose)", desc: "Shortens illness duration and shedding", isDrug: true,
           dmg: (r) => 40,
           log: (r) => `Effective — a single dose of doxycycline shortens diarrhoea duration, stool volume, and the period of organism shedding, reducing transmission risk. It is adjunctive to rehydration, not a substitute for it. <span class="cite">(Grade A — WHO)</span>` },
@@ -3391,7 +3392,7 @@
           log: (r) => `Not helpful here — cholera's massive fluid loss is toxin-mediated secretory diarrhoea, not something an antimotility agent meaningfully addresses, and reaching for it delays the evidence-based priority of rehydration. <span class="cite">(Grade B — WHO)</span>` },
       ],
       pearls: [
-        `<b>Rehydration — oral or IV depending on severity — is THE life-saving intervention in cholera</b>, not the antibiotic. Antibiotics are adjunctive: they shorten illness duration and organism shedding and reduce transmission, but do not replace fluid replacement. <span class="cite">(Grade A — WHO/MOH)</span>`,
+        `<b>Rehydration — oral or IV depending on severity — is THE life-saving intervention in cholera</b>, not the antibiotic. Antibiotics are adjunctive: they shorten illness duration and organism shedding and reduce transmission, but do not replace fluid replacement. <span class="cite">(Grade A — WHO/CDA)</span>`,
         `<b>Cholera toxin activates adenylate cyclase in intestinal epithelial cells</b>, driving massive secretory (non-inflammatory, non-bloody) diarrhoea through a purely toxin-mediated mechanism rather than tissue invasion — this is why the classic "rice-water" stool contains no blood or significant white cells, unlike invasive causes such as <i>Campylobacter</i> or <i>Shigella</i>. <span class="cite">(Grade A)</span>`,
         `<b>A single dose of doxycycline (or azithromycin, e.g. in pregnancy or children) is generally sufficient</b> — cholera treatment is notably simpler in this respect than most other bacterial GI infections requiring multi-day courses. <span class="cite">(Grade A — WHO)</span>`,
         `<b>Cholera is a notifiable disease in most jurisdictions</b> given its outbreak potential via contaminated water and poor sanitation — a single confirmed case can be a public health signal, not just an individual clinical event. <span class="cite">(Grade B)</span>`,
@@ -3528,7 +3529,7 @@
       moves: [
         { name: "Azithromycin", desc: "Macrolide — first-line", isDrug: true,
           dmg: (r) => 44,
-          log: (r) => `Highly effective — a macrolide is first-line at any stage; given early (catarrhal phase) it shortens illness, and given later it still reliably reduces infectiousness even though established paroxysmal cough won't resolve any faster. <span class="cite">(Grade A — MOH/CDC)</span>` },
+          log: (r) => `Highly effective — a macrolide is first-line at any stage; given early (catarrhal phase) it shortens illness, and given later it still reliably reduces infectiousness even though established paroxysmal cough won't resolve any faster. <span class="cite">(Grade A — CDA/CDC)</span>` },
         { name: "Trimethoprim-Sulfamethoxazole", desc: "Alternative for macrolide intolerance/allergy", isDrug: true,
           dmg: (r) => 32,
           log: (r) => `Effective — the standard alternative from 2 months of age when a macrolide can't be used. <span class="cite">(Grade B)</span>` },
@@ -4227,7 +4228,7 @@
       moves: [
         { name: "Metronidazole", desc: "First-line", isDrug: true,
           dmg: (r) => 46,
-          log: (r) => `Highly effective — oral or vaginal metronidazole is first-line. <span class="cite">(Grade A — MOH/CDC)</span>` },
+          log: (r) => `Highly effective — oral or vaginal metronidazole is first-line. <span class="cite">(Grade A — CDA/CDC)</span>` },
         { name: "Clindamycin", desc: "First-line alternative", isDrug: true,
           dmg: (r) => 40,
           log: (r) => `Effective — oral or vaginal clindamycin is an equally acceptable first-line alternative. <span class="cite">(Grade A)</span>` },
@@ -4241,7 +4242,7 @@
       pearls: [
         `<b>Bacterial vaginosis reflects a disruption of the normal vaginal microbiome</b> — loss of protective, acid-producing <i>Lactobacillus</i> and overgrowth of <i>Gardnerella vaginalis</i> alongside anaerobes (e.g. <i>Prevotella</i>, <i>Mobiluncus</i>) — rather than infection by a single pathogen. <span class="cite">(Grade B)</span>`,
         `<b>Diagnosis uses Amsel's criteria</b> (thin homogeneous discharge, vaginal pH >4.5, positive whiff test, clue cells — 3 of 4 required) or the Gram-stain-based Nugent score as the reference standard. <span class="cite">(Grade B)</span>`,
-        `<b>Oral or vaginal metronidazole, or clindamycin, are first-line treatment</b>; unlike trichomoniasis, routine treatment of male sexual partners is not recommended and has not been shown to reduce recurrence. <span class="cite">(Grade A — MOH/CDC)</span>`,
+        `<b>Oral or vaginal metronidazole, or clindamycin, are first-line treatment</b>; unlike trichomoniasis, routine treatment of male sexual partners is not recommended and has not been shown to reduce recurrence. <span class="cite">(Grade A — CDA/CDC)</span>`,
         `<b>Minimal inflammation/itching is a useful distinguishing feature from vulvovaginal candidiasis</b>, which classically causes marked itching with a thick, curd-like discharge instead. <span class="cite">(Grade B)</span>`,
       ],
     },
@@ -4767,7 +4768,7 @@
           dmg: (r, ctx) => ctx.vignette.supportiveCareOk ? 15 : 45,
           log: (r, ctx) => ctx.vignette.supportiveCareOk
             ? `Has activity against the virus, but isn't routinely indicated for acute hepatitis B in an immunocompetent host, which usually resolves spontaneously — reserve antivirals for severe/fulminant acute disease. <span class="cite">(Grade B)</span>`
-            : `Highly effective — tenofovir (or entecavir) is first-line for chronic hepatitis B meeting treatment criteria, given high potency and a high barrier to resistance. <span class="cite">(Grade A — MOH Singapore CPG / APASL)</span>` },
+            : `Highly effective — tenofovir (or entecavir) is first-line for chronic hepatitis B meeting treatment criteria, given high potency and a high barrier to resistance. <span class="cite">(Grade A — APASL; 2011 MOH CPG on this topic since withdrawn)</span>` },
         { name: "Peginterferon Alfa", desc: "Alternative for selected patients wanting a finite course", isDrug: true,
           dmg: (r) => 30,
           log: (r) => `An alternative for selected patients (e.g. those preferring a finite treatment course), though generally less used than nucleos(t)ide analogues given tolerability and a narrower group of good responders. <span class="cite">(Grade B)</span>` },
@@ -4778,7 +4779,7 @@
       pearls: [
         `<b>Over 95% of immunocompetent adults with acute HBV clear the infection spontaneously</b>; chronicity risk is far higher with perinatal or early-childhood acquisition, which is why universal infant vaccination (including a birth dose) is a public health priority. <span class="cite">(Grade A)</span>`,
         `<b>Serology tells the story</b>: HBsAg + IgM anti-HBc = acute infection; HBsAg persisting beyond 6 months with IgG (not IgM) anti-HBc = chronic infection. <span class="cite">(Grade A)</span>`,
-        `<b>Treatment for chronic hepatitis B targets patients with active disease</b> (elevated ALT, significant HBV DNA, and/or fibrosis) rather than everyone who is HBsAg-positive — inactive carriers with normal ALT and low viral load are monitored, not treated. <span class="cite">(Grade A — MOH Singapore CPG: Chronic Hepatitis B Infection / APASL)</span>`,
+        `<b>Treatment for chronic hepatitis B targets patients with active disease</b> (elevated ALT, significant HBV DNA, and/or fibrosis) rather than everyone who is HBsAg-positive — inactive carriers with normal ALT and low viral load are monitored, not treated. <span class="cite">(Grade A — APASL; MOH's 2011 CPG on Chronic Hepatitis B has since been withdrawn)</span>`,
         `<b>Tenofovir and entecavir are first-line</b> given potency and a high genetic barrier to resistance; treatment is typically long-term/indefinite rather than a fixed course for most patients with chronic disease. <span class="cite">(Grade A)</span>`,
       ],
     },
@@ -6153,7 +6154,7 @@ const DEX_INFO = {
       'Adamantane (amantadine) resistance is now near-universal in circulating influenza A and the drug class is no longer recommended regardless of individual isolate testing',
       'Baloxavir acts on a distinct target (the cap-dependent endonuclease) and retains activity against neuraminidase-inhibitor-resistant strains',
     ],
-    treatment: 'Oseltamivir is first-line, ideally started within 48 hours of symptom onset, though treatment beyond this window is still recommended in hospitalised, severe, or high-risk patients (Grade A, MOH/CDC/WHO). Baloxavir marboxil is a single-dose alternative acting on a different viral target, useful where resistance to neuraminidase inhibitors is suspected. Amantadine has no current role given near-universal resistance. Antibacterials have no role unless secondary bacterial infection is suspected.',
+    treatment: 'Oseltamivir is first-line, ideally started within 48 hours of symptom onset, though treatment beyond this window is still recommended in hospitalised, severe, or high-risk patients (Grade A, CDC/WHO). Baloxavir marboxil is a single-dose alternative acting on a different viral target, useful where resistance to neuraminidase inhibitors is suspected. Amantadine has no current role given near-universal resistance. Antibacterials have no role unless secondary bacterial infection is suspected.',
     references: [
       "CDC Influenza Antiviral Medications: Summary for Clinicians (Grade A)",
       "IDSA Clinical Practice Guidelines on Seasonal Influenza, 2018 Update (Uyeki et al., Clin Infect Dis 2019) (Grade A)",
@@ -6179,7 +6180,7 @@ const DEX_INFO = {
       'Artemisinin partial resistance (delayed parasite clearance) has emerged and spread in parts of the Greater Mekong subregion and, more recently, parts of East Africa — the reason artemisinin derivatives are always used in combination, never as monotherapy',
       'Chloroquine retains useful activity against <i>P. vivax</i> and <i>P. ovale</i> in most (though not all) regions, unlike <i>P. falciparum</i>',
     ],
-    treatment: 'IV artesunate is first-line for severe/complicated falciparum malaria (Grade A, WHO/MOH); oral artemisinin-based combination therapy (ACT, e.g. artemether-lumefantrine) is first-line for uncomplicated disease in a patient tolerating oral intake. Chloroquine has no reliable role given near-universal resistance. Doxycycline has genuine but slow-onset activity and is used as a partner drug or for chemoprophylaxis, not as monotherapy for acute disease. Malaria is a notifiable disease in Singapore and most jurisdictions.',
+    treatment: 'IV artesunate is first-line for severe/complicated falciparum malaria (Grade A, WHO); oral artemisinin-based combination therapy (ACT, e.g. artemether-lumefantrine) is first-line for uncomplicated disease in a patient tolerating oral intake. Chloroquine has no reliable role given near-universal resistance. Doxycycline has genuine but slow-onset activity and is used as a partner drug or for chemoprophylaxis, not as monotherapy for acute disease. Malaria is a notifiable disease in Singapore and most jurisdictions.',
     references: [
       "CDC Malaria: Treatment of Severe Malaria — Clinical Guidance (Grade A)",
       "WHO Guidelines for Malaria, 2025 (Grade A)",
@@ -6287,7 +6288,7 @@ const DEX_INFO = {
     references: [
       "Chey WD, Howden CW, Moss SF, et al. ACG Clinical Guideline: Treatment of <i>Helicobacter pylori</i> Infection. Am J Gastroenterol. 2024;119(9):1730-1753. (Grade A)",
       "Malfertheiner P, Megraud F, Rokkas T, et al. Management of <i>Helicobacter pylori</i> infection: the Maastricht VI/Florence consensus report. Gut. 2022;71:1724-1762. (Grade A)",
-      "The diagnosis and management of <i>H. pylori</i> infection in Singapore. Singapore Med J (local practice review, no dedicated MOH CPG identified for <i>H. pylori</i>). (Grade C)",
+      "The diagnosis and management of <i>H. pylori</i> infection in Singapore. Singapore Med J (local practice review, MOH's 2004 CPG on this topic has since been withdrawn; current practice follows ACG 2024). (Grade C)",
     ],
   },
   cjejuni: {
@@ -6334,7 +6335,7 @@ const DEX_INFO = {
       'Historically no clinically dominant resistance pattern existed, and treatment failure is still far more often about delayed or inadequate rehydration than antibiotic resistance — but since 2024, a highly drug-resistant epidemic <i>V. cholerae</i> O1 clone (traced from Yemen through East Africa to Mayotte) resistant to both azithromycin and ciprofloxacin has spread internationally, a genuinely new resistance concern for outbreak antibiotic selection (doxycycline/tetracycline generally remains active against it)',
       'Regional resistance to older first-line agents (e.g. tetracyclines, cotrimoxazole) has been reported in some outbreak settings and can inform antibiotic choice where surveillance data exists',
     ],
-    treatment: 'Rehydration — oral rehydration solution for mild-moderate dehydration, IV fluids for severe dehydration or shock — is the life-saving intervention and must never be delayed while awaiting confirmatory testing (Grade A, WHO/MOH). A single dose of doxycycline (or azithromycin, preferred in pregnancy and children) shortens illness duration, stool volume, and organism shedding, but is adjunctive to rehydration, not a substitute for it.',
+    treatment: 'Rehydration — oral rehydration solution for mild-moderate dehydration, IV fluids for severe dehydration or shock — is the life-saving intervention and must never be delayed while awaiting confirmatory testing (Grade A, WHO/CDA). A single dose of doxycycline (or azithromycin, preferred in pregnancy and children) shortens illness duration, stool volume, and organism shedding, but is adjunctive to rehydration, not a substitute for it.',
     references: [
       "WHO. Cholera clinical management / Guidelines for the control of cholera (WHO treatment pocketbook, rehydration and antibiotic guidance). (Grade A)",
       "Rouard C, Collet L, Njamkepo E, et al. Long-Distance Spread of a Highly Drug-Resistant Epidemic Cholera Strain. N Engl J Med. 2024;391(23):2271-2273. (Grade B)",
@@ -6384,7 +6385,7 @@ const DEX_INFO = {
       'No clinically significant macrolide resistance pattern is established in routine practice — treatment choice is not primarily a resistance issue',
       'The main treatment pitfall is timing (little effect on cough duration once the paroxysmal phase is established) rather than drug resistance',
     ],
-    treatment: 'Azithromycin (or another macrolide) is first-line for all age groups (Grade A, MOH/CDC); cotrimoxazole is the standard alternative from 2 months of age for macrolide intolerance/allergy. Antibiotics most effectively shorten the infectious period when given during the catarrhal phase; given later they still reduce transmissibility even though established paroxysmal cough won\'t resolve any faster. Close contacts, especially households with an unimmunised infant, should receive chemoprophylaxis regardless of their own vaccination status. Notifiable disease.',
+    treatment: 'Azithromycin (or another macrolide) is first-line for all age groups (Grade A, CDA/CDC); cotrimoxazole is the standard alternative from 2 months of age for macrolide intolerance/allergy. Antibiotics most effectively shorten the infectious period when given during the catarrhal phase; given later they still reduce transmissibility even though established paroxysmal cough won\'t resolve any faster. Close contacts, especially households with an unimmunised infant, should receive chemoprophylaxis regardless of their own vaccination status. Notifiable disease.',
     references: [
       "Communicable Diseases Agency (Singapore), \"Pertussis\" clinical guidance (Grade B)",
       "CDC, Treatment of Pertussis / Postexposure Antimicrobial Prophylaxis (Whooping Cough) clinical guidance (Grade A)",
@@ -6648,7 +6649,7 @@ const DEX_INFO = {
       'No major antimicrobial resistance pattern drives treatment choice',
       'Recurrence after treatment is common and reflects failure to durably restore a <i>Lactobacillus</i>-dominant microbiome rather than antibiotic resistance',
     ],
-    treatment: 'Oral or vaginal metronidazole, or oral/vaginal clindamycin, are first-line (Grade A, MOH/CDC). Routine treatment of male sexual partners is not recommended, unlike for trichomoniasis, since it has not been shown to reduce recurrence.',
+    treatment: 'Oral or vaginal metronidazole, or oral/vaginal clindamycin, are first-line (Grade A, CDA/CDC). Routine treatment of male sexual partners is not recommended, unlike for trichomoniasis, since it has not been shown to reduce recurrence.',
     references: [
       "Communicable Diseases Agency (Singapore, under MOH). Bacterial Vaginosis clinical guidance — Amsel criteria, metronidazole/clindamycin regimens (Grade A)",
       "CDC. Sexually Transmitted Infections Treatment Guidelines, 2021 — Bacterial Vaginosis (Grade A)",
@@ -6849,9 +6850,9 @@ const DEX_INFO = {
       'Tenofovir and entecavir have a high genetic barrier to resistance and are now preferred first-line agents for this reason',
       'Resistance surveillance matters most in patients previously exposed to older, low-barrier agents',
     ],
-    treatment: 'Acute hepatitis B in an immunocompetent adult is managed supportively in the large majority of cases; antivirals are reserved for severe or fulminant acute disease (Grade A). Chronic hepatitis B is treated when criteria for active disease are met (elevated ALT, significant HBV DNA, and/or fibrosis) — tenofovir or entecavir are first-line given potency and a high barrier to resistance, typically continued long-term/indefinitely (Grade A, MOH Singapore CPG / APASL). Peginterferon alfa is an alternative for selected patients wanting a finite treatment course (Grade B).',
+    treatment: 'Acute hepatitis B in an immunocompetent adult is managed supportively in the large majority of cases; antivirals are reserved for severe or fulminant acute disease (Grade A). Chronic hepatitis B is treated when criteria for active disease are met (elevated ALT, significant HBV DNA, and/or fibrosis) — tenofovir or entecavir are first-line given potency and a high barrier to resistance, typically continued long-term/indefinitely (Grade A, APASL). Peginterferon alfa is an alternative for selected patients wanting a finite treatment course (Grade B).',
     references: [
-      "Ministry of Health Singapore, Clinical Practice Guidelines: Chronic Hepatitis B Infection (Grade A)",
+      "Ministry of Health Singapore, Clinical Practice Guidelines: Chronic Hepatitis B Infection (2011) — since withdrawn; historical reference only (Grade C)",
       "Asian Pacific Association for the Study of the Liver (APASL) Hepatitis B Guidelines (Grade A)",
       "WHO Guidelines for the Prevention, Care and Treatment of Persons with Chronic Hepatitis B Infection (Grade B)",
     ],
