@@ -163,6 +163,32 @@
     color: var(--hp-red); margin:0 0 12px;
   }
   .confirm-modal-body { font-size:13.5px; line-height:1.7; color: var(--text-dim); margin:0 0 20px; }
+  .customize-modal-title {
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.4px; text-transform:uppercase;
+    color: var(--agar-gold); margin:0 0 16px; text-align:center;
+  }
+  .customize-preview-wrap { display:flex; justify-content:center; margin: 0 0 20px; }
+  .customize-preview-canvas { image-rendering: pixelated; background: var(--bg-void); border:1px solid var(--line); }
+  .customize-section { margin: 0 0 18px; }
+  .customize-section-label {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.4px; text-transform:uppercase;
+    color: var(--text-faint); margin:0 0 8px;
+  }
+  .customize-style-row { display:flex; gap:10px; }
+  .customize-style-btn {
+    flex:1; padding:10px; background:var(--bg-panel); border:1px solid var(--line); color:var(--text-dim);
+    cursor:pointer; font-size:13px; font-family:'IBM Plex Sans',sans-serif;
+  }
+  .customize-style-btn:hover { border-color: var(--agar-gold); }
+  .customize-style-btn.active { border-color: var(--agar-gold); color: var(--agar-gold); background: var(--bg-panel-2); }
+  .customize-swatch-row { display:flex; gap:9px; flex-wrap:wrap; }
+  .customize-swatch {
+    width:30px; height:30px; border-radius:50%; border:2px solid var(--line); cursor:pointer; padding:0;
+    box-sizing:border-box;
+  }
+  .customize-swatch:hover { border-color: var(--text-dim); }
+  .customize-swatch.active { border-color: var(--agar-gold); box-shadow: 0 0 0 2px var(--bg-panel-2), 0 0 0 4px var(--agar-gold); }
+
   button.action.danger { background: var(--hp-red); color:#fff; }
   button.action.danger:hover { background:#e06a8c; }
 
@@ -512,6 +538,7 @@
           <div class="info-dropdown hidden" id="info-dropdown">
             <button class="info-dropdown-item" id="btn-info-evidence">References &amp; Evidence Grades</button>
             <button class="info-dropdown-item" id="btn-info-abbreviations">Abbreviations Glossary</button>
+            <button class="info-dropdown-item" id="btn-info-customize">Customize Character</button>
             <button class="info-dropdown-item" id="btn-info-about">About / Credits</button>
             <button class="info-dropdown-item danger" id="btn-info-reset">Reset Progress</button>
           </div>
@@ -650,7 +677,37 @@
     </div>
   </div>
 
-  <div class="confirm-modal hidden" id="reset-confirm-modal">
+    <div class="dex-modal hidden" id="customize-modal">
+    <div class="dex-modal-backdrop" id="customize-modal-backdrop"></div>
+    <div class="dex-modal-panel" role="dialog" aria-modal="true" style="max-width:380px;">
+      <button class="dex-modal-close" id="customize-modal-close" aria-label="Close">✕</button>
+      <div class="customize-modal-title">Customize Character</div>
+      <div class="customize-preview-wrap">
+        <canvas class="customize-preview-canvas" id="customize-preview-canvas" width="96" height="96"></canvas>
+      </div>
+      <div class="customize-section">
+        <div class="customize-section-label">Body Style</div>
+        <div class="customize-style-row" id="customize-style-row"></div>
+      </div>
+      <div class="customize-section">
+        <div class="customize-section-label">Skin Tone</div>
+        <div class="customize-swatch-row" id="customize-skin-row"></div>
+      </div>
+      <div class="customize-section">
+        <div class="customize-section-label">Hair Colour</div>
+        <div class="customize-swatch-row" id="customize-hair-row"></div>
+      </div>
+      <div class="customize-section">
+        <div class="customize-section-label">Scrub Colour</div>
+        <div class="customize-swatch-row" id="customize-scrub-row"></div>
+      </div>
+      <div class="btn-row" style="justify-content:flex-end; margin-top:4px;">
+        <button class="action" id="btn-customize-done">Done</button>
+      </div>
+    </div>
+  </div>
+
+<div class="confirm-modal hidden" id="reset-confirm-modal">
     <div class="confirm-modal-backdrop" id="reset-confirm-backdrop"></div>
     <div class="confirm-modal-panel" role="alertdialog" aria-modal="true" aria-labelledby="reset-confirm-title">
       <div class="confirm-modal-title" id="reset-confirm-title">Reset All Progress?</div>
@@ -8424,6 +8481,7 @@ const DRUG_MOVE_MAP = {
     tilesSinceEncounter: 0, // pity-timer counter — forces an encounter once this reaches 6
     lastOrgId: null, // id of the most recently-encountered organism — kept out of the next random pick
     seenVignettes: [], // "orgId::vignetteIndex" keys already served this cycle — cleared on full completion/restart
+    custom: { style: 'female', skinIdx: 0, hairIdx: 1, scrubIdx: 1 }, // player character customization; index 0/1 defaults reproduce the sprite's original shipped look
   };
 
   let run = null; // active encounter state
@@ -8444,7 +8502,7 @@ const DRUG_MOVE_MAP = {
   }
   async function saveState() {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ coins: game.coins, dex: game.dex, meds: game.meds, lastOrgId: game.lastOrgId, seenVignettes: game.seenVignettes }));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ coins: game.coins, dex: game.dex, meds: game.meds, lastOrgId: game.lastOrgId, seenVignettes: game.seenVignettes, custom: game.custom }));
     } catch (e) { /* storage unavailable (e.g. private browsing) — progress just won't persist */ }
   }
 
@@ -8828,6 +8886,7 @@ const DRUG_MOVE_MAP = {
     if (e.key !== 'Escape') return;
     if (!$('reset-confirm-modal').classList.contains('hidden')) { closeResetConfirm(); return; }
     if (!$('dex-modal').classList.contains('hidden')) { closeDetail(); return; }
+    if (!$('customize-modal').classList.contains('hidden')) { closeCustomizeModal(); return; }
     if (!$('info-dropdown').classList.contains('hidden')) { closeInfoMenu(); return; }
     if ($('sidebar').classList.contains('open')) { closeSidebar(); }
   });
@@ -9571,9 +9630,198 @@ function renderMap() {
     return true;
   }
 
+
+  // ---------- player character customization ----------
+  const SPRITE_ASSETS = {
+    male: {
+      bboxScale: 64,
+      frames: {
+        top: { bbox:[17, 2, 47, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAYAAAC6CNk6AAAB9klEQVR4nO1WMU4DMRBcg9/AC9CRJkqTAqTUKfIF3hGJKgVVJN6RL1CEBgkKijRRmuhES8Mbgo7KJ589a6/vLlxCMt3d2js76/V6FcVRCNYgqJDxYk+k0b1cVE0IRTwxxW3BE4KI21YL8VeKPeiQsciXjZyrbMzaOlOMqrogqqp1I3czEbJbtgpXVDFKl/0vZucAidHZFvkyeOacnduDiIOtriY8n5CkyJet3mWVjTvrXB4gMYqwLjhfSYpVNmarWFLJIuKQ6th1kvhIUuw2Bps0tb0GiVHE0rsaqxNREaVeL0lxsq/TzctXSaZHE9q9P4lI9Wha7v28n9DP9xoGAYkvrwaeQj2aEhGxARg78oXIvTN2SfV8Rr3+sEJgk7jf9trrxTMrpEKMFiCHiBCtCfkuU2CfKYKez4iIaLtZiQLbPTyW++w9Ju3B0UdCUBeaqJoGo8zARN4Evf6wVG2KbS+vkx0sF7hGBWWik6T1bfHq/bvb+Otc1Z5iSbRt4E8HATuDyqTa/pmS6hCQH/PvsEaff01cdi6uFbYB5Ls7xaZp21MG97bWhf2Gm+mk+zNG2Oe5w3koNBDUARp9gorb6lwIp9dAjo94u1k1qvrjU3wmPhOfiQ+GuLNn8bAUu7gdZJUMfKxzlWJHYAcB11kK7L1cEKdX1b8y5ckYhWyDBwAAAABJRU5ErkJggg==', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAAAAACfY4bmAAABC0lEQVR4nNWTUZLEIAhEXyxvxJwJz2TOtNxpP8QoidmZ2aqpreVDlKahg2bD7YvZHu7TEj2O2wocBdICmAqkO3LsfWPZfTnF6zvsAgYI3Zca2eaLHYcBFwCRFmq+DLiPMNgD+tRkAdsLytPIXJAD22ysgd3pNu/ObGnUWWeHzXFfeoNt5p50heLKvA03VgHUE5qfrqQCag1QBYPS8HQkYp3pnWuQhro6A3ZUoByPKQqevruCquoFMag3N7bDDkCuADLq7oMu1BSSF73vzSD7NA9pvpE3HtNv4bx+xXj4CXsDAb2MW9jBXv39bwTk5S8CHs7zIfQGPjy1EyzyI/zR3v8Ivtx3HNsT9l/aNyGGQd5rcxMRAAAAAElFTkSuQmCC' },
+        bot: { bbox:[17, 2, 47, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAYAAAC6CNk6AAAB7klEQVR4nO1XMW6DMBQ1ic+QE1SUJWLJ0EpU6sTAFThHpEwMmZB6jlyhQ7pEaocOWSKWCHXt0jNQ0aVOjf39bYMpVOUtSfzt9/y+P3zHI3rUBnMgeFhw1pOodq1qV10EjXQgx65FQU5dqnvDYMIUC9blvhO558fK2PhS3dWtjsPYsefHaOp0cSNhF251XJAw+qprCYkTrWoeuizYZmlcVe35sbN0q7iMU/1NgsZt0q1MtQvXGIfVGWOOnBYXtGNIABrTZcwonXW5t+rRJsekLK7rp/eLGI0SUr08GInSaH1Z+5Ym5PPjZF7V80UoOaTRmhBClBtgcYgLEpfOWBSleUaC5aohwIuIv/m5V7tHpZGGMDQBIoQE+Tk0z6T1IvcMCogi/DgUU42LXLyGdMYqAps51Wbb+B7kGTkXx8YcynbCzqNSkEDpawNWbL/WnaQagaqYpSVYrhppg/C8O0hjtwW+ifkirK26kynYsfAG2CcbG8+FvtpsCUmTn+8a3KX3rYSHdww9Lq4eIQjDOxbfLC4BcQ/nmPVK/pah6q1twfdwdjsZ/owh9Hnu4H0IuxC0AXT1QR2b9GYMWMbG9adtEoZwLo6dqv7vOZ6EJ+FJeDTCg7XFcTlmuAn9hvPXU+lsvnQREBd3Ac8lbuL/VfUXSZO2iRqdj/4AAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAAAAACfY4bmAAABB0lEQVR4nNWUUY7EIAiGvxpvxJzJnknPtNxpHoqK1Zl2MtlslhdbPn4gULth9oO3h51hSdvrtoI9QXhFD2dYkW4XONq5n/z5ljqsxdXh1Krj2fEkrq4AfYSDPaBOTRZYT7VXFnrkQtzG4oNcqTCSc6ivLZO4YW1AfLbtrB1r9eQJ/zhsLAMkCzjO3HEGkh4gJVDYDx5aIFqVStMHyLWVY5O2T4VsU2uN1ocCJQkQybt5XOtmeX+zMQViBpKgped18jiJABKConLrGpTcc44NXqvTLPpAvfqKMfeFegOBNH2LQgG9e/1fNBCXVwTMHf3LUBv49s/0GRZ5i3+19j/C077HsV2o/9KeRt8/TJ/rH2IAAAAASUVORK5CYII=' }
+      }
+    },
+    female: {
+      bboxScale: 64,
+      frames: {
+        top: { bbox:[16, 2, 48, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAYAAADMMmuxAAACJ0lEQVR4nO1YQW7CMBB0EO/gyAUOiB9UkfhCK4VTqUQ59AM8IB/ooVSCnkCCLyBF/KDiUC4c+xH3Ukfrtb3eyAmhNCNFSmJ7dzK7a68SCQamw47kzMN4//yOfHNaVTnnrnUyDHFsg0sNqwJlO6dsGgSqcE7Z9uZA1dDiYmO42C6DHDw/PBnvYD7UrkCbGoRfH3VH2pg877Vn1/hiu7SqoMBSABvH73zjFJwEbLGX573x5ZxxKo9qz4E8G3EFhGY/Bs4DVQm1K9ASwl7/VOYWhc2W8llYgag7cmY9N/MhWtTeT6ngK0OOjemwIwsrAMsMfzVVoi44qwDCVhG+nVEI+utVFXhbJuCg0DEddUcs274QSHX1Zzu289+5Ugghe/GEJO4kYFvYn+0ERcQ1TpGwEsALkvQgBvHY6Qg/w7mnbEWSMAhQbKFhm2M4J0kPxnqbbZwoZLyU0WO2ZhHczO/ydXDNKVvlfsmGxAXsKAR5CKA8SXrQrjIASUNflZ2GSn58j9HGjBRUzDhyvz6aO95mbs4bxOPcbi+eyFO2iqwKcNmXgYs3JFhRrQpgwimpOEn48mEeVkmq23HhOlqyf01AywFfvELgsn0dCqjDAXY9RRoQDr7e7vN72C1dhwIUqswLIYim1NfLFQXsASC8CoSe/c1OeNsEjtk6uEr+tgINgYZAQ+AmCJTSD4TshrUrwP5LJsyfF76fGyzbvhCEdEVwrZNM7SGoncAPY1vhl3ZbkIoAAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAAAAADpWTRtAAABHElEQVR4nNWTUW7EIAxEX1Bu5D2TORM5U7hTPwwxEFC2qtR2/bGAPczOGGejxkkbr7oJ87oft2m5IQnLekmGZb2kw7zmsVVkHAqpyHhk2MsaIQNCXWPCRULJk32lA0QAETvYGkeGtYtz4qH6eD0zBOtCmhNw9gw5++/FcDZ4t3klzo5B7LpMXFCM1G5WglcdGOgv3joJoN029YAEoAVia/dYCdBsJVXIEAsi9B7tdsY5GpFo0ZmBAxWIPjCj+NZFAlXVWylDWs7DAYftdpMizn44hZBiGC7MNKwjYy4UmkaXTf3TN0bup4CdYYI85D2GzaB6ewbhgPyNz38lhJ3pI3Ol9/7YarD4hU6OABnd/IGGzwTc52Fo5SPDf4gvLk5JN6d7/YYAAAAASUVORK5CYII=' },
+        bot: { bbox:[16, 2, 48, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAYAAADMMmuxAAACJElEQVR4nO1YQU7DMBDcVH1Hj73QQ9UfVJH6BZDaE0UqPfCBPqAf4ABIwKmV6BeQqv4A9QAXjnzEXLrRxlmv7dhpAspIiCi2d8azXmfVBBywGPWUyzwdTx8/iW1Opypy17VGhSHEHExusA7EJpdiFgRUQS7Ftp6BqpHLi2n3j2/PpYLfXt2w7+l5sDpQltx1rSgghNw1htcZSPoTSPqT0uNeAmLs3iVW7VXQxQeX+lff70HjlAsroXYHOgD87k01XAZcLOTsFkYssJ1y1zQgOlLuY7ggxViMesr7DEg79N09APkWSE5wdayngiOXdo9VYG2ZCIHXZzrpT5xi21Kg8G+w3DmTn+YqAFAX6VwUbhTALRwsdyAJMY1LIlgB+oLp+gDDdJYj4sgRdO7X/kUUUcgTnYiLp+tDNn7cb7g4LPl2NcaYVFCOM+cAJaeBdAJuzPRej6U7wd6EpkA+c3D3+DxdH1j3MgEX6Vyh5fhfD0ZTEYIT1/m/hpxrXVREX1K7huksZyeH++vijbddyWLQBe+voSswXbaqOXtDoqeBdWC7Gme1a7MfAODutXwDW3tLlnOAu/FilZ4JzXLAdmJDYIrdDAfwWqRdj08D4oLPh8vsmXZLzXBAQpXnAkBoSm29nC/0RgRhdcClN5DQuG9BKyCqgON+E1wlf9uBVkAroBXwLwRE6QdCbsPaHXD5JUtvTGxrvOabUhCzG6KxCmJqT0HtAn4BNoDdPs+buUAAAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAAAAADpWTRtAAABGklEQVR4nNWTy5HEIAxEG8oZyTFBTCImK6c5SID4zNiHqZpdXbDV7UfzcUCtC77O+hD3en8NW9lB4lvdmvGtbu2413qFBshDn2uMRhj1/hr3em/4DCLj6A0LoLVuV3G4XaBpBK7znhAVwKvCAHDh8L2anlwvXs6/AIBryEArAKGtItdJyAHOemHmD/teuinS8MijgQEgmUVH9gYGkMQgCRAgmyOYnpF6CgGKNpXANZSes522KPgYQ9eHApREUANn67llWHH+eJqiBAaQCFI63SOO+TOtBLI8Hy+MtFUU7uQp6pNL2zZ4W48ItJfoGSGoNUEmgVAAeZjBzbg3zHQrGQlrBq0HP++3DTSv5gcZ/qdhvQ/TVt4S/kK9ALoNRkTEy2irAAAAAElFTkSuQmCC' }
+      }
+    }
+  };
+  // Curated colour swatches. skin/hair are flat colours; scrub carries a light+dark pair so the
+  // existing two-tone shading (see the mask categories below) is preserved in any hue.
+  // Index 0 of each matches the sprite's original shipped look, so a saved game with no `custom`
+  // data yet (or one from before this feature existed) renders identically once defaults kick in.
+  const CUSTOMIZE_SWATCHES = {
+    skin: ['#FFDABA','#FFCD94','#E0AC69','#C68642','#8D5524','#5C3317'],
+    hair: ['#000000','#67321E','#4A2C1A','#B0733A','#DEBC85','#B04928'],
+    scrub: [
+      { name:'Navy',            light:'#2B4363', dark:'#03172F' },
+      { name:'Ceil Blue',       light:'#5B86BF', dark:'#2B4363' },
+      { name:'Surgical Green',  light:'#3A8A76', dark:'#184E42' },
+      { name:'Violet',          light:'#70529E', dark:'#3A2860' },
+      { name:'Wine',            light:'#963742', dark:'#581620' },
+      { name:'Charcoal',        light:'#4B4B50', dark:'#222226' }
+    ]
+  };
+  // mask PNGs are flat grayscale category maps: 0=untouched(outlines/eyes/mouth/accessories/shoes),
+  // ~51=skin, ~102=scrub light, ~153=scrub dark, ~204=hair. Ranges (not exact-match) give a little
+  // tolerance; the source PNGs are pure flat colour so exact values are what's actually produced.
+  function hexToRgb(hex) {
+    const v = parseInt(hex.slice(1), 16);
+    return [(v>>16)&255, (v>>8)&255, v&255];
+  }
+  function loadImg(src) {
+    return new Promise((resolve, reject) => {
+      const im = new Image();
+      im.onload = () => resolve(im);
+      im.onerror = reject;
+      im.src = src;
+    });
+  }
+  let SPRITE_IMAGES = {};
+  async function preloadSpriteAssets() {
+    for (const style of Object.keys(SPRITE_ASSETS)) {
+      SPRITE_IMAGES[style] = {};
+      for (const frame of ['top','bot']) {
+        const cfg = SPRITE_ASSETS[style].frames[frame];
+        const [tpl, mask] = await Promise.all([loadImg(cfg.tpl), loadImg(cfg.mask)]);
+        SPRITE_IMAGES[style][frame] = { tpl, mask, bbox: cfg.bbox };
+      }
+    }
+  }
+  // Recolors one frame at its native (small, exact-colour) resolution, then reports where/how big
+  // to draw it into a 48x48 tile — the *only* resize this pipeline ever does, done once here with
+  // high-quality smoothing, never left to the browser's `image-rendering:pixelated` CSS scaling
+  // (that's what caused the earlier "blobby arms" bug — see player-sprite-swap project memory).
+  function recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex) {
+    const asset = SPRITE_IMAGES[style][frame];
+    const { tpl, mask, bbox } = asset;
+    const w = bbox[2]-bbox[0], h = bbox[3]-bbox[1];
+    const c1 = document.createElement('canvas'); c1.width = w; c1.height = h;
+    const ctx1 = c1.getContext('2d');
+    ctx1.drawImage(tpl, 0, 0);
+    const imgData = ctx1.getImageData(0, 0, w, h);
+    const c2 = document.createElement('canvas'); c2.width = w; c2.height = h;
+    const ctx2 = c2.getContext('2d');
+    ctx2.drawImage(mask, 0, 0);
+    const maskData = ctx2.getImageData(0, 0, w, h).data;
+    const skin = hexToRgb(skinHex), hair = hexToRgb(hairHex), sl = hexToRgb(scrubLightHex), sd = hexToRgb(scrubDarkHex);
+    const d = imgData.data;
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i+3] === 0) continue;
+      const g = maskData[i];
+      let c = null;
+      if (g >= 40 && g < 70) c = skin;
+      else if (g >= 90 && g < 115) c = sl;
+      else if (g >= 140 && g < 165) c = sd;
+      else if (g >= 190) c = hair;
+      if (c) { d[i] = c[0]; d[i+1] = c[1]; d[i+2] = c[2]; }
+    }
+    ctx1.putImageData(imgData, 0, 0);
+    const scale = TILE / SPRITE_ASSETS[style].bboxScale;
+    return {
+      canvas: c1,
+      destX: Math.round(bbox[0]*scale), destY: Math.round(bbox[1]*scale),
+      destW: Math.round(w*scale), destH: Math.round(h*scale),
+    };
+  }
+  function buildFrame48(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex) {
+    const { canvas, destX, destY, destW, destH } = recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex);
+    const out = document.createElement('canvas'); out.width = TILE; out.height = TILE;
+    const octx = out.getContext('2d');
+    octx.imageSmoothingEnabled = true; octx.imageSmoothingQuality = 'high';
+    octx.drawImage(canvas, 0, 0, canvas.width, canvas.height, destX, destY, destW, destH);
+    return out;
+  }
+  function buildPlayerSpriteDataUrl(style, skinHex, hairHex, scrubLightHex, scrubDarkHex) {
+    const sheet = document.createElement('canvas'); sheet.width = TILE*2; sheet.height = TILE;
+    const sctx = sheet.getContext('2d');
+    sctx.drawImage(buildFrame48(style, 'top', skinHex, hairHex, scrubLightHex, scrubDarkHex), 0, 0);
+    sctx.drawImage(buildFrame48(style, 'bot', skinHex, hairHex, scrubLightHex, scrubDarkHex), TILE, 0);
+    return sheet.toDataURL('image/png');
+  }
+  function currentCustomColors() {
+    const c = game.custom;
+    return {
+      skin: CUSTOMIZE_SWATCHES.skin[c.skinIdx],
+      hair: CUSTOMIZE_SWATCHES.hair[c.hairIdx],
+      scrub: CUSTOMIZE_SWATCHES.scrub[c.scrubIdx],
+    };
+  }
+  function applyPlayerSprite() {
+    if (!SPRITE_IMAGES[game.custom.style]) return; // assets not loaded yet
+    const { skin, hair, scrub } = currentCustomColors();
+    const url = buildPlayerSpriteDataUrl(game.custom.style, skin, hair, scrub.light, scrub.dark);
+    document.documentElement.style.setProperty('--player-sprite', `url("${url}")`);
+  }
+  function updateCustomizePreview() {
+    if (!SPRITE_IMAGES[game.custom.style]) return;
+    const { skin, hair, scrub } = currentCustomColors();
+    const frame = buildFrame48(game.custom.style, 'top', skin, hair, scrub.light, scrub.dark);
+    const canvas = $('customize-preview-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(frame, 0, 0, TILE, TILE, 0, 0, canvas.width, canvas.height);
+  }
+  function buildStyleButtons() {
+    const el = $('customize-style-row');
+    el.innerHTML = '';
+    [['female','Female'],['male','Male']].forEach(([key,label]) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'customize-style-btn';
+      btn.dataset.style = key;
+      btn.textContent = label;
+      btn.addEventListener('click', () => {
+        game.custom.style = key;
+        refreshCustomizeUI();
+        applyPlayerSprite();
+      });
+      el.appendChild(btn);
+    });
+  }
+  function buildSwatchButtons(containerId, colors, isScrub, onSelect) {
+    const el = $(containerId);
+    el.innerHTML = '';
+    colors.forEach((c, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'customize-swatch';
+      if (isScrub) {
+        btn.style.background = `linear-gradient(135deg, ${c.light} 50%, ${c.dark} 50%)`;
+        btn.title = c.name;
+      } else {
+        btn.style.background = c;
+      }
+      btn.addEventListener('click', () => onSelect(idx));
+      el.appendChild(btn);
+    });
+  }
+  function refreshCustomizeUI() {
+    document.querySelectorAll('#customize-style-row .customize-style-btn').forEach(b => b.classList.toggle('active', b.dataset.style === game.custom.style));
+    document.querySelectorAll('#customize-skin-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.skinIdx));
+    document.querySelectorAll('#customize-hair-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.hairIdx));
+    document.querySelectorAll('#customize-scrub-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.scrubIdx));
+    updateCustomizePreview();
+  }
+  buildStyleButtons();
+  buildSwatchButtons('customize-skin-row', CUSTOMIZE_SWATCHES.skin, false, (idx) => { game.custom.skinIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
+  buildSwatchButtons('customize-hair-row', CUSTOMIZE_SWATCHES.hair, false, (idx) => { game.custom.hairIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
+  buildSwatchButtons('customize-scrub-row', CUSTOMIZE_SWATCHES.scrub, true, (idx) => { game.custom.scrubIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
+  function openCustomizeModal() { refreshCustomizeUI(); $('customize-modal').classList.remove('hidden'); }
+  function closeCustomizeModal() { $('customize-modal').classList.add('hidden'); saveState(); }
+  $('btn-info-customize').addEventListener('click', () => { closeInfoMenu(); openCustomizeModal(); });
+  $('customize-modal-close').addEventListener('click', closeCustomizeModal);
+  $('customize-modal-backdrop').addEventListener('click', closeCustomizeModal);
+  $('btn-customize-done').addEventListener('click', closeCustomizeModal);
+
   // ---------- init ----------
   (async function init() {
     await loadState();
+    await preloadSpriteAssets();
+    applyPlayerSprite();
     renderMap();
     renderSidebar();
     tryDebugJump();
