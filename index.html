@@ -8500,7 +8500,13 @@ const DRUG_MOVE_MAP = {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
+        const defaultCustom = game.custom; // capture before Object.assign overwrites it below
         game = Object.assign(game, parsed);
+        // `custom` gains new fields over time (style, then stethIdx, ...); a save made before a
+        // given field existed won't have it, so fill gaps from the defaults rather than replacing
+        // the whole object wholesale — otherwise an old save leaves e.g. stethIdx undefined and
+        // crashes the recolor engine downstream (hexToRgb(undefined)).
+        if (parsed.custom) game.custom = Object.assign({}, defaultCustom, parsed.custom);
       }
     } catch (e) { /* no saved state yet, or storage unavailable — use defaults */ }
   }
