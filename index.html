@@ -151,6 +151,21 @@
   .info-dropdown-item:hover { background: var(--bg-panel); color: var(--agar-gold); }
   .info-dropdown-item.danger:hover { background: var(--bg-panel); color: var(--hp-red); }
 
+  .confirm-modal { position:fixed; inset:0; z-index:320; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .confirm-modal-backdrop { position:absolute; inset:0; background:rgba(8,7,12,.78); }
+  .confirm-modal-panel {
+    position:relative; width:100%; max-width:380px;
+    background: var(--bg-panel-2); border:1px solid var(--hp-red); padding:22px 22px 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  }
+  .confirm-modal-title {
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.4px; text-transform:uppercase;
+    color: var(--hp-red); margin:0 0 12px;
+  }
+  .confirm-modal-body { font-size:13.5px; line-height:1.7; color: var(--text-dim); margin:0 0 20px; }
+  button.action.danger { background: var(--hp-red); color:#fff; }
+  button.action.danger:hover { background:#e06a8c; }
+
   .stage { flex:1; padding: 22px 20px 90px; display:flex; flex-direction:column; gap:16px; }
   .hidden { display: none !important; }
 
@@ -631,6 +646,18 @@
     <div class="dex-modal-panel" role="dialog" aria-modal="true">
       <button class="dex-modal-close" id="dex-modal-close" aria-label="Close">✕</button>
       <div id="dex-modal-body"></div>
+    </div>
+  </div>
+
+  <div class="confirm-modal hidden" id="reset-confirm-modal">
+    <div class="confirm-modal-backdrop" id="reset-confirm-backdrop"></div>
+    <div class="confirm-modal-panel" role="alertdialog" aria-modal="true" aria-labelledby="reset-confirm-title">
+      <div class="confirm-modal-title" id="reset-confirm-title">Reset All Progress?</div>
+      <p class="confirm-modal-body" id="reset-confirm-body"></p>
+      <div class="btn-row" style="justify-content:flex-end;">
+        <button class="action ghost" id="btn-reset-cancel">Cancel</button>
+        <button class="action danger" id="btn-reset-confirm">Yes, Reset Everything</button>
+      </div>
     </div>
   </div>
 </div>
@@ -8308,9 +8335,20 @@ const DRUG_MOVE_MAP = {
   });
   $('btn-info-evidence').addEventListener('click', () => { closeInfoMenu(); openInfo('evidence'); });
   $('btn-info-about').addEventListener('click', () => { closeInfoMenu(); openInfo('about'); });
-  $('btn-info-reset').addEventListener('click', async () => {
-    closeInfoMenu();
-    if (!confirm('Reset coins, dex, and medication log? This cannot be undone.')) return;
+
+  // ---------- reset-progress confirmation ----------
+  function openResetConfirm() {
+    const coinWord = game.coins === 1 ? 'coin' : 'coins';
+    $('reset-confirm-body').textContent =
+      `You will lose all ${game.coins} ${coinWord}, and your Organism Dex and Drug Formulary progress will be cleared back to unseen. This cannot be undone.`;
+    $('reset-confirm-modal').classList.remove('hidden');
+  }
+  function closeResetConfirm() { $('reset-confirm-modal').classList.add('hidden'); }
+  $('btn-info-reset').addEventListener('click', () => { closeInfoMenu(); openResetConfirm(); });
+  $('btn-reset-cancel').addEventListener('click', closeResetConfirm);
+  $('reset-confirm-backdrop').addEventListener('click', closeResetConfirm);
+  $('btn-reset-confirm').addEventListener('click', async () => {
+    closeResetConfirm();
     game.coins = 0; game.dex = {}; game.meds = [];
     await saveState();
     renderSidebar();
@@ -8326,6 +8364,7 @@ const DRUG_MOVE_MAP = {
   $('sidebar-backdrop').addEventListener('click', closeSidebar);
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
+    if (!$('reset-confirm-modal').classList.contains('hidden')) { closeResetConfirm(); return; }
     if (!$('dex-modal').classList.contains('hidden')) { closeDetail(); return; }
     if (!$('info-dropdown').classList.contains('hidden')) { closeInfoMenu(); return; }
     if ($('sidebar').classList.contains('open')) { closeSidebar(); }
