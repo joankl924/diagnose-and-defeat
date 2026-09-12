@@ -5623,7 +5623,11 @@ const DEX_INFO = {
       'mecA (or mecC) gene → altered PBP2a with low beta-lactam affinity → acquired resistance (via horizontally transferred SCCmec cassette) to all penicillins, cephalosporins (except ceftaroline/ceftobiprole) and carbapenems once expressed (MRSA)',
       'Inducible clindamycin resistance (erm genes) in some erythromycin-resistant isolates — D-test required before relying on clindamycin',
     ],
-    treatment: "MSSA: cloxacillin/flucloxacillin or cefazolin — a narrow anti-staphylococcal beta-lactam outperforms vancomycin for susceptible strains (Grade A, IDSA). MRSA: vancomycin (AUC/MIC-guided dosing) or daptomycin for bacteraemia. Other options include linezolid, teicoplanin, and tigecycline, although evidence levels for each of these agents vary. Source control (drainage/device removal) is essential regardless of antibiotic choice.",
+    treatment: [
+      "MSSA: cloxacillin/flucloxacillin or cefazolin — a narrow anti-staphylococcal beta-lactam outperforms vancomycin for susceptible strains (Grade A, IDSA).",
+      "MRSA: vancomycin (AUC/MIC-guided dosing) or daptomycin for bacteraemia. Other options include linezolid, teicoplanin, and tigecycline, although evidence levels for each of these agents vary.",
+      "Source control (drainage/device removal) is essential regardless of antibiotic choice."
+    ],
     references: [
       "IDSA Clinical Practice Guidelines for the Treatment of MRSA Infections in Adults and Children, 2011 (Liu et al., Clin Infect Dis) (Grade A)",
       "ASHP/IDSA/PIDS/SIDP Consensus Guideline on Therapeutic Monitoring of Vancomycin, 2020 (Rybak et al., Am J Health-Syst Pharm) (Grade A)",
@@ -5651,7 +5655,11 @@ const DEX_INFO = {
       'No confirmed clinical penicillin resistance ever reported despite decades of use — penicillin remains first-line',
       'Macrolide resistance (erm/mef genes) increasingly reported — relevant when penicillin allergy limits options',
     ],
-    treatment: 'Penicillin V (oral) or benzylpenicillin (IV) remains first-line for all syndromes — no resistance described (Grade A). Severe invasive disease (necrotising fasciitis, toxic shock): high-dose penicillin PLUS clindamycin as adjunct — clindamycin suppresses toxin production independent of inoculum size (Eagle effect), improving outcomes (Grade B). Surgical debridement is essential in necrotising soft tissue infection.',
+    treatment: [
+      "Penicillin V (oral) or benzylpenicillin (IV) remains first-line for all syndromes — no resistance described (Grade A).",
+      "Severe invasive disease (necrotising fasciitis, toxic shock): high-dose penicillin PLUS clindamycin as adjunct — clindamycin suppresses toxin production independent of inoculum size (Eagle effect), improving outcomes (Grade B).",
+      "Surgical debridement is essential in necrotising soft tissue infection."
+    ],
     references: [
       "IDSA Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis, 2012 (Shulman et al., Clin Infect Dis) (Grade A)",
       "IDSA Clinical Practice Guidelines for Skin and Soft Tissue Infections, 2014 (Stevens et al., Clin Infect Dis) (Grade A)",
@@ -5678,7 +5686,11 @@ const DEX_INFO = {
       'Resistance is dose- and site-dependent: high-dose amoxicillin often still works for non-meningeal disease; meningitis needs the highest CNS-penetrant regimen',
       'Macrolide resistance (erm/mef) common in many regions',
     ],
-    treatment: 'Non-meningeal disease: high-dose amoxicillin first-line for susceptible/low-level resistant strains (Grade A); ceftriaxone for severe/hospitalised disease. Meningitis: empirical ceftriaxone PLUS vancomycin until susceptibility confirmed, given the risk of penicillin-non-susceptible <i>Streptococcus pneumoniae</i> in the CNS compartment (Grade A) — adjunctive dexamethasone reduces neurological complications. Vaccination (PCV/PPSV23) is the primary prevention strategy.',
+    treatment: [
+      "Non-meningeal disease: high-dose amoxicillin first-line for susceptible/low-level resistant strains (Grade A); ceftriaxone for severe/hospitalised disease.",
+      "Meningitis: empirical ceftriaxone PLUS vancomycin until susceptibility confirmed, given the risk of penicillin-non-susceptible <i>Streptococcus pneumoniae</i> in the CNS compartment (Grade A) — adjunctive dexamethasone reduces neurological complications.",
+      "Vaccination (PCV/PPSV23) is the primary prevention strategy."
+    ],
     specifics: 'This is more nitty-gritty, but EUCAST and CLSI differ in their recommended methodology for assessing penicillin susceptibility. EUCAST recommends broth microdilution, and permits oxacillin disc diffusion to rule out penicillin resistance. CLSI uses broth microdilution and E-tests (gradient diffusion strips) to look at penicillin MICs. <span class="cite">(Grade B — <a href="https://doi.org/10.1128/jcm.00027-25" target="_blank" rel="noopener" style="color:var(--agar-gold);">Mendes RE et al., J Clin Microbiol 2025</a>; <a href="https://doi.org/10.1007/s10096-024-04847-2" target="_blank" rel="noopener" style="color:var(--agar-gold);">Martens S et al., Eur J Clin Microbiol Infect Dis 2024</a>)</span>',
     references: [
       "IDSA/ATS Clinical Practice Guidelines: Diagnosis and Treatment of Adults with Community-Acquired Pneumonia, 2019 (Metlay et al., Am J Respir Crit Care Med) (Grade A)",
@@ -5710,7 +5722,11 @@ const DEX_INFO = {
       'VRE: acquired vanA/vanB gene clusters alter the peptidoglycan precursor target, conferring vancomycin resistance',
       'Typically ampicillin-susceptible when non-VRE — a real point of difference from <i>E. faecium</i>, which is usually ampicillin-resistant (altered PBP5) even without vancomycin resistance',
     ],
-    treatment: 'Uncomplicated UTI: amoxicillin/ampicillin if susceptible, or nitrofurantoin. Endocarditis: ampicillin plus gentamicin (synergy) exploits bactericidal killing beyond either agent alone (Grade A, IDSA/AHA). VRE or ampicillin-resistant strains: linezolid or daptomycin — daptomycin should NOT be used for pulmonary infection (surfactant inactivates it).',
+    treatment: [
+      "Uncomplicated UTI: amoxicillin/ampicillin if susceptible, or nitrofurantoin.",
+      "Endocarditis: ampicillin plus gentamicin (synergy) exploits bactericidal killing beyond either agent alone (Grade A, IDSA/AHA).",
+      "VRE or ampicillin-resistant strains: linezolid or daptomycin — daptomycin should NOT be used for pulmonary infection (surfactant inactivates it)."
+    ],
     references: [
       "2015 ESC Guidelines for the Management of Infective Endocarditis (Habib et al., Eur Heart J) (Grade A)",
       "2015 AHA Scientific Statement: Infective Endocarditis in Adults (Baddour et al., Circulation) (Grade A)",
@@ -5736,7 +5752,10 @@ const DEX_INFO = {
       'Usually ampicillin-resistant (altered, low-affinity PBP5) regardless of vancomycin susceptibility — unlike <i>E. faecalis</i>, which is typically ampicillin-susceptible when non-VRE',
       'The majority of hospital VRE isolates are <i>E. faecium</i> — acquired vanA/vanB gene clusters add vancomycin resistance on top of the baseline ampicillin resistance',
     ],
-    treatment: 'Vancomycin-susceptible: vancomycin (ampicillin is NOT a reliable option here, unlike for <i>E. faecalis</i>). VRE or ampicillin-resistant strains: linezolid or high-dose daptomycin (10–12 mg/kg/day) — higher doses are associated with lower mortality in VRE bacteraemia, likely reflecting the higher daptomycin MICs typically seen in this species (Grade B).',
+    treatment: [
+      "Vancomycin-susceptible: vancomycin (ampicillin is NOT a reliable option here, unlike for <i>E. faecalis</i>).",
+      "VRE or ampicillin-resistant strains: linezolid or high-dose daptomycin (10–12 mg/kg/day) — higher doses are associated with lower mortality in VRE bacteraemia, likely reflecting the higher daptomycin MICs typically seen in this species (Grade B)."
+    ],
     references: [
       "Vancomycin-Resistant Enterococci, StatPearls [Internet], NCBI Bookshelf (Grade B — review, species-level susceptibility patterns)",
       "CASP Vancomycin-Resistant <i>Enterococcus faecium</i> Treatment Guideline, UNC Division of Infectious Diseases, Jan 2023 — cohort data supporting high-dose (10–12 mg/kg) daptomycin (Grade B)",
@@ -5761,7 +5780,11 @@ const DEX_INFO = {
       'Remains universally penicillin-susceptible — no confirmed clinical resistance, so penicillin/ampicillin remains first-line',
       'Clindamycin and macrolide resistance increasingly common — relevant for penicillin-allergic pregnant patients needing intrapartum prophylaxis',
     ],
-    treatment: 'Penicillin G or ampicillin is first-line for all syndromes (Grade A). Universal antenatal screening (36–37 weeks) with intrapartum antibiotic prophylaxis for colonised mothers is the cornerstone of early-onset neonatal GBS disease prevention (Grade A). Penicillin-allergic patients require clindamycin susceptibility (incl. D-test) or vancomycin if resistant/unknown.',
+    treatment: [
+      "Penicillin G or ampicillin is first-line for all syndromes (Grade A).",
+      "Universal antenatal screening (36–37 weeks) with intrapartum antibiotic prophylaxis for colonised mothers is the cornerstone of early-onset neonatal GBS disease prevention (Grade A).",
+      "Penicillin-allergic patients require clindamycin susceptibility (incl. D-test) or vancomycin if resistant/unknown."
+    ],
     references: [
       "ACOG Committee Opinion No. 797: Prevention of Group B Streptococcal Early-Onset Disease in Newborns, 2020 (Obstet Gynecol) (Grade A)",
       "CDC Prevention of Perinatal Group B Streptococcal Disease, Revised Guidelines (Grade A)",
@@ -5787,7 +5810,11 @@ const DEX_INFO = {
       'Intrinsically resistant to ALL cephalosporins — a critical pitfall, since empirical meningitis cover (ceftriaxone+vancomycin) does NOT cover <i>Listeria</i>',
       'Remains reliably ampicillin/penicillin-susceptible — no significant acquired resistance in routine isolates',
     ],
-    treatment: 'Ampicillin (± gentamicin for synergy in severe disease) is first-line (Grade B — no RCTs exist for <i>Listeria</i> meningitis treatment; recommendation rests on observational data and expert-consensus guidelines). Trimethoprim-sulfamethoxazole is the standard alternative for penicillin allergy. Because standard empirical meningitis cover misses <i>Listeria</i>, ampicillin must be added empirically in at-risk groups (neonates, >50 years, pregnancy, immunocompromised) pending CSF results.',
+    treatment: [
+      "Ampicillin (± gentamicin for synergy in severe disease) is first-line (Grade B — no RCTs exist for <i>Listeria</i> meningitis treatment; recommendation rests on observational data and expert-consensus guidelines).",
+      "Trimethoprim-sulfamethoxazole is the standard alternative for penicillin allergy.",
+      "Because standard empirical meningitis cover misses <i>Listeria</i>, ampicillin must be added empirically in at-risk groups (neonates, >50 years, pregnancy, immunocompromised) pending CSF results."
+    ],
     references: [
       "NICE NG240 — Meningitis (bacterial) and meningococcal disease: recognition, diagnosis and management (evidence review for <i>Listeria</i> antibiotic treatment found no eligible studies) (Grade A)",
       "Thønnings S et al. 'Antibiotic treatment and mortality in patients with <i>Listeria monocytogenes</i> meningitis or bacteraemia.' Clin Microbiol Infect. 2016 (observational cohort) (Grade B)",
@@ -5812,7 +5839,12 @@ const DEX_INFO = {
       'Not primarily an antimicrobial-resistance problem — vancomycin/fidaxomicin remain reliably active; the challenge is recurrence and epidemic strain virulence',
       'Broad-spectrum antibiotic exposure (clindamycin, fluoroquinolones, broad cephalosporins) disrupts protective gut flora and enables overgrowth',
     ],
-    treatment: 'The 2021 IDSA/SHEA focused update suggests fidaxomicin in preference to vancomycin for an initial episode (conditional recommendation, moderate-certainty evidence) given lower recurrence, though oral vancomycin remains an acceptable first-line alternative where fidaxomicin is unavailable or cost-prohibitive (Grade B, IDSA/SHEA 2021). IV metronidazole is reserved for when oral therapy is not feasible. Fulminant disease: oral/rectal vancomycin plus IV metronidazole. Stopping the inciting antibiotic wherever possible is the single most effective intervention.',
+    treatment: [
+      "The 2021 IDSA/SHEA focused update suggests fidaxomicin in preference to vancomycin for an initial episode (conditional recommendation, moderate-certainty evidence) given lower recurrence, though oral vancomycin remains an acceptable first-line alternative where fidaxomicin is unavailable or cost-prohibitive (Grade B, IDSA/SHEA 2021).",
+      "IV metronidazole is reserved for when oral therapy is not feasible.",
+      "Fulminant disease: oral/rectal vancomycin plus IV metronidazole.",
+      "Stopping the inciting antibiotic wherever possible is the single most effective intervention."
+    ],
     references: [
       "Johnson S et al. (IDSA/SHEA). 'Clinical Practice Guideline... 2021 Focused Update Guidelines on Management of <i>Clostridioides difficile</i> Infection in Adults.' Clin Infect Dis. 2021;73(5):e1029-e1044 (Grade A)",
       "van Prehn J et al. (ESCMID). '2021 update on the treatment guidance document for <i>Clostridioides difficile</i> infection in adults.' Clin Microbiol Infect. 2021 (Grade B)",
@@ -5840,7 +5872,12 @@ const DEX_INFO = {
       'Plasmid-mediated resistance spreads readily between Enterobacterales, often co-carrying fluoroquinolone/aminoglycoside resistance',
       'STEC/EHEC: antibiotics may worsen HUS risk by increasing toxin release — treatment is supportive',
     ],
-    treatment: 'Uncomplicated cystitis: nitrofurantoin first-line, with amoxicillin-clavulanate or fosfomycin as alternatives (Grade A, per Singapore ACE Guideline 2023); co-trimoxazole is not part of current Singapore guidance given local resistance rates, though it remains an option elsewhere if local resistance <20%. Uncomplicated pyelonephritis: amoxicillin-clavulanate first-line per ACE Singapore (cefuroxime as alternative); ceftriaxone or ciprofloxacin remain appropriate for more complicated pyelonephritis or bacteraemia/urosepsis if susceptible. Confirmed ESBL with invasive infection: carbapenem (Grade A). STEC/EHEC diarrhoea: avoid antibiotics and anti-motility agents.',
+    treatment: [
+      "Uncomplicated cystitis: nitrofurantoin first-line, with amoxicillin-clavulanate or fosfomycin as alternatives (Grade A, per Singapore ACE Guideline 2023); co-trimoxazole is not part of current Singapore guidance given local resistance rates, though it remains an option elsewhere if local resistance <20%.",
+      "Uncomplicated pyelonephritis: amoxicillin-clavulanate first-line per ACE Singapore (cefuroxime as alternative); ceftriaxone or ciprofloxacin remain appropriate for more complicated pyelonephritis or bacteraemia/urosepsis if susceptible.",
+      "Confirmed ESBL with invasive infection: carbapenem (Grade A).",
+      "STEC/EHEC diarrhoea: avoid antibiotics and anti-motility agents."
+    ],
     references: [
       "Agency for Care Effectiveness (ACE) Singapore. Urinary Tract Infections — Appropriate Diagnosis and Antibiotic Use for Uncomplicated Cystitis and Pyelonephritis (2023). (Grade A)",
       "IDSA 2024 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections — ESBL-E section. (Grade A)",
@@ -5867,7 +5904,10 @@ const DEX_INFO = {
       'Ceftazidime-avibactam/meropenem-vaborbactam restore activity against KPC-producers but NOT metallo-beta-lactamases (NDM) unless combined with aztreonam',
       'Frequently co-resistant to fluoroquinolones and aminoglycosides',
     ],
-    treatment: 'Non-CRE, non-ESBL strains: ceftriaxone or piperacillin-tazobactam as for other Enterobacterales. CRE strains: agent choice depends on the specific carbapenemase — ceftazidime-avibactam for KPC/OXA-48-like; ceftazidime-avibactam plus aztreonam for NDM (Grade B, evolving evidence). ID/microbiology input strongly recommended for CRE management.',
+    treatment: [
+      "Non-CRE, non-ESBL strains: ceftriaxone or piperacillin-tazobactam as for other Enterobacterales.",
+      "CRE strains: agent choice depends on the specific carbapenemase — ceftazidime-avibactam for KPC/OXA-48-like; ceftazidime-avibactam plus aztreonam for NDM (Grade B, evolving evidence). ID/microbiology input strongly recommended for CRE management."
+    ],
     references: [
       "IDSA 2024 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections — CRE section. (Grade A)",
       "Yigit H et al. Novel carbapenem-hydrolyzing beta-lactamase, KPC-1, from a carbapenem-resistant strain of <i>Klebsiella pneumoniae</i>. Antimicrob Agents Chemother. 2001;45(4):1151-1161. (Grade B)",
@@ -5893,7 +5933,10 @@ const DEX_INFO = {
       'Can acquire ESBL production, though less frequently than <i>E. coli</i>/<i>Klebsiella</i>',
       'Generally retains good ampicillin/amoxicillin susceptibility unlike most other Enterobacterales',
     ],
-    treatment: 'Uncomplicated UTI: ampicillin/amoxicillin or a cephalosporin if susceptible (avoid nitrofurantoin — intrinsically resistant) (Grade A). Complicated infection/struvite calculi: prolonged therapy plus urological input for stone removal, since retained calculi harbour bacteria and drive recurrence regardless of antibiotic choice.',
+    treatment: [
+      "Uncomplicated UTI: ampicillin/amoxicillin or a cephalosporin if susceptible (avoid nitrofurantoin — intrinsically resistant) (Grade A).",
+      "Complicated infection/struvite calculi: prolonged therapy plus urological input for stone removal, since retained calculi harbour bacteria and drive recurrence regardless of antibiotic choice."
+    ],
     references: [
       "CLSI M100 Performance Standards for Antimicrobial Susceptibility Testing (intrinsic resistance tables — <i>P. mirabilis</i> intrinsic resistance to nitrofurantoin and tetracyclines). (Grade A)",
       "Armbruster CE, Mobley HLT. Merging mythology and morphology: the multifaceted lifestyle of <i>Proteus mirabilis</i>. Nat Rev Microbiol. 2012;10(11):743-754. (Grade B)",
@@ -5919,7 +5962,12 @@ const DEX_INFO = {
       'Fluoroquinolone resistance increasingly widespread, especially in South Asian strains',
       'XDR strains (additionally 3rd-gen cephalosporin-resistant) have emerged and spread, notably from Pakistan since 2016',
     ],
-    treatment: 'Empirical choice should be guided by travel history. For most regions, ceftriaxone or azithromycin are appropriate empirical options pending susceptibility (Grade A/B). For travellers from Pakistan (notably Sindh province) or Iraq, ceftriaxone resistance is now common among circulating XDR strains — azithromycin is preferred empirically for uncomplicated illness, and a carbapenem for complicated/severe illness, in these patients (CDC, 2024). Fluoroquinolones should not be used empirically given widespread resistance, but ciprofloxacin remains an option once susceptibility is confirmed. Notifiable in Singapore under the Infectious Diseases Act.',
+    treatment: [
+      "Empirical choice should be guided by travel history. For most regions, ceftriaxone or azithromycin are appropriate empirical options pending susceptibility (Grade A/B).",
+      "For travellers from Pakistan (notably Sindh province) or Iraq, ceftriaxone resistance is now common among circulating XDR strains — azithromycin is preferred empirically for uncomplicated illness, and a carbapenem for complicated/severe illness, in these patients (CDC, 2024).",
+      "Fluoroquinolones should not be used empirically given widespread resistance, but ciprofloxacin remains an option once susceptibility is confirmed.",
+      "Notifiable in Singapore under the Infectious Diseases Act."
+    ],
     references: [
       "CDC. Clinical Guidance for Typhoid Fever and Paratyphoid Fever (updated 2024). (Grade A)",
       "Klemm EJ et al. Emergence of an Extensively Drug-Resistant <i>Salmonella enterica</i> Serovar Typhi Clone in Pakistan. mBio. 2018;9(1):e00105-18. (Grade A)",
@@ -5945,7 +5993,10 @@ const DEX_INFO = {
       'AmpC hydrolyses penicillins, most cephalosporins (incl. 3rd-gen) and aztreonam once expressed — but NOT cefepime (4th-gen) or carbapenems, which remain stable choices',
       'Can separately acquire ESBL/carbapenemase genes on top of AmpC — susceptibility testing remains essential',
     ],
-    treatment: 'For serious infection, avoid 3rd-generation cephalosporins even if the initial isolate reports susceptible — cefepime or a carbapenem are the preferred, AmpC-stable choices for moderate-severe disease (Grade A, IDSA AmpC guidance). Piperacillin-tazobactam carries similar induction risk and is generally avoided for the same reason. Narrow agents (ampicillin) are not viable — chromosomal AmpC confers baseline resistance.',
+    treatment: [
+      "For serious infection, avoid 3rd-generation cephalosporins even if the initial isolate reports susceptible — cefepime or a carbapenem are the preferred, AmpC-stable choices for moderate-severe disease (Grade A, IDSA AmpC guidance). Piperacillin-tazobactam carries similar induction risk and is generally avoided for the same reason.",
+      "Narrow agents (ampicillin) are not viable — chromosomal AmpC confers baseline resistance."
+    ],
     references: [
       "IDSA 2024 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections — AmpC-producing Enterobacterales section. (Grade A)",
       "Jacoby GA. AmpC β-Lactamases. Clin Microbiol Rev. 2009;22(1):161-182. (Grade B)",
@@ -5973,7 +6024,11 @@ const DEX_INFO = {
       'Can acquire resistance during treatment via efflux upregulation, AmpC derepression, porin (OprD) loss and, less commonly, carbapenemase acquisition — MDR/XDR <i>Pseudomonas</i> is an increasing ICU concern',
       'Newer agents (ceftolozane-tazobactam, ceftazidime-avibactam, imipenem-relebactam) provide options against many resistant strains',
     ],
-    treatment: 'Empirical coverage for suspected <i>Pseudomonas</i> requires an anti-pseudomonal agent — piperacillin-tazobactam, ceftazidime, cefepime, meropenem, or an anti-pseudomonal fluoroquinolone (Grade A for severe/neutropenic sepsis). De-escalate to a narrower agent once susceptibilities return. For MDR strains, expert opinion favours de-escalation to monotherapy once susceptibility is confirmed (Grade B/C).',
+    treatment: [
+      "Empirical coverage for suspected <i>Pseudomonas</i> requires an anti-pseudomonal agent — piperacillin-tazobactam, ceftazidime, cefepime, meropenem, or an anti-pseudomonal fluoroquinolone (Grade A for severe/neutropenic sepsis).",
+      "De-escalate to a narrower agent once susceptibilities return.",
+      "For MDR strains, expert opinion favours de-escalation to monotherapy once susceptibility is confirmed (Grade B/C)."
+    ],
     references: [
       "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, v4.0 (2024) — Difficult-to-Treat Resistance <i>P. aeruginosa</i> section (Grade A)",
       "Line L, et al. Regulation and Function of Versatile Aerobic and Anaerobic Respiratory Metabolism in <i>Pseudomonas aeruginosa</i>. Front Cell Infect Microbiol / PMC3153056 (Grade B)",
@@ -5999,7 +6054,11 @@ const DEX_INFO = {
       'Frequently extensively drug-resistant (XDR), with few reliably active agents remaining',
       'Polymyxins often used as salvage therapy, but resistance and toxicity limit use',
     ],
-    treatment: 'Confirm susceptibility before selecting therapy given the high resistance burden. Susceptible strains: piperacillin-tazobactam or a carbapenem. For carbapenem-resistant (CRAB)/XDR strains, current IDSA guidance (AMR Guidance v4.0, 2024) now prefers sulbactam-durlobactam combined with a carbapenem (meropenem or imipenem-cilastatin) as first-choice therapy where available; high-dose ampicillin-sulbactam plus a second active agent (e.g. a polymyxin, cefiderocol, or minocycline) is an alternative when sulbactam-durlobactam is unavailable (Grade B/C). Infection control (contact precautions, environmental cleaning) is critical given outbreak potential.',
+    treatment: [
+      "Confirm susceptibility before selecting therapy given the high resistance burden. Susceptible strains: piperacillin-tazobactam or a carbapenem.",
+      "For carbapenem-resistant (CRAB)/XDR strains, current IDSA guidance (AMR Guidance v4.0, 2024) now prefers sulbactam-durlobactam combined with a carbapenem (meropenem or imipenem-cilastatin) as first-choice therapy where available; high-dose ampicillin-sulbactam plus a second active agent (e.g. a polymyxin, cefiderocol, or minocycline) is an alternative when sulbactam-durlobactam is unavailable (Grade B/C).",
+      "Infection control (contact precautions, environmental cleaning) is critical given outbreak potential."
+    ],
     references: [
       "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, v4.0 (2024) — Carbapenem-Resistant <i>A. baumannii</i> section (Grade A)",
       "WHO Bacterial Priority Pathogens List, 2024 update — critical priority: carbapenem-resistant <i>Acinetobacter baumannii</i> (Grade A)",
@@ -6025,7 +6084,12 @@ const DEX_INFO = {
       'Largely penicillin-susceptible worldwide, though reduced susceptibility (altered PBPs) reported in some regions',
       'Ceftriaxone preferred empirically given reliability and CNS penetration pending susceptibility',
     ],
-    treatment: 'Empirical ceftriaxone (or cefotaxime) is first-line, started immediately on clinical suspicion without waiting for confirmatory testing — outcome is time-critical (Grade A). Benzylpenicillin remains an option once susceptibility confirmed. Close contacts require chemoprophylaxis (ciprofloxacin, rifampicin, or ceftriaxone). Notifiable in Singapore under the Infectious Diseases Act.',
+    treatment: [
+      "Empirical ceftriaxone (or cefotaxime) is first-line, started immediately on clinical suspicion without waiting for confirmatory testing — outcome is time-critical (Grade A).",
+      "Benzylpenicillin remains an option once susceptibility confirmed.",
+      "Close contacts require chemoprophylaxis (ciprofloxacin, rifampicin, or ceftriaxone).",
+      "Notifiable in Singapore under the Infectious Diseases Act."
+    ],
     references: [
       "Communicable Diseases Agency (Singapore), \"Meningococcal Disease\" clinical guidance (Grade B)",
       "CDC, Meningococcal Disease — Clinical Guidance (treatment & chemoprophylaxis) (Grade A)",
@@ -6051,7 +6115,12 @@ const DEX_INFO = {
       'BLPAR (beta-lactamase-positive, ampicillin-resistant) via TEM-1 beta-lactamase — the dominant mechanism; amoxicillin-clavulanate restores activity',
       'BLNAR (beta-lactamase-negative, ampicillin-resistant) via altered PBPs — NOT rescued by clavulanate; needs a cephalosporin or susceptibility-guided therapy',
     ],
-    treatment: 'Non-severe, beta-lactamase-negative: amoxicillin. BLPAR strains or empirical therapy pending result: amoxicillin-clavulanate (Grade A). Invasive disease (meningitis, epiglottitis, bacteraemia): ceftriaxone, which reliably covers both BLPAR and BLNAR strains. Hib conjugate vaccination is the primary prevention strategy (Singapore national childhood schedule).',
+    treatment: [
+      "Non-severe, beta-lactamase-negative: amoxicillin.",
+      "BLPAR strains or empirical therapy pending result: amoxicillin-clavulanate (Grade A).",
+      "Invasive disease (meningitis, epiglottitis, bacteraemia): ceftriaxone, which reliably covers both BLPAR and BLNAR strains.",
+      "Hib conjugate vaccination is the primary prevention strategy (Singapore national childhood schedule)."
+    ],
     references: [
       "CDC, <i>Haemophilus influenzae</i> Disease — Clinical Overview (Grade B)",
       "Global <i>H. influenzae</i> epidemiology and beta-lactamase-based resistance, 2013-2022 (BMC Infect Dis. 2025) — reports ~24% global beta-lactamase positivity, consistent with the game's stated range (Grade B)",
@@ -6078,7 +6147,11 @@ const DEX_INFO = {
       'Ceftriaxone resistance/reduced susceptibility is an emerging global concern (WHO high-priority AMR pathogen); isolated treatment-failure cases reported',
       'Azithromycin should not be used as sole empirical therapy given rising resistance',
     ],
-    treatment: 'Ceftriaxone (single IM dose) is first-line per current CDC/WHO and Singapore-aligned STI guidance (Grade A) — IV ceftriaxone has a role in disseminated gonococcal infection, but as a multi-day course rather than the single-dose regimen — guidance has moved toward ceftriaxone monotherapy at adequate dose given rising azithromycin resistance; check local guidelines. Test of cure recommended for pharyngeal infection. Partner notification and co-testing/treatment for chlamydia are essential given frequent co-infection.',
+    treatment: [
+      "Ceftriaxone (single IM dose) is first-line per current CDC/WHO and Singapore-aligned STI guidance (Grade A) — IV ceftriaxone has a role in disseminated gonococcal infection, but as a multi-day course rather than the single-dose regimen — guidance has moved toward ceftriaxone monotherapy at adequate dose given rising azithromycin resistance; check local guidelines.",
+      "Test of cure recommended for pharyngeal infection.",
+      "Partner notification and co-testing/treatment for chlamydia are essential given frequent co-infection."
+    ],
     references: [
       "CDC, Sexually Transmitted Infections Treatment Guidelines 2021 — Gonococcal Infections (updated clinical care page, ceftriaxone 500 mg IM single dose) (Grade A)",
       "Fifer H et al. British Association for Sexual Health and HIV (BASHH) UK National Guideline for the Management of Infection with <i>Neisseria gonorrhoeae</i>, 2025. Int J STD AIDS. 2025 (Grade A)",
@@ -6104,7 +6177,12 @@ const DEX_INFO = {
       'Intrinsically resistant to ALL beta-lactams — an intracellular pathogen, so these agents cannot achieve adequate intracellular concentration despite occasionally appearing susceptible in vitro',
       'No major acquired resistance patterns routinely relevant — the key pitfall is class selection, not resistance',
     ],
-    treatment: "Respiratory fluoroquinolones (e.g. levofloxacin) or macrolides (e.g. azithromycin) are first-line — both achieve the high intracellular concentrations required (Grade A). Beta-lactams should NOT be used even if reported susceptible in vitro. Urinary antigen testing allows rapid diagnosis. Notifiable in Singapore under the Infectious Diseases Act given outbreak potential.",
+    treatment: [
+      "Respiratory fluoroquinolones (e.g. levofloxacin) or macrolides (e.g. azithromycin) are first-line — both achieve the high intracellular concentrations required (Grade A).",
+      "Beta-lactams should NOT be used even if reported susceptible in vitro.",
+      "Urinary antigen testing allows rapid diagnosis.",
+      "Notifiable in Singapore under the Infectious Diseases Act given outbreak potential."
+    ],
     references: [
       "Metlay JP, et al. Diagnosis and Treatment of Adults with Community-Acquired Pneumonia. ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67. (Grade A)",
       "Singapore Communicable Diseases Agency (Ministry of Health). Legionellosis — notifiable disease status, diagnostic methods. (Grade A)",
@@ -6128,7 +6206,11 @@ const DEX_INFO = {
       'Intrinsically resistant to all beta-lactams (no cell wall target) — the single most important prescribing point',
       'Macrolide-resistant strains (23S rRNA mutations) increasingly reported in some regions, particularly parts of Asia',
     ],
-    treatment: 'Macrolides (e.g. azithromycin) are first-line, particularly in children (Grade A). Doxycycline is an effective adult alternative, preferred where macrolide resistance is a regional concern. Beta-lactams (including amoxicillin, ceftriaxone) are clinically ineffective regardless of any in-vitro report — <i>Mycoplasma</i> has no cell wall for them to act on.',
+    treatment: [
+      "Macrolides (e.g. azithromycin) are first-line, particularly in children (Grade A).",
+      "Doxycycline is an effective adult alternative, preferred where macrolide resistance is a regional concern.",
+      "Beta-lactams (including amoxicillin, ceftriaxone) are clinically ineffective regardless of any in-vitro report — <i>Mycoplasma</i> has no cell wall for them to act on."
+    ],
     references: [
       "Waites KB, Talkington DF. <i>Mycoplasma pneumoniae</i> and Its Role as a Human Pathogen. Clin Microbiol Rev. 2004;17(4):697-728. (Grade B)",
       "Himmelreich R, et al. Complete sequence analysis of the genome of the bacterium <i>Mycoplasma pneumoniae</i>. Nucleic Acids Res. 1996;24(22):4420-4449. (Grade B)",
@@ -6156,7 +6238,13 @@ const DEX_INFO = {
       'Acquired azole resistance can emerge with prior exposure (efflux upregulation, ERG11 mutation), though less common than in non-albicans species',
       'Echinocandin resistance remains rare in <i>C. albicans</i>',
     ],
-    treatment: 'Echinocandins (e.g. caspofungin) are first-line for candidaemia/invasive candidiasis in most guidelines, particularly with recent azole exposure or moderate-severe illness (Grade A, IDSA). Fluconazole is appropriate step-down once stable and confirmed susceptible. Liposomal amphotericin B is reserved for refractory disease or specific sites with limited echinocandin penetration. Central line removal is a key adjunct for candidaemia. Asymptomatic candiduria in a catheterised patient generally does not need treatment — catheter change/removal first.',
+    treatment: [
+      "Echinocandins (e.g. caspofungin) are first-line for candidaemia/invasive candidiasis in most guidelines, particularly with recent azole exposure or moderate-severe illness (Grade A, IDSA).",
+      "Fluconazole is appropriate step-down once stable and confirmed susceptible.",
+      "Liposomal amphotericin B is reserved for refractory disease or specific sites with limited echinocandin penetration.",
+      "Central line removal is a key adjunct for candidaemia.",
+      "Asymptomatic candiduria in a catheterised patient generally does not need treatment — catheter change/removal first."
+    ],
     references: [
       "IDSA Clinical Practice Guideline for the Management of Candidiasis, 2016 Update (Pappas et al., Clin Infect Dis 2016) (Grade A)",
       "ECMM/ISHAM/ASM Global Guideline for the Diagnosis and Management of Candidiasis, Lancet Infect Dis 2024 (Grade A)",
@@ -6182,7 +6270,12 @@ const DEX_INFO = {
       'Acquired resistance uncommon but can emerge with fluconazole monotherapy/prolonged exposure',
       'Flucytosine resistance emerges rapidly on monotherapy — must always be combined with amphotericin B',
     ],
-    treatment: "Induction: for HIV-associated cryptococcal meningitis, WHO (2022) now recommends a single high dose (10 mg/kg) of liposomal amphotericin B combined with 14 days of flucytosine and fluconazole (based on the AMBITION-cm trial) as the preferred regimen; where this isn't feasible, or in non-HIV/transplant hosts, daily amphotericin B (conventional or liposomal) plus flucytosine for at least 2 weeks (HIV, IDSA) or at least 4 weeks (non-HIV, IDSA) remains standard (Grade A) — both approaches are fungicidal, clear CSF organisms faster than monotherapy, and reduce mortality. Where flucytosine is unavailable, amphotericin B monotherapy or amphotericin B plus fluconazole are alternatives. Consolidation/maintenance uses fluconazole. Serial lumbar puncture to manage raised ICP is an essential, mortality-reducing intervention independent of antifungal therapy (Grade A).",
+    treatment: [
+      "Induction: for HIV-associated cryptococcal meningitis, WHO (2022) now recommends a single high dose (10 mg/kg) of liposomal amphotericin B combined with 14 days of flucytosine and fluconazole (based on the AMBITION-cm trial) as the preferred regimen; where this isn't feasible, or in non-HIV/transplant hosts, daily amphotericin B (conventional or liposomal) plus flucytosine for at least 2 weeks (HIV, IDSA) or at least 4 weeks (non-HIV, IDSA) remains standard (Grade A) — both approaches are fungicidal, clear CSF organisms faster than monotherapy, and reduce mortality.",
+      "Where flucytosine is unavailable, amphotericin B monotherapy or amphotericin B plus fluconazole are alternatives.",
+      "Consolidation/maintenance uses fluconazole.",
+      "Serial lumbar puncture to manage raised ICP is an essential, mortality-reducing intervention independent of antifungal therapy (Grade A)."
+    ],
     references: [
       "WHO Guidelines for Diagnosing, Preventing and Managing Cryptococcal Disease Among Adults, Adolescents and Children Living with HIV, 2022 (Grade A)",
       "Jarvis JN et al., Single-Dose Liposomal Amphotericin B Treatment for Cryptococcal Meningitis (AMBITION-cm), NEJM 2022 (Grade A)",
@@ -6209,7 +6302,11 @@ const DEX_INFO = {
       'No clinically significant, well-established antimicrobial resistance pattern in routine practice — treatment failures are more often due to reinfection or non-adherence than true resistance',
       "Beta-lactams (all penicillins and cephalosporins) are intrinsically ineffective — the organism's atypical cell wall gives them no meaningful target, not that it has 'acquired' resistance to them",
     ],
-    treatment: 'Doxycycline is now first-line for uncomplicated urogenital infection in non-pregnant patients (Grade A, CDC 2021) — it outperforms single-dose azithromycin, particularly for rectal infection. Azithromycin (single dose) remains an effective alternative and is preferred in pregnancy, where doxycycline is contraindicated. Sexual partners from the preceding 60 days should be tested and treated, and concurrent gonorrhoea should be considered given frequent co-infection.',
+    treatment: [
+      "Doxycycline is now first-line for uncomplicated urogenital infection in non-pregnant patients (Grade A, CDC 2021) — it outperforms single-dose azithromycin, particularly for rectal infection.",
+      "Azithromycin (single dose) remains an effective alternative and is preferred in pregnancy, where doxycycline is contraindicated.",
+      "Sexual partners from the preceding 60 days should be tested and treated, and concurrent gonorrhoea should be considered given frequent co-infection."
+    ],
     references: [
       "Singapore Communicable Diseases Agency (Ministry of Health). <i>Chlamydia</i> — doxycycline 100mg BD x7d first-line (non-pregnant); azithromycin 1g single dose in pregnancy. (Grade A)",
       "CDC. Sexually Transmitted Infections Treatment Guidelines, 2021 — Chlamydial Infections. MMWR Recomm Rep. (Grade A)",
@@ -6235,7 +6332,11 @@ const DEX_INFO = {
       'Remains essentially universally penicillin-susceptible worldwide — no clinically significant penicillin resistance has ever been well-documented, a striking exception among the organisms in this dex',
       'Reduced macrolide (azithromycin) efficacy from 23S rRNA mutations has been reported in some regions, which is why macrolides are not recommended as primary syphilis therapy',
     ],
-    treatment: 'Benzathine penicillin G (intramuscular) is first-line for every stage — dosing and duration (single dose for early syphilis, three weekly doses for late latent disease, and IV aqueous crystalline penicillin G for neurosyphilis) vary by stage, but the drug of choice does not (Grade A). Doxycycline is the standard alternative for non-pregnant, penicillin-allergic patients. In pregnancy, penicillin desensitisation and treatment is preferred over doxycycline (contraindicated), since penicillin is the only therapy proven to reliably prevent congenital transmission.',
+    treatment: [
+      "Benzathine penicillin G (intramuscular) is first-line for every stage — dosing and duration (single dose for early syphilis, three weekly doses for late latent disease, and IV aqueous crystalline penicillin G for neurosyphilis) vary by stage, but the drug of choice does not (Grade A).",
+      "Doxycycline is the standard alternative for non-pregnant, penicillin-allergic patients.",
+      "In pregnancy, penicillin desensitisation and treatment is preferred over doxycycline (contraindicated), since penicillin is the only therapy proven to reliably prevent congenital transmission."
+    ],
     references: [
       "Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021 (Syphilis section, incl. subsequent cdc.gov/sti clinical guidance updates). MMWR Recomm Rep. 2021;70(4):1-187. (Grade A)",
       "WHO Guidelines for the Treatment of <i>Treponema pallidum</i> (Syphilis). Geneva: World Health Organization; 2016. (Grade B)",
@@ -6261,7 +6362,12 @@ const DEX_INFO = {
       'Adamantane (amantadine) resistance is now near-universal in circulating influenza A and the drug class is no longer recommended regardless of individual isolate testing',
       'Baloxavir acts on a distinct target (the cap-dependent endonuclease) and retains activity against neuraminidase-inhibitor-resistant strains',
     ],
-    treatment: 'Oseltamivir is first-line, ideally started within 48 hours of symptom onset, though treatment beyond this window is still recommended in hospitalised, severe, or high-risk patients (Grade A, CDC/WHO). Baloxavir marboxil is a single-dose alternative acting on a different viral target, useful where resistance to neuraminidase inhibitors is suspected. Amantadine has no current role given near-universal resistance. Antibacterials have no role unless secondary bacterial infection is suspected.',
+    treatment: [
+      "Oseltamivir is first-line, ideally started within 48 hours of symptom onset, though treatment beyond this window is still recommended in hospitalised, severe, or high-risk patients (Grade A, CDC/WHO).",
+      "Baloxavir marboxil is a single-dose alternative acting on a different viral target, useful where resistance to neuraminidase inhibitors is suspected.",
+      "Amantadine has no current role given near-universal resistance.",
+      "Antibacterials have no role unless secondary bacterial infection is suspected."
+    ],
     references: [
       "CDC Influenza Antiviral Medications: Summary for Clinicians (Grade A)",
       "IDSA Clinical Practice Guidelines on Seasonal Influenza, 2018 Update (Uyeki et al., Clin Infect Dis 2019) (Grade A)",
@@ -6287,7 +6393,12 @@ const DEX_INFO = {
       'Artemisinin partial resistance (delayed parasite clearance) has emerged and spread in parts of the Greater Mekong subregion and, more recently, parts of East Africa — the reason artemisinin derivatives are always used in combination, never as monotherapy',
       'Chloroquine retains useful activity against <i>P. vivax</i> and <i>P. ovale</i> in most (though not all) regions, unlike <i>P. falciparum</i>',
     ],
-    treatment: 'IV artesunate is first-line for severe/complicated falciparum malaria (Grade A, WHO); oral artemisinin-based combination therapy (ACT, e.g. artemether-lumefantrine) is first-line for uncomplicated disease in a patient tolerating oral intake. Chloroquine has no reliable role given near-universal resistance. Doxycycline has genuine but slow-onset activity and is used as a partner drug or for chemoprophylaxis, not as monotherapy for acute disease. Malaria is a notifiable disease in Singapore and most jurisdictions.',
+    treatment: [
+      "IV artesunate is first-line for severe/complicated falciparum malaria (Grade A, WHO); oral artemisinin-based combination therapy (ACT, e.g. artemether-lumefantrine) is first-line for uncomplicated disease in a patient tolerating oral intake.",
+      "Chloroquine has no reliable role given near-universal resistance.",
+      "Doxycycline has genuine but slow-onset activity and is used as a partner drug or for chemoprophylaxis, not as monotherapy for acute disease.",
+      "Malaria is a notifiable disease in Singapore and most jurisdictions."
+    ],
     references: [
       "CDC Malaria: Treatment of Severe Malaria — Clinical Guidance (Grade A)",
       "WHO Guidelines for Malaria, 2025 (Grade A)",
@@ -6313,7 +6424,11 @@ const DEX_INFO = {
       'Albendazole is a real but less reliable alternative to ivermectin specifically for <i>Strongyloides</i>, with lower cure rates in trials',
       "Praziquantel has no activity — it targets trematodes and cestodes, not nematodes, illustrating that anthelmintic classes are not interchangeable across helminth taxa",
     ],
-    treatment: 'Ivermectin is first-line for both uncomplicated and severe (hyperinfection/disseminated) disease (Grade A, CDC/WHO); extended courses or subcutaneous administration may be used in hyperinfection where oral absorption is unreliable. Albendazole is a less effective alternative where ivermectin is unavailable or contraindicated. Screening (serology ± stool) before starting significant immunosuppression — especially corticosteroids — is essential in anyone with relevant current or past residence in an endemic area, since corticosteroids are the single most important precipitant of hyperinfection and the complication is largely preventable.',
+    treatment: [
+      "Ivermectin is first-line for both uncomplicated and severe (hyperinfection/disseminated) disease (Grade A, CDC/WHO); extended courses or subcutaneous administration may be used in hyperinfection where oral absorption is unreliable.",
+      "Albendazole is a less effective alternative where ivermectin is unavailable or contraindicated.",
+      "Screening (serology ± stool) before starting significant immunosuppression — especially corticosteroids — is essential in anyone with relevant current or past residence in an endemic area, since corticosteroids are the single most important precipitant of hyperinfection and the complication is largely preventable."
+    ],
     references: [
       "CDC Strongyloidiasis — Clinical Care Guidance (Grade A)",
       "WHO Guideline: Strongyloidiasis (control of neglected tropical diseases) (Grade B)",
@@ -6339,7 +6454,11 @@ const DEX_INFO = {
       'Intrinsic resistance to polymyxins (colistin) — a genus-level trait, not an acquired one, so susceptibility testing will not "reveal" activity that was never there',
       'Ampicillin is intrinsically ineffective from baseline low-level AmpC expression alone, without needing induction',
     ],
-    treatment: 'For <i>Enterobacter cloacae</i> complex, <i>Klebsiella aerogenes</i>, and <i>Citrobacter freundii</i>, cefepime or a carbapenem are preferred over 3rd-generation cephalosporins/piperacillin-tazobactam given a ~20% risk of clinically significant AmpC derepression during therapy. <i>Serratia marcescens</i> itself is at low risk of this (<5%) per current IDSA guidance, so susceptibility-guided therapy — including ceftriaxone or piperacillin-tazobactam if the isolate tests susceptible — is reasonable rather than reflexively escalating to cefepime/a carbapenem (Grade A, IDSA AMR Guidance v4.0, 2024). Colistin should not be relied on despite its broad Gram-negative reputation elsewhere, given intrinsic polymyxin resistance in this organism.',
+    treatment: [
+      "For <i>Enterobacter cloacae</i> complex, <i>Klebsiella aerogenes</i>, and <i>Citrobacter freundii</i>, cefepime or a carbapenem are preferred over 3rd-generation cephalosporins/piperacillin-tazobactam given a ~20% risk of clinically significant AmpC derepression during therapy.",
+      "<i>Serratia marcescens</i> itself is at low risk of this (<5%) per current IDSA guidance, so susceptibility-guided therapy — including ceftriaxone or piperacillin-tazobactam if the isolate tests susceptible — is reasonable rather than reflexively escalating to cefepime/a carbapenem (Grade A, IDSA AMR Guidance v4.0, 2024).",
+      "Colistin should not be relied on despite its broad Gram-negative reputation elsewhere, given intrinsic polymyxin resistance in this organism."
+    ],
     references: [
       "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, v4.0 (2024) — AmpC-Producing Enterobacterales section (Grade A)",
       "Tamma PD, et al. IDSA Guidance on the Treatment of AmpC β-Lactamase-Producing Enterobacterales... Clin Infect Dis. 2022;74(12):2089-2114 (Grade A)",
@@ -6365,7 +6484,11 @@ const DEX_INFO = {
       'Intrinsic polymyxin (colistin) resistance — a genus-level trait shared with <i>Proteus</i> and <i>Serratia</i>',
       'Carries an inducible chromosomal AmpC gene, but per current IDSA guidance clinically significant derepression during therapy is uncommon in <i>Morganella</i> — under 5% of infections, versus roughly 20% for <i>Enterobacter cloacae</i> complex, <i>Klebsiella aerogenes</i>, and <i>Citrobacter freundii</i> — so a 3rd-generation cephalosporin that tests susceptible can generally be relied on, guided by susceptibility results',
     ],
-    treatment: 'For <i>Enterobacter cloacae</i> complex, <i>Klebsiella aerogenes</i>, and <i>Citrobacter freundii</i>, cefepime or a carbapenem are preferred given a ~20% risk of clinically significant AmpC derepression during therapy. <i>Morganella</i> itself is at low risk of this (<5%) per current IDSA guidance, so susceptibility-guided therapy is reasonable rather than reflexively escalating to cefepime/a carbapenem (Grade A, IDSA AMR Guidance v4.0, 2024). Avoid nitrofurantoin and colistin, both intrinsically unreliable against this organism regardless of what a susceptibility report for other Enterobacterales might suggest.',
+    treatment: [
+      "For <i>Enterobacter cloacae</i> complex, <i>Klebsiella aerogenes</i>, and <i>Citrobacter freundii</i>, cefepime or a carbapenem are preferred given a ~20% risk of clinically significant AmpC derepression during therapy.",
+      "<i>Morganella</i> itself is at low risk of this (<5%) per current IDSA guidance, so susceptibility-guided therapy is reasonable rather than reflexively escalating to cefepime/a carbapenem (Grade A, IDSA AMR Guidance v4.0, 2024).",
+      "Avoid nitrofurantoin and colistin, both intrinsically unreliable against this organism regardless of what a susceptibility report for other Enterobacterales might suggest."
+    ],
     references: [
       "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, v4.0 (2024) — AmpC-Producing Enterobacterales section (Grade A)",
       "O'Hara CM, Brenner FW, Miller JM. Classification, Identification, and Clinical Significance of <i>Proteus</i>, <i>Providencia</i>, and <i>Morganella</i>. Clin Microbiol Rev. 2000;13(4):534-546 (Grade A)",
@@ -6391,7 +6514,12 @@ const DEX_INFO = {
       'Prior macrolide exposure for any other indication is a strong predictor of clarithromycin resistance in a subsequent <i>H. pylori</i> infection',
       'Metronidazole resistance is also common in many regions, though the bismuth quadruple regimen remains effective as a four-drug combination overall',
     ],
-    treatment: 'Optimized bismuth quadruple therapy (PPI + bismuth + metronidazole + tetracycline, 14 days) is now first-line for treatment-naive patients per the 2024 ACG guideline, which removed empiric clarithromycin triple therapy from first-line status given rising resistance. Clarithromycin triple therapy (PPI + amoxicillin + clarithromycin) is reserved for patients with documented clarithromycin susceptibility (Grade A, ACG 2024). Eradication is never attempted with a single antibiotic. Confirm eradication with a repeat non-invasive test at least 4 weeks after completing therapy and at least 2 weeks off the PPI.',
+    treatment: [
+      "Optimized bismuth quadruple therapy (PPI + bismuth + metronidazole + tetracycline, 14 days) is now first-line for treatment-naive patients per the 2024 ACG guideline, which removed empiric clarithromycin triple therapy from first-line status given rising resistance.",
+      "Clarithromycin triple therapy (PPI + amoxicillin + clarithromycin) is reserved for patients with documented clarithromycin susceptibility (Grade A, ACG 2024).",
+      "Eradication is never attempted with a single antibiotic.",
+      "Confirm eradication with a repeat non-invasive test at least 4 weeks after completing therapy and at least 2 weeks off the PPI."
+    ],
     references: [
       "Chey WD, Howden CW, Moss SF, et al. ACG Clinical Guideline: Treatment of <i>Helicobacter pylori</i> Infection. Am J Gastroenterol. 2024;119(9):1730-1753. (Grade A)",
       "Malfertheiner P, Megraud F, Rokkas T, et al. Management of <i>Helicobacter pylori</i> infection: the Maastricht VI/Florence consensus report. Gut. 2022;71:1724-1762. (Grade A)",
@@ -6417,7 +6545,10 @@ const DEX_INFO = {
       'Azithromycin has largely replaced ciprofloxacin as the generally preferred first-line agent when treatment is indicated, given this resistance trend',
       'No well-established macrolide resistance pattern comparable in scale to the fluoroquinolone trend',
     ],
-    treatment: 'Most <i>Campylobacter</i> gastroenteritis in healthy hosts is self-limiting — supportive care (oral rehydration) alone is guideline-concordant (Grade B, IDSA). Antibiotic treatment (azithromycin preferred; ciprofloxacin only if local susceptibility is known) is reserved for severe or bloody illness caught early, immunocompromise, or bacteraemia.',
+    treatment: [
+      "Most <i>Campylobacter</i> gastroenteritis in healthy hosts is self-limiting — supportive care (oral rehydration) alone is guideline-concordant (Grade B, IDSA).",
+      "Antibiotic treatment (azithromycin preferred; ciprofloxacin only if local susceptibility is known) is reserved for severe or bloody illness caught early, immunocompromise, or bacteraemia."
+    ],
     references: [
       "Shane AL, Mody RK, Crump JA, et al. 2017 IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80. (Grade B)",
       "CDC. <i>Campylobacter</i> Infection — Clinical Overview and Treatment Guidance (cdc.gov/campylobacter). (Grade C)",
@@ -6442,7 +6573,10 @@ const DEX_INFO = {
       'Historically no clinically dominant resistance pattern existed, and treatment failure is still far more often about delayed or inadequate rehydration than antibiotic resistance — but since 2024, a highly drug-resistant epidemic <i>V. cholerae</i> O1 clone (traced from Yemen through East Africa to Mayotte) resistant to both azithromycin and ciprofloxacin has spread internationally, a genuinely new resistance concern for outbreak antibiotic selection (doxycycline/tetracycline generally remains active against it)',
       'Regional resistance to older first-line agents (e.g. tetracyclines, cotrimoxazole) has been reported in some outbreak settings and can inform antibiotic choice where surveillance data exists',
     ],
-    treatment: 'Rehydration — oral rehydration solution for mild-moderate dehydration, IV fluids for severe dehydration or shock — is the life-saving intervention and must never be delayed while awaiting confirmatory testing (Grade A, WHO/CDA). A single dose of doxycycline (or azithromycin, preferred in pregnancy and children) shortens illness duration, stool volume, and organism shedding, but is adjunctive to rehydration, not a substitute for it.',
+    treatment: [
+      "Rehydration — oral rehydration solution for mild-moderate dehydration, IV fluids for severe dehydration or shock — is the life-saving intervention and must never be delayed while awaiting confirmatory testing (Grade A, WHO/CDA).",
+      "A single dose of doxycycline (or azithromycin, preferred in pregnancy and children) shortens illness duration, stool volume, and organism shedding, but is adjunctive to rehydration, not a substitute for it."
+    ],
     references: [
       "WHO. Cholera clinical management / Guidelines for the control of cholera (WHO treatment pocketbook, rehydration and antibiotic guidance). (Grade A)",
       "Rouard C, Collet L, Njamkepo E, et al. Long-Distance Spread of a Highly Drug-Resistant Epidemic Cholera Strain. N Engl J Med. 2024;391(23):2271-2273. (Grade B)",
@@ -6467,7 +6601,11 @@ const DEX_INFO = {
       'No well-established acquired antimicrobial resistance pattern dominates clinical decision-making here — outcome is driven far more by host risk factors (cirrhosis, iron overload, delay to source control) than by drug resistance',
       'Monotherapy with a tetracycline alone has genuine activity but underperforms combination therapy for severe disease',
     ],
-    treatment: 'Combination therapy — a tetracycline (doxycycline) plus a 3rd-generation cephalosporin (ceftriaxone) — is preferred for severe disease, supported by in vitro synergy data and retrospective/observational clinical outcome studies, though not by randomised trials (Grade B — observational evidence; CDC treatment guidance). Early, aggressive surgical debridement is critical wherever there is evidence of necrotising soft tissue infection; antibiotics alone will not control established tissue necrosis. Cirrhosis and other iron-overload states are the dominant risk factor for fulminant disease and should heighten suspicion and urgency of management.',
+    treatment: [
+      "Combination therapy — a tetracycline (doxycycline) plus a 3rd-generation cephalosporin (ceftriaxone) — is preferred for severe disease, supported by in vitro synergy data and retrospective/observational clinical outcome studies, though not by randomised trials (Grade B — observational evidence; CDC treatment guidance).",
+      "Early, aggressive surgical debridement is critical wherever there is evidence of necrotising soft tissue infection; antibiotics alone will not control established tissue necrosis.",
+      "Cirrhosis and other iron-overload states are the dominant risk factor for fulminant disease and should heighten suspicion and urgency of management."
+    ],
     references: [
       "CDC. <i>Vibrio vulnificus</i> Infection — Clinical Guidance for Healthcare Providers (cdc.gov/vibrio). (Grade C)",
       "Kim SE, Shin SU, Oh TH, et al. Outcomes of Third-Generation Cephalosporin Plus Ciprofloxacin or Doxycycline Therapy in Patients with <i>Vibrio vulnificus</i> Septicemia: A Propensity Score-Matched Analysis. PLoS Negl Trop Dis. 2019;13(6):e0007478. (Grade B)",
@@ -6492,7 +6630,12 @@ const DEX_INFO = {
       'No clinically significant macrolide resistance pattern is established in routine practice — treatment choice is not primarily a resistance issue',
       'The main treatment pitfall is timing (little effect on cough duration once the paroxysmal phase is established) rather than drug resistance',
     ],
-    treatment: 'Azithromycin (or another macrolide) is first-line for all age groups (Grade A, CDA/CDC); cotrimoxazole is the standard alternative from 2 months of age for macrolide intolerance/allergy. Antibiotics most effectively shorten the infectious period when given during the catarrhal phase; given later they still reduce transmissibility even though established paroxysmal cough won\'t resolve any faster. Close contacts, especially households with an unimmunised infant, should receive chemoprophylaxis regardless of their own vaccination status. Notifiable disease.',
+    treatment: [
+      "Azithromycin (or another macrolide) is first-line for all age groups (Grade A, CDA/CDC); cotrimoxazole is the standard alternative from 2 months of age for macrolide intolerance/allergy.",
+      "Antibiotics most effectively shorten the infectious period when given during the catarrhal phase; given later they still reduce transmissibility even though established paroxysmal cough won't resolve any faster.",
+      "Close contacts, especially households with an unimmunised infant, should receive chemoprophylaxis regardless of their own vaccination status.",
+      "Notifiable disease."
+    ],
     references: [
       "Communicable Diseases Agency (Singapore), \"Pertussis\" clinical guidance (Grade B)",
       "CDC, Treatment of Pertussis / Postexposure Antimicrobial Prophylaxis (Whooping Cough) clinical guidance (Grade A)",
@@ -6518,7 +6661,11 @@ const DEX_INFO = {
       "Macrolides (azithromycin, erythromycin) remain reliably active; increasing penicillin resistance has been reported in several regions, which is the specific reason WHO's 2024 guideline now recommends macrolides in preference to penicillin",
       'The critical failure mode is delayed antitoxin administration, not antibiotic resistance',
     ],
-    treatment: 'Diphtheria antitoxin (equine), given as early as possible on clinical suspicion without waiting for laboratory confirmation, is the essential toxin-neutralising treatment (Grade A/B, WHO) — dosed by clinical severity/site rather than weight. A macrolide (azithromycin or erythromycin) is now recommended in preference to benzylpenicillin to eradicate the organism and reduce transmission, reflecting rising penicillin resistance (Grade A — WHO 2024). Close contacts require surveillance, chemoprophylaxis, and vaccination status review; diphtheria is notifiable.',
+    treatment: [
+      "Diphtheria antitoxin (equine), given as early as possible on clinical suspicion without waiting for laboratory confirmation, is the essential toxin-neutralising treatment (Grade A/B, WHO) — dosed by clinical severity/site rather than weight.",
+      "A macrolide (azithromycin or erythromycin) is now recommended in preference to benzylpenicillin to eradicate the organism and reduce transmission, reflecting rising penicillin resistance (Grade A — WHO 2024).",
+      "Close contacts require surveillance, chemoprophylaxis, and vaccination status review; diphtheria is notifiable."
+    ],
     references: [
       "WHO. Clinical management of diphtheria: guideline. 2 February 2024 (recommends macrolides in preference to penicillin; escalating antitoxin dosing by severity/time since onset) (Grade A)",
       "CDC. Clinical Guidance for Diphtheria (antitoxin administration, notification, contact management) (Grade B)",
@@ -6544,7 +6691,12 @@ const DEX_INFO = {
       'Fluoroquinolone resistance is increasingly widespread, particularly in isolates from South/Southeast Asia',
       'Extensively drug-resistant strains (additionally azithromycin- and/or ceftriaxone-resistant) have emerged and spread internationally, notably in sexual networks among men who have sex with men',
     ],
-    treatment: 'Azithromycin is a commonly preferred empirical oral option; ciprofloxacin remains an alternative only where local/travel-related fluoroquinolone susceptibility is known (Grade A/B). Ceftriaxone is used for severe disease or where oral options are unreliable. Antimotility agents are contraindicated. Antibiotics shorten illness duration and reduce transmission more consistently than in some other bacterial diarrhoeas, given <i>Shigella</i>\'s outbreak potential at very low infectious dose.',
+    treatment: [
+      "Azithromycin is a commonly preferred empirical oral option; ciprofloxacin remains an alternative only where local/travel-related fluoroquinolone susceptibility is known (Grade A/B).",
+      "Ceftriaxone is used for severe disease or where oral options are unreliable.",
+      "Antimotility agents are contraindicated.",
+      "Antibiotics shorten illness duration and reduce transmission more consistently than in some other bacterial diarrhoeas, given <i>Shigella</i>'s outbreak potential at very low infectious dose."
+    ],
     references: [
       "CDC. Clinical Overview of Shigellosis (2024). (Grade A)",
       "CDC Health Alert Network. Increase in Extensively Drug-Resistant (XDR) <i>Shigella</i> Infections in the United States. (Grade A)",
@@ -6570,7 +6722,10 @@ const DEX_INFO = {
       'Clindamycin resistance has risen substantially (up to 30-40% in many surveillance series) and can no longer be assumed',
       'Metronidazole resistance remains rare and it stays a reliable agent',
     ],
-    treatment: 'Metronidazole, a beta-lactam/beta-lactamase-inhibitor combination (e.g. piperacillin-tazobactam, amoxicillin-clavulanate), or a carbapenem are reliable choices (Grade A); clindamycin is no longer dependable empirically given rising resistance. Source control — drainage of an abscess or surgical correction of the underlying perforation — is essential and often more important to outcome than the specific antibiotic chosen.',
+    treatment: [
+      "Metronidazole, a beta-lactam/beta-lactamase-inhibitor combination (e.g. piperacillin-tazobactam, amoxicillin-clavulanate), or a carbapenem are reliable choices (Grade A); clindamycin is no longer dependable empirically given rising resistance.",
+      "Source control — drainage of an abscess or surgical correction of the underlying perforation — is essential and often more important to outcome than the specific antibiotic chosen."
+    ],
     references: [
       "Mazuski JE, et al. The Surgical Infection Society Revised Guidelines on the Management of Intra-Abdominal Infection. Surg Infect (Larchmt). 2017;18(1):1-76 (updated 2024). (Grade A)",
       "Snydman DR, et al. National Survey on the Susceptibility of the <i>Bacteroides fragilis</i> Group — trends in beta-lactam, clindamycin, and metronidazole susceptibility. (Grade B)",
@@ -6593,7 +6748,11 @@ const DEX_INFO = {
     resistance: [
       'Over 90% of isolates produce a beta-lactamase (BRO-1/BRO-2) — a near-universal, essentially fixed trait rather than a per-isolate coin-flip — so amoxicillin alone should be assumed ineffective rather than tested for',
     ],
-    treatment: 'Amoxicillin-clavulanate is a reliable first-line choice given near-universal beta-lactamase production (Grade A); 2nd/3rd-generation cephalosporins are also beta-lactamase-stable alternatives. Macrolides are an option for penicillin allergy. Many mild otitis media/sinusitis cases in children are managed with a period of watchful waiting per paediatric guidelines before antibiotics are started.',
+    treatment: [
+      "Amoxicillin-clavulanate is a reliable first-line choice given near-universal beta-lactamase production (Grade A); 2nd/3rd-generation cephalosporins are also beta-lactamase-stable alternatives.",
+      "Macrolides are an option for penicillin allergy.",
+      "Many mild otitis media/sinusitis cases in children are managed with a period of watchful waiting per paediatric guidelines before antibiotics are started."
+    ],
     references: [
       "Murphy TF, Parameswaran GI. <i>Moraxella catarrhalis</i>, a Human Respiratory Tract Pathogen. Clin Infect Dis. 2009;49:124-131 (Grade B)",
       "AAP/AAFP Clinical Practice Guideline: Diagnosis and Management of Acute Otitis Media (watchful waiting) (Grade A)",
@@ -6616,7 +6775,10 @@ const DEX_INFO = {
       'A beta-lactamase-producing minority of strains exists, making penicillin monotherapy a less reliable empirical choice than a protected beta-lactam or metronidazole-containing regimen',
       'No widespread resistance to metronidazole or carbapenems has been described',
     ],
-    treatment: 'Piperacillin-tazobactam, or penicillin plus metronidazole, are preferred first-line regimens, typically for a prolonged course (3-6 weeks depending on complications) (Grade B). Anticoagulation for the associated venous thrombosis is not routinely recommended given limited evidence and should be individualised (Grade C).',
+    treatment: [
+      "Piperacillin-tazobactam, or penicillin plus metronidazole, are preferred first-line regimens, typically for a prolonged course (3-6 weeks depending on complications) (Grade B).",
+      "Anticoagulation for the associated venous thrombosis is not routinely recommended given limited evidence and should be individualised (Grade C)."
+    ],
     references: [
       "Riordan T. Human infection with <i>Fusobacterium necrophorum</i> (Necrobacillosis), with a focus on Lemierre's syndrome. Clin Microbiol Rev. 2007;20(4):622-659. (Grade B)",
       "Lemierre Syndrome. StatPearls [Internet]. NCBI Bookshelf NBK499846 (empiric therapy, ~6-week course, anticoagulation controversy — no controlled trials). (Grade B)",
@@ -6641,7 +6803,10 @@ const DEX_INFO = {
       'No clinically significant antimicrobial resistance pattern is described',
       'The more important pitfall is choice of agent (metronidazole generally preferred over penicillin) rather than resistance',
     ],
-    treatment: 'Human tetanus immunoglobulin to neutralise unbound circulating toxin, plus metronidazole (preferred) or penicillin, plus wound debridement, form the core of treatment (Grade A); supportive care (benzodiazepines for spasm control, autonomic support, and ventilatory support in severe disease) is often needed. Because natural infection does not confer immunity, active immunisation (tetanus toxoid) during convalescence is required to prevent future episodes (Grade A).',
+    treatment: [
+      "Human tetanus immunoglobulin to neutralise unbound circulating toxin, plus metronidazole (preferred) or penicillin, plus wound debridement, form the core of treatment (Grade A); supportive care (benzodiazepines for spasm control, autonomic support, and ventilatory support in severe disease) is often needed.",
+      "Because natural infection does not confer immunity, active immunisation (tetanus toxoid) during convalescence is required to prevent future episodes (Grade A)."
+    ],
     references: [
       "Ahmadsyah I, Salim MA. 'Treatment of tetanus: an open study to compare the efficacy of procaine penicillin and metronidazole.' BMJ. 1985;291:648-650 (Grade B)",
       "WHO position paper on tetanus vaccines / current recommendations for tetanus management (Grade B)",
@@ -6665,7 +6830,11 @@ const DEX_INFO = {
       'Prior carbapenem exposure is itself a major risk factor for selecting out this organism by eliminating competing flora',
       'Also frequently resistant to aminoglycosides and many other beta-lactams',
     ],
-    treatment: 'Current IDSA guidance (AMR Guidance v4.0, 2024) recommends combination therapy (two active agents) for most <i>S. maltophilia</i> infections rather than monotherapy, with a preference order of cefiderocol-based, then ceftazidime-avibactam plus aztreonam, then minocycline-based, then trimethoprim-sulfamethoxazole-based, then levofloxacin-based regimens. Trimethoprim-sulfamethoxazole (cotrimoxazole) remains a widely used backbone agent (Grade B) rather than an unqualified first-line monotherapy, and levofloxacin is a reasonable alternative, particularly for sulfa allergy/intolerance (Grade B). Carbapenems and most other beta-lactams should not be relied on empirically — reaching for a carbapenem here, unlike for most other resistant Gram-negative rods, is the wrong instinct.',
+    treatment: [
+      "Current IDSA guidance (AMR Guidance v4.0, 2024) recommends combination therapy (two active agents) for most <i>S. maltophilia</i> infections rather than monotherapy, with a preference order of cefiderocol-based, then ceftazidime-avibactam plus aztreonam, then minocycline-based, then trimethoprim-sulfamethoxazole-based, then levofloxacin-based regimens.",
+      "Trimethoprim-sulfamethoxazole (cotrimoxazole) remains a widely used backbone agent (Grade B) rather than an unqualified first-line monotherapy, and levofloxacin is a reasonable alternative, particularly for sulfa allergy/intolerance (Grade B).",
+      "Carbapenems and most other beta-lactams should not be relied on empirically — reaching for a carbapenem here, unlike for most other resistant Gram-negative rods, is the wrong instinct."
+    ],
     references: [
       "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, v4.0 (2024) — <i>Stenotrophomonas maltophilia</i> section (Grade A)",
       "Rationale for contemporary antimicrobial treatment of <i>Stenotrophomonas maltophilia</i>: a narrative review. CMI Communications. 2025 (Grade B)",
@@ -6687,7 +6856,11 @@ const DEX_INFO = {
       'No major acquired antimicrobial resistance pattern dominates clinical decision-making',
       'A minority of strains produce beta-lactamase, so amoxicillin-clavulanate (rather than amoxicillin alone) is generally preferred',
     ],
-    treatment: 'Amoxicillin-clavulanate is first-line (Grade A); penicillin or doxycycline are reasonable alternatives (Grade B). Vancomycin has no activity, since this is a Gram-negative organism. Functional or anatomical asplenia is the dominant host risk factor for fulminant disease and should heighten clinical suspicion and urgency after any animal bite exposure.',
+    treatment: [
+      "Amoxicillin-clavulanate is first-line (Grade A); penicillin or doxycycline are reasonable alternatives (Grade B).",
+      "Vancomycin has no activity, since this is a Gram-negative organism.",
+      "Functional or anatomical asplenia is the dominant host risk factor for fulminant disease and should heighten clinical suspicion and urgency after any animal bite exposure."
+    ],
     references: [
       "NICE NG184: Human and animal bites — antimicrobial prescribing (2023) (Grade A)",
       "Butler T. <i>Capnocytophaga canimorsus</i>: an emerging cause of sepsis, meningitis, and post-splenectomy infection after dog bites. Eur J Clin Microbiol Infect Dis. 2015;34(7):1271-1280 (Grade B)",
@@ -6711,7 +6884,10 @@ const DEX_INFO = {
       'Many naturally-occurring strains remain penicillin-susceptible, but current guidance avoids beta-lactam monotherapy given the potential for inducible beta-lactamase production',
       'No major acquired resistance to fluoroquinolones or tetracyclines is described in naturally-occurring disease',
     ],
-    treatment: 'Systemic (non-cutaneous) anthrax requires combination therapy with TWO bactericidal antimicrobials from different classes (e.g. ciprofloxacin plus a beta-lactam if confirmed penicillin-susceptible) plus a protein/RNA synthesis inhibitor (e.g. clindamycin or linezolid, to reduce toxin production), plus antitoxin (raxibacumab, obiltoxaximab, or anthrax immune globulin) as an adjunct — a single fluoroquinolone or tetracycline alone is not adequate backbone therapy for systemic disease (Grade A, CDC 2023). Uncomplicated cutaneous disease without systemic involvement can usually be treated with monotherapy (fluoroquinolone, tetracycline, or penicillin if susceptibility confirmed); if aerosol/bioterrorism-associated exposure is possible, the combined treatment-plus-prophylaxis course should total 42–60 days depending on vaccination status, given the risk of latent inhaled spores.',
+    treatment: [
+      "Systemic (non-cutaneous) anthrax requires combination therapy with TWO bactericidal antimicrobials from different classes (e.g. ciprofloxacin plus a beta-lactam if confirmed penicillin-susceptible) plus a protein/RNA synthesis inhibitor (e.g. clindamycin or linezolid, to reduce toxin production), plus antitoxin (raxibacumab, obiltoxaximab, or anthrax immune globulin) as an adjunct — a single fluoroquinolone or tetracycline alone is not adequate backbone therapy for systemic disease (Grade A, CDC 2023).",
+      "Uncomplicated cutaneous disease without systemic involvement can usually be treated with monotherapy (fluoroquinolone, tetracycline, or penicillin if susceptibility confirmed); if aerosol/bioterrorism-associated exposure is possible, the combined treatment-plus-prophylaxis course should total 42–60 days depending on vaccination status, given the risk of latent inhaled spores."
+    ],
     references: [
       "CDC. Guidelines for the Prevention and Treatment of Anthrax, 2023. MMWR Recomm Rep. 2023;72(6):1-124 (Grade A)",
       "WHO. Anthrax in Humans and Animals, 4th edition, 2008 (Grade B)",
@@ -6734,7 +6910,10 @@ const DEX_INFO = {
       'Not clinically relevant to the classic food-poisoning syndromes, since these are preformed/toxin-mediated illnesses that antibiotics cannot influence',
       'For genuine invasive disease, <i>B. cereus</i> is intrinsically resistant to beta-lactams (produces beta-lactamase); vancomycin or clindamycin are generally used instead',
     ],
-    treatment: 'The classic food-poisoning syndromes (emetic and diarrhoeal) are self-limited and require supportive care only (antiemetics, oral rehydration) — antibiotics have no role and do not shorten the illness, since it is toxin- rather than infection-driven (Grade B). Genuine invasive <i>B. cereus</i> infection is a different clinical picture entirely and is treated with vancomycin or clindamycin, not a beta-lactam.',
+    treatment: [
+      "The classic food-poisoning syndromes (emetic and diarrhoeal) are self-limited and require supportive care only (antiemetics, oral rehydration) — antibiotics have no role and do not shorten the illness, since it is toxin- rather than infection-driven (Grade B).",
+      "Genuine invasive <i>B. cereus</i> infection is a different clinical picture entirely and is treated with vancomycin or clindamycin, not a beta-lactam."
+    ],
     references: [
       "Bottone EJ. '<i>Bacillus cereus</i>, a Volatile Human Pathogen.' Clin Microbiol Rev. 2010;23(2):382-398 (Grade B)",
       "CDC/FDA Bad Bug Book — <i>Bacillus cereus</i> (toxin-mediated food poisoning syndromes) (Grade B)",
@@ -6756,7 +6935,10 @@ const DEX_INFO = {
       'No major antimicrobial resistance pattern drives treatment choice',
       'Recurrence after treatment is common and reflects failure to durably restore a <i>Lactobacillus</i>-dominant microbiome rather than antibiotic resistance',
     ],
-    treatment: 'Oral or vaginal metronidazole, or oral/vaginal clindamycin, are first-line (Grade A, CDA/CDC). Routine treatment of male sexual partners is not recommended, unlike for trichomoniasis, since it has not been shown to reduce recurrence.',
+    treatment: [
+      "Oral or vaginal metronidazole, or oral/vaginal clindamycin, are first-line (Grade A, CDA/CDC).",
+      "Routine treatment of male sexual partners is not recommended, unlike for trichomoniasis, since it has not been shown to reduce recurrence."
+    ],
     references: [
       "Communicable Diseases Agency (Singapore, under MOH). Bacterial Vaginosis clinical guidance — Amsel criteria, metronidazole/clindamycin regimens (Grade A)",
       "CDC. Sexually Transmitted Infections Treatment Guidelines, 2021 — Bacterial Vaginosis (Grade A)",
@@ -6780,7 +6962,11 @@ const DEX_INFO = {
       'Metronidazole resistance is uncommon but recognised',
       'Persistent/recurrent infection after adequate treatment (with confirmed partner treatment and adherence) should prompt consideration of resistance testing and higher-dose or extended metronidazole/tinidazole regimens',
     ],
-    treatment: 'A 7-day course of oral metronidazole is now preferred over a single 2g dose in women, given better cure rates (Grade A, CDC 2021); a single dose remains an option, particularly in men. Tinidazole is an alternative. All sexual partners must be treated concurrently — unlike bacterial vaginosis, this is a genuine sexually transmitted infection — and abstinence is advised until treatment is complete and both partners are symptom-free.',
+    treatment: [
+      "A 7-day course of oral metronidazole is now preferred over a single 2g dose in women, given better cure rates (Grade A, CDC 2021); a single dose remains an option, particularly in men.",
+      "Tinidazole is an alternative.",
+      "All sexual partners must be treated concurrently — unlike bacterial vaginosis, this is a genuine sexually transmitted infection — and abstinence is advised until treatment is complete and both partners are symptom-free."
+    ],
     references: [
       "CDC Sexually Transmitted Infections Treatment Guidelines, 2021 — Trichomoniasis (Grade A)",
       "WHO Guidelines for the Management of Symptomatic Sexually Transmitted Infections, 2021 (Grade B)",
@@ -6805,7 +6991,12 @@ const DEX_INFO = {
       'Echinocandin resistance remains uncommon (under 2% by CDC surveillance) but can emerge on therapy with prolonged exposure',
       'A small but growing minority of isolates are resistant to all three major antifungal classes ("pan-resistant")',
     ],
-    treatment: 'Echinocandins (e.g. caspofungin) are first-line pending susceptibility results in essentially all current guidance, given that most isolates remain echinocandin-susceptible despite widespread azole resistance (Grade A, CDC/IDSA). Amphotericin B is an alternative for resistant or refractory disease. For isolates with resistance spanning multiple classes, combination therapy and expert/infectious diseases consultation are warranted; newer agents (e.g. fosmanogepix, ibrexafungerp) are emerging options where available. Equally important as antifungal choice: contact precautions, single-room isolation, and environmental decontamination, given how readily this organism spreads in healthcare settings.',
+    treatment: [
+      "Echinocandins (e.g. caspofungin) are first-line pending susceptibility results in essentially all current guidance, given that most isolates remain echinocandin-susceptible despite widespread azole resistance (Grade A, CDC/IDSA).",
+      "Amphotericin B is an alternative for resistant or refractory disease.",
+      "For isolates with resistance spanning multiple classes, combination therapy and expert/infectious diseases consultation are warranted; newer agents (e.g. fosmanogepix, ibrexafungerp) are emerging options where available.",
+      "Equally important as antifungal choice: contact precautions, single-room isolation, and environmental decontamination, given how readily this organism spreads in healthcare settings."
+    ],
     references: [
       "CDC Clinical Overview of <i>Candida auris</i> (cdc.gov/candida-auris) (Grade A)",
       "ECMM/ISHAM/ASM Global Guideline for the Diagnosis and Management of Candidiasis, Lancet Infect Dis 2024 (Grade A)",
@@ -6829,7 +7020,12 @@ const DEX_INFO = {
       'Intrinsically resistant to azoles and amphotericin B, reflecting its atypical membrane biology rather than acquired resistance',
       'No validated in vitro susceptibility testing exists given the organism cannot be cultured, so treatment choice is guided entirely by clinical trial evidence rather than isolate-specific testing',
     ],
-    treatment: 'High-dose trimethoprim-sulfamethoxazole is first-line across all severities (Grade A). IV pentamidine or clindamycin-primaquine (after excluding G6PD deficiency) are standard alternatives for sulfa allergy/intolerance or treatment failure, with atovaquone reserved for milder disease given lower potency. Adjunctive corticosteroids, started early (ideally within 72 hours of antimicrobial therapy), reduce mortality in moderate-severe disease (room-air PaO2 <70mmHg or A-a gradient ≥35mmHg) — well established in HIV-associated disease (Grade A) and generally extrapolated to non-HIV immunosuppression despite less robust trial evidence (Grade B/C). Prophylaxis (typically low-dose co-trimoxazole) is indicated for at-risk groups, including HIV with CD4 <200 and patients on prolonged high-dose corticosteroids.',
+    treatment: [
+      "High-dose trimethoprim-sulfamethoxazole is first-line across all severities (Grade A).",
+      "IV pentamidine or clindamycin-primaquine (after excluding G6PD deficiency) are standard alternatives for sulfa allergy/intolerance or treatment failure, with atovaquone reserved for milder disease given lower potency.",
+      "Adjunctive corticosteroids, started early (ideally within 72 hours of antimicrobial therapy), reduce mortality in moderate-severe disease (room-air PaO2 <70mmHg or A-a gradient ≥35mmHg) — well established in HIV-associated disease (Grade A) and generally extrapolated to non-HIV immunosuppression despite less robust trial evidence (Grade B/C).",
+      "Prophylaxis (typically low-dose co-trimoxazole) is indicated for at-risk groups, including HIV with CD4 <200 and patients on prolonged high-dose corticosteroids."
+    ],
     references: [
       "Kaplan JE et al., Guidelines for Prevention and Treatment of Opportunistic Infections in Adults and Adolescents with HIV (NIH/CDC/HIVMA), continually updated (Grade A)",
       "Limper AH et al., An Official ATS Statement: Treatment of Fungal Infections in Adult Pulmonary and Critical Care Patients, Am J Respir Crit Care Med 2011 (Grade A)",
@@ -6854,7 +7050,12 @@ const DEX_INFO = {
       'Voriconazole resistance (commonly via cyp51A mutations, increasingly linked to agricultural azole fungicide use) is an emerging concern in some regions and warrants susceptibility testing when response is inadequate',
       'No mould in this genus has useful susceptibility to fluconazole — a spectrum gap rather than acquired resistance',
     ],
-    treatment: 'Voriconazole is first-line for invasive pulmonary aspergillosis (Grade A, IDSA 2016), based on a clear survival advantage over conventional amphotericin B; isavuconazole is a non-inferior, better-tolerated alternative (Grade A, SECURE trial). Liposomal amphotericin B is reserved for triazole intolerance/contraindication. ABPA is treated primarily with corticosteroids to control the allergic response, with itraconazole sometimes added as a steroid-sparing adjunct rather than to eradicate the organism (Grade B). Aspergilloma is often managed conservatively unless significant haemoptysis occurs, in which case surgical resection — not antifungal therapy — is definitive, given poor antifungal penetration into a cavity.',
+    treatment: [
+      "Voriconazole is first-line for invasive pulmonary aspergillosis (Grade A, IDSA 2016), based on a clear survival advantage over conventional amphotericin B; isavuconazole is a non-inferior, better-tolerated alternative (Grade A, SECURE trial).",
+      "Liposomal amphotericin B is reserved for triazole intolerance/contraindication.",
+      "ABPA is treated primarily with corticosteroids to control the allergic response, with itraconazole sometimes added as a steroid-sparing adjunct rather than to eradicate the organism (Grade B).",
+      "Aspergilloma is often managed conservatively unless significant haemoptysis occurs, in which case surgical resection — not antifungal therapy — is definitive, given poor antifungal penetration into a cavity."
+    ],
     references: [
       "Patterson TF et al., Practice Guidelines for the Diagnosis and Management of Aspergillosis, IDSA 2016 (Clin Infect Dis) (Grade A)",
       "Maertens JA et al., Isavuconazole versus Voriconazole for Primary Treatment of Invasive Mould Disease (SECURE trial), Lancet 2016 (Grade A)",
@@ -6880,7 +7081,13 @@ const DEX_INFO = {
       'Reduced susceptibility to amphotericin B relative to other invasive moulds, necessitating higher doses than typically used for other fungal infections',
       'Isavuconazole and posaconazole retain useful activity and serve as alternative/step-down options',
     ],
-    treatment: 'High-dose liposomal amphotericin B is first-line and should be started empirically on strong clinical suspicion given how rapidly this disease progresses, without waiting for tissue confirmation (Grade A, ECMM/MSG Global Guideline 2019). Isavuconazole or posaconazole are approved alternatives or step-down options. Urgent, often repeated, surgical debridement of necrotic tissue is an essential adjunct — antifungal therapy alone frequently fails given poor drug penetration into angioinvasive, poorly perfused necrotic tissue. Reversing the underlying risk factor (e.g. correcting diabetic ketoacidosis, minimising immunosuppression where possible) is an important parallel priority. Voriconazole and other Mucorales-inactive triazoles used as prophylaxis have themselves been implicated as a risk factor for breakthrough mucormycosis.',
+    treatment: [
+      "High-dose liposomal amphotericin B is first-line and should be started empirically on strong clinical suspicion given how rapidly this disease progresses, without waiting for tissue confirmation (Grade A, ECMM/MSG Global Guideline 2019).",
+      "Isavuconazole or posaconazole are approved alternatives or step-down options.",
+      "Urgent, often repeated, surgical debridement of necrotic tissue is an essential adjunct — antifungal therapy alone frequently fails given poor drug penetration into angioinvasive, poorly perfused necrotic tissue.",
+      "Reversing the underlying risk factor (e.g. correcting diabetic ketoacidosis, minimising immunosuppression where possible) is an important parallel priority.",
+      "Voriconazole and other Mucorales-inactive triazoles used as prophylaxis have themselves been implicated as a risk factor for breakthrough mucormycosis."
+    ],
     references: [
       "Cornely OA et al., Global Guideline for the Diagnosis and Management of Mucormycosis (ECMM/MSG), Lancet Infect Dis 2019 (Grade A)",
       "Skiada A et al., Diagnosis and Treatment of Mucormycosis in Patients with Haematological Malignancies, Blood 2018 (Grade B)",
@@ -6905,7 +7112,11 @@ const DEX_INFO = {
       'Not applicable in the antimicrobial-resistance sense — there is no antiviral drug in clinical use against dengue for resistance to develop against',
       'The key "resistance" concept clinically relevant to dengue is serotype-specific immunity: secondary infection with a heterologous serotype is a major severe-dengue risk factor rather than a protective re-exposure',
     ],
-    treatment: 'There is no dengue-specific antiviral. Management of uncomplicated disease is supportive and outpatient-based — paracetamol for fever/pain, oral hydration, and avoidance of NSAIDs/aspirin given bleeding risk (Grade A, Singapore National Dengue Clinical Guideline / WHO). Warning signs mandate closer monitoring or admission, with structured, stepwise IV crystalloid resuscitation guided by serial haematocrit for those progressing to plasma leakage or shock (Grade A). Platelet transfusion is reserved for significant clinical bleeding, not isolated thrombocytopenia.',
+    treatment: [
+      "There is no dengue-specific antiviral. Management of uncomplicated disease is supportive and outpatient-based — paracetamol for fever/pain, oral hydration, and avoidance of NSAIDs/aspirin given bleeding risk (Grade A, Singapore National Dengue Clinical Guideline / WHO).",
+      "Warning signs mandate closer monitoring or admission, with structured, stepwise IV crystalloid resuscitation guided by serial haematocrit for those progressing to plasma leakage or shock (Grade A).",
+      "Platelet transfusion is reserved for significant clinical bleeding, not isolated thrombocytopenia."
+    ],
     references: [
       "Ministry of Health Singapore, National Dengue Clinical Practice Guideline (Grade A)",
       "WHO, Dengue Guidelines for Diagnosis, Treatment, Prevention and Control (Grade A)",
@@ -6931,7 +7142,11 @@ const DEX_INFO = {
       'Integrase strand transfer inhibitors (e.g. dolutegravir) have a high genetic barrier to resistance, contributing to their preferred first-line status, though WHO surveillance (2024) has documented rising real-world dolutegravir resistance (roughly 4-9% in surveyed cohorts, up to around 20% in treatment-experienced patients switching with an unsuppressed viral load) — underscoring the importance of adherence support and viral load monitoring rather than changing first-line recommendations',
       'Baseline resistance testing is recommended where feasible before starting therapy, given transmitted drug resistance in some populations',
     ],
-    treatment: 'Antiretroviral therapy (ART) is recommended for everyone diagnosed with HIV regardless of CD4 count ("test and treat"), ideally started rapidly/same-day after diagnosis rather than delayed for staging (Grade A, WHO). A dolutegravir-based two-NRTI backbone (e.g. tenofovir/lamivudine + dolutegravir) is preferred first-line therapy in essentially all current guidelines given potency, a high barrier to resistance, and tolerability (Grade A, WHO/DHHS). CD4 count and an opportunistic infection screen at diagnosis guide prophylaxis needs (e.g. co-trimoxazole below 200 cells/microL).',
+    treatment: [
+      "Antiretroviral therapy (ART) is recommended for everyone diagnosed with HIV regardless of CD4 count (\"test and treat\"), ideally started rapidly/same-day after diagnosis rather than delayed for staging (Grade A, WHO).",
+      "A dolutegravir-based two-NRTI backbone (e.g. tenofovir/lamivudine + dolutegravir) is preferred first-line therapy in essentially all current guidelines given potency, a high barrier to resistance, and tolerability (Grade A, WHO/DHHS).",
+      "CD4 count and an opportunistic infection screen at diagnosis guide prophylaxis needs (e.g. co-trimoxazole below 200 cells/microL)."
+    ],
     references: [
       "WHO Consolidated Guidelines on HIV Prevention, Testing, Treatment, Service Delivery and Monitoring (Grade A)",
       "DHHS Panel on Antiretroviral Guidelines for Adults and Adolescents (Grade A)",
@@ -6957,7 +7172,11 @@ const DEX_INFO = {
       'Tenofovir and entecavir have a high genetic barrier to resistance and are now preferred first-line agents for this reason',
       'Resistance surveillance matters most in patients previously exposed to older, low-barrier agents',
     ],
-    treatment: 'Acute hepatitis B in an immunocompetent adult is managed supportively in the large majority of cases; antivirals are reserved for severe or fulminant acute disease (Grade A). Chronic hepatitis B is treated when criteria for active disease are met (elevated ALT, significant HBV DNA, and/or fibrosis) — tenofovir or entecavir are first-line given potency and a high barrier to resistance, typically continued long-term/indefinitely (Grade A, APASL). Peginterferon alfa is an alternative for selected patients wanting a finite treatment course (Grade B).',
+    treatment: [
+      "Acute hepatitis B in an immunocompetent adult is managed supportively in the large majority of cases; antivirals are reserved for severe or fulminant acute disease (Grade A).",
+      "Chronic hepatitis B is treated when criteria for active disease are met (elevated ALT, significant HBV DNA, and/or fibrosis) — tenofovir or entecavir are first-line given potency and a high barrier to resistance, typically continued long-term/indefinitely (Grade A, APASL).",
+      "Peginterferon alfa is an alternative for selected patients wanting a finite treatment course (Grade B)."
+    ],
     references: [
       "Ministry of Health Singapore, Clinical Practice Guidelines: Chronic Hepatitis B Infection (2011) — since withdrawn; historical reference only (Grade C)",
       "Asian Pacific Association for the Study of the Liver (APASL) Hepatitis B Guidelines (Grade A)",
@@ -6983,7 +7202,11 @@ const DEX_INFO = {
       'Resistance should be considered with prolonged or refractory disease in significantly immunocompromised patients with extensive prior aciclovir exposure',
       'Foscarnet is the standard alternative for aciclovir-resistant HSV, acting via direct viral DNA polymerase inhibition without requiring thymidine-kinase-mediated activation',
     ],
-    treatment: 'HSV encephalitis is a neurological emergency — empirical high-dose IV aciclovir should start immediately on clinical suspicion without waiting for CSF PCR confirmation, since delay meaningfully worsens neurological outcomes and mortality (Grade A). For genital or orolabial disease, oral aciclovir or valaciclovir is usually sufficient, with IV reserved for severe or disseminated disease (Grade A). Foscarnet is reserved for aciclovir-resistant HSV (Grade B).',
+    treatment: [
+      "HSV encephalitis is a neurological emergency — empirical high-dose IV aciclovir should start immediately on clinical suspicion without waiting for CSF PCR confirmation, since delay meaningfully worsens neurological outcomes and mortality (Grade A).",
+      "For genital or orolabial disease, oral aciclovir or valaciclovir is usually sufficient, with IV reserved for severe or disseminated disease (Grade A).",
+      "Foscarnet is reserved for aciclovir-resistant HSV (Grade B)."
+    ],
     references: [
       "IDSA/ACTG Guidelines for the Management of Encephalitis (Grade A)",
       "CDC Sexually Transmitted Infections Treatment Guidelines — Genital HSV (Grade A)",
@@ -7008,7 +7231,11 @@ const DEX_INFO = {
       'Aciclovir resistance is uncommon but can occur with prolonged exposure in significantly immunocompromised hosts, via mechanisms similar to HSV (thymidine kinase mutations)',
       'Foscarnet is the standard alternative where resistance is suspected',
     ],
-    treatment: 'Uncomplicated varicella in a healthy child is generally managed supportively (antipyretics, antihistamines for itch, skin hygiene); routine antivirals aren\'t required in this low-risk group (Grade B). Localised zoster in an immunocompetent adult benefits from oral valaciclovir or aciclovir started within 72 hours of rash onset, reducing severity and duration (Grade A). Disseminated or visceral zoster in immunocompromised hosts requires IV, not oral, aciclovir (Grade A).',
+    treatment: [
+      "Uncomplicated varicella in a healthy child is generally managed supportively (antipyretics, antihistamines for itch, skin hygiene); routine antivirals aren't required in this low-risk group (Grade B).",
+      "Localised zoster in an immunocompetent adult benefits from oral valaciclovir or aciclovir started within 72 hours of rash onset, reducing severity and duration (Grade A).",
+      "Disseminated or visceral zoster in immunocompromised hosts requires IV, not oral, aciclovir (Grade A)."
+    ],
     references: [
       "CDC Chickenpox (Varicella) and Shingles (Herpes Zoster) Clinical Guidance (Grade A)",
       "IDSA Guidelines for the Management of Varicella-Zoster Virus Infections (Grade A)",
@@ -7033,7 +7260,12 @@ const DEX_INFO = {
       'Ganciclovir resistance (via UL97 or UL54 mutations) can occur with prolonged or repeated treatment courses, particularly in transplant recipients',
       'Foscarnet is the standard alternative for ganciclovir-resistant CMV, or when ganciclovir\'s myelosuppression is dose-limiting, given its different mechanism and its own significant nephrotoxicity trade-off',
     ],
-    treatment: 'Oral valganciclovir has largely replaced IV ganciclovir for most non-life-threatening CMV disease given comparable efficacy and easier administration (Grade A). IV ganciclovir is preferred for severe/life-threatening disease or unreliable oral absorption (Grade A). Foscarnet is reserved for ganciclovir resistance or dose-limiting toxicity (Grade B). Cautiously reducing immunosuppression is an important adjunct in transplant recipients, balanced against rejection risk (Grade B).',
+    treatment: [
+      "Oral valganciclovir has largely replaced IV ganciclovir for most non-life-threatening CMV disease given comparable efficacy and easier administration (Grade A).",
+      "IV ganciclovir is preferred for severe/life-threatening disease or unreliable oral absorption (Grade A).",
+      "Foscarnet is reserved for ganciclovir resistance or dose-limiting toxicity (Grade B).",
+      "Cautiously reducing immunosuppression is an important adjunct in transplant recipients, balanced against rejection risk (Grade B)."
+    ],
     references: [
       "American Society of Transplantation (AST) Infectious Diseases Community of Practice — CMV Guidelines (Grade A)",
       "CDC Congenital CMV Infection Clinical Overview (Grade A)",
@@ -7058,7 +7290,11 @@ const DEX_INFO = {
       'Nirmatrelvir resistance-associated mutations in the main protease have been described but remain uncommon in circulating strains',
       'Ritonavir (the pharmacokinetic booster in nirmatrelvir/ritonavir) is a potent CYP3A4 inhibitor with numerous significant drug interactions that must be checked before prescribing, distinct from viral resistance itself',
     ],
-    treatment: 'Nirmatrelvir/ritonavir is most effective when started within 5 days of symptom onset in high-risk, non-hospitalised outpatients, reducing progression to severe disease (Grade A). Remdesivir has evidence in hospitalised patients requiring supplemental oxygen (Grade A). Dexamethasone reduces mortality specifically in patients with hypoxia requiring oxygen or ventilation, but shows no benefit — and a possible signal of harm — when given without hypoxia (Grade A, RECOVERY trial).',
+    treatment: [
+      "Nirmatrelvir/ritonavir is most effective when started within 5 days of symptom onset in high-risk, non-hospitalised outpatients, reducing progression to severe disease (Grade A).",
+      "Remdesivir has evidence in hospitalised patients requiring supplemental oxygen (Grade A).",
+      "Dexamethasone reduces mortality specifically in patients with hypoxia requiring oxygen or ventilation, but shows no benefit — and a possible signal of harm — when given without hypoxia (Grade A, RECOVERY trial)."
+    ],
     references: [
       "NIH COVID-19 Treatment Guidelines (Grade A)",
       "WHO Living Guideline on Therapeutics and COVID-19 (Grade A)",
@@ -7083,7 +7319,10 @@ const DEX_INFO = {
       'Not applicable in the conventional antimicrobial-resistance sense — aciclovir has in vitro activity against EBV lytic replication but no established clinical role, so resistance to it is not a clinically relevant concept here',
       'For PTLD, "resistance" to first-line management is framed as failure to respond to reduced immunosuppression, prompting escalation to rituximab or chemotherapy',
     ],
-    treatment: 'Uncomplicated infectious mononucleosis is managed supportively (analgesia, hydration, rest, avoiding contact sports) — aciclovir has no proven clinical benefit despite in vitro activity (Grade A). Post-transplant lymphoproliferative disorder is managed stepwise: reduce immunosuppression first, add rituximab for CD20-positive disease not responding to reduced immunosuppression alone, and reserve chemotherapy for refractory or aggressive disease (Grade B, international transplant society guidance).',
+    treatment: [
+      "Uncomplicated infectious mononucleosis is managed supportively (analgesia, hydration, rest, avoiding contact sports) — aciclovir has no proven clinical benefit despite in vitro activity (Grade A).",
+      "Post-transplant lymphoproliferative disorder is managed stepwise: reduce immunosuppression first, add rituximab for CD20-positive disease not responding to reduced immunosuppression alone, and reserve chemotherapy for refractory or aggressive disease (Grade B, international transplant society guidance)."
+    ],
     references: [
       "American Society of Transplantation (AST) Guidelines — Post-Transplant Lymphoproliferative Disorder (Grade B)",
       "UpToDate/CDC Clinical Overview of Infectious Mononucleosis (Grade B)",
@@ -7108,7 +7347,11 @@ const DEX_INFO = {
       'Resistance-associated substitutions to direct-acting antivirals can occur but rarely compromise pangenotypic regimens at standard treatment durations',
       'Treatment failure is now uncommon with modern regimens; retreatment options exist for the rare patient who does not achieve sustained virologic response',
     ],
-    treatment: 'Chronic hepatitis C is curable — a 12-week course of a pangenotypic direct-acting antiviral regimen (e.g. sofosbuvir/velpatasvir) achieves sustained virologic response in well over 95% of patients, regardless of genotype (Grade A, WHO/AASLD-IDSA). Interferon-based regimens are obsolete. After a needlestick or other high-risk exposure, because no post-exposure prophylaxis exists, management is scheduled follow-up HCV RNA and antibody testing, with prompt treatment if infection is confirmed (Grade B).',
+    treatment: [
+      "Chronic hepatitis C is curable — a 12-week course of a pangenotypic direct-acting antiviral regimen (e.g. sofosbuvir/velpatasvir) achieves sustained virologic response in well over 95% of patients, regardless of genotype (Grade A, WHO/AASLD-IDSA).",
+      "Interferon-based regimens are obsolete.",
+      "After a needlestick or other high-risk exposure, because no post-exposure prophylaxis exists, management is scheduled follow-up HCV RNA and antibody testing, with prompt treatment if infection is confirmed (Grade B)."
+    ],
     references: [
       "AASLD-IDSA HCV Guidance: Recommendations for Testing, Managing, and Treating Hepatitis C (Grade A)",
       "WHO Guidelines for the Care and Treatment of Persons Diagnosed with Chronic Hepatitis C Virus Infection (Grade A)",
@@ -7133,7 +7376,11 @@ const DEX_INFO = {
       'Not applicable in the antimicrobial-resistance sense — there is no antiviral in routine clinical use against measles',
       'The relevant population-level "resistance" concern is waning herd immunity when vaccination coverage falls, which permits outbreak transmission even where measles was previously well controlled',
     ],
-    treatment: 'There is no specific antiviral treatment for measles — management is supportive. WHO recommends two age-appropriate doses of vitamin A, given 24 hours apart, for every child diagnosed with measles regardless of country or apparent nutritional status, since it reduces morbidity and mortality (Grade A, WHO). Antibiotics are reserved for suspected secondary bacterial infection, not given empirically. MMR vaccination within 72 hours of exposure can prevent or attenuate disease in a susceptible contact, but has no role once infection is established (Grade B).',
+    treatment: [
+      "There is no specific antiviral treatment for measles — management is supportive. WHO recommends two age-appropriate doses of vitamin A, given 24 hours apart, for every child diagnosed with measles regardless of country or apparent nutritional status, since it reduces morbidity and mortality (Grade A, WHO).",
+      "Antibiotics are reserved for suspected secondary bacterial infection, not given empirically.",
+      "MMR vaccination within 72 hours of exposure can prevent or attenuate disease in a susceptible contact, but has no role once infection is established (Grade B)."
+    ],
     references: [
       "WHO Guideline: Vitamin A Supplementation for Children with Measles (Grade A)",
       "CDC Measles Clinical Overview and Case Management (Grade A)",
@@ -7158,7 +7405,10 @@ const DEX_INFO = {
       'Not applicable in the conventional sense — there is no antiviral treatment for established rabies to develop resistance against',
       'Experimental intensive-care protocols (sometimes called the "Milwaukee protocol") have been attempted in a handful of symptomatic patients, but there is no controlled evidence they alter the outcome, and rabies fatality remains essentially universal once symptoms appear',
     ],
-    treatment: 'Post-exposure management for Category III exposures requires all three elements: immediate, thorough wound washing with soap and water for 15 minutes (the single most effective intervention), rabies immunoglobulin infiltrated around the wound, and a full vaccine series (e.g. the WHO Essen regimen: days 0, 3, 7, 14) — together essentially 100% effective if started before symptoms begin (Grade A, WHO). Once clinical rabies develops, no treatment reliably alters the outcome; care shifts to palliation and infection control precautions (Grade B, WHO).',
+    treatment: [
+      "Post-exposure management for Category III exposures requires all three elements: immediate, thorough wound washing with soap and water for 15 minutes (the single most effective intervention), rabies immunoglobulin infiltrated around the wound, and a full vaccine series (e.g. the WHO Essen regimen: days 0, 3, 7, 14) — together essentially 100% effective if started before symptoms begin (Grade A, WHO).",
+      "Once clinical rabies develops, no treatment reliably alters the outcome; care shifts to palliation and infection control precautions (Grade B, WHO)."
+    ],
     references: [
       "WHO Rabies Vaccines and Immunoglobulins: WHO Position Paper (Grade A)",
       "WHO Guide for Post-Exposure Prophylaxis (Grade A)",
@@ -7183,7 +7433,11 @@ const DEX_INFO = {
       'Not a clinically significant issue for RSV given the limited antiviral options available',
       'The main "resistance" consideration is the limited and controversial evidence base for aerosolised ribavirin in severe disease, rather than viral resistance to a well-established agent',
     ],
-    treatment: 'Bronchiolitis is managed with supportive care — supplemental oxygen only if saturations fall below the recommended threshold, and feeding support if oral intake becomes inadequate; bronchodilators, corticosteroids, and antibiotics have no proven benefit in typical bronchiolitis and are not routinely recommended (Grade A, NICE/AAP). In severely immunocompromised patients with progressive lower respiratory tract disease, aerosolised ribavirin (sometimes with high-titre RSV immunoglobulin) has been used, though the evidence base remains limited (Grade C). Nirsevimab and palivizumab are prevention tools for high-risk infants, not treatments for active infection.',
+    treatment: [
+      "Bronchiolitis is managed with supportive care — supplemental oxygen only if saturations fall below the recommended threshold, and feeding support if oral intake becomes inadequate; bronchodilators, corticosteroids, and antibiotics have no proven benefit in typical bronchiolitis and are not routinely recommended (Grade A, NICE/AAP).",
+      "In severely immunocompromised patients with progressive lower respiratory tract disease, aerosolised ribavirin (sometimes with high-titre RSV immunoglobulin) has been used, though the evidence base remains limited (Grade C).",
+      "Nirsevimab and palivizumab are prevention tools for high-risk infants, not treatments for active infection."
+    ],
     references: [
       "NICE Guideline NG9: Bronchiolitis in Children — Diagnosis and Management (Grade A)",
       "American Academy of Pediatrics Clinical Practice Guideline: Bronchiolitis (Grade A)",
@@ -7207,7 +7461,10 @@ const DEX_INFO = {
     resistance: [
       'Not applicable — there is no licensed antiviral against chikungunya to develop resistance against',
     ],
-    treatment: 'There is no specific antiviral for chikungunya — management is supportive throughout. In the acute phase, while dengue has not yet been excluded, paracetamol is preferred over NSAIDs/aspirin given shared bleeding-risk concerns and the possibility of co-infection (Grade B, WHO/PAHO). Once dengue is excluded, NSAIDs are reasonable first-line for persistent chronic arthritis, escalating to conventional DMARDs (e.g. methotrexate) for refractory, NSAID-unresponsive cases (Grade C, rheumatology case series/expert guidance).',
+    treatment: [
+      "There is no specific antiviral for chikungunya — management is supportive throughout. In the acute phase, while dengue has not yet been excluded, paracetamol is preferred over NSAIDs/aspirin given shared bleeding-risk concerns and the possibility of co-infection (Grade B, WHO/PAHO).",
+      "Once dengue is excluded, NSAIDs are reasonable first-line for persistent chronic arthritis, escalating to conventional DMARDs (e.g. methotrexate) for refractory, NSAID-unresponsive cases (Grade C, rheumatology case series/expert guidance)."
+    ],
     references: [
       "WHO Guidelines on Clinical Management of Chikungunya Fever (Grade B)",
       "Pan American Health Organization (PAHO) Preparedness and Response for Chikungunya Virus (Grade B)",
@@ -8274,7 +8531,7 @@ const DRUG_MOVE_MAP = {
         </div>
         <div class="detail-section">
           <h4>Usual Treatment</h4>
-          <p class="detail-para">${info.treatment}</p>
+          <ul class="detail-list">${info.treatment.map(t => `<li>${t}</li>`).join('')}</ul>
         </div>
         ${info.specifics ? `
         <div class="detail-section">
