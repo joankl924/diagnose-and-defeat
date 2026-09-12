@@ -1008,7 +1008,7 @@
       name: 'Streptococcus pneumoniae',
       aliases: ['streptococcus pneumoniae', 'strep pneumoniae', 's pneumoniae', 'pneumococcus', 'pneumococcal'],
       spriteColor: 'var(--pneumo-violet)',
-      flagName: 'PNSP',
+      flagName: 'penicillin-non-susceptible <i>Streptococcus pneumoniae</i>',
       vignettes: [
         {
           caseNum: 13,
@@ -1025,7 +1025,7 @@
           caseNum: 14,
           syndrome: 'Meningitis',
           patientHP: 50, // starting patient life for this vignette's severity
-          pnspSite: 'meningitis', // site-specific PNSP treatment logic — see spneumoniae moves
+          pnspSite: 'meningitis', // site-specific penicillin-non-susceptible S. pneumoniae treatment logic — see spneumoniae moves
           text: "A 24-year-old man with no past medical history presents with 12 hours of severe headache, neck stiffness, photophobia, and fever of 39.3°C. He had untreated sinusitis the week before. Lumbar puncture shows cloudy CSF with a high neutrophil count and low glucose.",
           clues: [
             { title: "Gram Stain — CSF", icon: "pairs-violet", text: "Gram-positive diplococci, lancet-shaped, extracellular and within neutrophils." },
@@ -1037,7 +1037,7 @@
           caseNum: 15,
           syndrome: 'Bacteraemic Pneumonia — Nursing Home',
           patientHP: 55, // starting patient life for this vignette's severity
-          pnspSite: 'bacteraemia', // site-specific PNSP treatment logic — see spneumoniae moves
+          pnspSite: 'bacteraemia', // site-specific penicillin-non-susceptible S. pneumoniae treatment logic — see spneumoniae moves
           text: "An 82-year-old nursing home resident with dementia presents with fever, delirium, and hypoxia. She completed a course of amoxicillin for a chest infection six weeks ago. Temp 38.6°C, SpO2 89%. Blood and sputum cultures are sent.",
           clues: [
             { title: "Gram Stain — Sputum/Blood Culture", icon: "pairs-violet", text: "Gram-positive diplococci, lancet-shaped, with many polymorphs." },
@@ -1110,7 +1110,7 @@
         { name: "Order Susceptibility Testing", desc: "PBP-mediated resistance profile — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
-            ctx.setSubtype(r ? 'PNSP' : 'Penicillin-susceptible');
+            ctx.setSubtype(r ? 'penicillin-non-susceptible Streptococcus pneumoniae' : 'Penicillin-susceptible');
             const rows = r
               ? [{drug:'Oxacillin Screen (penicillin surrogate)', result:'R'}, {drug:'Penicillin (MIC)', result:'R'}, {drug:'Ceftriaxone', result:'S'}]
               : [{drug:'Oxacillin Screen (penicillin surrogate)', result:'S'}, {drug:'Ceftriaxone', result:'S'}];
@@ -1130,7 +1130,7 @@
       ],
       pearls: [
         `<b>Pneumococcal resistance is PBP-mediated, not enzymatic</b> — unlike <i>S. aureus</i>, there's no beta-lactamase to neutralise, so high tissue/serum drug levels can overcome reduced PBP affinity outside the CNS. <span class="cite">(Grade A)</span>`,
-        `<b>The same "resistance" behaves differently by site</b> — PNSP that responds fine to high-dose amoxicillin for pneumonia may need vancomycin added in meningitis, where CSF drug levels are much lower relative to blood. <span class="cite">(Grade A)</span>`,
+        `<b>The same "resistance" behaves differently by site</b> — penicillin-non-susceptible <i>Streptococcus pneumoniae</i> that responds fine to high-dose amoxicillin for pneumonia may need vancomycin added in meningitis, where CSF drug levels are much lower relative to blood. <span class="cite">(Grade A)</span>`,
         `<b>Extremes of age, asplenia, and unvaccinated status</b> raise the risk of invasive pneumococcal disease — pneumococcal vaccination remains a key prevention strategy. <span class="cite">(Grade A — MOH National Adult Immunisation Schedule)</span>`,
       ],
     },
