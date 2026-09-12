@@ -133,6 +133,24 @@
     font-size: 12px;
   }
 
+  .left-menu-wrap { position: relative; display:flex; align-items:center; }
+  .menu-toggle-left {
+    background: transparent; border:1px solid var(--line); color:var(--text-main);
+    padding:6px 10px; cursor:pointer; font-size:12px; line-height:1; font-family:'IBM Plex Sans',sans-serif;
+  }
+  .menu-toggle-left:hover, .menu-toggle-left[aria-expanded="true"] { border-color: var(--agar-gold); color: var(--agar-gold); }
+  .info-dropdown {
+    position:absolute; top:calc(100% + 6px); left:0; z-index:250; min-width:230px;
+    background: var(--bg-panel-2); border:1px solid var(--line); box-shadow:0 10px 28px rgba(0,0,0,.45);
+    display:flex; flex-direction:column; padding:6px;
+  }
+  .info-dropdown-item {
+    background:transparent; border:none; color:var(--text-main); text-align:left;
+    font-family:'IBM Plex Sans',sans-serif; font-size:12.5px; padding:9px 10px; cursor:pointer;
+  }
+  .info-dropdown-item:hover { background: var(--bg-panel); color: var(--agar-gold); }
+  .info-dropdown-item.danger:hover { background: var(--bg-panel); color: var(--hp-red); }
+
   .stage { flex:1; padding: 22px 20px 90px; display:flex; flex-direction:column; gap:16px; }
   .hidden { display: none !important; }
 
@@ -473,7 +491,17 @@
 <div class="app">
   <div class="console">
     <header class="topbar">
-      <div class="brand">DIAGNOSE &amp; DEFEAT</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="left-menu-wrap">
+          <button class="menu-toggle-left" id="btn-info-menu" aria-haspopup="true" aria-expanded="false">☰ Menu</button>
+          <div class="info-dropdown hidden" id="info-dropdown">
+            <button class="info-dropdown-item" id="btn-info-evidence">References &amp; Evidence Grades</button>
+            <button class="info-dropdown-item" id="btn-info-about">About / Credits</button>
+            <button class="info-dropdown-item danger" id="btn-info-reset">Reset Progress</button>
+          </div>
+        </div>
+        <div class="brand">DIAGNOSE &amp; DEFEAT</div>
+      </div>
       <div style="display:flex; align-items:center; gap:10px;">
         <div class="coin-chip" id="coin-chip-top">0 coins</div>
         <button class="menu-toggle" id="btn-menu-toggle">Dex ▤</button>
@@ -596,7 +624,6 @@
     <div id="tab-drugs" class="hidden">
       <div class="dex-list" id="med-list"></div>
     </div>
-    <button class="sidebar-reset" id="btn-reset">Reset progress</button>
   </aside>
 
   <div class="dex-modal hidden" id="dex-modal">
@@ -8212,6 +8239,83 @@ const DRUG_MOVE_MAP = {
   $('dex-modal-close').addEventListener('click', closeDetail);
   $('dex-modal-backdrop').addEventListener('click', closeDetail);
 
+  // ---------- info menu (references/evidence grades, about, reset) ----------
+  const INFO_CONTENT = {
+    evidence: `
+      <div class="detail-header">
+        <div class="detail-name" style="font-size:12px;">REFERENCES &amp; EVIDENCE GRADES</div>
+      </div>
+      <div class="detail-section">
+        <h4>How Citations Work In This Game</h4>
+        <p class="detail-para">Throughout the Dex and the treatment log, specific claims carry an inline citation like <span class="cite">(Grade A)</span> or <span class="cite">(Grade B — WHO)</span> right next to the claim they support.</p>
+      </div>
+      <div class="detail-section">
+        <h4>Grading Scale</h4>
+        <ul class="detail-list">
+          <li><b>Grade A — high confidence.</b> Randomised controlled trials, meta-analyses of RCTs, or unambiguous guideline recommendations (e.g. MOH, IDSA, WHO) where the evidence base is settled.</li>
+          <li><b>Grade B — moderate confidence.</b> Well-designed cohort or case-control studies, non-randomised comparisons, or guideline recommendations extrapolated from related conditions.</li>
+          <li><b>Grade C — low confidence / expert opinion.</b> Case series, case reports, mechanistic reasoning, or expert consensus where comparative data doesn't exist — common for rarer organisms in this Dex.</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Guideline Hierarchy</h4>
+        <p class="detail-para">Singapore MOH/CDA guidance is used first wherever it addresses an organism or scenario. Where it doesn't, the game falls back to IDSA, WHO, UK (NICE/UKHSA), or Australian (Therapeutic Guidelines) sources.</p>
+      </div>
+      <p class="detail-note">This is a simplified educational tool, not a clinical decision-support system — treatment mechanics are gamified and should not be used to guide real patient care.</p>
+    `,
+    about: `
+      <div class="detail-header">
+        <div class="detail-name" style="font-size:12px;">ABOUT THIS GAME</div>
+      </div>
+      <div class="detail-section">
+        <p class="detail-para"><i>Diagnose &amp; Defeat</i> is a browser-based microbiology teaching game built as a study companion for infectious disease case recognition and antimicrobial treatment reasoning.</p>
+      </div>
+      <div class="detail-section">
+        <h4>How It Works</h4>
+        <ul class="detail-list">
+          <li>Walk the ED floor to trigger a case.</li>
+          <li>Work through clues in the lab workup to reach a diagnosis.</li>
+          <li>Choose a treatment move in a turn-based battle against the pathogen.</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Built With</h4>
+        <p class="detail-para">A single HTML/JS file, built iteratively with Claude. Source at <a href="https://github.com/joankl924/diagnose-and-defeat" target="_blank" rel="noopener" style="color:var(--agar-gold);">github.com/joankl924/diagnose-and-defeat</a>.</p>
+      </div>
+      <p class="detail-note">Educational prototype — not a clinical decision tool.</p>
+    `
+  };
+  function openInfo(key) {
+    $('dex-modal-body').innerHTML = INFO_CONTENT[key];
+    $('dex-modal').classList.remove('hidden');
+  }
+  function closeInfoMenu() {
+    $('info-dropdown').classList.add('hidden');
+    $('btn-info-menu').setAttribute('aria-expanded', 'false');
+  }
+  function openInfoMenu() {
+    $('info-dropdown').classList.remove('hidden');
+    $('btn-info-menu').setAttribute('aria-expanded', 'true');
+  }
+  $('btn-info-menu').addEventListener('click', (e) => {
+    e.stopPropagation();
+    $('info-dropdown').classList.contains('hidden') ? openInfoMenu() : closeInfoMenu();
+  });
+  document.addEventListener('click', (e) => {
+    if (!$('info-dropdown').classList.contains('hidden') && !e.target.closest('.left-menu-wrap')) {
+      closeInfoMenu();
+    }
+  });
+  $('btn-info-evidence').addEventListener('click', () => { closeInfoMenu(); openInfo('evidence'); });
+  $('btn-info-about').addEventListener('click', () => { closeInfoMenu(); openInfo('about'); });
+  $('btn-info-reset').addEventListener('click', async () => {
+    closeInfoMenu();
+    if (!confirm('Reset coins, dex, and medication log? This cannot be undone.')) return;
+    game.coins = 0; game.dex = {}; game.meds = [];
+    await saveState();
+    renderSidebar();
+  });
+
   // ---------- sidebar open/close ----------
   function openSidebar() { $('sidebar').classList.add('open'); $('sidebar-backdrop').classList.add('open'); }
   function closeSidebar() { $('sidebar').classList.remove('open'); $('sidebar-backdrop').classList.remove('open'); }
@@ -8223,6 +8327,7 @@ const DRUG_MOVE_MAP = {
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     if (!$('dex-modal').classList.contains('hidden')) { closeDetail(); return; }
+    if (!$('info-dropdown').classList.contains('hidden')) { closeInfoMenu(); return; }
     if ($('sidebar').classList.contains('open')) { closeSidebar(); }
   });
 
@@ -8235,13 +8340,6 @@ const DRUG_MOVE_MAP = {
       $('tab-organisms').classList.toggle('hidden', tab !== 'organisms');
       $('tab-drugs').classList.toggle('hidden', tab !== 'drugs');
     });
-  });
-
-  $('btn-reset').addEventListener('click', async () => {
-    if (!confirm('Reset coins, dex, and medication log? This cannot be undone.')) return;
-    game.coins = 0; game.dex = {}; game.meds = [];
-    await saveState();
-    renderSidebar();
   });
 
   // ---------- map ----------
