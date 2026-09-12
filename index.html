@@ -122,7 +122,9 @@
     color: var(--agar-gold);
     padding: 5px 10px;
     white-space: nowrap;
+    cursor: pointer;
   }
+  .coin-chip:hover { border-color: var(--agar-gold); background: var(--bg-panel); }
   .menu-toggle {
     display: none;
     background: transparent;
@@ -188,6 +190,15 @@
   }
   .customize-swatch:hover { border-color: var(--text-dim); }
   .customize-swatch.active { border-color: var(--agar-gold); box-shadow: 0 0 0 2px var(--bg-panel-2), 0 0 0 4px var(--agar-gold); }
+
+  .shop-item {
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .shop-item:last-child { border-bottom:none; }
+  .shop-item-name { font-size:14px; color:var(--text-main); margin:0 0 4px; }
+  .shop-item-desc { font-size:11.5px; color:var(--text-faint); }
+  .shop-item button.action { font-size:12.5px; padding:9px 14px; white-space:nowrap; }
 
   button.action.danger { background: var(--hp-red); color:#fff; }
   button.action.danger:hover { background:#e06a8c; }
@@ -538,7 +549,6 @@
           <div class="info-dropdown hidden" id="info-dropdown">
             <button class="info-dropdown-item" id="btn-info-evidence">References &amp; Evidence Grades</button>
             <button class="info-dropdown-item" id="btn-info-abbreviations">Abbreviations Glossary</button>
-            <button class="info-dropdown-item" id="btn-info-customize">Customize Character</button>
             <button class="info-dropdown-item" id="btn-info-about">About / Credits</button>
             <button class="info-dropdown-item danger" id="btn-info-reset">Reset Progress</button>
           </div>
@@ -546,7 +556,7 @@
         <div class="brand">DIAGNOSE &amp; DEFEAT</div>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
-        <div class="coin-chip" id="coin-chip-top">0 coins</div>
+        <div class="coin-chip" id="coin-chip-top" role="button" tabindex="0" title="Open Coin Shop">0 coins</div>
         <button class="menu-toggle" id="btn-menu-toggle">Dex ▤</button>
       </div>
     </header>
@@ -707,6 +717,21 @@
       </div>
       <div class="btn-row" style="justify-content:flex-end; margin-top:4px;">
         <button class="action" id="btn-customize-done">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dex-modal hidden" id="shop-modal">
+    <div class="dex-modal-backdrop" id="shop-modal-backdrop"></div>
+    <div class="dex-modal-panel" role="dialog" aria-modal="true" style="max-width:380px;">
+      <button class="dex-modal-close" id="shop-modal-close" aria-label="Close">✕</button>
+      <div class="customize-modal-title">Coin Shop</div>
+      <div class="shop-item">
+        <div>
+          <div class="shop-item-name">Customize Character</div>
+          <div class="shop-item-desc">Change your body style and colours</div>
+        </div>
+        <button class="action" id="btn-shop-customize">300 coins</button>
       </div>
     </div>
   </div>
@@ -8524,6 +8549,7 @@ const DRUG_MOVE_MAP = {
   function renderSidebar() {
     $('coin-box').innerHTML = `${game.coins}<small>COINS</small>`;
     $('coin-chip-top').textContent = `${game.coins} coins`;
+    if (!$('shop-modal').classList.contains('hidden')) refreshShopUI();
 
     // ---- organism dex, grouped ----
     const dexList = $('dex-list');
@@ -8896,6 +8922,7 @@ const DRUG_MOVE_MAP = {
     if (e.key !== 'Escape') return;
     if (!$('reset-confirm-modal').classList.contains('hidden')) { closeResetConfirm(); return; }
     if (!$('dex-modal').classList.contains('hidden')) { closeDetail(); return; }
+    if (!$('shop-modal').classList.contains('hidden')) { closeShopModal(); return; }
     if (!$('customize-modal').classList.contains('hidden')) { closeCustomizeModal(); return; }
     if (!$('info-dropdown').classList.contains('hidden')) { closeInfoMenu(); return; }
     if ($('sidebar').classList.contains('open')) { closeSidebar(); }
@@ -9836,9 +9863,33 @@ function renderMap() {
   buildSwatchButtons('customize-steth-row', CUSTOMIZE_SWATCHES.steth, false, (idx) => { game.custom.stethIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
   function openCustomizeModal() { refreshCustomizeUI(); $('customize-modal').classList.remove('hidden'); }
   function closeCustomizeModal() { $('customize-modal').classList.add('hidden'); saveState(); }
-  $('btn-info-customize').addEventListener('click', () => { closeInfoMenu(); openCustomizeModal(); });
   $('customize-modal-close').addEventListener('click', closeCustomizeModal);
   $('customize-modal-backdrop').addEventListener('click', closeCustomizeModal);
+
+  // ---------- coin shop ----------
+  // Clicking the coin display opens a small shop of things to spend coins on. Customize
+  // Character is the first item (300 coins, charged every time it's opened — no one-time
+  // unlock); more shop items can be added as more shop-item rows later.
+  function refreshShopUI() {
+    const canAfford = game.coins >= 300;
+    const btn = $('btn-shop-customize');
+    btn.disabled = !canAfford;
+    btn.textContent = canAfford ? '300 coins' : 'Need 300 coins';
+  }
+  function openShopModal() { refreshShopUI(); $('shop-modal').classList.remove('hidden'); }
+  function closeShopModal() { $('shop-modal').classList.add('hidden'); }
+  $('coin-chip-top').addEventListener('click', openShopModal);
+  $('coin-chip-top').addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openShopModal(); } });
+  $('shop-modal-close').addEventListener('click', closeShopModal);
+  $('shop-modal-backdrop').addEventListener('click', closeShopModal);
+  $('btn-shop-customize').addEventListener('click', () => {
+    if (game.coins < 300) return; // button is disabled in this case, but guard anyway
+    game.coins -= 300;
+    renderSidebar();
+    saveState();
+    closeShopModal();
+    openCustomizeModal();
+  });
   $('btn-customize-done').addEventListener('click', closeCustomizeModal);
 
   // ---------- init ----------
