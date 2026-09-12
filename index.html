@@ -798,7 +798,7 @@
       moves: [
         { name: "Penicillin G", desc: "Beta-lactam, no beta-lactamase stability", isDrug: true,
           dmg: (r) => 0,
-          log: (r) => `Penicillin G has no effect. Over 90% of <i>S. aureus</i> isolates produce beta-lactamase. <span class="cite">(Grade A — general microbiology principle, not a specific guideline)</span>` },
+          log: (r) => `Penicillin G has no effect. Historically, over 90% of <i>S. aureus</i> isolates produce beta-lactamase. <span class="cite">(Grade A — general microbiology principle, not a specific guideline)</span>` },
         { name: "Cloxacillin", desc: "Anti-staphylococcal penicillin", isDrug: true,
           dmg: (r) => r ? 0 : 45,
           log: (r) => r ? `Cloxacillin has no effect — this isolate carries mecA and is methicillin-resistant. <span class="cite">(Grade A)</span>`
@@ -849,6 +849,7 @@
           caseNum: 6,
           syndrome: 'Pyelonephritis / Urosepsis — Healthcare-Associated',
           patientHP: 55, // starting patient life for this vignette's severity
+          beyondBladder: true, // catheter-associated urosepsis — nitrofurantoin doesn't reach therapeutic tissue/blood levels
           text: "A 76-year-old man with a long-term indwelling urinary catheter is admitted with 1 day of fever, rigors, and confusion. He was hospitalised for 3 weeks two months ago and completed two antibiotic courses, including ciprofloxacin, during that stay. Temp 38.7°C, BP 92/60.",
           clues: [
             { title: "Gram Stain — Urine", icon: "rods", text: "Gram-negative rods, no particular arrangement." },
@@ -860,6 +861,7 @@
           caseNum: 7,
           syndrome: 'Biliary Sepsis — Post-Travel',
           patientHP: 55, // starting patient life for this vignette's severity
+          beyondBladder: true, // biliary/systemic sepsis — nitrofurantoin doesn't reach therapeutic tissue/blood levels
           text: "A 64-year-old woman presents with fever, right upper quadrant pain, and jaundice 10 days after returning from a region with high rates of extended-spectrum beta-lactamase carriage. Ultrasound shows cholelithiasis with a dilated common bile duct.",
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "rods", text: "Gram-negative rods, no particular arrangement." },
@@ -887,8 +889,10 @@
       ],
       moves: [
         { name: "Nitrofurantoin", desc: "First-line for uncomplicated cystitis", isDrug: true,
-          dmg: (r) => 40,
-          log: (r) => `Effective — nitrofurantoin remains first-line for uncomplicated lower UTI regardless of ESBL status. <span class="cite">(Grade A — ACE Singapore UTI Guideline, 2023)</span>` },
+          dmg: (r, ctx) => ctx.vignette.beyondBladder ? 0 : 40,
+          log: (r, ctx) => ctx.vignette.beyondBladder
+            ? `No effect – doesn't achieve therapeutic levels outside the bladder. <span class="cite">(Grade A)</span>`
+            : `Effective — nitrofurantoin remains first-line for uncomplicated lower UTI regardless of ESBL status. <span class="cite">(Grade A — ACE Singapore UTI Guideline, 2023)</span>` },
         { name: "Ciprofloxacin", desc: "Fluoroquinolone", isDrug: true,
           dmg: (r) => r ? 0 : 35,
           log: (r) => r ? `Ciprofloxacin has no effect — ESBL producers frequently co-carry fluoroquinolone resistance. <span class="cite">(Grade A)</span>`
@@ -982,15 +986,15 @@
         { name: "Amoxicillin", desc: "Aminopenicillin", isDrug: true,
           dmg: (r) => 45,
           log: (r) => `Effective and often preferred in children for palatability, same spectrum logic as penicillin V. <span class="cite">(Grade A)</span>` },
-        { name: "Clindamycin (adjunct)", desc: "Protein synthesis inhibitor, toxin suppression", isDrug: true,
+        { name: "Clindamycin", desc: "Protein synthesis inhibitor, toxin suppression", isDrug: true,
           dmg: (r) => 20,
-          log: (r) => `Adds real benefit as an adjunct in severe or toxin-mediated disease by switching off exotoxin and M-protein production — always paired with a beta-lactam, never used alone. <span class="cite">(Grade B — necrotising fasciitis/toxic shock)</span>` },
+          log: (r) => `Used in penicillin allergy. <span class="cite">(Grade A — penicillin-allergy alternative)</span> Adds real benefit as an adjunct in severe or toxin-mediated disease by switching off exotoxin and M-protein production — always paired with a beta-lactam, never used alone. <span class="cite">(Grade B — necrotising fasciitis/toxic shock)</span>` },
         { name: "Azithromycin", desc: "Macrolide, penicillin-allergy alternative", isDrug: true,
           dmg: (r) => 25,
           log: (r) => `Works, but macrolide resistance is emerging in GAS — reserve for true penicillin allergy. <span class="cite">(Grade B)</span>` },
         { name: "Vancomycin", desc: "Broad glycopeptide", isDrug: true,
           dmg: (r) => 15,
-          log: (r) => `It works, but this is unnecessary escalation — a fully penicillin-susceptible organism doesn't need this. <span class="cite">(Grade B — stewardship principle)</span>` },
+          log: (r) => `While vancomycin is effective, it is not usually used in uncomplicated GAS pharyngitis or scarlet fever; to date, penicillins remain the first-line, universally effective therapy for GAS. It may be added in severe, invasive GAS, but serves primarily as empiric coverage for possible concomitant MRSA rather than as anti-streptococcal therapy. <span class="cite">(Grade A)</span>` },
       ],
       pearls: [
         `<b>Group A strep has stayed universally penicillin-susceptible</b> for decades — narrow-spectrum penicillin remains first-line, whatever the syndrome. <span class="cite">(Grade A)</span>`,
@@ -1021,6 +1025,7 @@
           caseNum: 14,
           syndrome: 'Meningitis',
           patientHP: 50, // starting patient life for this vignette's severity
+          pnspSite: 'meningitis', // site-specific PNSP treatment logic — see spneumoniae moves
           text: "A 24-year-old man with no past medical history presents with 12 hours of severe headache, neck stiffness, photophobia, and fever of 39.3°C. He had untreated sinusitis the week before. Lumbar puncture shows cloudy CSF with a high neutrophil count and low glucose.",
           clues: [
             { title: "Gram Stain — CSF", icon: "pairs-violet", text: "Gram-positive diplococci, lancet-shaped, extracellular and within neutrophils." },
@@ -1032,6 +1037,7 @@
           caseNum: 15,
           syndrome: 'Bacteraemic Pneumonia — Nursing Home',
           patientHP: 55, // starting patient life for this vignette's severity
+          pnspSite: 'bacteraemia', // site-specific PNSP treatment logic — see spneumoniae moves
           text: "An 82-year-old nursing home resident with dementia presents with fever, delirium, and hypoxia. She completed a course of amoxicillin for a chest infection six weeks ago. Temp 38.6°C, SpO2 89%. Blood and sputum cultures are sent.",
           clues: [
             { title: "Gram Stain — Sputum/Blood Culture", icon: "pairs-violet", text: "Gram-positive diplococci, lancet-shaped, with many polymorphs." },
@@ -1059,24 +1065,64 @@
       ],
       moves: [
         { name: "High-dose Amoxicillin", desc: "Aminopenicillin, high dose overcomes reduced PBP affinity", isDrug: true,
-          dmg: (r) => r ? 30 : 45,
-          log: (r) => r ? `Still lands a meaningful hit — for non-meningeal infection, high-dose amoxicillin overcomes most PBP-mediated resistance because achievable tissue levels exceed the MIC. <span class="cite">(Grade A)</span>`
-                        : `Highly effective — first-line for pneumococcal pneumonia. <span class="cite">(Grade A — IDSA/ATS CAP Guidelines)</span>` },
+          // Site changes the story: outside the CNS, high-dose amoxicillin still overcomes PBP-mediated
+          // resistance because achievable tissue levels exceed the MIC; in the CSF or for confirmed
+          // bacteraemia/sepsis, a resistant isolate is a genuine miss — see doc amendments for Cases 14/15.
+          dmg: (r, ctx) => ctx.vignette.pnspSite ? (r ? 0 : 45) : (r ? 30 : 45),
+          log: (r, ctx) => {
+            if (ctx.vignette.pnspSite === 'meningitis') {
+              return r ? `No effect against resistant isolates within CSF. <span class="cite">(Grade A)</span>`
+                       : `High-dose amoxicillin can be used for susceptible isolates. A high dose is required to achieve therapeutic concentrations in the CSF. <span class="cite">(Grade A)</span>`;
+            }
+            if (ctx.vignette.pnspSite === 'bacteraemia') {
+              return r ? `No effect against resistant isolates. <span class="cite">(Grade A)</span>`
+                       : `High-dose amoxicillin can be used for susceptible isolates; a high dose is needed for serious infections including bacteraemia, meningitis, and sepsis. <span class="cite">(Grade A)</span>`;
+            }
+            return r ? `Still lands a meaningful hit — for non-meningeal infection, high-dose amoxicillin overcomes most PBP-mediated resistance because achievable tissue levels exceed the MIC. <span class="cite">(Grade A)</span>`
+                     : `Highly effective — first-line for pneumococcal pneumonia. <span class="cite">(Grade A — IDSA/ATS CAP Guidelines)</span>`;
+          } },
         { name: "Ceftriaxone", desc: "Third-generation cephalosporin, good CNS penetration", isDrug: true,
           dmg: (r) => r ? 35 : 40,
-          log: (r) => `Effective, and the right empirical choice whenever CNS infection is possible — reliable CSF penetration at meningitic dosing. <span class="cite">(Grade A)</span>` },
-        { name: "Vancomycin (meningitis add-on)", desc: "Added empirically pending susceptibility in meningitis", isDrug: true,
-          dmg: (r) => r ? 40 : 10,
-          log: (r) => r ? `Correct move for suspected meningitis — vancomycin is added empirically to ceftriaxone until penicillin/cephalosporin susceptibility is confirmed. <span class="cite">(Grade A — empirical meningitis therapy)</span>`
-                        : `Works, but is unnecessary outside the CNS or once susceptibility is confirmed — added toxicity without added benefit here. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Penicillin Susceptibility (E-test)", desc: "PBP-mediated resistance profile — 20 patient life", isDrug: false, patientCost: 20,
+          log: (r, ctx) => {
+            if (ctx.vignette.pnspSite === 'meningitis') {
+              return `Effective for susceptible isolates; achieves reliable CSF penetration at meningitic dosing. For resistant isolates, vancomycin must be added. <span class="cite">(Grade A)</span>`;
+            }
+            if (ctx.vignette.pnspSite === 'bacteraemia') {
+              return `Effective for susceptible isolates. For resistant isolates, vancomycin must be added. <span class="cite">(Grade A)</span>`;
+            }
+            return `Effective, and the right empirical choice whenever CNS infection is possible — reliable CSF penetration at meningitic dosing. <span class="cite">(Grade A)</span>`;
+          } },
+        { name: "Vancomycin", desc: "Added empirically pending susceptibility — value is site-dependent", isDrug: true,
+          // Wrong move for CAP/otitis regardless of susceptibility; guideline-recommended add-on for
+          // meningitis or bacteraemia when resistance is confirmed — see doc amendments for Cases 13-16.
+          dmg: (r, ctx) => ctx.vignette.pnspSite ? (r ? 40 : 10) : 10,
+          log: (r, ctx) => {
+            if (ctx.vignette.pnspSite === 'meningitis') {
+              return r ? `Correct move — guideline-recommended empiric therapy for suspected bacterial meningitis, added to ceftriaxone until susceptibility is confirmed; also guideline-recommended for ceftriaxone/cefotaxime-resistant isolates. <span class="cite">(Grade A — empirical meningitis therapy)</span>`
+                       : `Works, but is unnecessary outside the CNS or once susceptibility is confirmed — added toxicity without added benefit here. <span class="cite">(Grade B — stewardship principle)</span>`;
+            }
+            if (ctx.vignette.pnspSite === 'bacteraemia') {
+              return r ? `Correct move — guideline-recommended empiric therapy for suspected bacteraemia, covering for concomitant MRSA and for resistant <i>S. pneumoniae</i> isolates; also guideline-recommended for ceftriaxone/cefotaxime-resistant isolates. <span class="cite">(Grade A)</span>`
+                       : `Works, but is unnecessary once susceptibility is confirmed — added toxicity without added benefit here. <span class="cite">(Grade B — stewardship principle)</span>`;
+            }
+            return `Works, but this is unnecessary outside the CNS — regardless of susceptibility, there's no indication to reach for vancomycin here. <span class="cite">(Grade B — stewardship principle)</span>`;
+          } },
+        { name: "Order Susceptibility Testing", desc: "PBP-mediated resistance profile — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'PNSP' : 'Penicillin-susceptible');
             const rows = r
               ? [{drug:'Oxacillin Screen (penicillin surrogate)', result:'R'}, {drug:'Penicillin (MIC)', result:'R'}, {drug:'Ceftriaxone', result:'S'}]
               : [{drug:'Oxacillin Screen (penicillin surrogate)', result:'S'}, {drug:'Ceftriaxone', result:'S'}];
-            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `PBP-mediated resistance (PNSP) — high-dose amoxicillin and ceftriaxone still work outside the CNS; add vancomycin if meningitis is suspected.` : `Fully penicillin-susceptible — standard beta-lactam therapy will be effective.`);
+            let resistantNote;
+            if (ctx.vignette.pnspSite === 'meningitis') {
+              resistantNote = `PBP-mediated resistance (penicillin-non-susceptible isolate) – high dose amoxicillin and ceftriaxone still work outside the CNS; add vancomycin if meningitis is suspected.`;
+            } else if (ctx.vignette.pnspSite === 'bacteraemia') {
+              resistantNote = `PBP-mediated resistance (penicillin-non-susceptible isolate) – high dose amoxicillin and ceftriaxone still work outside the CNS; add vancomycin if bacteraemia is suspected.`;
+            } else {
+              resistantNote = `PBP-mediated resistance (penicillin-non-susceptible isolate) – high dose amoxicillin and ceftriaxone still work outside the CNS; add vancomycin if bacteraemia or meningitis is suspected.`;
+            }
+            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? resistantNote : `Fully penicillin-susceptible — standard beta-lactam therapy will be effective.`);
           } },
         { name: "Ciprofloxacin", desc: "Fluoroquinolone — weak pneumococcal activity", isDrug: true,
           dmg: (r) => 0,
@@ -5577,12 +5623,13 @@ const DEX_INFO = {
       'mecA (or mecC) gene → altered PBP2a with low beta-lactam affinity → acquired resistance (via horizontally transferred SCCmec cassette) to all penicillins, cephalosporins (except ceftaroline/ceftobiprole) and carbapenems once expressed (MRSA)',
       'Inducible clindamycin resistance (erm genes) in some erythromycin-resistant isolates — D-test required before relying on clindamycin',
     ],
-    treatment: "MSSA: cloxacillin/flucloxacillin or cefazolin — a narrow anti-staphylococcal beta-lactam outperforms vancomycin for susceptible strains (Grade A, IDSA). MRSA: vancomycin (AUC/MIC-guided dosing) or daptomycin for bacteraemia; linezolid is an alternative but avoided for bacteraemia in some analyses. Source control (drainage/device removal) is essential regardless of antibiotic choice.",
+    treatment: "MSSA: cloxacillin/flucloxacillin or cefazolin — a narrow anti-staphylococcal beta-lactam outperforms vancomycin for susceptible strains (Grade A, IDSA). MRSA: vancomycin (AUC/MIC-guided dosing) or daptomycin for bacteraemia. Other options include linezolid, teicoplanin, and tigecycline, although evidence levels for each of these agents vary. Source control (drainage/device removal) is essential regardless of antibiotic choice.",
     references: [
       "IDSA Clinical Practice Guidelines for the Treatment of MRSA Infections in Adults and Children, 2011 (Liu et al., Clin Infect Dis) (Grade A)",
       "ASHP/IDSA/PIDS/SIDP Consensus Guideline on Therapeutic Monitoring of Vancomycin, 2020 (Rybak et al., Am J Health-Syst Pharm) (Grade A)",
       "Kim SH et al., Outcome of Vancomycin Treatment in Patients with Methicillin-Susceptible <i>S. aureus</i> Bacteraemia, Antimicrob Agents Chemother 2008 (Grade B)",
       "Chambers HF & DeLeo FR, Waves of Resistance: <i>Staphylococcus aureus</i> in the Antibiotic Era, Nat Rev Microbiol 2009 (Grade B)",
+      "Ju G et al., Comparative Effectiveness and Safety of Six Antibiotics in Treating MRSA Infections: A Network Meta-Analysis, Int J Infect Dis 2024 (Grade B — network meta-analysis)",
     ],
   },
   spyogenes: {
@@ -5609,6 +5656,7 @@ const DEX_INFO = {
       "IDSA Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis, 2012 (Shulman et al., Clin Infect Dis) (Grade A)",
       "IDSA Clinical Practice Guidelines for Skin and Soft Tissue Infections, 2014 (Stevens et al., Clin Infect Dis) (Grade A)",
       "Chochua S et al., Invasive Group A Streptococcal PBP2x Variants Associated with Reduced Susceptibility to Beta-Lactams, USA 2015-2021, Antimicrob Agents Chemother 2022 (Grade B)",
+      "Hua C et al., Necrotising Soft-Tissue Infections, Lancet Infect Dis 2023 (Grade B)",
     ],
   },
   spneumoniae: {
@@ -5630,11 +5678,15 @@ const DEX_INFO = {
       'Resistance is dose- and site-dependent: high-dose amoxicillin often still works for non-meningeal disease; meningitis needs the highest CNS-penetrant regimen',
       'Macrolide resistance (erm/mef) common in many regions',
     ],
-    treatment: 'Non-meningeal disease: high-dose amoxicillin first-line for susceptible/low-level resistant strains (Grade A); ceftriaxone for severe/hospitalised disease. Meningitis: empirical ceftriaxone PLUS vancomycin until susceptibility confirmed, given PNSP risk in the CNS compartment (Grade A) — adjunctive dexamethasone reduces neurological complications. Vaccination (PCV/PPSV23) is the primary prevention strategy.',
+    treatment: 'Non-meningeal disease: high-dose amoxicillin first-line for susceptible/low-level resistant strains (Grade A); ceftriaxone for severe/hospitalised disease. Meningitis: empirical ceftriaxone PLUS vancomycin until susceptibility confirmed, given the risk of penicillin-non-susceptible <i>Streptococcus pneumoniae</i> in the CNS compartment (Grade A) — adjunctive dexamethasone reduces neurological complications. Vaccination (PCV/PPSV23) is the primary prevention strategy.',
+    specifics: 'This is more nitty-gritty, but EUCAST and CLSI differ in their recommended methodology for assessing penicillin susceptibility. EUCAST recommends broth microdilution, and permits oxacillin disc diffusion to rule out penicillin resistance. CLSI uses broth microdilution and E-tests (gradient diffusion strips) to look at penicillin MICs. <span class="cite">(Grade B — Mendes RE et al., J Clin Microbiol 2025; Martens S et al., Eur J Clin Microbiol Infect Dis 2024)</span>',
     references: [
       "IDSA/ATS Clinical Practice Guidelines: Diagnosis and Treatment of Adults with Community-Acquired Pneumonia, 2019 (Metlay et al., Am J Respir Crit Care Med) (Grade A)",
       "IDSA Practice Guidelines for the Management of Bacterial Meningitis, 2004 (Tunkel et al., Clin Infect Dis) (Grade A)",
       "Acute management of pneumonia in adult patients, Singapore Med J 2023 (Grade B)",
+      "Cabellos C et al., Penicillin- and Cephalosporin-Resistant Pneumococcal Meningitis: Treatment in the Real World and in Guidelines, Antimicrob Agents Chemother 2022 (Grade B)",
+      "van de Beek D et al., Community-Acquired Bacterial Meningitis, Lancet 2021 (Grade B)",
+      "van de Beek D et al., Community-Acquired Bacterial Meningitis, Nat Rev Dis Primers 2016 (Grade B)",
     ],
   },
   efaecalis: {
@@ -5788,12 +5840,13 @@ const DEX_INFO = {
       'Plasmid-mediated resistance spreads readily between Enterobacterales, often co-carrying fluoroquinolone/aminoglycoside resistance',
       'STEC/EHEC: antibiotics may worsen HUS risk by increasing toxin release — treatment is supportive',
     ],
-    treatment: 'Uncomplicated cystitis: nitrofurantoin first-line, with amoxicillin-clavulanate or fosfomycin as alternatives (Grade A, per Singapore ACE Guideline 2023); co-trimoxazole is not part of current Singapore guidance given local resistance rates, though it remains an option elsewhere if local resistance <20%. Uncomplicated pyelonephritis: amoxicillin-clavulanate first-line per ACE Singapore (cefuroxime as alternative); ceftriaxone or ciprofloxacin remain appropriate for more complicated pyelonephritis or bacteraemia/urosepsis if susceptible. Confirmed ESBL with invasive infection: carbapenem (Grade A) — do not step down to a cephalosporin even if in-vitro susceptible. STEC/EHEC diarrhoea: avoid antibiotics and anti-motility agents.',
+    treatment: 'Uncomplicated cystitis: nitrofurantoin first-line, with amoxicillin-clavulanate or fosfomycin as alternatives (Grade A, per Singapore ACE Guideline 2023); co-trimoxazole is not part of current Singapore guidance given local resistance rates, though it remains an option elsewhere if local resistance <20%. Uncomplicated pyelonephritis: amoxicillin-clavulanate first-line per ACE Singapore (cefuroxime as alternative); ceftriaxone or ciprofloxacin remain appropriate for more complicated pyelonephritis or bacteraemia/urosepsis if susceptible. Confirmed ESBL with invasive infection: carbapenem (Grade A). STEC/EHEC diarrhoea: avoid antibiotics and anti-motility agents.',
     references: [
       "Agency for Care Effectiveness (ACE) Singapore. Urinary Tract Infections — Appropriate Diagnosis and Antibiotic Use for Uncomplicated Cystitis and Pyelonephritis (2023). (Grade A)",
       "IDSA 2024 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections — ESBL-E section. (Grade A)",
       "Harris PNA et al. Effect of Piperacillin-Tazobactam vs Meropenem on 30-Day Mortality for Ceftriaxone-Resistant <i>E. coli</i>/<i>Klebsiella</i> BSI (MERINO trial). JAMA. 2018;320(10):984-994. (Grade A)",
-      "Murray PR et al. Manual of Clinical Microbiology (core biochemical/identification reference). (Grade B)",
+      "Freedman SB et al., Shiga Toxin-Producing <i>Escherichia coli</i> and the Hemolytic-Uremic Syndrome, N Engl J Med 2023 (Grade A)",
+      "IDSA 2025 Guideline Update on Complicated Urinary Tract Infections (endorsed by AMMI-CA, ASM, AUA, ESCMID, SAEM, SHM, SIDP) (Grade A)",
     ],
   },
   kpneumoniae: {
@@ -8045,6 +8098,7 @@ const DRUG_MOVE_MAP = {
   'Penicillin V': 'penicillin_v',
   'Amoxicillin': 'amoxicillin',
   'Clindamycin (adjunct)': 'clindamycin',
+  'Clindamycin': 'clindamycin',
   'Azithromycin': 'azithromycin',
   'High-dose Amoxicillin': 'amoxicillin',
   'Ceftriaxone': 'ceftriaxone',
@@ -8222,6 +8276,11 @@ const DRUG_MOVE_MAP = {
           <h4>Usual Treatment</h4>
           <p class="detail-para">${info.treatment}</p>
         </div>
+        ${info.specifics ? `
+        <div class="detail-section">
+          <h4>Specifics</h4>
+          <p class="detail-para">${info.specifics}</p>
+        </div>` : ''}
         <div class="detail-section">
           <h4>Clinical Pearls</h4>
           <div style="display:flex; flex-direction:column; gap:8px;">
