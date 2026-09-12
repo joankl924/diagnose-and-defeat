@@ -701,6 +701,10 @@
         <div class="customize-section-label">Scrub Colour</div>
         <div class="customize-swatch-row" id="customize-scrub-row"></div>
       </div>
+      <div class="customize-section">
+        <div class="customize-section-label">Stethoscope Colour</div>
+        <div class="customize-swatch-row" id="customize-steth-row"></div>
+      </div>
       <div class="btn-row" style="justify-content:flex-end; margin-top:4px;">
         <button class="action" id="btn-customize-done">Done</button>
       </div>
@@ -8481,7 +8485,7 @@ const DRUG_MOVE_MAP = {
     tilesSinceEncounter: 0, // pity-timer counter — forces an encounter once this reaches 6
     lastOrgId: null, // id of the most recently-encountered organism — kept out of the next random pick
     seenVignettes: [], // "orgId::vignetteIndex" keys already served this cycle — cleared on full completion/restart
-    custom: { style: 'female', skinIdx: 0, hairIdx: 1, scrubIdx: 1 }, // player character customization; index 0/1 defaults reproduce the sprite's original shipped look
+    custom: { style: 'female', skinIdx: 0, hairIdx: 1, scrubIdx: 1, stethIdx: 0 }, // player character customization; index 0/1 defaults reproduce the sprite's original shipped look
   };
 
   let run = null; // active encounter state
@@ -9636,15 +9640,15 @@ function renderMap() {
     male: {
       bboxScale: 64,
       frames: {
-        top: { bbox:[17, 2, 47, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAYAAAC6CNk6AAAB9klEQVR4nO1WMU4DMRBcg9/AC9CRJkqTAqTUKfIF3hGJKgVVJN6RL1CEBgkKijRRmuhES8Mbgo7KJ589a6/vLlxCMt3d2js76/V6FcVRCNYgqJDxYk+k0b1cVE0IRTwxxW3BE4KI21YL8VeKPeiQsciXjZyrbMzaOlOMqrogqqp1I3czEbJbtgpXVDFKl/0vZucAidHZFvkyeOacnduDiIOtriY8n5CkyJet3mWVjTvrXB4gMYqwLjhfSYpVNmarWFLJIuKQ6th1kvhIUuw2Bps0tb0GiVHE0rsaqxNREaVeL0lxsq/TzctXSaZHE9q9P4lI9Wha7v28n9DP9xoGAYkvrwaeQj2aEhGxARg78oXIvTN2SfV8Rr3+sEJgk7jf9trrxTMrpEKMFiCHiBCtCfkuU2CfKYKez4iIaLtZiQLbPTyW++w9Ju3B0UdCUBeaqJoGo8zARN4Evf6wVG2KbS+vkx0sF7hGBWWik6T1bfHq/bvb+Otc1Z5iSbRt4E8HATuDyqTa/pmS6hCQH/PvsEaff01cdi6uFbYB5Ls7xaZp21MG97bWhf2Gm+mk+zNG2Oe5w3koNBDUARp9gorb6lwIp9dAjo94u1k1qvrjU3wmPhOfiQ+GuLNn8bAUu7gdZJUMfKxzlWJHYAcB11kK7L1cEKdX1b8y5ckYhWyDBwAAAABJRU5ErkJggg==', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAAAAACfY4bmAAABC0lEQVR4nNWTUZLEIAhEXyxvxJwJz2TOtNxpP8QoidmZ2aqpreVDlKahg2bD7YvZHu7TEj2O2wocBdICmAqkO3LsfWPZfTnF6zvsAgYI3Zca2eaLHYcBFwCRFmq+DLiPMNgD+tRkAdsLytPIXJAD22ysgd3pNu/ObGnUWWeHzXFfeoNt5p50heLKvA03VgHUE5qfrqQCag1QBYPS8HQkYp3pnWuQhro6A3ZUoByPKQqevruCquoFMag3N7bDDkCuADLq7oMu1BSSF73vzSD7NA9pvpE3HtNv4bx+xXj4CXsDAb2MW9jBXv39bwTk5S8CHs7zIfQGPjy1EyzyI/zR3v8Ivtx3HNsT9l/aNyGGQd5rcxMRAAAAAElFTkSuQmCC' },
-        bot: { bbox:[17, 2, 47, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAYAAAC6CNk6AAAB7klEQVR4nO1XMW6DMBQ1ic+QE1SUJWLJ0EpU6sTAFThHpEwMmZB6jlyhQ7pEaocOWSKWCHXt0jNQ0aVOjf39bYMpVOUtSfzt9/y+P3zHI3rUBnMgeFhw1pOodq1qV10EjXQgx65FQU5dqnvDYMIUC9blvhO558fK2PhS3dWtjsPYsefHaOp0cSNhF251XJAw+qprCYkTrWoeuizYZmlcVe35sbN0q7iMU/1NgsZt0q1MtQvXGIfVGWOOnBYXtGNIABrTZcwonXW5t+rRJsekLK7rp/eLGI0SUr08GInSaH1Z+5Ym5PPjZF7V80UoOaTRmhBClBtgcYgLEpfOWBSleUaC5aohwIuIv/m5V7tHpZGGMDQBIoQE+Tk0z6T1IvcMCogi/DgUU42LXLyGdMYqAps51Wbb+B7kGTkXx8YcynbCzqNSkEDpawNWbL/WnaQagaqYpSVYrhppg/C8O0hjtwW+ifkirK26kynYsfAG2CcbG8+FvtpsCUmTn+8a3KX3rYSHdww9Lq4eIQjDOxbfLC4BcQ/nmPVK/pah6q1twfdwdjsZ/owh9Hnu4H0IuxC0AXT1QR2b9GYMWMbG9adtEoZwLo6dqv7vOZ6EJ+FJeDTCg7XFcTlmuAn9hvPXU+lsvnQREBd3Ac8lbuL/VfUXSZO2iRqdj/4AAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAAAAACfY4bmAAABB0lEQVR4nNWUUY7EIAiGvxpvxJzJnknPtNxpHoqK1Zl2MtlslhdbPn4gULth9oO3h51hSdvrtoI9QXhFD2dYkW4XONq5n/z5ljqsxdXh1Krj2fEkrq4AfYSDPaBOTRZYT7VXFnrkQtzG4oNcqTCSc6ivLZO4YW1AfLbtrB1r9eQJ/zhsLAMkCzjO3HEGkh4gJVDYDx5aIFqVStMHyLWVY5O2T4VsU2uN1ocCJQkQybt5XOtmeX+zMQViBpKgped18jiJABKConLrGpTcc44NXqvTLPpAvfqKMfeFegOBNH2LQgG9e/1fNBCXVwTMHf3LUBv49s/0GRZ5i3+19j/C077HsV2o/9KeRt8/TJ/rH2IAAAAASUVORK5CYII=' }
+        top: { bbox:[17, 2, 47, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAYAAAC6CNk6AAAB9klEQVR4nO1WMU4DMRBcg9/AC9CRJkqTAqTUKfIF3hGJKgVVJN6RL1CEBgkKijRRmuhES8Mbgo7KJ589a6/vLlxCMt3d2js76/V6FcVRCNYgqJDxYk+k0b1cVE0IRTwxxW3BE4KI21YL8VeKPeiQsciXjZyrbMzaOlOMqrogqqp1I3czEbJbtgpXVDFKl/0vZucAidHZFvkyeOacnduDiIOtriY8n5CkyJet3mWVjTvrXB4gMYqwLjhfSYpVNmarWFLJIuKQ6th1kvhIUuw2Bps0tb0GiVHE0rsaqxNREaVeL0lxsq/TzctXSaZHE9q9P4lI9Wha7v28n9DP9xoGAYkvrwaeQj2aEhGxARg78oXIvTN2SfV8Rr3+sEJgk7jf9trrxTMrpEKMFiCHiBCtCfkuU2CfKYKez4iIaLtZiQLbPTyW++w9Ju3B0UdCUBeaqJoGo8zARN4Evf6wVG2KbS+vkx0sF7hGBWWik6T1bfHq/bvb+Otc1Z5iSbRt4E8HATuDyqTa/pmS6hCQH/PvsEaff01cdi6uFbYB5Ls7xaZp21MG97bWhf2Gm+mk+zNG2Oe5w3koNBDUARp9gorb6lwIp9dAjo94u1k1qvrjU3wmPhOfiQ+GuLNn8bAUu7gdZJUMfKxzlWJHYAcB11kK7L1cEKdX1b8y5ckYhWyDBwAAAABJRU5ErkJggg==', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAAAAACfY4bmAAABGElEQVR42t2T0W3EIBBEH8RVXBt7baQNaIM2uJq8beA28gEG4wPJVnSKFCSzgtlZxrNgKGPlOJ4l2iFal2YEtgKW2VgrvE5z5mwAlhL9aT/eYXtQQNijjz1by6R10WAPIJK3cvQNfjKzJbsmA1gvKLd0Uk7kjq3a5t5UrUG7ja+S9gAeG9tWdG69qVp/QI5iTD1G3nQ1dkrJNdSl1HUsAriSkOOhJREImgHnQOE747a1XnemththIJUTQ1GnQCAI+HqZJt4uRAjkrzddiH7csbCnLzFbUuu+2EupEG2XfOsZKJiIdsVrBxTk2mX6xROUMSIX2AYE3ED5C/Tq85cprFPPGltHuvmsaydY5IPF/w/81m+5w/7L8QOrIUrgoLdqYgAAAABJRU5ErkJggg==' },
+        bot: { bbox:[17, 2, 47, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAYAAAC6CNk6AAAB7klEQVR4nO1XMW6DMBQ1ic+QE1SUJWLJ0EpU6sTAFThHpEwMmZB6jlyhQ7pEaocOWSKWCHXt0jNQ0aVOjf39bYMpVOUtSfzt9/y+P3zHI3rUBnMgeFhw1pOodq1qV10EjXQgx65FQU5dqnvDYMIUC9blvhO558fK2PhS3dWtjsPYsefHaOp0cSNhF251XJAw+qprCYkTrWoeuizYZmlcVe35sbN0q7iMU/1NgsZt0q1MtQvXGIfVGWOOnBYXtGNIABrTZcwonXW5t+rRJsekLK7rp/eLGI0SUr08GInSaH1Z+5Ym5PPjZF7V80UoOaTRmhBClBtgcYgLEpfOWBSleUaC5aohwIuIv/m5V7tHpZGGMDQBIoQE+Tk0z6T1IvcMCogi/DgUU42LXLyGdMYqAps51Wbb+B7kGTkXx8YcynbCzqNSkEDpawNWbL/WnaQagaqYpSVYrhppg/C8O0hjtwW+ifkirK26kynYsfAG2CcbG8+FvtpsCUmTn+8a3KX3rYSHdww9Lq4eIQjDOxbfLC4BcQ/nmPVK/pah6q1twfdwdjsZ/owh9Hnu4H0IuxC0AXT1QR2b9GYMWMbG9adtEoZwLo6dqv7vOZ6EJ+FJeDTCg7XFcTlmuAn9hvPXU+lsvnQREBd3Ac8lbuL/VfUXSZO2iRqdj/4AAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAA9CAAAAACfY4bmAAABBklEQVR42t2U23HEIAxFD4w70raxbeA2aINtI21EbVBHPnjawMaeTCYz0Y9sHa4QkrEh2ye9PbK3U1pfzQy2BHZFU9Dy1r7BW/b7KR4uqe1cXAKdWvXoG97HtHvDD1ZtSV2TCdbLletCXNvSL5Lh3DoXH/aWQVyxViB9NnPWHvfK6hija9TFeJhYAHB5QfKh4QB4TcA5UHgmbtvotSgVX0QWQiklTTLPUyHkrum5Yg/eC2AIzxaje/QC+5uJKbCFtFCL9tUnCttU6BFA5dI18B+tLnfzEnmQ/lT31DInckFtQMAN36LwAr16/WWJdT2RqtZZ3T/9M93DIr+Y/P/gYd5yR/2X9gWaWEPhqePwTwAAAABJRU5ErkJggg==' }
       }
     },
     female: {
       bboxScale: 64,
       frames: {
-        top: { bbox:[16, 2, 48, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAYAAADMMmuxAAACJ0lEQVR4nO1YQW7CMBB0EO/gyAUOiB9UkfhCK4VTqUQ59AM8IB/ooVSCnkCCLyBF/KDiUC4c+xH3Ukfrtb3eyAmhNCNFSmJ7dzK7a68SCQamw47kzMN4//yOfHNaVTnnrnUyDHFsg0sNqwJlO6dsGgSqcE7Z9uZA1dDiYmO42C6DHDw/PBnvYD7UrkCbGoRfH3VH2pg877Vn1/hiu7SqoMBSABvH73zjFJwEbLGX573x5ZxxKo9qz4E8G3EFhGY/Bs4DVQm1K9ASwl7/VOYWhc2W8llYgag7cmY9N/MhWtTeT6ngK0OOjemwIwsrAMsMfzVVoi44qwDCVhG+nVEI+utVFXhbJuCg0DEddUcs274QSHX1Zzu289+5Ugghe/GEJO4kYFvYn+0ERcQ1TpGwEsALkvQgBvHY6Qg/w7mnbEWSMAhQbKFhm2M4J0kPxnqbbZwoZLyU0WO2ZhHczO/ydXDNKVvlfsmGxAXsKAR5CKA8SXrQrjIASUNflZ2GSn58j9HGjBRUzDhyvz6aO95mbs4bxOPcbi+eyFO2iqwKcNmXgYs3JFhRrQpgwimpOEn48mEeVkmq23HhOlqyf01AywFfvELgsn0dCqjDAXY9RRoQDr7e7vN72C1dhwIUqswLIYim1NfLFQXsASC8CoSe/c1OeNsEjtk6uEr+tgINgYZAQ+AmCJTSD4TshrUrwP5LJsyfF76fGyzbvhCEdEVwrZNM7SGoncAPY1vhl3ZbkIoAAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAAAAADpWTRtAAABHElEQVR4nNWTUW7EIAxEX1Bu5D2TORM5U7hTPwwxEFC2qtR2/bGAPczOGGejxkkbr7oJ87oft2m5IQnLekmGZb2kw7zmsVVkHAqpyHhk2MsaIQNCXWPCRULJk32lA0QAETvYGkeGtYtz4qH6eD0zBOtCmhNw9gw5++/FcDZ4t3klzo5B7LpMXFCM1G5WglcdGOgv3joJoN029YAEoAVia/dYCdBsJVXIEAsi9B7tdsY5GpFo0ZmBAxWIPjCj+NZFAlXVWylDWs7DAYftdpMizn44hZBiGC7MNKwjYy4UmkaXTf3TN0bup4CdYYI85D2GzaB6ewbhgPyNz38lhJ3pI3Ol9/7YarD4hU6OABnd/IGGzwTc52Fo5SPDf4gvLk5JN6d7/YYAAAAASUVORK5CYII=' },
-        bot: { bbox:[16, 2, 48, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAYAAADMMmuxAAACJElEQVR4nO1YQU7DMBDcVH1Hj73QQ9UfVJH6BZDaE0UqPfCBPqAf4ABIwKmV6BeQqv4A9QAXjnzEXLrRxlmv7dhpAspIiCi2d8azXmfVBBywGPWUyzwdTx8/iW1Opypy17VGhSHEHExusA7EJpdiFgRUQS7Ftp6BqpHLi2n3j2/PpYLfXt2w7+l5sDpQltx1rSgghNw1htcZSPoTSPqT0uNeAmLs3iVW7VXQxQeX+lff70HjlAsroXYHOgD87k01XAZcLOTsFkYssJ1y1zQgOlLuY7ggxViMesr7DEg79N09APkWSE5wdayngiOXdo9VYG2ZCIHXZzrpT5xi21Kg8G+w3DmTn+YqAFAX6VwUbhTALRwsdyAJMY1LIlgB+oLp+gDDdJYj4sgRdO7X/kUUUcgTnYiLp+tDNn7cb7g4LPl2NcaYVFCOM+cAJaeBdAJuzPRej6U7wd6EpkA+c3D3+DxdH1j3MgEX6Vyh5fhfD0ZTEYIT1/m/hpxrXVREX1K7huksZyeH++vijbddyWLQBe+voSswXbaqOXtDoqeBdWC7Gme1a7MfAODutXwDW3tLlnOAu/FilZ4JzXLAdmJDYIrdDAfwWqRdj08D4oLPh8vsmXZLzXBAQpXnAkBoSm29nC/0RgRhdcClN5DQuG9BKyCqgON+E1wlf9uBVkAroBXwLwRE6QdCbsPaHXD5JUtvTGxrvOabUhCzG6KxCmJqT0HtAn4BNoDdPs+buUAAAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAAAAADpWTRtAAABGklEQVR4nNWTy5HEIAxEG8oZyTFBTCImK6c5SID4zNiHqZpdXbDV7UfzcUCtC77O+hD3en8NW9lB4lvdmvGtbu2413qFBshDn2uMRhj1/hr3em/4DCLj6A0LoLVuV3G4XaBpBK7znhAVwKvCAHDh8L2anlwvXs6/AIBryEArAKGtItdJyAHOemHmD/teuinS8MijgQEgmUVH9gYGkMQgCRAgmyOYnpF6CgGKNpXANZSes522KPgYQ9eHApREUANn67llWHH+eJqiBAaQCFI63SOO+TOtBLI8Hy+MtFUU7uQp6pNL2zZ4W48ItJfoGSGoNUEmgVAAeZjBzbg3zHQrGQlrBq0HP++3DTSv5gcZ/qdhvQ/TVt4S/kK9ALoNRkTEy2irAAAAAElFTkSuQmCC' }
+        top: { bbox:[16, 2, 48, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAYAAADMMmuxAAACJ0lEQVR4nO1YQW7CMBB0EO/gyAUOiB9UkfhCK4VTqUQ59AM8IB/ooVSCnkCCLyBF/KDiUC4c+xH3Ukfrtb3eyAmhNCNFSmJ7dzK7a68SCQamw47kzMN4//yOfHNaVTnnrnUyDHFsg0sNqwJlO6dsGgSqcE7Z9uZA1dDiYmO42C6DHDw/PBnvYD7UrkCbGoRfH3VH2pg877Vn1/hiu7SqoMBSABvH73zjFJwEbLGX573x5ZxxKo9qz4E8G3EFhGY/Bs4DVQm1K9ASwl7/VOYWhc2W8llYgag7cmY9N/MhWtTeT6ngK0OOjemwIwsrAMsMfzVVoi44qwDCVhG+nVEI+utVFXhbJuCg0DEddUcs274QSHX1Zzu289+5Ugghe/GEJO4kYFvYn+0ERcQ1TpGwEsALkvQgBvHY6Qg/w7mnbEWSMAhQbKFhm2M4J0kPxnqbbZwoZLyU0WO2ZhHczO/ydXDNKVvlfsmGxAXsKAR5CKA8SXrQrjIASUNflZ2GSn58j9HGjBRUzDhyvz6aO95mbs4bxOPcbi+eyFO2iqwKcNmXgYs3JFhRrQpgwimpOEn48mEeVkmq23HhOlqyf01AywFfvELgsn0dCqjDAXY9RRoQDr7e7vN72C1dhwIUqswLIYim1NfLFQXsASC8CoSe/c1OeNsEjtk6uEr+tgINgYZAQ+AmCJTSD4TshrUrwP5LJsyfF76fGyzbvhCEdEVwrZNM7SGoncAPY1vhl3ZbkIoAAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAAAAADpWTRtAAABJUlEQVR42t2T623EIBCEPyN3tG4jbUAbtMHV5G2DOvKDl+EgvlMSKcpKNoadHfYx3ih2crWjfJi5v223qftCYpb+fGiW/nxsuLGtIN3gCDmNW4Y9rw4UEMrqwtAHNL+0bq4AByCSNml1I8O6inNSQ6njuGcwqQthTsDZM6i2d2U4L/hWZj04OwZJ4TKpohRSulkIjiIY6AOfOkmM0Ta/jTH0gABgMySt3bAC4DW5rAWFj4wwfY0pWvH1eANivs7nPBXweAHXBDMmf1VUAE96erQQ3GqavgbsKRVp7A8KnQrBmSFgoocvTIGNgHZX1MkoCO4FyX0XsA9CYNTHS7+/gJ1U8QB94/dfJcI+H3Kb/b6SgvxYo94GiPz6Ff8U8KwHeZPhL9gnKvlQtjI2Dl0AAAAASUVORK5CYII=' },
+        bot: { bbox:[16, 2, 48, 63], tpl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAYAAADMMmuxAAACJElEQVR4nO1YQU7DMBDcVH1Hj73QQ9UfVJH6BZDaE0UqPfCBPqAf4ABIwKmV6BeQqv4A9QAXjnzEXLrRxlmv7dhpAspIiCi2d8azXmfVBBywGPWUyzwdTx8/iW1Opypy17VGhSHEHExusA7EJpdiFgRUQS7Ftp6BqpHLi2n3j2/PpYLfXt2w7+l5sDpQltx1rSgghNw1htcZSPoTSPqT0uNeAmLs3iVW7VXQxQeX+lff70HjlAsroXYHOgD87k01XAZcLOTsFkYssJ1y1zQgOlLuY7ggxViMesr7DEg79N09APkWSE5wdayngiOXdo9VYG2ZCIHXZzrpT5xi21Kg8G+w3DmTn+YqAFAX6VwUbhTALRwsdyAJMY1LIlgB+oLp+gDDdJYj4sgRdO7X/kUUUcgTnYiLp+tDNn7cb7g4LPl2NcaYVFCOM+cAJaeBdAJuzPRej6U7wd6EpkA+c3D3+DxdH1j3MgEX6Vyh5fhfD0ZTEYIT1/m/hpxrXVREX1K7huksZyeH++vijbddyWLQBe+voSswXbaqOXtDoqeBdWC7Gme1a7MfAODutXwDW3tLlnOAu/FilZ4JzXLAdmJDYIrdDAfwWqRdj08D4oLPh8vsmXZLzXBAQpXnAkBoSm29nC/0RgRhdcClN5DQuG9BKyCqgON+E1wlf9uBVkAroBXwLwRE6QdCbsPaHXD5JUtvTGxrvOabUhCzG6KxCmJqT0HtAn4BNoDdPs+buUAAAAAASUVORK5CYII=', mask:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAA9CAAAAADpWTRtAAABJ0lEQVR42t2T3Y3EIAyEv6B0RNrYNqAN2mDb2DbiNlLHPQDBBPJz0p10Or8AnmEYjJkosaJjKRMzxutyGsJKxJziOWlO8Zw23MS0C/gmH4uNXaHF69KM8ZrQHkTaURN87873CsOYVRXsYYR1uVcwSSD2SEzFnHVOujPArLpyXSlZGw+2F2Dab+HLIVYJLKVhjhvlWEm2bXMVd9sWW0IEcJmSxqgJEQgCDsCBwCszpoy/CNWFQOCTfJuEi3rn/NqShOfWdJkECMHmI+KrZlHTYMFfvqakfoiJLGX/W4tFP483h/1Glw0j+y3Cpzp0x466b9pUw3Dakw8U7BiyPP7+FhzS7X+DPPTQt/KBIBdvVRVkeAeefN6fJlj760f8U0LfD/abCn8hvgAAQEq/DjS+qQAAAABJRU5ErkJggg==' }
       }
     }
   };
@@ -9662,11 +9666,15 @@ function renderMap() {
       { name:'Violet',          light:'#70529E', dark:'#3A2860' },
       { name:'Wine',            light:'#963742', dark:'#581620' },
       { name:'Charcoal',        light:'#4B4B50', dark:'#222226' }
-    ]
+    ],
+    steth: ['#000000','#5A5A5A','#8A97A8','#1F3A5F','#27BBE5','#7A2438']
   };
-  // mask PNGs are flat grayscale category maps: 0=untouched(outlines/eyes/mouth/accessories/shoes),
-  // ~51=skin, ~102=scrub light, ~153=scrub dark, ~204=hair. Ranges (not exact-match) give a little
-  // tolerance; the source PNGs are pure flat colour so exact values are what's actually produced.
+  // mask PNGs are flat grayscale category maps: 0=untouched(outlines/eyes/mouth/shoes),
+  // ~51=skin, ~102=scrub light, ~153=scrub dark, ~204=hair, ~230=stethoscope. Ranges (not exact-match)
+  // give a little tolerance; the source PNGs are pure flat colour so exact values are what's produced.
+  // (Female source art draws its stethoscope in the same black used for outlines elsewhere, so the
+  // stethoscope pixels were isolated at asset-prep time via connected-component analysis — same
+  // technique used to separate the male sprite's hair from its eyes/mouth, both pure black too.)
   function hexToRgb(hex) {
     const v = parseInt(hex.slice(1), 16);
     return [(v>>16)&255, (v>>8)&255, v&255];
@@ -9694,7 +9702,7 @@ function renderMap() {
   // to draw it into a 48x48 tile — the *only* resize this pipeline ever does, done once here with
   // high-quality smoothing, never left to the browser's `image-rendering:pixelated` CSS scaling
   // (that's what caused the earlier "blobby arms" bug — see player-sprite-swap project memory).
-  function recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex) {
+  function recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex) {
     const asset = SPRITE_IMAGES[style][frame];
     const { tpl, mask, bbox } = asset;
     const w = bbox[2]-bbox[0], h = bbox[3]-bbox[1];
@@ -9706,7 +9714,7 @@ function renderMap() {
     const ctx2 = c2.getContext('2d');
     ctx2.drawImage(mask, 0, 0);
     const maskData = ctx2.getImageData(0, 0, w, h).data;
-    const skin = hexToRgb(skinHex), hair = hexToRgb(hairHex), sl = hexToRgb(scrubLightHex), sd = hexToRgb(scrubDarkHex);
+    const skin = hexToRgb(skinHex), hair = hexToRgb(hairHex), sl = hexToRgb(scrubLightHex), sd = hexToRgb(scrubDarkHex), st = hexToRgb(stethHex);
     const d = imgData.data;
     for (let i = 0; i < d.length; i += 4) {
       if (d[i+3] === 0) continue;
@@ -9715,7 +9723,8 @@ function renderMap() {
       if (g >= 40 && g < 70) c = skin;
       else if (g >= 90 && g < 115) c = sl;
       else if (g >= 140 && g < 165) c = sd;
-      else if (g >= 190) c = hair;
+      else if (g >= 190 && g < 215) c = hair;
+      else if (g >= 215) c = st;
       if (c) { d[i] = c[0]; d[i+1] = c[1]; d[i+2] = c[2]; }
     }
     ctx1.putImageData(imgData, 0, 0);
@@ -9726,19 +9735,19 @@ function renderMap() {
       destW: Math.round(w*scale), destH: Math.round(h*scale),
     };
   }
-  function buildFrame48(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex) {
-    const { canvas, destX, destY, destW, destH } = recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex);
+  function buildFrame48(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex) {
+    const { canvas, destX, destY, destW, destH } = recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex);
     const out = document.createElement('canvas'); out.width = TILE; out.height = TILE;
     const octx = out.getContext('2d');
     octx.imageSmoothingEnabled = true; octx.imageSmoothingQuality = 'high';
     octx.drawImage(canvas, 0, 0, canvas.width, canvas.height, destX, destY, destW, destH);
     return out;
   }
-  function buildPlayerSpriteDataUrl(style, skinHex, hairHex, scrubLightHex, scrubDarkHex) {
+  function buildPlayerSpriteDataUrl(style, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex) {
     const sheet = document.createElement('canvas'); sheet.width = TILE*2; sheet.height = TILE;
     const sctx = sheet.getContext('2d');
-    sctx.drawImage(buildFrame48(style, 'top', skinHex, hairHex, scrubLightHex, scrubDarkHex), 0, 0);
-    sctx.drawImage(buildFrame48(style, 'bot', skinHex, hairHex, scrubLightHex, scrubDarkHex), TILE, 0);
+    sctx.drawImage(buildFrame48(style, 'top', skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex), 0, 0);
+    sctx.drawImage(buildFrame48(style, 'bot', skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex), TILE, 0);
     return sheet.toDataURL('image/png');
   }
   function currentCustomColors() {
@@ -9747,18 +9756,19 @@ function renderMap() {
       skin: CUSTOMIZE_SWATCHES.skin[c.skinIdx],
       hair: CUSTOMIZE_SWATCHES.hair[c.hairIdx],
       scrub: CUSTOMIZE_SWATCHES.scrub[c.scrubIdx],
+      steth: CUSTOMIZE_SWATCHES.steth[c.stethIdx],
     };
   }
   function applyPlayerSprite() {
     if (!SPRITE_IMAGES[game.custom.style]) return; // assets not loaded yet
-    const { skin, hair, scrub } = currentCustomColors();
-    const url = buildPlayerSpriteDataUrl(game.custom.style, skin, hair, scrub.light, scrub.dark);
+    const { skin, hair, scrub, steth } = currentCustomColors();
+    const url = buildPlayerSpriteDataUrl(game.custom.style, skin, hair, scrub.light, scrub.dark, steth);
     document.documentElement.style.setProperty('--player-sprite', `url("${url}")`);
   }
   function updateCustomizePreview() {
     if (!SPRITE_IMAGES[game.custom.style]) return;
-    const { skin, hair, scrub } = currentCustomColors();
-    const frame = buildFrame48(game.custom.style, 'top', skin, hair, scrub.light, scrub.dark);
+    const { skin, hair, scrub, steth } = currentCustomColors();
+    const frame = buildFrame48(game.custom.style, 'top', skin, hair, scrub.light, scrub.dark, steth);
     const canvas = $('customize-preview-canvas');
     const ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
@@ -9804,12 +9814,14 @@ function renderMap() {
     document.querySelectorAll('#customize-skin-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.skinIdx));
     document.querySelectorAll('#customize-hair-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.hairIdx));
     document.querySelectorAll('#customize-scrub-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.scrubIdx));
+    document.querySelectorAll('#customize-steth-row .customize-swatch').forEach((b,i) => b.classList.toggle('active', i === game.custom.stethIdx));
     updateCustomizePreview();
   }
   buildStyleButtons();
   buildSwatchButtons('customize-skin-row', CUSTOMIZE_SWATCHES.skin, false, (idx) => { game.custom.skinIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
   buildSwatchButtons('customize-hair-row', CUSTOMIZE_SWATCHES.hair, false, (idx) => { game.custom.hairIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
   buildSwatchButtons('customize-scrub-row', CUSTOMIZE_SWATCHES.scrub, true, (idx) => { game.custom.scrubIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
+  buildSwatchButtons('customize-steth-row', CUSTOMIZE_SWATCHES.steth, false, (idx) => { game.custom.stethIdx = idx; refreshCustomizeUI(); applyPlayerSprite(); });
   function openCustomizeModal() { refreshCustomizeUI(); $('customize-modal').classList.remove('hidden'); }
   function closeCustomizeModal() { $('customize-modal').classList.add('hidden'); saveState(); }
   $('btn-info-customize').addEventListener('click', () => { closeInfoMenu(); openCustomizeModal(); });
