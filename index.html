@@ -9741,12 +9741,18 @@ function renderMap() {
       destW: Math.round(w*scale), destH: Math.round(h*scale),
     };
   }
+  // The uploaded player art is flat-colour pixel art with hard edges; the game's built-in NPC
+  // art is soft/anti-aliased. A slight blur on the final composited frame narrows that visual
+  // gap (softens the silhouette and hair edges) without needing new source art.
+  const PLAYER_SOFTEN_BLUR_PX = 0.6;
   function buildFrame48(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex) {
     const { canvas, destX, destY, destW, destH } = recolorFrameRaw(style, frame, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex);
     const out = document.createElement('canvas'); out.width = TILE; out.height = TILE;
     const octx = out.getContext('2d');
     octx.imageSmoothingEnabled = true; octx.imageSmoothingQuality = 'high';
+    octx.filter = `blur(${PLAYER_SOFTEN_BLUR_PX}px)`;
     octx.drawImage(canvas, 0, 0, canvas.width, canvas.height, destX, destY, destW, destH);
+    octx.filter = 'none';
     return out;
   }
   function buildPlayerSpriteDataUrl(style, skinHex, hairHex, scrubLightHex, scrubDarkHex, stethHex) {
