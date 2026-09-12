@@ -511,6 +511,7 @@
           <button class="menu-toggle-left" id="btn-info-menu" aria-haspopup="true" aria-expanded="false">☰ Menu</button>
           <div class="info-dropdown hidden" id="info-dropdown">
             <button class="info-dropdown-item" id="btn-info-evidence">References &amp; Evidence Grades</button>
+            <button class="info-dropdown-item" id="btn-info-abbreviations">Abbreviations Glossary</button>
             <button class="info-dropdown-item" id="btn-info-about">About / Credits</button>
             <button class="info-dropdown-item danger" id="btn-info-reset">Reset Progress</button>
           </div>
@@ -8626,6 +8627,150 @@ const DRUG_MOVE_MAP = {
         <p class="detail-para">A single HTML/JS file, built iteratively with Claude. Source at <a href="https://github.com/joankl924/diagnose-and-defeat" target="_blank" rel="noopener" style="color:var(--agar-gold);">github.com/joankl924/diagnose-and-defeat</a>.</p>
       </div>
       <p class="detail-note">Educational prototype — not a clinical decision tool.</p>
+    `,
+    abbreviations: `
+      <div class="detail-header">
+        <div class="detail-name" style="font-size:12px;">ABBREVIATIONS GLOSSARY</div>
+      </div>
+      <div class="detail-section">
+        <p class="detail-para">A quick reference for the shorthand used throughout the Dex, case clues, and treatment log — handy if you're new to microbiology or infectious diseases.</p>
+      </div>
+      <div class="detail-section">
+        <h4>Organisms, Resistance &amp; Pathotypes</h4>
+        <ul class="detail-list">
+          <li><b>AmpC</b> — inducible/chromosomal beta-lactamase seen in "SPICE"/"ESCPM" organisms; confers resistance to many cephalosporins once induced</li>
+          <li><b>BLNAR</b> — beta-lactamase-negative, ampicillin-resistant (via altered penicillin-binding proteins, e.g. some <i>H. influenzae</i>) — not rescued by clavulanate</li>
+          <li><b>BLPAR</b> — beta-lactamase-positive, ampicillin-resistant</li>
+          <li><b>CDI</b> — <i>Clostridioides difficile</i> infection</li>
+          <li><b>CRAB</b> — carbapenem-resistant <i>Acinetobacter baumannii</i></li>
+          <li><b>CRE</b> — carbapenem-resistant Enterobacterales</li>
+          <li><b>CRPA</b> — carbapenem-resistant <i>Pseudomonas aeruginosa</i></li>
+          <li><b>EHEC / STEC</b> — enterohaemorrhagic / Shiga toxin-producing <i>Escherichia coli</i></li>
+          <li><b>EIEC</b> — enteroinvasive <i>Escherichia coli</i></li>
+          <li><b>EPEC</b> — enteropathogenic <i>Escherichia coli</i></li>
+          <li><b>ESBL</b> — extended-spectrum beta-lactamase</li>
+          <li><b>ETEC</b> — enterotoxigenic <i>Escherichia coli</i> (traveller's diarrhoea)</li>
+          <li><b>GAS / GBS</b> — Group A / Group B <i>Streptococcus</i></li>
+          <li><b>KPC</b> — <i>Klebsiella pneumoniae</i> carbapenemase</li>
+          <li><b>MDR / XDR</b> — multidrug-resistant / extensively drug-resistant</li>
+          <li><b>MRSA / MSSA</b> — methicillin-resistant / methicillin-susceptible <i>Staphylococcus aureus</i></li>
+          <li><b>NAP1/BI</b> — a hypervirulent, toxin-hyperproducing <i>C. difficile</i> strain type</li>
+          <li><b>NDM</b> — New Delhi metallo-beta-lactamase</li>
+          <li><b>OXA / TEM</b> — beta-lactamase/carbapenemase enzyme families, named for their gene groups</li>
+          <li><b>PPNG</b> — penicillinase-producing <i>Neisseria gonorrhoeae</i></li>
+          <li><b>SPICE</b> — mnemonic for <i>Serratia, Pseudomonas/Providencia,</i> indole-positive <i>Proteus, Citrobacter, Enterobacter</i> (chromosomal AmpC-inducible organisms; also called ESCPM)</li>
+          <li><b>VRE</b> — vancomycin-resistant <i>Enterococcus</i></li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Antibiotics &amp; Pharmacology</h4>
+        <ul class="detail-list">
+          <li><b>ACT</b> — artemisinin-based combination therapy</li>
+          <li><b>AUC</b> — area under the (concentration-time) curve; used for individualised vancomycin dosing (AUC/MIC-guided)</li>
+          <li><b>CYP450 / CYP3A4</b> — cytochrome P450 (drug-metabolising liver enzyme system) / a specific isoform frequently involved in drug interactions</li>
+          <li><b>IM</b> — intramuscular</li>
+          <li><b>IV</b> — intravenous</li>
+          <li><b>IVIG</b> — intravenous immunoglobulin</li>
+          <li><b>MIC</b> — minimum inhibitory concentration</li>
+          <li><b>NRTI</b> — nucleoside/nucleotide reverse transcriptase inhibitor (an HIV drug class)</li>
+          <li><b>PBP</b> — penicillin-binding protein (the target of beta-lactam antibiotics)</li>
+          <li><b>PPI</b> — proton pump inhibitor</li>
+          <li><b>TIG</b> — tigecycline</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Laboratory Tests, Stains &amp; Culture Media</h4>
+        <ul class="detail-list">
+          <li><b>BAL</b> — bronchoalveolar lavage</li>
+          <li><b>BCYE</b> — buffered charcoal yeast extract agar (for <i>Legionella</i>)</li>
+          <li><b>CAMP test</b> — biochemical test (named for its describers, Christie, Atkins &amp; Munch-Petersen) that helps identify Group B <i>Streptococcus</i></li>
+          <li><b>EIA</b> — enzyme immunoassay</li>
+          <li><b>GMS</b> — Gomori methenamine silver stain (highlights fungal elements)</li>
+          <li><b>H2S</b> — hydrogen sulphide (a production test, e.g. on TSI agar)</li>
+          <li><b>HRP2</b> — histidine-rich protein 2 (a <i>Plasmodium falciparum</i> rapid antigen test target)</li>
+          <li><b>KOH</b> — potassium hydroxide prep (fungal microscopy; also the vaginal "whiff test")</li>
+          <li><b>LP</b> — lumbar puncture</li>
+          <li><b>MALDI-TOF</b> — matrix-assisted laser desorption/ionisation time-of-flight mass spectrometry, used for rapid organism identification</li>
+          <li><b>NAAT</b> — nucleic acid amplification test</li>
+          <li><b>NAD</b> — nicotinamide adenine dinucleotide ("factor V" — a growth requirement for <i>Haemophilus</i>)</li>
+          <li><b>NS1</b> — non-structural protein 1 (a dengue rapid antigen test target)</li>
+          <li><b>ODC</b> — ornithine decarboxylase (a biochemical identification test)</li>
+          <li><b>PCR / RT-PCR</b> — polymerase chain reaction / reverse-transcription PCR</li>
+          <li><b>PYR</b> — pyrrolidonyl arylamidase (a biochemical identification test)</li>
+          <li><b>RPR / VDRL</b> — rapid plasma reagin / Venereal Disease Research Laboratory (non-treponemal syphilis screening tests)</li>
+          <li><b>TCBS</b> — thiosulfate citrate bile salts sucrose agar (selective for <i>Vibrio</i>)</li>
+          <li><b>TPPA</b> — <i>Treponema pallidum</i> particle agglutination (a treponemal syphilis confirmatory test)</li>
+          <li><b>TSI</b> — triple sugar iron agar</li>
+          <li><b>XLD</b> — xylose lysine deoxycholate agar</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Clinical Syndromes &amp; Findings</h4>
+        <ul class="detail-list">
+          <li><b>ABPA</b> — allergic bronchopulmonary aspergillosis</li>
+          <li><b>AKI</b> — acute kidney injury</li>
+          <li><b>ARDS</b> — acute respiratory distress syndrome</li>
+          <li><b>BV</b> — bacterial vaginosis</li>
+          <li><b>CNS</b> — central nervous system</li>
+          <li><b>COPD</b> — chronic obstructive pulmonary disease</li>
+          <li><b>CSF</b> — cerebrospinal fluid</li>
+          <li><b>DIC</b> — disseminated intravascular coagulation</li>
+          <li><b>DKA</b> — diabetic ketoacidosis</li>
+          <li><b>GI</b> — gastrointestinal</li>
+          <li><b>HUS</b> — haemolytic uraemic syndrome</li>
+          <li><b>ICP</b> — intracranial pressure</li>
+          <li><b>LGV</b> — lymphogranuloma venereum</li>
+          <li><b>MALT</b> — mucosa-associated lymphoid tissue (a lymphoma subtype)</li>
+          <li><b>PTLD</b> — post-transplant lymphoproliferative disease</li>
+          <li><b>SSPE</b> — subacute sclerosing panencephalitis</li>
+          <li><b>STI / UTI</b> — sexually transmitted infection / urinary tract infection</li>
+          <li><b>HR / BP / RR</b> — heart rate / blood pressure / respiratory rate, on patient vital-sign readouts</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Viruses, Vaccination &amp; HIV Care</h4>
+        <ul class="detail-list">
+          <li><b>ART</b> — antiretroviral therapy</li>
+          <li><b>CD4</b> — a T-helper lymphocyte marker used to monitor HIV-related immune status</li>
+          <li><b>CMV / EBV / HSV / VZV</b> — cytomegalovirus / Epstein–Barr virus / herpes simplex virus / varicella-zoster virus</li>
+          <li><b>COVID-19 / SARS-CoV-2</b> — coronavirus disease 2019 / the virus that causes it</li>
+          <li><b>DENV</b> — dengue virus (serotypes DENV-1 to DENV-4)</li>
+          <li><b>EBER</b> — EBV-encoded RNA (detected by in-situ hybridisation)</li>
+          <li><b>H1N1 / H3N2</b> — influenza A virus subtypes</li>
+          <li><b>HBV / HCV</b> — hepatitis B / hepatitis C virus</li>
+          <li><b>HIV</b> — human immunodeficiency virus</li>
+          <li><b>PCV / PPSV23</b> — pneumococcal conjugate vaccine / 23-valent pneumococcal polysaccharide vaccine</li>
+          <li><b>PEP</b> — post-exposure prophylaxis</li>
+          <li><b>RSV</b> — respiratory syncytial virus</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <h4>Guideline Bodies, Standards &amp; Journals</h4>
+        <ul class="detail-list">
+          <li><b>WHO</b> — World Health Organization</li>
+          <li><b>CDC</b> — (US) Centers for Disease Control and Prevention</li>
+          <li><b>IDSA</b> — Infectious Diseases Society of America</li>
+          <li><b>MOH</b> — Ministry of Health (Singapore)</li>
+          <li><b>CDA</b> — Communicable Diseases Agency (Singapore)</li>
+          <li><b>ACE</b> — Agency for Care Effectiveness (Singapore)</li>
+          <li><b>DSC</b> — Department of STI Control, National Skin Centre (Singapore)</li>
+          <li><b>NICE</b> — National Institute for Health and Care Excellence (UK)</li>
+          <li><b>UKHSA</b> — UK Health Security Agency</li>
+          <li><b>BASHH</b> — British Association for Sexual Health and HIV</li>
+          <li><b>SHEA</b> — Society for Healthcare Epidemiology of America</li>
+          <li><b>AAP / ACOG / AAFP / ACG / ATS</b> — American Academy of Pediatrics / American College of Obstetricians &amp; Gynecologists / American Academy of Family Physicians / American College of Gastroenterology / American Thoracic Society</li>
+          <li><b>AASLD</b> — American Association for the Study of Liver Diseases</li>
+          <li><b>ECMM / ISHAM</b> — European Confederation of Medical Mycology / International Society for Human and Animal Mycology</li>
+          <li><b>ESCMID</b> — European Society of Clinical Microbiology and Infectious Diseases</li>
+          <li><b>CLSI / EUCAST</b> — Clinical and Laboratory Standards Institute / European Committee on Antimicrobial Susceptibility Testing — the two main standards bodies for lab susceptibility breakpoints</li>
+          <li><b>PAHO / ECDC</b> — Pan American Health Organization / European Centre for Disease Prevention and Control</li>
+          <li><b>DHHS / NIH / HIVMA</b> — (US) Department of Health &amp; Human Services / National Institutes of Health / HIV Medicine Association (co-authors of US HIV treatment guidelines)</li>
+          <li><b>ACTG</b> — AIDS Clinical Trials Group</li>
+          <li><b>NEJM / JAMA / BMJ</b> — New England Journal of Medicine / Journal of the American Medical Association / British Medical Journal</li>
+          <li><b>MMWR</b> — Morbidity and Mortality Weekly Report (the CDC's bulletin)</li>
+        </ul>
+      </div>
+      <p class="detail-note">Some organism/drug Dex references also name additional co-authoring specialty societies not individually listed here.</p>
     `
   };
   function openInfo(key) {
@@ -8650,6 +8795,7 @@ const DRUG_MOVE_MAP = {
     }
   });
   $('btn-info-evidence').addEventListener('click', () => { closeInfoMenu(); openInfo('evidence'); });
+  $('btn-info-abbreviations').addEventListener('click', () => { closeInfoMenu(); openInfo('abbreviations'); });
   $('btn-info-about').addEventListener('click', () => { closeInfoMenu(); openInfo('about'); });
 
   // ---------- reset-progress confirmation ----------
