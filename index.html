@@ -761,6 +761,13 @@
         </div>
         <button class="action" id="btn-shop-customize">300 coins</button>
       </div>
+      <div class="shop-item">
+        <div>
+          <div class="shop-item-name">Unlock Full Dex</div>
+          <div class="shop-item-desc">See every organism in the Dex permanently, even ones you haven't fought yet</div>
+        </div>
+        <button class="action" id="btn-shop-dex">3000 coins</button>
+      </div>
     </div>
   </div>
 
@@ -8600,6 +8607,7 @@ const DRUG_MOVE_MAP = {
     seenVignettes: [], // "orgId::vignetteIndex" keys already served this cycle — cleared on full completion/restart
     custom: { style: 'female', skinIdx: 0, hairIdx: 1, scrubIdx: 1, stethIdx: 0 }, // player character customization; index 0/1 defaults reproduce the sprite's original shipped look
     brainWarnShown: false, // true once the critical-brain-power popup has fired for this dip; resets once brain power climbs back above 20%
+    dexUnlocked: false, // one-time Locker Room purchase (3000 coins) — once true, every organism in the Dex renders as browsable reference material regardless of play progress; not reset by Reset Progress (permanent purchase, same precedent as `custom`)
   };
 
   let run = null; // active encounter state
@@ -8626,7 +8634,7 @@ const DRUG_MOVE_MAP = {
   }
   async function saveState() {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ coins: game.coins, brainPower: game.brainPower, dex: game.dex, meds: game.meds, lastOrgId: game.lastOrgId, seenVignettes: game.seenVignettes, custom: game.custom }));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ coins: game.coins, brainPower: game.brainPower, dex: game.dex, meds: game.meds, lastOrgId: game.lastOrgId, seenVignettes: game.seenVignettes, custom: game.custom, dexUnlocked: game.dexUnlocked }));
     } catch (e) { /* storage unavailable (e.g. private browsing) — progress just won't persist */ }
   }
 
@@ -8655,13 +8663,18 @@ const DRUG_MOVE_MAP = {
       orgsInGroup.forEach(org => {
         const entry = game.dex[org.id];
         const btn = document.createElement('button');
-        if (!entry) {
+        if (!entry && !game.dexUnlocked) {
           btn.className = 'dex-item locked';
           btn.disabled = true;
           btn.innerHTML = `<span>??? </span><span class="status">unseen</span>`;
         } else {
-          btn.className = 'dex-item ' + (entry.defeated ? 'defeated' : 'encountered');
-          btn.innerHTML = `<span>${italicOrgName(org.name)}</span><span class="status">${entry.defeated ? '✓ cleared' : 'seen'}</span>`;
+          // Real play progress (if any) still colours the entry — Full Dex unlock just
+          // additionally reveals organisms with no progress yet, as browsable reference
+          // (reusing the same '.dex-item.reference' style the always-visible Drug
+          // Formulary already uses further down).
+          btn.className = 'dex-item ' + (entry ? (entry.defeated ? 'defeated' : 'encountered') : 'reference');
+          const statusText = entry ? (entry.defeated ? '✓ cleared' : 'seen') : 'reference';
+          btn.innerHTML = `<span>${italicOrgName(org.name)}</span><span class="status">${statusText}</span>`;
           btn.addEventListener('click', () => openDetail('organism', org.id));
         }
         dexList.appendChild(btn);
@@ -8986,8 +8999,9 @@ const DRUG_MOVE_MAP = {
   // ---------- reset-progress confirmation ----------
   function openResetConfirm() {
     const coinWord = game.coins === 1 ? 'coin' : 'coins';
-    $('reset-confirm-body').textContent =
-      `You will lose all ${game.coins} ${coinWord}, and your Organism Dex and Drug Formulary progress will be cleared back to unseen. This cannot be undone.`;
+    let msg = `You will lose all ${game.coins} ${coinWord}, and your Organism Dex and Drug Formulary progress will be cleared back to unseen. This cannot be undone.`;
+    if (game.dexUnlocked) msg += ' (Your Locker Room purchases, including the Full Dex unlock, are not affected.)';
+    $('reset-confirm-body').textContent = msg;
     $('reset-confirm-modal').classList.remove('hidden');
   }
   function closeResetConfirm() { $('reset-confirm-modal').classList.add('hidden'); }
@@ -9963,14 +9977,27 @@ function renderMap() {
   $('customize-modal-backdrop').addEventListener('click', closeCustomizeModal);
 
   // ---------- coin shop ----------
-  // Clicking the coin display opens a small shop of things to spend coins on. Customize
-  // Character is the first item (300 coins, charged every time it's opened — no one-time
-  // unlock); more shop items can be added as more shop-item rows later.
+  // Clicking the coin display opens a small shop of things to spend coins on.
+  // - Customize Character: 300 coins, charged every time it's opened — no one-time unlock.
+  // - Unlock Full Dex: 3000 coins, a one-time PERMANENT unlock (game.dexUnlocked) — once
+  //   bought, the button stays disabled/"Unlocked" forever and the purchase is not undone
+  //   by Reset Progress (same precedent as the Customize Character selections in `custom`).
+  // More shop items can be added as more shop-item rows later.
   function refreshShopUI() {
     const canAfford = game.coins >= 300;
     const btn = $('btn-shop-customize');
     btn.disabled = !canAfford;
     btn.textContent = canAfford ? '300 coins' : 'Need 300 coins';
+
+    const dexBtn = $('btn-shop-dex');
+    if (game.dexUnlocked) {
+      dexBtn.disabled = true;
+      dexBtn.textContent = 'Unlocked ✓';
+    } else {
+      const canAffordDex = game.coins >= 3000;
+      dexBtn.disabled = !canAffordDex;
+      dexBtn.textContent = canAffordDex ? '3000 coins' : 'Need 3000 coins';
+    }
   }
   function openShopModal() { refreshShopUI(); $('shop-modal').classList.remove('hidden'); }
   function closeShopModal() { $('shop-modal').classList.add('hidden'); }
@@ -9985,6 +10012,13 @@ function renderMap() {
     saveState();
     closeShopModal();
     openCustomizeModal();
+  });
+  $('btn-shop-dex').addEventListener('click', () => {
+    if (game.dexUnlocked || game.coins < 3000) return; // already unlocked, or can't afford — button is disabled in these cases, but guard anyway
+    game.coins -= 3000;
+    game.dexUnlocked = true;
+    renderSidebar(); // re-renders dex-list (now fully visible) and refreshes the shop button to "Unlocked"
+    saveState();
   });
   $('btn-customize-done').addEventListener('click', closeCustomizeModal);
 
