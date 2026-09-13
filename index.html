@@ -169,6 +169,10 @@
     font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.4px; text-transform:uppercase;
     color: var(--agar-gold); margin:0 0 16px; text-align:center;
   }
+  button.action.minimart-btn { font-family:'IBM Plex Mono',monospace; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .minimart-icon { width:18px; height:18px; flex:none; }
+  .minimart-title { display:flex; align-items:center; justify-content:center; gap:6px; }
+  .minimart-icon-sm { width:14px; height:14px; flex:none; }
   .customize-preview-wrap { display:flex; justify-content:center; margin: 0 0 20px; }
   .customize-preview-canvas { image-rendering: pixelated; background: var(--bg-void); border:1px solid var(--line); }
   .customize-section { margin: 0 0 18px; }
@@ -592,7 +596,7 @@
           <div class="map-viewport" id="map-viewport">
             <div class="map-grid" id="map-grid"></div>
           </div>
-          <button class="action ghost" id="btn-vending">Vending Machine</button>
+          <button class="action ghost minimart-btn" id="btn-vending"><img class="minimart-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAADX0lEQVR4nG2Uy2vdRRTHP+fM/Ka9jyS3qTFBxIipfapNIVBxUURLF+JOceE/IKgb1+LWP8CNexERNwXXVXChtFratBjsQ5vQiObRm9x7c2/ye8zDxQ23UTybGb4z5xzOfL6MfPPeO1+cf2b63b2ijCJoAhICACkNVxFIgAw1kdE21g45vfZw/Svbq+JK7sRgnSYQVcEQEMBaC0BVVYjuF0fwSYkxAWiuIr3Kr9grf21ffv3SqU+mWw3xIVJUFbc3hM5uyW6vAykxNT2DryqqEBlzwvxTjiyzOKOy1hlw5buly3Z2rNZoWMNhVSSzrK1v03zxbapOjydqhxmfaNHd3sZ7z6ljx3jwYIX15W85PTdD8pGGNcyO1Rq2ijEao4hRMIoxhuV7d5k7fpzVlRV67U0y50gxcu/X21QPF5mdbUFMiFWMUaoYo80HpW5u7ZC8x4eEVeHo+nUe/fkjLnhICVurk1KiyPeYf3aSvGjQ6+c4qzzq7dEfDNQ+d+Hiy52XLtIOPsSYjIrQOimoKoggQIwRAFVltQyEGBAEVQnWWHN8rfWKbd+82m0Wq2gKEodQR9RJI1CjcAKCkEhYkEGS9Mdvm8v2tdh+/8xGj9JHGfnjv9kHYljicaPMqrwRyg/trNTm97aEPCYZOUX2E1LaN17aH1OI8rhBTEnrxnBCzQW72Blc6x5pnvdIEqNCTIQQ2I0Gd8ghMbHrHHVfEmMkCyWZKhbI1ZDyKv3eL/r281w++OzNhV9qmcpgr8A5R9MmfkjPM7ZwiUGnjWaOvN5kcPN7XuUOnRKKvYKZiQa93SJ9/eVPb9mFp6fliIncqp0hnjhLuXqHS+V1ppvj1I5M4giQEmNHj1IfrzPWj1wdX8C9cJK/VxaZD0tybmZ6UyugKCt0YorWsdPYyRnyssKHiPcVwXtCCPiqIsREUVbYyRlac6fR1hR5UdL3PtMYoxxkNHrK/4f2r6ODV6zV4LPMUnbbFMv3KbY3cJlFRVBr0f0fQO1Qc5kl395ga/k+0m2TZRarwdvuTjGRk8nZ4i79G7dwhxxl5hgMdqHXI9/ZAcCYoVaK41x/kfLGzzTrh8nJpLtTTMhHH3+6NPXk1AlDQFVICSofqMQi1g09BIgIqSrJ8GTWIAIxJgKGzY3Nu/8AQZWpvTRwO3oAAAAASUVORK5CYII=" alt="">Minimart</button>
           <div class="dpad">
             <button class="up" data-dir="up">▲</button>
             <button class="left" data-dir="left">◀</button>
@@ -762,7 +766,7 @@
     <div class="dex-modal-backdrop" id="vending-modal-backdrop"></div>
     <div class="dex-modal-panel" role="dialog" aria-modal="true" style="max-width:440px;">
       <button class="dex-modal-close" id="vending-modal-close" aria-label="Close">✕</button>
-      <div class="customize-modal-title">Vending Machine</div>
+      <div class="customize-modal-title minimart-title"><img class="minimart-icon-sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC3UlEQVR4nC2Rz2tcVRTHP+fe+96blxmTND86tNBYaU2xSiEKdqELwaKrkp3gov4F4sqda9f+Be4ENy78AV0XcVMVIhZtIdjQmiYxnZn86OTNe/fde4+Lmc2B8z0Hzvl+P/Ljpx9/f+PC0u26DlFJFjEYI2hSAMQICgiQYppqSOx0nP1zf/STG/i4FefLTfNSRESMhhbvW5zLUE3ElBAxpBjolCUqFkWJYs3gSdxyA2fu96+uUOQODZ6/TzrsTLqcPN+nKArOLS1TTyrKhSUW62ds9EFsRuMDg4e7913pXNeqYFQIbeCgKlh7+wPOhocsnT/P4f4B80XB3Lllnv38HYQJxuRYFUrnuq55MWxCdYoNFjSRDbfZu/ctZ6NDdhrPar/PSeOJZ0e8+0qJxh6x8gQfqcej2mXr77y+vfomMQZVVRY3lG7TcHH9GiKGEFoEwWUZe8byJESMMeqso3O1vOGag32XP3pI6z06jZhCDKoKqmQypZBUEaa9AcRlnA4Glbu5+8fm9eoBdUjGCADMAE6rgOpUnY0BJLOGg0G4LTsffajLSamTIgKiijNADDC7bERQ4wgKRoSoUFphKIL75Wjyw7XLK5siSVEVFcPzWmChj9GEz3LyEDBnQxZtSx4DMXM0XvXB7vCRe/zGy1+9/95rm3tNTp0MV8oK3y4yvHkH9RPECN51WPn1G9bcEdtVyZxTvZw1cvfeX5+ZV3PTq8c1T9du8d/GHQ6rnPnUUoaWMngK31CGll70HFY5g7c+4emlW/hxw/WOzZ1XTYjQ6xaYXoF1Fp8giaAyjS3NfOfOMt8tSE2BitAmUWeMKMCL8QR1FasxYZ1FRKYIABHBWiGGxPFphYwnABgj6kbHY9fNLeuP79JE4eJcyz9hgegbUuuni1gmQbnizmh/+5rCKt3CMjoeO/n8iy9/v3RheSMjKCBRYRwMqVwATTPqBjM5oecSdvqUtjj5d3+49T+sx3GmiY41ogAAAABJRU5ErkJggg==" alt="">Minimart</div>
       <div class="snack-list" id="snack-list"></div>
     </div>
   </div>
