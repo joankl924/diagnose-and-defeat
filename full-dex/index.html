@@ -545,6 +545,17 @@
   .detail-references { padding-left:16px; }
   .detail-references li { font-size:11.5px; line-height:1.5; color: var(--text-faint); font-family:'IBM Plex Mono',monospace; }
 
+  /* Full Dex build: "Play This Case" picker inside each organism's Dex detail — lets a
+     showcase viewer jump straight into any specific case/vignette instead of walking the
+     map and waiting for a random encounter. */
+  .case-picker-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .case-picker-select {
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color: var(--text-main);
+    background: var(--bg-void); border:1px solid var(--line); border-radius:4px;
+    padding:8px 10px; flex:1 1 auto; min-width:120px;
+  }
+  .case-picker-select:focus-visible { outline:2px solid var(--agar-gold); outline-offset:1px; }
+
   footer.game-footer { padding:14px 20px; border-top:1px solid var(--line); background: var(--bg-panel-2); font-size:11.5px; color:var(--text-faint); text-align:center; }
 
   @media (max-width: 720px) {
@@ -8703,12 +8714,33 @@ btn.className = 'dex-item ' + (entry ? (entry.defeated ? 'defeated' : 'encounter
     if (kind === 'organism') {
       const org = ORGANISMS.find(o => o.id === id);
       const info = DEX_INFO[id];
+      // Full Dex build: "Play This Case" picker — reuses the same forced-encounter path as
+      // the ?jump= URL debug param (see triggerEncounter/tryDebugJump above), just exposed
+      // in the UI instead of requiring a hand-typed URL. Cases are listed by their permanent
+      // caseNum (not array index) since that's the number visible everywhere else in the game.
+      const caseOptions = org.vignettes
+        .map((v, i) => ({ v, i }))
+        .sort((a, b) => a.v.caseNum - b.v.caseNum)
+        .map(({ v, i }) => `<option value="${i}">Case ${v.caseNum}</option>`).join('');
       body.innerHTML = `
         <div class="detail-header">
           <div class="detail-portrait" style="background:${org.spriteColor};"></div>
           <div class="detail-name">${italicOrgName(org.name, true)}</div>
           <div class="detail-tagline">${info.group}</div>
           ${org.flagName ? `<div class="detail-badge">Resistance flag: ${org.flagName}</div>` : ''}
+        </div>
+        <div class="detail-section">
+          <h4>Play This Case</h4>
+          <div class="case-picker-row">
+            <select id="case-picker-select" class="case-picker-select">${caseOptions}</select>
+            ${org.flagName ? `
+            <select id="case-picker-resistant" class="case-picker-select">
+              <option value="">Random resistance</option>
+              <option value="1">Force resistant</option>
+              <option value="0">Force susceptible</option>
+            </select>` : ''}
+            <button class="action" id="case-picker-play">▶ Play This Case</button>
+          </div>
         </div>
         <div class="detail-section">
           <h4>Characteristics</h4>
@@ -8743,6 +8775,24 @@ btn.className = 'dex-item ' + (entry ? (entry.defeated ? 'defeated' : 'encounter
           <ul class="detail-list detail-references">${info.references.map(r => `<li>${r}</li>`).join('')}</ul>
         </div>` : ''}
       `;
+      $('case-picker-play').addEventListener('click', () => {
+        const vIdx = parseInt($('case-picker-select').value, 10);
+        const vignette = org.vignettes[vIdx];
+        const forced = { org, vignette };
+        const resistantSelect = $('case-picker-resistant');
+        if (resistantSelect && (resistantSelect.value === '1' || resistantSelect.value === '0')) {
+          forced.resistant = resistantSelect.value === '1';
+        }
+        closeDetail();
+        closeSidebar();
+        // Reset every screen back to a clean slate before jumping in, in case this was opened
+        // mid-encounter (the topbar's Dex button is reachable from any screen) — triggerEncounter
+        // itself only hides screen-map, so without this a stale battle/diagnosis screen could be
+        // left visible underneath the new vignette screen.
+        ['screen-map', 'screen-vignette', 'screen-diagnosis', 'screen-battle', 'screen-end'].forEach(hide);
+        run = null;
+        triggerEncounter(forced);
+      });
     } else {
       const info = DRUG_INFO[id];
       body.innerHTML = `
