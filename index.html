@@ -792,6 +792,20 @@
       </div>
     </div>
   </div>
+
+  <div class="dex-modal hidden" id="npc-modal">
+    <div class="dex-modal-backdrop" id="npc-modal-backdrop"></div>
+    <div class="dex-modal-panel" role="dialog" aria-modal="true" aria-labelledby="npc-modal-name" style="max-width:400px;">
+      <button class="dex-modal-close" id="npc-modal-close" aria-label="Close">✕</button>
+      <div class="detail-header">
+        <div class="detail-name" id="npc-modal-name"></div>
+      </div>
+      <p class="detail-para" id="npc-modal-line"></p>
+      <div class="btn-row" style="justify-content:flex-end; margin-top:18px;">
+        <button class="action" id="npc-modal-ok">OK</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -852,6 +866,53 @@
     ["wall_left", "chair_back_man", "chair_back_woman", "chair_back_man", "partition_vertical", "F", "F", "F", "F", "chair_back_man", "chair_back_empty", "chair_back_man", "chair_back_woman", "wall_right"],
     ["wall_corner_bl", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom_E", "wall_bottom_D", "wall_bottom_poster", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom", "wall_corner_br"],
   ];
+
+  // Lines shown when the player bumps into a staff NPC tile instead of walking through
+  // it (NPCs are solid, like any other non-"F" tile — see movePlayer). Each NPC has a
+  // small pool mixing ED flavour with evidence-graded clinical/IPC tips; openNpcDialogue()
+  // picks one at random each bump, avoiding an immediate repeat of the last line shown.
+  const NPC_DIALOGUE = {
+    ED_doc: {
+      name: 'ED Doctor',
+      lines: [
+        `Three sepsis alerts before 9am — my coffee's the only prophylaxis I trust today.`,
+        `For suspected sepsis: blood cultures before antibiotics, but never let cultures delay empirical therapy within the golden hour. <span class="cite">(Grade A — Surviving Sepsis Campaign)</span>`,
+        `Whoever redesigned this bay, thank you — the chair-to-bed sightlines finally make sense.`,
+        `Check the local antibiogram before you commit to empirical cover — resistance patterns here can drift from the national picture. <span class="cite">(Grade B — MOH Antimicrobial Stewardship guidance)</span>`,
+        `Spot the Gram stain before the formal report lands and you're already a step ahead of most juniors.`,
+      ],
+    },
+    receptionist: {
+      name: 'Receptionist',
+      lines: [
+        `Reg desk. No, we still haven't found that missing CT request form.`,
+        `Some of what you'll see today is legally notifiable to MOH, often within 24 hours — worth knowing which ones before you're the one filling the form. <span class="cite">(Grade A — Infectious Diseases Act, Singapore)</span>`,
+        `Need the interpreter line? I've got the extension memorised by now.`,
+        `Infection control's running hand hygiene audits again this week — the five moments, not just "in and out". <span class="cite">(Grade A — WHO/MOH hand hygiene guidance)</span>`,
+        `Go on, guess how many times I've said "please take a seat" today.`,
+      ],
+    },
+    nurse1: {
+      name: 'Nurse',
+      lines: [
+        `Obs round in ten minutes. Don't let me catch you skipping a set.`,
+        `Don't let a reassuring-looking patient fool you — a proper set of vitals and a qSOFA catch what a glance won't. <span class="cite">(Grade B)</span>`,
+        `Bed 4's been asking for a blanket for twenty minutes. I can see you standing there.`,
+        `Check every IV line for redness or tenderness on your rounds — catching phlebitis early saves a much bigger infection later. <span class="cite">(Grade B)</span>`,
+        `Coffee machine's broken again. Third time this month.`,
+      ],
+    },
+    nurse2: {
+      name: 'Nurse',
+      lines: [
+        `Restocking PPE — don't you dare take the last pair of gloves.`,
+        `Donning and doffing order matters more than people think — most self-contamination happens on the way out, not the way in. <span class="cite">(Grade B — CDC/MOH IPC guidance)</span>`,
+        `New rotation starts Monday. Hope you like early starts.`,
+        `Pull urinary catheters the moment they're not clinically needed — duration is the single biggest driver of catheter-associated UTIs. <span class="cite">(Grade A)</span>`,
+        `If you hear the crash cart alarm, that's not a drill — move.`,
+      ],
+    },
+  };
 
   // ===================================================================
   // ORGANISMS
@@ -9027,6 +9088,7 @@ const DRUG_MOVE_MAP = {
     if (e.key !== 'Escape') return;
     if (!$('reset-confirm-modal').classList.contains('hidden')) { closeResetConfirm(); return; }
     if (!$('dex-modal').classList.contains('hidden')) { closeDetail(); return; }
+    if (!$('npc-modal').classList.contains('hidden')) { closeNpcDialogue(); return; }
     if (!$('shop-modal').classList.contains('hidden')) { closeShopModal(); return; }
     if (!$('vending-modal').classList.contains('hidden')) { closeVendingModal(); return; }
     if (!$('customize-modal').classList.contains('hidden')) { closeCustomizeModal(); return; }
@@ -9100,13 +9162,17 @@ function renderMap() {
   }
   function movePlayer(dir) {
     if ($('screen-map').classList.contains('hidden')) return;
+    if (!$('npc-modal').classList.contains('hidden')) return; // don't walk through an open NPC dialogue
     let { playerRow: r, playerCol: c } = game;
     if (dir === 'up') r--; if (dir === 'down') r++;
     if (dir === 'left') c--; if (dir === 'right') c++;
     const t = tileAt(r, c);
     // "F" (plain floor) is the only walkable tile — everything else (walls, beds,
     // partitions, chairs, NPCs) is solid, matching the ED floor-plan spreadsheet.
-    if (t !== 'F') return;
+    if (t !== 'F') {
+      if (NPC_DIALOGUE[t]) openNpcDialogue(t);
+      return;
+    }
     game.playerRow = r; game.playerCol = c;
     // the sprite is only drawn facing left/right, so up/down movement keeps the last
     // left/right facing rather than trying to show a (nonexistent) front/back pose
@@ -9122,8 +9188,32 @@ function renderMap() {
       setTimeout(triggerEncounter, 120);
     }
   }
-    document.addEventListener('keydown', (e) => {
+
+  // ---------- NPC dialogue ----------
+  // Bumping into a staff NPC tile (instead of walking through it, same as bumping into
+  // any other solid tile) pops a short in-character line. `game.npcLineIdx` remembers
+  // each NPC's last-shown line (runtime-only, not persisted to saveState) purely so two
+  // consecutive bumps into the same NPC don't repeat the same line twice in a row.
+  function openNpcDialogue(npcKey) {
+    const npc = NPC_DIALOGUE[npcKey];
+    if (!npc) return;
+    game.npcLineIdx = game.npcLineIdx || {};
+    const lines = npc.lines;
+    let idx = Math.floor(Math.random() * lines.length);
+    if (lines.length > 1 && idx === game.npcLineIdx[npcKey]) idx = (idx + 1) % lines.length;
+    game.npcLineIdx[npcKey] = idx;
+    $('npc-modal-name').textContent = npc.name;
+    $('npc-modal-line').innerHTML = lines[idx];
+    $('npc-modal').classList.remove('hidden');
+  }
+  function closeNpcDialogue() { $('npc-modal').classList.add('hidden'); }
+  $('npc-modal-close').addEventListener('click', closeNpcDialogue);
+  $('npc-modal-backdrop').addEventListener('click', closeNpcDialogue);
+  $('npc-modal-ok').addEventListener('click', closeNpcDialogue);
+
+  document.addEventListener('keydown', (e) => {
     if ($('screen-map').classList.contains('hidden')) return;
+    if (!$('npc-modal').classList.contains('hidden')) return;
     const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', w: 'up', s: 'down', a: 'left', d: 'right' };
     if (map[e.key]) { e.preventDefault(); movePlayer(map[e.key]); }
   });
