@@ -426,6 +426,8 @@
   .snack-buy { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
   .snack-price { display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--agar-gold); font-family:'IBM Plex Mono',monospace; }
   .snack-price img { width:20px; height:20px; }
+  .brain-warning-banner { display:flex; align-items:flex-start; gap:8px; background: rgba(210,64,64,.12); border:1px solid var(--hp-red); color: var(--hp-red); font-size:13px; line-height:1.5; padding:10px 12px; margin-bottom:12px; }
+  .brain-warning-banner b { color: var(--hp-red); }
   .battle-log { min-height:44px; font-size:14px; color:var(--text-dim); line-height:1.6; padding:10px 2px; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line); }
   .moves-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   .move-btn { text-align:left; background: var(--bg-panel-2); border:1px solid var(--line); color:var(--text-main); padding:11px 12px; cursor:pointer; font-family:'IBM Plex Sans',sans-serif; }
@@ -767,6 +769,7 @@
     <div class="dex-modal-panel" role="dialog" aria-modal="true" style="max-width:440px;">
       <button class="dex-modal-close" id="vending-modal-close" aria-label="Close">✕</button>
       <div class="customize-modal-title minimart-title"><img class="minimart-icon-sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC3UlEQVR4nC2Rz2tcVRTHP+fe+96blxmTND86tNBYaU2xSiEKdqELwaKrkp3gov4F4sqda9f+Be4ENy78AV0XcVMVIhZtIdjQmiYxnZn86OTNe/fde4+Lmc2B8z0Hzvl+P/Ljpx9/f+PC0u26DlFJFjEYI2hSAMQICgiQYppqSOx0nP1zf/STG/i4FefLTfNSRESMhhbvW5zLUE3ElBAxpBjolCUqFkWJYs3gSdxyA2fu96+uUOQODZ6/TzrsTLqcPN+nKArOLS1TTyrKhSUW62ds9EFsRuMDg4e7913pXNeqYFQIbeCgKlh7+wPOhocsnT/P4f4B80XB3Lllnv38HYQJxuRYFUrnuq55MWxCdYoNFjSRDbfZu/ctZ6NDdhrPar/PSeOJZ0e8+0qJxh6x8gQfqcej2mXr77y+vfomMQZVVRY3lG7TcHH9GiKGEFoEwWUZe8byJESMMeqso3O1vOGag32XP3pI6z06jZhCDKoKqmQypZBUEaa9AcRlnA4Glbu5+8fm9eoBdUjGCADMAE6rgOpUnY0BJLOGg0G4LTsffajLSamTIgKiijNADDC7bERQ4wgKRoSoUFphKIL75Wjyw7XLK5siSVEVFcPzWmChj9GEz3LyEDBnQxZtSx4DMXM0XvXB7vCRe/zGy1+9/95rm3tNTp0MV8oK3y4yvHkH9RPECN51WPn1G9bcEdtVyZxTvZw1cvfeX5+ZV3PTq8c1T9du8d/GHQ6rnPnUUoaWMngK31CGll70HFY5g7c+4emlW/hxw/WOzZ1XTYjQ6xaYXoF1Fp8giaAyjS3NfOfOMt8tSE2BitAmUWeMKMCL8QR1FasxYZ1FRKYIABHBWiGGxPFphYwnABgj6kbHY9fNLeuP79JE4eJcyz9hgegbUuuni1gmQbnizmh/+5rCKt3CMjoeO/n8iy9/v3RheSMjKCBRYRwMqVwATTPqBjM5oecSdvqUtjj5d3+49T+sx3GmiY41ogAAAABJRU5ErkJggg==" alt="">Minimart</div>
+      <div class="brain-warning-banner hidden" id="brain-warning-banner">⚠ <b>Brain Power critical!</b> Head to the minimart to buy some food to fuel your brain power!</div>
       <div class="snack-list" id="snack-list"></div>
     </div>
   </div>
@@ -8567,6 +8570,7 @@ const DRUG_MOVE_MAP = {
     lastOrgId: null, // id of the most recently-encountered organism — kept out of the next random pick
     seenVignettes: [], // "orgId::vignetteIndex" keys already served this cycle — cleared on full completion/restart
     custom: { style: 'female', skinIdx: 0, hairIdx: 1, scrubIdx: 1, stethIdx: 0 }, // player character customization; index 0/1 defaults reproduce the sprite's original shipped look
+    brainWarnShown: false, // true once the critical-brain-power popup has fired for this dip; resets once brain power climbs back above 20%
   };
 
   let run = null; // active encounter state
@@ -9699,6 +9703,7 @@ function renderMap() {
   $('btn-return-map').addEventListener('click', () => {
     hide('screen-end'); show('screen-map');
     run = null;
+    maybeWarnBrainPower();
   });
 
   // ---------- debug jump (testing only — not shown anywhere in the UI) ----------
@@ -9960,6 +9965,18 @@ function renderMap() {
     $('brainpower-fill').style.background = bp > 50 ? 'var(--hp-green)' : bp > 20 ? 'var(--hp-amber)' : 'var(--hp-red)';
   }
 
+  // Pops the Minimart open (with a warning banner) the first time Brain Power drops to or
+  // below the 20% critical threshold; resets once it's topped back up above 20%, so the
+  // warning can fire again on a later dip rather than only ever once per session.
+  function maybeWarnBrainPower() {
+    if (game.brainPower <= 20 && !game.brainWarnShown) {
+      game.brainWarnShown = true;
+      openVendingModal();
+    } else if (game.brainPower > 20) {
+      game.brainWarnShown = false;
+    }
+  }
+
   // ---------- vending machine (snack shop) ----------
   // Reached from the map screen. Buying a snack spends coins to top up Brain Power, capped
   // at 100% — see the SNACKS menu above for the current prices/effects.
@@ -9987,9 +10004,16 @@ function renderMap() {
     if (!snack || game.coins < snack.cost) return; // guard even though the button is disabled in this case
     game.coins -= snack.cost;
     game.brainPower = Math.min(100, game.brainPower + snack.restore);
+    maybeWarnBrainPower();
+    updateBrainWarningBanner();
     saveState(); renderSidebar(); renderVendingUI();
   }
-  function openVendingModal() { renderVendingUI(); $('vending-modal').classList.remove('hidden'); }
+  function updateBrainWarningBanner() { $('brain-warning-banner').classList.toggle('hidden', game.brainPower > 20); }
+  function openVendingModal() {
+    renderVendingUI();
+    updateBrainWarningBanner();
+    $('vending-modal').classList.remove('hidden');
+  }
   function closeVendingModal() { $('vending-modal').classList.add('hidden'); }
   $('btn-vending').addEventListener('click', openVendingModal);
   $('vending-modal-close').addEventListener('click', closeVendingModal);
@@ -10002,6 +10026,7 @@ function renderMap() {
     applyPlayerSprite();
     renderMap();
     renderSidebar();
+    maybeWarnBrainPower();
     tryDebugJump();
   })();
 })();
