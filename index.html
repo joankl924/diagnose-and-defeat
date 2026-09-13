@@ -957,7 +957,7 @@
       name: 'Escherichia coli',
       aliases: ['escherichia coli', 'e coli'],
       spriteColor: 'var(--safranin-pink)',
-      flagName: 'ESBL',
+      flagName: 'ESBL, CRE, AmpC',
       vignettes: [
         {
           caseNum: 5,
@@ -1265,7 +1265,7 @@
       name: 'Klebsiella pneumoniae',
       aliases: ['klebsiella pneumoniae', 'klebsiella', 'k pneumoniae'],
       spriteColor: 'var(--klebs-amber)',
-      flagName: 'CRE',
+      flagName: 'ESBL, CRE, AmpC',
       vignettes: [
         {
           caseNum: 17,
@@ -1304,6 +1304,7 @@
           caseNum: 20,
           syndrome: 'Bacteraemia — Repatriated Patient',
           patientHP: 55, // starting patient life for this vignette's severity
+          forceResistant: true, // stem specifically documents known CRE colonisation — always presents resistant, not the usual 50/50
           text: "A 45-year-old woman is repatriated to Singapore after 6 weeks in an overseas ICU following a road traffic accident, where she is known to have been colonised with a carbapenem-resistant organism. She now has fever and a new line-associated bacteraemia.",
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "rods", text: "Gram-negative rods." },
@@ -1335,7 +1336,7 @@
           dmg: (r) => r ? 45 : 20,
           log: (r) => r ? `Highly effective against KPC-producing carbapenem-resistant Enterobacterales — a targeted option once CRE is confirmed. <span class="cite">(Grade B — emerging evidence, ID input advised)</span>`
                         : `Works, but this is significant overkill for a susceptible isolate — reserve novel agents for confirmed CRE. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Carbapenemase/CRE Screen", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
+        { name: "Order Antibiotic Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'CRE' : 'Carbapenem-susceptible');
@@ -1422,22 +1423,22 @@
           dmg: (r) => r ? 0 : 40,
           log: (r) => r ? `No effect — this is a carbapenem-resistant <i>P. aeruginosa</i> (CRPA) isolate; reaching for a different carbapenem-class agent won't help once resistance is this broad. <span class="cite">(Grade A)</span>`
                         : `Highly effective anti-pseudomonal carbapenem. <span class="cite">(Grade A)</span>` },
-        { name: "Colistin (Polymyxin E)", desc: "Last-line agent for confirmed MDR/CRPA, nephrotoxic", isDrug: true,
-          dmg: (r) => r ? 35 : 15,
-          log: (r) => r ? `Effective — one of the few remaining options once an isolate is resistant to anti-pseudomonal penicillins and carbapenems, though it carries significant nephrotoxicity and needs careful dosing and monitoring, ideally with infectious diseases input. <span class="cite">(Grade B — limited alternatives)</span>`
-                        : `Works, but this is an unnecessarily toxic choice for a susceptible isolate — reach for piperacillin-tazobactam or meropenem first. <span class="cite">(Grade B — stewardship principle)</span>` },
+        { name: "Ceftazidime-Avibactam", desc: "Novel beta-lactam/inhibitor, active vs many MDR/CRPA strains", isDrug: true,
+          dmg: (r) => r ? 45 : 20,
+          log: (r) => r ? `Effective option; used when there is multi-drug resistance but documented susceptibility to ceftazidime-avibactam. <span class="cite">(Grade B — IDSA 2024 AMR Guidance)</span>`
+                        : `Effective, but this is an overkill option, as the strain is susceptible to standard anti-pseudomonal agents; ceftazidime-avibactam should be reserved for resistant strains that test susceptible to it. <span class="cite">(Grade B — stewardship principle)</span>` },
         { name: "Order Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'MDR' : 'Susceptible');
             const rows = r
-              ? [{drug:'Ceftriaxone', result:'R'}, {drug:'Piperacillin-Tazobactam', result:'R'}, {drug:'Meropenem', result:'R'}, {drug:'Colistin', result:'S'}]
-              : [{drug:'Ceftriaxone', result:'R'}, {drug:'Piperacillin-Tazobactam', result:'S'}, {drug:'Meropenem', result:'S'}];
-            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Multidrug-resistant, including carbapenem resistance (CRPA) — colistin remains susceptible; escalate and involve infectious diseases.` : `Susceptible to standard anti-pseudomonal agents. (Ceftriaxone R is intrinsic — <i>Pseudomonas</i> is never covered by it, regardless of MDR status.)`);
+              ? [{drug:'Ceftriaxone', result:'R'}, {drug:'Ceftazidime', result:'R'}, {drug:'Piperacillin-Tazobactam', result:'R'}, {drug:'Meropenem', result:'R'}, {drug:'Ceftazidime-Avibactam', result:'S'}]
+              : [{drug:'Ceftriaxone', result:'R'}, {drug:'Ceftazidime', result:'S'}, {drug:'Piperacillin-Tazobactam', result:'S'}, {drug:'Meropenem', result:'S'}];
+            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Multidrug-resistant, including carbapenem resistance (CRPA) — ceftazidime-avibactam remains susceptible; escalate and involve infectious diseases.` : `Susceptible to standard anti-pseudomonal agents. (Ceftriaxone R is intrinsic — <i>Pseudomonas</i> is never covered by it, regardless of MDR status.)`);
           } },
-        { name: "Ampicillin", desc: "Aminopenicillin — no anti-pseudomonal activity", isDrug: true,
+        { name: "Trimethoprim-Sulfamethoxazole (TMP-SMX)", desc: "Folate-pathway inhibitor — no anti-pseudomonal activity", isDrug: true,
           dmg: (r) => 0,
-          log: (r) => `No effect — <i>Pseudomonas aeruginosa</i> is intrinsically resistant to ampicillin. Its low outer-membrane permeability and constitutive efflux pumps keep narrow-spectrum penicillins out regardless of MDR status. <span class="cite">(Grade A)</span>` },
+          log: (r) => `No effect — <i>Pseudomonas aeruginosa</i> is intrinsically resistant to TMP-SMX, as it constitutively expresses efflux pumps against TMP-SMX and has reduced outer membrane permeability to this drug. <span class="cite">(Grade A)</span>` },
       ],
       pearls: [
         `<b>Not every beta-lactam is a "real" option against <i>Pseudomonas</i></b> — it's intrinsically resistant to agents like ceftriaxone and ampicillin, so choosing an anti-pseudomonal agent (piperacillin-tazobactam, ceftazidime, cefepime, meropenem) matters before resistance testing even comes into it. <span class="cite">(Grade A)</span>`,
@@ -1514,10 +1515,10 @@
           dmg: (r) => r ? 0 : 40,
           log: (r) => r ? `No effect — this is a carbapenem-resistant isolate (CRAB), a WHO critical-priority pathogen with very limited remaining options. <span class="cite">(Grade A)</span>`
                         : `Highly effective for a susceptible isolate.` },
-        { name: "Colistin (Polymyxin E)", desc: "Last-line agent for confirmed CRAB, nephrotoxic", isDrug: true,
-          dmg: (r) => r ? 35 : 15,
-          log: (r) => r ? `Effective — often one of the few remaining options for confirmed CRAB, though it carries significant nephrotoxicity and needs careful dosing and monitoring. <span class="cite">(Grade B — limited alternatives)</span>`
-                        : `Works, but this is an unnecessarily toxic choice for a susceptible isolate. <span class="cite">(Grade B — stewardship principle)</span>` },
+        { name: "Sulbactam-Durlobactam + Meropenem", desc: "Targeted CRAB regimen (ATTACK trial), carbapenem backbone for concomitant Gram-negatives", isDrug: true,
+          dmg: (r) => r ? 40 : 15,
+          log: (r) => r ? `Sulbactam-containing antibiotic regimens are recommended for the treatment of CRAB infections. Where sulbactam-durlobactam is not available, an alternative is high-dose ampicillin-sulbactam (total daily dose of 9g of the sulbactam component) in combination with at least one other agent (e.g. polymyxin B, minocycline). <span class="cite">(Grade B — IDSA 2024 AMR Guidance)</span>`
+                        : `Effective, but this is an overkill option; reserve sulbactam-durlobactam for true CRAB infections. <span class="cite">(Grade B — stewardship principle)</span>` },
         { name: "Order Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
@@ -1560,6 +1561,7 @@
           caseNum: 30,
           syndrome: 'Infective Endocarditis',
           patientHP: 50, // starting patient life for this vignette's severity
+          forceResistant: false, // teaching point is IE-specific management, not VRE — always presents ampicillin/vancomycin-susceptible
           text: "A 68-year-old man with a bicuspid aortic valve presents with 3 weeks of low-grade fever, malaise, and a new murmur, 6 weeks after a cystoscopy for benign prostatic hyperplasia. Echocardiography shows a vegetation on the aortic valve. Multiple blood cultures grow the same organism.",
           clues: [
             { title: "Gram Stain — Blood Culture Broth", icon: "pairs-violet", text: "Gram-positive cocci in pairs and short chains." },
@@ -1598,29 +1600,45 @@
       ],
       moves: [
         { name: "Ampicillin", desc: "Aminopenicillin, first-line for susceptible isolates", isDrug: true,
-          dmg: (r) => r ? 0 : 35,
-          log: (r) => r ? `No effect — vancomycin-resistant enterococci (VRE) are typically also ampicillin-resistant. <span class="cite">(Grade A)</span>`
-                        : `Effective — ampicillin remains first-line for susceptible <i>E. faecalis</i>; note this is a real point of difference from <i>E. faecium</i>, which is usually ampicillin-resistant even when vancomycin-susceptible. <span class="cite">(Grade A)</span>` },
+          // Case 30 (infective endocarditis) is a special case: ampicillin monotherapy is
+          // insufficient for enterococcal IE even when the isolate is ampicillin-susceptible —
+          // see doc amendments for Case 30.
+          dmg: (r, ctx) => (ctx && ctx.vignette && ctx.vignette.caseNum === 30) ? 0 : (r ? 0 : 35),
+          log: (r, ctx) => {
+            if (ctx && ctx.vignette && ctx.vignette.caseNum === 30) {
+              return `Insufficient as monotherapy for the treatment of infective endocarditis — enterococcal IE needs a synergistic combination regardless of ampicillin susceptibility. <span class="cite">(Grade A — ESC/AHA Endocarditis Guidelines)</span>`;
+            }
+            return r ? `No effect – resistant to ampicillin. Vancomycin-resistant enterococci (VRE) are typically also ampicillin-resistant. <span class="cite">(Grade A)</span>`
+                     : `Effective — ampicillin remains first-line for susceptible <i>E. faecalis</i>; note this is a real point of difference from <i>E. faecium</i>, which is usually ampicillin-resistant even when vancomycin-susceptible. <span class="cite">(Grade A)</span>`;
+          } },
         { name: "Ampicillin + Gentamicin (synergy)", desc: "Combination for endocarditis, synergistic bactericidal effect", isDrug: true,
           dmg: (r) => r ? 0 : 48,
           log: (r) => r ? `No effect from the ampicillin component. <span class="cite">(Grade A)</span>`
                         : `Highly effective — the classic synergistic combination for enterococcal endocarditis, though ampicillin plus ceftriaxone is increasingly preferred to reduce aminoglycoside toxicity. <span class="cite">(Grade B — ESC/AHA Endocarditis Guidelines)</span>` },
         { name: "Vancomycin", desc: "Glycopeptide", isDrug: true,
-          dmg: (r) => r ? 0 : 30,
-          log: (r) => r ? `No effect — this isolate is vancomycin-resistant (VRE). <span class="cite">(Grade A)</span>`
-                        : `Effective for a susceptible isolate, though ampicillin is usually preferred first-line when the isolate is also ampicillin-susceptible. <span class="cite">(Grade B)</span>` },
+          // Case 30 (infective endocarditis): vancomycin monotherapy is also marked wrong here —
+          // enterococcal IE needs a synergistic combination regardless of which cell-wall agent is
+          // used — see doc amendments for Case 30.
+          dmg: (r, ctx) => (ctx && ctx.vignette && ctx.vignette.caseNum === 30) ? 0 : (r ? 0 : 30),
+          log: (r, ctx) => {
+            if (ctx && ctx.vignette && ctx.vignette.caseNum === 30) {
+              return `Effective for a susceptible isolate, though ampicillin is usually preferred first-line when the isolate is also ampicillin-susceptible. In infective endocarditis, this should also be combined with another synergistic agent — used alone, it is insufficient here. <span class="cite">(Grade B)</span>`;
+            }
+            return r ? `No effect — this isolate is vancomycin-resistant (VRE). <span class="cite">(Grade A)</span>`
+                     : `Effective for a susceptible isolate, though ampicillin is usually preferred first-line when the isolate is also ampicillin-susceptible. <span class="cite">(Grade B)</span>`;
+          } },
         { name: "Linezolid / Daptomycin", desc: "Reserved for confirmed VRE", isDrug: true,
           dmg: (r) => r ? 40 : 12,
           log: (r) => r ? `Effective — one of the few reliable options for confirmed VRE. <span class="cite">(Grade A — for confirmed VRE)</span>`
                         : `Works, but this is unnecessary escalation for a fully susceptible isolate. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
+        { name: "Order Antibiotic Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'VRE' : 'Vancomycin-susceptible');
             const rows = r
-              ? [{drug:'Ceftriaxone', result:'R'}, {drug:'Ampicillin', result:'R'}, {drug:'Vancomycin', result:'R'}, {drug:'Linezolid', result:'S'}]
-              : [{drug:'Ceftriaxone', result:'R'}, {drug:'Ampicillin', result:'S'}, {drug:'Vancomycin', result:'S'}];
-            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Vancomycin-resistant (VRE) — ampicillin and vancomycin are both out; reach for linezolid or daptomycin.` : `Vancomycin-susceptible — ampicillin-based therapy is preferred. (Ceftriaxone R is intrinsic to enterococci regardless of VRE status.)`);
+              ? [{drug:'Ceftriaxone', result:'R'}, {drug:'Ampicillin', result:'R'}, {drug:'Vancomycin', result:'R'}, {drug:'Gentamicin', result:'S'}, {drug:'Linezolid', result:'S'}]
+              : [{drug:'Ceftriaxone', result:'R'}, {drug:'Ampicillin', result:'S'}, {drug:'Vancomycin', result:'S'}, {drug:'Gentamicin', result:'S'}];
+            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Vancomycin-resistant (VRE) — ampicillin and vancomycin are both out; reach for linezolid or daptomycin.` : `Vancomycin-susceptible — ampicillin-based therapy is preferred${ctx.vignette.caseNum === 30 ? ', though infective endocarditis still requires a synergistic combination rather than monotherapy' : ''}. (Ceftriaxone R is intrinsic to enterococci regardless of VRE status.)`);
           } },
       ],
       pearls: [
@@ -1681,14 +1699,14 @@
           dmg: (r) => r ? 45 : 15,
           log: (r) => r ? `Effective — linezolid or high-dose daptomycin (10–12 mg/kg/day, higher than standard dosing because VRE isolates tend to have higher MICs) are the mainstay for VRE <i>E. faecium</i> bacteraemia. <span class="cite">(Grade B — cohort data linking higher daptomycin dose to lower mortality)</span>`
                         : `Works, but this is unnecessary escalation — vancomycin remains preferred first-line once the isolate is confirmed vancomycin-susceptible. <span class="cite">(Grade B — stewardship principle)</span>` },
-        { name: "Order Vancomycin Susceptibility (E-test)", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
+        { name: "Order Antibiotic Susceptibility Testing", desc: "Cascade susceptibility panel — 20 patient life", isDrug: false, patientCost: 20,
           dmg: (r) => 0,
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'VRE' : 'Vancomycin-susceptible');
             const rows = r
               ? [{drug:'Ampicillin', result:'R'}, {drug:'Ceftriaxone', result:'R'}, {drug:'Vancomycin', result:'R'}, {drug:'Linezolid', result:'S'}]
-              : [{drug:'Ampicillin', result:'R'}, {drug:'Ceftriaxone', result:'R'}, {drug:'Vancomycin', result:'S'}];
-            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Vancomycin-resistant (VRE) <i>E. faecium</i> — ampicillin, ceftriaxone and vancomycin are all out; reach for linezolid or high-dose daptomycin.` : `Vancomycin-susceptible <i>E. faecium</i> — vancomycin is preferred. (Ampicillin R here is typical for this species regardless of VRE status — a key difference from <i>E. faecalis</i>.)`);
+              : [{drug:'Ampicillin', result:'R'}, {drug:'Ceftriaxone', result:'R'}, {drug:'Vancomycin', result:'S'}, {drug:'Gentamicin', result:'S'}];
+            return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Vancomycin-resistant (VRE) <i>E. faecium</i> — ampicillin, ceftriaxone and vancomycin are all out; reach for linezolid or high-dose daptomycin.` : `Vancomycin-susceptible <i>E. faecium</i> — vancomycin is preferred, and can be combined with gentamicin for infective endocarditis. (Ampicillin R here is typical for this species regardless of VRE status — a key difference from <i>E. faecalis</i>.)`);
           } },
       ],
       pearls: [
@@ -5832,8 +5850,9 @@ const DEX_INFO = {
       'Gram-positive coccus in pairs/short chains',
       'Catalase-negative',
       'Grows in 6.5% NaCl and on bile-esculin agar (both positive) — key identifying features',
-      'Group D Lancefield antigen; intrinsically tolerant to many antibiotics',
+      'Group D Lancefield antigen',
       'Identical Gram stain and colony appearance to <i>E. faecium</i> — the two share this basic phenotype, so definitive species identification needs MALDI-TOF or molecular methods, not the panel above alone',
+      'Intrinsically tolerant to many antibiotics',
     ],
     manifestations: [
       'Urinary tract infection, particularly catheter-associated and healthcare-related',
@@ -5842,26 +5861,31 @@ const DEX_INFO = {
       'Bacteraemia, particularly line-associated in hospitalised patients',
     ],
     resistance: [
-      'Intrinsic low-level resistance to ALL cephalosporins and clindamycin — never use regardless of in-vitro report',
-      'Intrinsic tolerance to beta-lactams and aminoglycosides individually — necessitates synergy combinations for endocarditis',
-      'VRE: acquired vanA/vanB gene clusters alter the peptidoglycan precursor target, conferring vancomycin resistance',
+      'Intrinsic low-level resistance to ALL cephalosporins — never use regardless of in-vitro report. Enterococci produce low-affinity penicillin-binding proteins (PBP5 in <i>E. faecium</i>, PBP4 in <i>E. faecalis</i>), among other mechanisms',
+      'Intrinsic resistance to clindamycin, due to inherent target and permeability differences',
+      'Intrinsic resistance to trimethoprim-sulfamethoxazole, as enterococci can scavenge exogenous folates from the environment, bypassing the folate synthesis pathway that TMP-SMX targets',
+      'Intrinsic tolerance to beta-lactams and aminoglycosides if used individually — necessitates synergy combinations for endocarditis if susceptible (e.g. ampicillin plus gentamicin)',
+      'Vancomycin-resistant enterococci (VRE): acquired vanA/vanB gene clusters alter the peptidoglycan precursor target, conferring vancomycin resistance',
+      'High-level aminoglycoside resistance (HLAR) may be acquired through aminoglycoside-modifying enzymes, and can pose a problem for aminoglycoside use in enterococcal endocarditis; an alternative aminoglycoside may be used if susceptible, or ampicillin-ceftriaxone used instead',
       'Typically ampicillin-susceptible when non-VRE — a real point of difference from <i>E. faecium</i>, which is usually ampicillin-resistant (altered PBP5) even without vancomycin resistance',
     ],
     treatment: [
       "Uncomplicated UTI: amoxicillin/ampicillin if susceptible, or nitrofurantoin.",
-      "Endocarditis: ampicillin plus gentamicin (synergy) exploits bactericidal killing beyond either agent alone (Grade A, IDSA/AHA).",
-      "VRE or ampicillin-resistant strains: linezolid or daptomycin — daptomycin should NOT be used for pulmonary infection (surfactant inactivates it)."
+      "VRE but ampicillin-susceptible: ampicillin alone for uncomplicated bacteraemia; ampicillin-gentamicin or ampicillin-ceftriaxone combinations can still be used for endocarditis.",
+      "VRE and ampicillin-resistant: linezolid or daptomycin are alternatives. Current guidelines recommend high-dose daptomycin with ampicillin or ceftaroline (see 2015 AHA guidelines). Daptomycin should not be used for pulmonary infection, as surfactant inactivates it."
     ],
     references: [
       "2015 ESC Guidelines for the Management of Infective Endocarditis (Habib et al., Eur Heart J) (Grade A)",
       "2015 AHA Scientific Statement: Infective Endocarditis in Adults (Baddour et al., Circulation) (Grade A)",
       "Fernández-Hidalgo N et al., Ampicillin plus Ceftriaxone is as Effective as Ampicillin plus Gentamicin for Treating <i>Enterococcus faecalis</i> Infective Endocarditis, Clin Infect Dis 2013 (Grade B)",
+      "<a href=\"https://link.springer.com/article/10.1007/s40265-024-02135-z\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Schellong P et al., Treatment of Complicated Gram-Positive Bacteraemia and Infective Endocarditis, Drugs 2025;85(2):193-214</a> (Grade B)",
+      "<a href=\"https://link.springer.com/article/10.1186/s12879-014-0687-9\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Chuang YC et al., Daptomycin versus Linezolid for Treatment of Vancomycin-Resistant Enterococcal Bacteraemia: Systematic Review and Meta-Analysis, BMC Infect Dis 2014;14:687</a> (Grade A — meta-analysis)",
     ],
   },
   efaecium: {
     group: 'Gram-Positive Cocci',
     characteristics: [
-      'Gram-positive coccus in pairs/short chains — identical to <i>E. faecalis</i> on Gram stain',
+      'Gram-positive coccus in pairs/short chains',
       'Catalase-negative',
       'Grows in 6.5% NaCl and on bile-esculin agar (both positive), same as <i>E. faecalis</i> — species-level identification needs MALDI-TOF or molecular methods, not phenotypic panels alone',
       'Group D Lancefield antigen',
@@ -5873,18 +5897,19 @@ const DEX_INFO = {
       'Urinary tract infection, typically catheter-associated in institutionalised patients',
     ],
     resistance: [
-      'Intrinsic resistance to ALL cephalosporins and clindamycin, like all enterococci',
-      'Usually ampicillin-resistant (altered, low-affinity PBP5) regardless of vancomycin susceptibility — unlike <i>E. faecalis</i>, which is typically ampicillin-susceptible when non-VRE',
-      'The majority of hospital VRE isolates are <i>E. faecium</i> — acquired vanA/vanB gene clusters add vancomycin resistance on top of the baseline ampicillin resistance',
+      'See also <i>Enterococcus faecalis</i> for more detail on resistance mechanisms — <i>E. faecium</i> shares the same intrinsic resistance to ALL cephalosporins, co-trimoxazole, and clindamycin',
+      'Unlike <i>E. faecalis</i>, <i>E. faecium</i> is usually ampicillin-resistant due to its low-affinity PBP5',
+      'The majority of hospital VRE isolates are <i>E. faecium</i> — acquired vanA/vanB gene clusters confer vancomycin resistance',
     ],
     treatment: [
-      "Vancomycin-susceptible: vancomycin (ampicillin is NOT a reliable option here, unlike for <i>E. faecalis</i>).",
-      "VRE or ampicillin-resistant strains: linezolid or high-dose daptomycin (10–12 mg/kg/day) — higher doses are associated with lower mortality in VRE bacteraemia, likely reflecting the higher daptomycin MICs typically seen in this species (Grade B)."
+      "Order susceptibility testing to rule out vancomycin resistance.",
+      "Vancomycin-susceptible: vancomycin remains first-line here, and can be combined with gentamicin for infective endocarditis (though this should be undertaken carefully, given synergistic oto- and nephrotoxicity).",
+      "Vancomycin-resistant: linezolid or high-dose daptomycin are the alternative agents. Current guidelines recommend high-dose daptomycin with ampicillin or ceftaroline (see 2015 AHA guidelines). Daptomycin should not be used for pulmonary infection, as surfactant inactivates it."
     ],
     references: [
-      "Vancomycin-Resistant Enterococci, StatPearls [Internet], NCBI Bookshelf (Grade B — review, species-level susceptibility patterns)",
-      "CASP Vancomycin-Resistant <i>Enterococcus faecium</i> Treatment Guideline, UNC Division of Infectious Diseases, Jan 2023 — cohort data supporting high-dose (10–12 mg/kg) daptomycin (Grade B)",
-      "CDC Antibiotic Resistance & Patient Safety Portal: Vancomycin-Resistant <i>Enterococcus faecium</i> (Grade B — national surveillance data)",
+      "<a href=\"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Baddour LM et al., Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications, Circulation 2015</a> (Grade A)",
+      "<a href=\"https://link.springer.com/article/10.1007/s40265-024-02135-z\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Schellong P et al., Treatment of Complicated Gram-Positive Bacteraemia and Infective Endocarditis, Drugs 2025;85(2):193-214</a> (Grade B)",
+      "<a href=\"https://link.springer.com/article/10.1186/s12879-014-0687-9\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Chuang YC et al., Daptomycin versus Linezolid for Treatment of Vancomycin-Resistant Enterococcal Bacteraemia: Systematic Review and Meta-Analysis, BMC Infect Dis 2014;14:687</a> (Grade A — meta-analysis)",
     ],
   },
   sagalactiae: {
@@ -5993,6 +6018,7 @@ const DEX_INFO = {
       'Diarrhoeal disease — STEC/EHEC (HUS), ETEC (traveller\'s diarrhoea), EPEC, EIEC pathotypes',
     ],
     resistance: [
+      '<i>E. coli</i> can also be carbapenem-resistant (CRE). For more information on CP/CRE, see the <i>Klebsiella pneumoniae</i> entry in the Organism Dex',
       'ESBL (e.g. CTX-M family) hydrolyses penicillins and cephalosporins (incl. 3rd-generation) — carbapenems are treatment of choice for serious infection',
       'Plasmid-mediated resistance spreads readily between Enterobacterales, often co-carrying fluoroquinolone/aminoglycoside resistance',
       'STEC/EHEC: antibiotics may worsen HUS risk by increasing toxin release — treatment is supportive',
@@ -6000,7 +6026,7 @@ const DEX_INFO = {
     treatment: [
       "Uncomplicated cystitis: nitrofurantoin first-line, with amoxicillin-clavulanate or fosfomycin as alternatives (Grade A, per Singapore ACE Guideline 2023); co-trimoxazole is not part of current Singapore guidance given local resistance rates, though it remains an option elsewhere if local resistance <20%.",
       "Uncomplicated pyelonephritis: amoxicillin-clavulanate first-line per ACE Singapore (cefuroxime as alternative); ceftriaxone or ciprofloxacin remain appropriate for more complicated pyelonephritis or bacteraemia/urosepsis if susceptible.",
-      "Confirmed ESBL with invasive infection: carbapenem (Grade A).",
+      "Confirmed ESBL with invasive infection: carbapenem (Grade A). Carbapenems are preferred to piperacillin-tazobactam even if the latter tests susceptible — in the MERINO trial, piperacillin-tazobactam use was associated with excess mortality relative to meropenem for ceftriaxone-resistant <i>E. coli</i>/<i>Klebsiella</i> bloodstream infection, attributed to the inoculum effect: isolates may test susceptible in vitro against a controlled, standardised inoculum, yet be overwhelmed by the much higher bacterial burden encountered in vivo, leading to treatment failure (Grade A).",
       "STEC/EHEC diarrhoea: avoid antibiotics and anti-motility agents."
     ],
     references: [
@@ -6025,13 +6051,16 @@ const DEX_INFO = {
       'Pyogenic liver abscess — hypervirulent K1/K2 strains (more common in East/SE Asia) with metastatic spread',
     ],
     resistance: [
-      'Carbapenemase production (KPC, NDM, OXA-48-like) confers carbapenem resistance — CRE is a WHO critical-priority pathogen',
-      'Ceftazidime-avibactam/meropenem-vaborbactam restore activity against KPC-producers but NOT metallo-beta-lactamases (NDM) unless combined with aztreonam',
+      '<i>Klebsiella pneumoniae</i> can also produce ESBL (for more information, see the <i>E. coli</i> entry in the Organism Dex)',
+      'Carbapenem resistance in carbapenem-resistant Enterobacterales (CRE) can arise from different mechanisms, chiefly through carbapenemase production (CP-CRE) or through a combination of a non-carbapenemase beta-lactamase with porin loss or increased efflux pump activity',
+      'Carbapenemase production is encoded by genes including KPC, NDM, and OXA-48',
       'Frequently co-resistant to fluoroquinolones and aminoglycosides',
     ],
     treatment: [
       "Non-CRE, non-ESBL strains: ceftriaxone or piperacillin-tazobactam as for other Enterobacterales.",
-      "CRE strains: agent choice depends on the specific carbapenemase — ceftazidime-avibactam for KPC/OXA-48-like; ceftazidime-avibactam plus aztreonam for NDM (Grade B, evolving evidence). ID/microbiology input strongly recommended for CRE management."
+      "ESBL strains: if susceptible, TMP-SMX, ciprofloxacin, or levofloxacin remain as options; nitrofurantoin can be used for uncomplicated UTI if it tests susceptible. Otherwise, use a carbapenem.",
+      "CRE strains: agent choice depends on the specific mechanism. Treatment options for CP/CRE are limited — if susceptible, TMP-SMX, ciprofloxacin, or levofloxacin remain options for pyelonephritis or complicated UTI. If not, ceftazidime-avibactam/meropenem-vaborbactam restore activity against KPC/OXA-48-like producers but NOT metallo-beta-lactamases (e.g. NDM) unless combined with aztreonam (Grade B, evolving evidence).",
+      "ID/microbiology input is strongly recommended for CRE management, which also carries infection-control implications."
     ],
     references: [
       "IDSA 2024 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections — CRE section. (Grade A)",
@@ -6148,6 +6177,7 @@ const DEX_INFO = {
       'Intrinsically resistant to many antibiotics (ampicillin, most 1st/2nd-gen cephalosporins, co-trimoxazole) via low outer-membrane permeability and constitutive efflux',
       'Can acquire resistance during treatment via efflux upregulation, AmpC derepression, porin (OprD) loss and, less commonly, carbapenemase acquisition — MDR/XDR <i>Pseudomonas</i> is an increasing ICU concern',
       'Newer agents (ceftolozane-tazobactam, ceftazidime-avibactam, imipenem-relebactam) provide options against many resistant strains',
+      'The IDSA 2024 Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections has a helpful discussion on treatment options for difficult-to-treat <i>Pseudomonas aeruginosa</i> infections',
     ],
     treatment: [
       "Empirical coverage for suspected <i>Pseudomonas</i> requires an anti-pseudomonal agent — piperacillin-tazobactam, ceftazidime, cefepime, meropenem, or an anti-pseudomonal fluoroquinolone (Grade A for severe/neutropenic sepsis).",
@@ -6157,7 +6187,6 @@ const DEX_INFO = {
     references: [
       "IDSA Guidance on the Treatment of Antimicrobial-Resistant Gram-Negative Infections, v4.0 (2024) — Difficult-to-Treat Resistance <i>P. aeruginosa</i> section (Grade A)",
       "Line L, et al. Regulation and Function of Versatile Aerobic and Anaerobic Respiratory Metabolism in <i>Pseudomonas aeruginosa</i>. Front Cell Infect Microbiol / PMC3153056 (Grade B)",
-      "Murray PR, et al. Medical Microbiology (textbook) — <i>Pseudomonas aeruginosa</i> biochemistry and pathogenesis (Grade B)",
     ],
   },
   abaumannii: {
@@ -9129,7 +9158,9 @@ function renderMap() {
       vignette = picked.vignette;
       game.seenVignettes.push(vignetteKey(org, vignette));
     }
-    const resistant = forced && typeof forced.resistant === 'boolean' ? forced.resistant : (org.flagName ? Math.random() < 0.5 : false);
+    const resistant = forced && typeof forced.resistant === 'boolean' ? forced.resistant
+      : typeof vignette.forceResistant === 'boolean' ? vignette.forceResistant
+      : (org.flagName ? Math.random() < 0.5 : false);
     run = {
       org, vignette, resistant,
       // patient's starting life reflects how sick this particular clinical picture is —
