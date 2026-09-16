@@ -68,6 +68,7 @@
     --pjirovecii-mist:#9ba3b0;
     --aspergillus-verdigris: #5a8f5c;
     --mucorales-umber: #4a3c30;
+    --mtb-slate:      #5b6b73;
     --dengue-crimson: #a83232;
     --hiv-violet: #6a4c93;
     --hepb-amber: #c68a2e;
@@ -804,6 +805,20 @@
       </div>
     </div>
   </div>
+
+  <div class="dex-modal hidden" id="npc-modal">
+    <div class="dex-modal-backdrop" id="npc-modal-backdrop"></div>
+    <div class="dex-modal-panel" role="dialog" aria-modal="true" aria-labelledby="npc-modal-name" style="max-width:400px;">
+      <button class="dex-modal-close" id="npc-modal-close" aria-label="Close">✕</button>
+      <div class="detail-header">
+        <div class="detail-name" id="npc-modal-name"></div>
+      </div>
+      <p class="detail-para" id="npc-modal-line"></p>
+      <div class="btn-row" style="justify-content:flex-end; margin-top:18px;">
+        <button class="action" id="npc-modal-ok">OK</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -864,6 +879,53 @@
     ["wall_left", "chair_back_man", "chair_back_woman", "chair_back_man", "partition_vertical", "F", "F", "F", "F", "chair_back_man", "chair_back_empty", "chair_back_man", "chair_back_woman", "wall_right"],
     ["wall_corner_bl", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom_E", "wall_bottom_D", "wall_bottom_poster", "wall_bottom", "wall_bottom", "wall_bottom", "wall_bottom", "wall_corner_br"],
   ];
+
+  // Lines shown when the player bumps into a staff NPC tile instead of walking through
+  // it (NPCs are solid, like any other non-"F" tile — see movePlayer). Each NPC has a
+  // small pool mixing ED flavour with evidence-graded clinical/IPC tips; openNpcDialogue()
+  // picks one at random each bump, avoiding an immediate repeat of the last line shown.
+  const NPC_DIALOGUE = {
+    ED_doc: {
+      name: 'ED Doctor',
+      lines: [
+        `Three sepsis alerts before 9am — my coffee's the only prophylaxis I trust today.`,
+        `For suspected sepsis: blood cultures before antibiotics, but never let cultures delay empirical therapy within the golden hour. <span class="cite">(Grade A — Surviving Sepsis Campaign)</span>`,
+        `Whoever redesigned this bay, thank you — the chair-to-bed sightlines finally make sense.`,
+        `Check the local antibiogram before you commit to empirical cover — resistance patterns here can drift from the national picture. <span class="cite">(Grade B — MOH Antimicrobial Stewardship guidance)</span>`,
+        `Spot the Gram stain before the formal report lands and you're already a step ahead of most juniors.`,
+      ],
+    },
+    receptionist: {
+      name: 'Receptionist',
+      lines: [
+        `Reg desk. No, we still haven't found that missing CT request form.`,
+        `Some of what you'll see today is legally notifiable to MOH, often within 24 hours — worth knowing which ones before you're the one filling the form. <span class="cite">(Grade A — Infectious Diseases Act, Singapore)</span>`,
+        `Need the interpreter line? I've got the extension memorised by now.`,
+        `Infection control's running hand hygiene audits again this week — the five moments, not just "in and out". <span class="cite">(Grade A — WHO/MOH hand hygiene guidance)</span>`,
+        `Go on, guess how many times I've said "please take a seat" today.`,
+      ],
+    },
+    nurse1: {
+      name: 'Nurse',
+      lines: [
+        `Obs round in ten minutes. Don't let me catch you skipping a set.`,
+        `Don't let a reassuring-looking patient fool you — a proper set of vitals and a qSOFA catch what a glance won't. <span class="cite">(Grade B)</span>`,
+        `Bed 4's been asking for a blanket for twenty minutes. I can see you standing there.`,
+        `Check every IV line for redness or tenderness on your rounds — catching phlebitis early saves a much bigger infection later. <span class="cite">(Grade B)</span>`,
+        `Coffee machine's broken again. Third time this month.`,
+      ],
+    },
+    nurse2: {
+      name: 'Nurse',
+      lines: [
+        `Restocking PPE — don't you dare take the last pair of gloves.`,
+        `Donning and doffing order matters more than people think — most self-contamination happens on the way out, not the way in. <span class="cite">(Grade B — CDC/MOH IPC guidance)</span>`,
+        `New rotation starts Monday. Hope you like early starts.`,
+        `Pull urinary catheters the moment they're not clinically needed — duration is the single biggest driver of catheter-associated UTIs. <span class="cite">(Grade A)</span>`,
+        `If you hear the crash cart alarm, that's not a drill — move.`,
+      ],
+    },
+  };
 
   // ===================================================================
   // ORGANISMS
@@ -1543,7 +1605,7 @@
           log: (r, ctx) => {
             ctx.setSubtype(r ? 'CRAB' : 'Carbapenem-susceptible');
             const rows = r
-              ? [{drug:'Piperacillin-Tazobactam', result:'R'}, {drug:'Meropenem', result:'R'}, {drug:'Colistin', result:'S'}]
+              ? [{drug:'Piperacillin-Tazobactam', result:'R'}, {drug:'Meropenem', result:'R'}]
               : [{drug:'Piperacillin-Tazobactam', result:'S'}, {drug:'Meropenem', result:'S'}];
             return `Susceptibility cascade reported:` + susceptPanel(rows, r ? `Carbapenem-resistant (CRAB). Very limited options remain — involve infectious diseases and infection control.` : `Carbapenem-susceptible — standard beta-lactams remain appropriate.`);
           } },
@@ -5714,6 +5776,122 @@
         `<b>There is no specific antiviral treatment for chikungunya</b> — management is entirely supportive throughout both the acute febrile illness and any chronic arthritic sequelae. <span class="cite">(Grade A)</span>`,
       ],
     },
+    {
+      id: 'mtb',
+      kingdom: 'bacteria',
+      name: 'Mycobacterium tuberculosis',
+      aliases: ['mycobacterium tuberculosis', 'tb', 'tuberculosis', 'mtb', 'ltbi', 'pulmonary tb', 'tb meningitis', 'latent tb', 'tuberculous meningitis'],
+      spriteColor: 'var(--mtb-slate)',
+      vignettes: [
+        {
+          caseNum: 197,
+          syndrome: 'Pulmonary Tuberculosis',
+          patientHP: 60, // starting patient life for this vignette's severity
+          text: "A 34-year-old man, recently arrived from a country with a high tuberculosis burden, presents with 6 weeks of cough, intermittent low-grade fever, drenching night sweats, and unintentional weight loss. He also reports occasional streaks of blood in his sputum.",
+          clues: [
+            { title: "Sputum AFB Smear (Ziehl-Neelsen Stain)", icon: "img-microscopyother", text: "Acid-fast bacilli seen — red/pink rods against a blue counterstain, resistant to acid-alcohol decolourisation because of the mycolic-acid-rich cell wall." },
+            { title: "Chest X-ray", icon: "img-xray", text: "Upper-lobe cavitary infiltrate — the classic distribution for post-primary (reactivation) pulmonary disease." },
+            { title: "GeneXpert MTB/RIF Ultra — Sputum", icon: "img-molecular", text: "<i>Mycobacterium tuberculosis</i> complex detected; rifampicin resistance NOT detected." },
+          ],
+        },
+        {
+          caseNum: 198,
+          syndrome: 'Tuberculous Meningitis',
+          patientHP: 45, // starting patient life for this vignette's severity
+          text: "A 27-year-old woman presents with 10 days of worsening headache, low-grade fever, and increasing lethargy, followed by new double vision over the last 2 days. Her family say she has 'not been herself' for weeks. Examination shows neck stiffness and a sixth cranial nerve palsy.",
+          clues: [
+            { title: "CSF Interpretation", icon: "img-biochemicaltest", text: "Lymphocytic pleocytosis, a markedly low CSF:plasma glucose ratio, and high protein — a subacute pattern quite different from the neutrophilic, more acute picture of bacterial meningitis." },
+            { title: "CSF GeneXpert MTB/RIF Ultra", icon: "img-molecular", text: "<i>Mycobacterium tuberculosis</i> complex detected; rifampicin resistance NOT detected." },
+            { title: "MRI Brain", icon: "img-xray", text: "Basal meningeal enhancement with early communicating hydrocephalus — a classic combination for tuberculous meningitis." },
+          ],
+        },
+        {
+          caseNum: 199,
+          syndrome: 'Latent Tuberculosis Infection',
+          patientHP: 85, // starting patient life for this vignette's severity — asymptomatic, low acuity
+          text: "A 41-year-old nurse is screened after a household member was recently diagnosed with smear-positive pulmonary tuberculosis. She is entirely well, with no cough, fever, or weight loss.",
+          clues: [
+            { title: "Interferon-Gamma Release Assay (IGRA)", icon: "img-molecular", text: "Positive — indicates immune sensitisation to <i>M. tuberculosis</i> antigens. Unlike the tuberculin skin test, IGRA results are not confounded by prior BCG vaccination." },
+            { title: "Chest X-ray", icon: "img-xray", text: "No infiltrate, cavity, or other abnormality — no evidence of active disease." },
+            { title: "Clinical Assessment", icon: "img-physexam", text: "No cough, fever, night sweats, or weight loss on review of systems — asymptomatic." },
+          ],
+        },
+      ],
+      quizOptions: [
+        { name: "Mycobacterium tuberculosis", correct: true },
+        { name: "Nontuberculous mycobacteria (e.g. M. avium complex)", correct: false },
+        { name: "Cryptococcus neoformans", correct: false },
+        { name: "Streptococcus pneumoniae", correct: false },
+      ],
+      moves: [
+        { name: "Isoniazid Monotherapy", desc: "Single first-line agent — appropriate only for a low mycobacterial burden", isDrug: true,
+          dmg: (r, ctx) => (ctx && ctx.vignette && ctx.vignette.caseNum === 199) ? 45 : 0,
+          log: (r, ctx) => {
+            if (ctx && ctx.vignette && ctx.vignette.caseNum === 199) {
+              return `Effective — isoniazid daily for 6–9 months (6H/9H) is one of Singapore's two preferred regimens for latent TB infection. Monotherapy is appropriate here because the mycobacterial burden in latent infection is low, unlike active disease. <span class="cite">(Grade A — MOH Singapore TB Guidelines 2024)</span>`;
+            }
+            return `No effect — active tuberculosis disease carries a far higher bacillary burden than latent infection, and a single agent rapidly selects for drug-resistant mutants. Active TB, at any site, always requires multi-drug combination therapy. <span class="cite">(Grade A — WHO Consolidated Guidelines on Tuberculosis)</span>`;
+          } },
+        { name: "Standard 4-Drug Combination — 2HRZE/4HR (6 Months)", desc: "Isoniazid, rifampicin, pyrazinamide, ethambutol for 2 months, then isoniazid/rifampicin for 4 months", isDrug: true,
+          dmg: (r, ctx) => {
+            const c = ctx && ctx.vignette && ctx.vignette.caseNum;
+            if (c === 197) return 45;
+            return 0;
+          },
+          log: (r, ctx) => {
+            const c = ctx && ctx.vignette && ctx.vignette.caseNum;
+            if (c === 197) {
+              return `Effective — the standard 2-month intensive phase (isoniazid, rifampicin, pyrazinamide, ethambutol) followed by a 4-month continuation phase (isoniazid, rifampicin) is first-line for drug-susceptible pulmonary TB. WHO does not recommend routinely extending this beyond 6 months. <span class="cite">(Grade A — MOH Singapore TB Guidelines 2024; WHO)</span>`;
+            }
+            if (c === 198) {
+              return `The right drug combination, but an insufficient duration — tuberculous meningitis needs a longer continuation phase than standard pulmonary disease; stopping at 6 months risks relapse in CNS disease. <span class="cite">(Grade A — ATS/CDC/IDSA Guidelines)</span>`;
+            }
+            return `Unnecessary here — this is the regimen for active TB disease. Latent infection has a low mycobacterial burden and does not need 4-drug combination therapy, which would mean needless toxicity for no added benefit. <span class="cite">(Grade A)</span>`;
+          } },
+        { name: "Extended Combination Therapy — 9–12 Months + Adjunctive Corticosteroids", desc: "Longer continuation phase, used when the site of disease demands it", isDrug: true,
+          dmg: (r, ctx) => {
+            const c = ctx && ctx.vignette && ctx.vignette.caseNum;
+            if (c === 198) return 45;
+            if (c === 197) return 20;
+            return 0;
+          },
+          log: (r, ctx) => {
+            const c = ctx && ctx.vignette && ctx.vignette.caseNum;
+            if (c === 198) {
+              return `Effective — tuberculous meningitis is treated with an extended continuation phase (commonly 9–12 months total) plus adjunctive dexamethasone or prednisolone tapered over 6–8 weeks, which reduces mortality. Singapore's 2024 TB guideline is scoped to pulmonary disease and does not cover CNS TB, so this follows international guidance. <span class="cite">(Grade A — ATS/CDC/IDSA Guidelines; Thwaites et al., NEJM 2004)</span>`;
+            }
+            if (c === 197) {
+              return `Still effective, but unnecessarily prolonged — WHO does not recommend extending standard pulmonary TB treatment beyond 6 months, since the evidence does not show added benefit, only added toxicity and cost. <span class="cite">(Grade A — stewardship principle; WHO)</span>`;
+            }
+            return `Far more aggressive than a patient with no active disease needs. <span class="cite">(Grade A)</span>`;
+          } },
+        { name: "Short-Course Preventive Therapy — Rifampicin 4 Months (4R) or Isoniazid+Rifapentine 3 Months (3HP)", desc: "Short rifamycin-based regimen for a low mycobacterial burden", isDrug: true,
+          dmg: (r, ctx) => (ctx && ctx.vignette && ctx.vignette.caseNum === 199) ? 45 : 0,
+          log: (r, ctx) => {
+            if (ctx && ctx.vignette && ctx.vignette.caseNum === 199) {
+              return `Effective — 4 months of daily rifampicin (4R) is Singapore's other preferred latent TB infection regimen, alongside 6–9 months of isoniazid; 3 months of isoniazid+rifapentine (3HP) or isoniazid+rifampicin (3HR) are accepted alternatives. Much shorter than active-disease treatment because the bacillary burden is low. <span class="cite">(Grade A — MOH Singapore TB Guidelines 2024)</span>`;
+            }
+            return `Insufficient for active disease — this short, rifamycin-based regimen is designed for the low bacillary burden of latent infection and cannot reliably treat established, symptomatic, microbiologically-confirmed TB disease. <span class="cite">(Grade A)</span>`;
+          } },
+        { name: "Stop Therapy After the Intensive Phase Alone (~2 Months)", desc: "Discontinuing once symptoms improve, without completing the continuation phase", isDrug: false,
+          dmg: (r) => 0,
+          log: (r) => `No effect — stopping after the intensive phase alone, regardless of which regimen or site is involved, risks treatment failure, relapse, and selection for drug resistance. The full continuation phase must be completed for the correct total duration. <span class="cite">(Grade A — WHO/MOH Singapore TB Guidelines)</span>` },
+        { name: "Observation Only — No Treatment", desc: "Deferring therapy without starting any regimen", isDrug: false,
+          dmg: (r) => 0,
+          log: (r, ctx) => {
+            if (ctx && ctx.vignette && ctx.vignette.caseNum === 199) {
+              return `Not appropriate — untreated latent TB infection carries a lifetime progression risk to active disease of roughly 5–10% in immunocompetent adults, substantially higher with HIV, other immunosuppression, or recent infection. This is why LTBI warrants preventive therapy rather than observation alone. <span class="cite">(Grade A — WHO/CDC)</span>`;
+            }
+            return `Not appropriate — symptomatic, microbiologically-confirmed active tuberculosis requires treatment; observation alone risks ongoing transmission and clinical deterioration. <span class="cite">(Grade A)</span>`;
+          } },
+      ],
+      pearls: [
+        `<b>TB treatment duration is site-specific, not a single fixed number</b> — 6 months is standard for pulmonary disease, but tuberculous meningitis needs an extended continuation phase (~9–12 months) given the higher stakes of undertreatment. <span class="cite">(Grade A)</span>`,
+        `<b>Monotherapy is the wrong answer in active disease but the right answer in latent infection</b> — the difference is bacillary burden: active TB disease needs combination therapy to prevent selecting resistance, while latent infection's low organism burden means a single well-chosen agent (isoniazid, or a short rifamycin-based course) is sufficient. <span class="cite">(Grade A — MOH Singapore TB Guidelines 2024)</span>`,
+        `<b>Stopping treatment early, at any site, risks relapse and acquired drug resistance</b> — completing the full prescribed duration matters as much as choosing the right drugs. <span class="cite">(Grade A)</span>`,
+        `<b>Latent TB infection is not "nothing to treat"</b> — untreated LTBI carries a lifetime progression risk to active disease of roughly 5–10% in immunocompetent adults, higher with HIV or other immunosuppression, which is why preventive therapy is recommended rather than observation alone. <span class="cite">(Grade A — WHO/CDC)</span>`,
+      ],
+    },
   ];
 
   // Every vignette now carries its own fixed, hand-assigned caseNum (set directly
@@ -5757,6 +5935,7 @@ const ORGANISM_GROUPS = [
   'Gram-Negative Rods — Curved/Spiral',
   'Gram-Negative Cocci / Coccobacilli',
   'Atypical / Intracellular',
+  'Mycobacteria',
   'Spirochetes',
   'Fungi',
   'Viruses',
@@ -5929,6 +6108,40 @@ const DEX_INFO = {
       "<a href=\"https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Baddour LM et al., Infective Endocarditis in Adults: Diagnosis, Antimicrobial Therapy, and Management of Complications, Circulation 2015</a> (Grade A)",
       "<a href=\"https://link.springer.com/article/10.1007/s40265-024-02135-z\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Schellong P et al., Treatment of Complicated Gram-Positive Bacteraemia and Infective Endocarditis, Drugs 2025;85(2):193-214</a> (Grade B)",
       "<a href=\"https://link.springer.com/article/10.1186/s12879-014-0687-9\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Chuang YC et al., Daptomycin versus Linezolid for Treatment of Vancomycin-Resistant Enterococcal Bacteraemia: Systematic Review and Meta-Analysis, BMC Infect Dis 2014;14:687</a> (Grade A — meta-analysis)",
+    ],
+  },
+  mtb: {
+    group: 'Mycobacteria',
+    characteristics: [
+      'Acid-fast bacillus — a thick, lipid-rich (mycolic acid) cell wall resists Gram staining; visualised instead with Ziehl-Neelsen or auramine-rhodamine (fluorescence) stains',
+      'Slow-growing obligate aerobe — culture on solid (L\u00f6wenstein-Jensen) or liquid (MGIT) media can take weeks, unlike routine bacterial culture',
+      'Facultative intracellular pathogen — survives and replicates within macrophages, driving the granulomatous host response that defines TB pathology',
+      'Spread by airborne droplet nuclei; infectiousness correlates with smear-positivity and cavitary disease',
+      "The distinction between infection and disease is central: latent TB infection (contained, asymptomatic, non-infectious, positive IGRA/TST with normal imaging) versus active TB disease (symptomatic, potentially infectious, abnormal imaging/microbiology)",
+    ],
+    manifestations: [
+      'Pulmonary TB — the classic and most common form: subacute cough >2\u20133 weeks, low-grade fever, night sweats, weight loss, and occasional haemoptysis, with an upper-lobe cavitary infiltrate on chest imaging',
+      'Tuberculous meningitis — subacute headache, fever, meningism and progressive confusion/cranial nerve palsies over days to weeks (a much slower tempo than acute bacterial meningitis); CSF shows lymphocytic pleocytosis, low glucose, and high protein',
+      'Latent TB infection — asymptomatic; identified through contact tracing or pre-immunosuppression screening via a positive IGRA or TST with a normal chest X-ray',
+      "Other extrapulmonary sites (not modelled in this game's case bank): lymphadenitis, pleural disease, bone/joint disease (Pott's disease), gastrointestinal and genitourinary TB, and disseminated/miliary disease",
+    ],
+    resistance: [
+      'Drug-susceptible TB is the presentation modelled in all three cases in this game',
+      'Multidrug-resistant TB (MDR-TB, resistant to at least isoniazid and rifampicin) and rifampicin-resistant TB (RR-TB) exist and require longer, specialist-directed second-line regimens — not modelled here in drug-level detail, but recognising when a case needs specialist/infectious-diseases referral rather than a standard regimen is itself an important skill',
+      'GeneXpert MTB/RIF (or MTB/RIF Ultra) gives a same-day result for both organism detection and rifampicin-resistance status, and is now the WHO-recommended initial diagnostic test in most settings',
+    ],
+    treatment: [
+      "Standard drug-susceptible pulmonary TB (and most non-CNS extrapulmonary disease): a 2-month intensive phase of isoniazid, rifampicin, pyrazinamide and ethambutol (2HRZE), followed by a 4-month continuation phase of isoniazid and rifampicin (4HR) \u2014 6 months total. WHO does not recommend routinely extending this beyond 6 months.",
+      "Tuberculous meningitis: an extended continuation phase is used given the consequences of undertreatment \u2014 commonly 9\u201312 months total \u2014 plus adjunctive corticosteroids (dexamethasone or prednisolone, tapered over 6\u20138 weeks), which reduce mortality. Singapore's 2024 TB guideline is scoped to pulmonary disease and does not cover CNS TB, so this recommendation follows international (ATS/CDC/IDSA) guidance.",
+      "Latent TB infection (preventive therapy): Singapore's preferred regimens are rifampicin daily for 4 months (4R) or isoniazid daily for 6\u20139 months (6H/9H); alternatives are isoniazid+rifampicin daily for 3 months (3HR) or isoniazid+rifapentine weekly for 3 months (3HP). Unlike active disease, single-agent therapy is appropriate here because the mycobacterial burden is low.",
+      "Active TB disease of any site always requires multi-drug combination therapy \u2014 treating it with a single agent risks selecting for drug resistance and is never appropriate, regardless of site.",
+    ],
+    references: [
+      "Lee SS et al., Singapore Tuberculosis Clinical Management Guidelines 2024: A Modified Delphi Adaptation of International Guidelines for Drug-Susceptible TB Infection and Pulmonary Disease, Ann Acad Med Singap 2024 (Grade A)",
+      "WHO Consolidated Guidelines on Tuberculosis: Drug-Susceptible TB Treatment (Grade A)",
+      "<a href=\"https://www.idsociety.org/practice-guideline/treatment-of-drug-susceptible-tb/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">ATS/CDC/IDSA Clinical Practice Guidelines: Treatment of Drug-Susceptible Tuberculosis, Clin Infect Dis 2016</a> (Grade A)",
+      "<a href=\"https://www.nejm.org/doi/full/10.1056/NEJMoa040573\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--agar-gold);\">Thwaites GE et al., Dexamethasone for the Treatment of Tuberculous Meningitis in Adolescents and Adults, N Engl J Med 2004;351:1741-1751</a> (Grade A \u2014 RCT)",
+      "CDC, Treatment Regimens for Latent TB Infection (Grade A)",
     ],
   },
   sagalactiae: {
@@ -7663,6 +7876,7 @@ const DRUG_CLASSES = [
   { label: 'Folate Pathway Inhibitors', keys: ['cotrimoxazole'] },
   { label: 'Nitrofurans & Nitroimidazoles', keys: ['nitrofurantoin', 'metronidazole'] },
   { label: 'Other Antibacterials', keys: ['aztreonam', 'chloramphenicol', 'colistin', 'linezolid_daptomycin', 'fidaxomicin'] },
+  { label: 'Anti-Tuberculosis Therapy', keys: ['tb_isoniazid_mono', 'tb_standard_6mo', 'tb_extended_steroids', 'tb_ltbi_short_course'] },
   { label: '<i>H. pylori</i> Eradication Therapy', keys: ['clarithromycin_triple', 'bismuth_quad'] },
   { label: 'Antifungals', keys: ['fluconazole', 'caspofungin', 'amphotericin_b', 'ambisome_flucytosine', 'voriconazole', 'isavuconazole', 'iv_pentamidine', 'clinda_primaquine'] },
   { label: 'Antivirals', keys: ['oseltamivir', 'baloxavir', 'amantadine', 'nirmatrelvir_ritonavir', 'remdesivir', 'ribavirin'] },
@@ -7677,6 +7891,71 @@ const DRUG_CLASSES = [
 ];
 
 const DRUG_INFO = {
+  tb_isoniazid_mono: {
+    name: 'Isoniazid Monotherapy (6H/9H)',
+    class: 'Anti-tuberculosis agent \u2014 isonicotinic acid hydrazide',
+    route: 'Oral',
+    moa: 'Inhibits mycolic acid synthesis within the mycobacterial cell wall biosynthesis pathway; bactericidal against actively dividing organisms.',
+    coverage: [
+      'Latent TB infection \u2014 daily monotherapy for 6 or 9 months is one of two regimens Singapore prefers for LTBI, appropriate because of the low mycobacterial burden',
+      'Never used as monotherapy for active TB disease of any site \u2014 rapidly selects for isoniazid-resistant mutants at the much higher bacillary burden seen in active disease',
+    ],
+    sideEffects: [
+      'Peripheral neuropathy (reduced by co-administered pyridoxine/vitamin B6, especially in malnutrition, pregnancy, HIV, diabetes, or renal failure)',
+      'Hepatotoxicity \u2014 transaminitis is common and usually mild, but clinically significant hepatitis requires monitoring',
+      'Drug interactions via CYP450 inhibition',
+    ],
+    notes: 'The isoniazid dose and duration for LTBI (6\u20139 months) is much longer than its role within combination therapy for active disease, precisely because it is being asked to do the job alone.',
+  },
+  tb_standard_6mo: {
+    name: 'Standard 4-Drug Combination \u2014 2HRZE/4HR (6 Months)',
+    class: 'Anti-tuberculosis combination regimen',
+    route: 'Oral',
+    moa: 'Four first-line agents (isoniazid, rifampicin, pyrazinamide, ethambutol) acting via distinct mechanisms \u2014 combined to kill actively dividing, semi-dormant, and intracellular sub-populations of bacilli and to prevent selection of drug-resistant mutants.',
+    coverage: [
+      'First-line regimen for drug-susceptible pulmonary (and most non-CNS extrapulmonary) TB disease',
+      '2-month intensive phase (isoniazid, rifampicin, pyrazinamide, ethambutol) followed by a 4-month continuation phase (isoniazid, rifampicin)',
+      'Not an adequate duration for tuberculous meningitis or bone/joint TB, which need longer continuation therapy',
+    ],
+    sideEffects: [
+      'Hepatotoxicity (isoniazid, rifampicin, and pyrazinamide are all potentially hepatotoxic) \u2014 baseline and interval liver function monitoring is standard',
+      'Rifampicin: orange discolouration of body fluids, potent CYP450 induction (major drug-interaction potential), flu-like reactions',
+      'Ethambutol: optic neuritis (dose- and duration-dependent) \u2014 baseline visual acuity/colour vision testing recommended',
+      'Pyrazinamide: hyperuricaemia, arthralgia, hepatotoxicity',
+    ],
+    notes: 'WHO does not recommend routinely extending this regimen beyond 6 months for standard drug-susceptible disease \u2014 the evidence does not show added benefit from doing so.',
+  },
+  tb_extended_steroids: {
+    name: 'Extended Combination Therapy + Adjunctive Corticosteroids (9\u201312 Months)',
+    class: 'Anti-tuberculosis combination regimen + adjunctive immunomodulation',
+    route: 'Oral (regimen); oral or IV (corticosteroid)',
+    moa: 'The same four first-line anti-tuberculosis agents as the standard regimen, given for a longer continuation phase; adjunctive corticosteroids reduce the inflammatory response within the confined intracranial/intraspinal space, lowering mortality in CNS disease.',
+    coverage: [
+      'Tuberculous meningitis \u2014 a 2-month intensive phase as standard, then an extended continuation phase (commonly 7\u201310 further months, ~9\u201312 months total), plus dexamethasone or prednisolone tapered over 6\u20138 weeks',
+      'Unnecessarily prolonged (and best avoided) for standard pulmonary TB, where 6 months is already sufficient',
+    ],
+    sideEffects: [
+      'As for the standard 4-drug regimen, over a longer exposure period',
+      'Corticosteroid-related: hyperglycaemia, mood/behavioural change, GI ulceration risk, immunosuppression',
+    ],
+    notes: 'The mortality benefit from adjunctive corticosteroids in TB meningitis is a strong, moderate-certainty recommendation (ATS/CDC/IDSA 2016), building on the landmark Thwaites et al. dexamethasone RCT (NEJM 2004).',
+  },
+  tb_ltbi_short_course: {
+    name: 'Short-Course Preventive Therapy \u2014 4R / 3HP / 3HR',
+    class: 'Anti-tuberculosis preventive regimen (rifamycin-based)',
+    route: 'Oral',
+    moa: "Rifampicin (or rifapentine) inhibits bacterial DNA-dependent RNA polymerase, given alone or with isoniazid, for a shorter duration than isoniazid monotherapy by exploiting the rifamycins' greater sterilising activity.",
+    coverage: [
+      "Latent TB infection: rifampicin daily for 4 months (4R) is one of Singapore's two preferred LTBI regimens",
+      'Alternatives: isoniazid+rifapentine weekly for 3 months (3HP), or isoniazid+rifampicin daily for 3 months (3HR)',
+      'Not adequate for active TB disease at any site',
+    ],
+    sideEffects: [
+      'Rifampicin/rifapentine: orange discolouration of body fluids, CYP450 induction and drug interactions, hepatotoxicity, flu-like reactions',
+      'Generally better completion rates than 6\u20139 month isoniazid monotherapy, given the shorter course',
+    ],
+    notes: "Shorter, rifamycin-based LTBI regimens are increasingly favoured internationally for better treatment completion, though Singapore's 2024 guideline lists 4R and 6H/9H as equally preferred first-line options.",
+  },
   penicillin_g: {
     name: 'Penicillin G (Benzylpenicillin)',
     class: 'Natural/narrow-spectrum penicillin',
@@ -8482,6 +8761,10 @@ const DRUG_INFO = {
 };
 
 const DRUG_MOVE_MAP = {
+  'Isoniazid Monotherapy': 'tb_isoniazid_mono',
+  'Standard 4-Drug Combination \u2014 2HRZE/4HR (6 Months)': 'tb_standard_6mo',
+  'Extended Combination Therapy \u2014 9\u201312 Months + Adjunctive Corticosteroids': 'tb_extended_steroids',
+  'Short-Course Preventive Therapy \u2014 Rifampicin 4 Months (4R) or Isoniazid+Rifapentine 3 Months (3HP)': 'tb_ltbi_short_course',
   'Ibuprofen/NSAID for Fever': 'ibuprofen',
   'NSAIDs / Aspirin (Acute Phase)': 'ibuprofen',
   'NSAIDs (Chronic Phase, Dengue Excluded)': 'ibuprofen',
@@ -9071,6 +9354,7 @@ btn.className = 'dex-item ' + (entry ? (entry.defeated ? 'defeated' : 'encounter
     if (e.key !== 'Escape') return;
     if (!$('reset-confirm-modal').classList.contains('hidden')) { closeResetConfirm(); return; }
     if (!$('dex-modal').classList.contains('hidden')) { closeDetail(); return; }
+    if (!$('npc-modal').classList.contains('hidden')) { closeNpcDialogue(); return; }
     if (!$('shop-modal').classList.contains('hidden')) { closeShopModal(); return; }
     if (!$('vending-modal').classList.contains('hidden')) { closeVendingModal(); return; }
     if (!$('customize-modal').classList.contains('hidden')) { closeCustomizeModal(); return; }
@@ -9144,13 +9428,17 @@ function renderMap() {
   }
   function movePlayer(dir) {
     if ($('screen-map').classList.contains('hidden')) return;
+    if (!$('npc-modal').classList.contains('hidden')) return; // don't walk through an open NPC dialogue
     let { playerRow: r, playerCol: c } = game;
     if (dir === 'up') r--; if (dir === 'down') r++;
     if (dir === 'left') c--; if (dir === 'right') c++;
     const t = tileAt(r, c);
     // "F" (plain floor) is the only walkable tile — everything else (walls, beds,
     // partitions, chairs, NPCs) is solid, matching the ED floor-plan spreadsheet.
-    if (t !== 'F') return;
+    if (t !== 'F') {
+      if (NPC_DIALOGUE[t]) openNpcDialogue(t);
+      return;
+    }
     game.playerRow = r; game.playerCol = c;
     // the sprite is only drawn facing left/right, so up/down movement keeps the last
     // left/right facing rather than trying to show a (nonexistent) front/back pose
@@ -9166,8 +9454,32 @@ function renderMap() {
       setTimeout(triggerEncounter, 120);
     }
   }
-    document.addEventListener('keydown', (e) => {
+
+  // ---------- NPC dialogue ----------
+  // Bumping into a staff NPC tile (instead of walking through it, same as bumping into
+  // any other solid tile) pops a short in-character line. `game.npcLineIdx` remembers
+  // each NPC's last-shown line (runtime-only, not persisted to saveState) purely so two
+  // consecutive bumps into the same NPC don't repeat the same line twice in a row.
+  function openNpcDialogue(npcKey) {
+    const npc = NPC_DIALOGUE[npcKey];
+    if (!npc) return;
+    game.npcLineIdx = game.npcLineIdx || {};
+    const lines = npc.lines;
+    let idx = Math.floor(Math.random() * lines.length);
+    if (lines.length > 1 && idx === game.npcLineIdx[npcKey]) idx = (idx + 1) % lines.length;
+    game.npcLineIdx[npcKey] = idx;
+    $('npc-modal-name').textContent = npc.name;
+    $('npc-modal-line').innerHTML = lines[idx];
+    $('npc-modal').classList.remove('hidden');
+  }
+  function closeNpcDialogue() { $('npc-modal').classList.add('hidden'); }
+  $('npc-modal-close').addEventListener('click', closeNpcDialogue);
+  $('npc-modal-backdrop').addEventListener('click', closeNpcDialogue);
+  $('npc-modal-ok').addEventListener('click', closeNpcDialogue);
+
+  document.addEventListener('keydown', (e) => {
     if ($('screen-map').classList.contains('hidden')) return;
+    if (!$('npc-modal').classList.contains('hidden')) return;
     const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', w: 'up', s: 'down', a: 'left', d: 'right' };
     if (map[e.key]) { e.preventDefault(); movePlayer(map[e.key]); }
   });
