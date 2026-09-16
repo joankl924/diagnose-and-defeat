@@ -9326,7 +9326,7 @@ btn.className = 'dex-item ' + (entry ? (entry.defeated ? 'defeated' : 'encounter
   // ---------- reset-progress confirmation ----------
   function openResetConfirm() {
     const coinWord = game.coins === 1 ? 'coin' : 'coins';
-    let msg = `You will lose all ${game.coins} ${coinWord}, and your Organism Dex and Drug Formulary progress will be cleared back to unseen. This cannot be undone.`;
+    let msg = `You will lose all ${game.coins} ${coinWord} (reset to the 5,000 demo baseline), and your Organism Dex and Drug Formulary progress will be cleared back to unseen. This cannot be undone.`;
     if (game.dexUnlocked) msg += ' (Your Locker Room purchases, including the Full Dex unlock, are not affected.)';
     $('reset-confirm-body').textContent = msg;
     $('reset-confirm-modal').classList.remove('hidden');
@@ -9337,7 +9337,7 @@ btn.className = 'dex-item ' + (entry ? (entry.defeated ? 'defeated' : 'encounter
   $('reset-confirm-backdrop').addEventListener('click', closeResetConfirm);
   $('btn-reset-confirm').addEventListener('click', async () => {
     closeResetConfirm();
-    game.coins = 0; game.dex = {}; game.meds = []; game.brainPower = 100;
+    game.coins = 5000; game.dex = {}; game.meds = []; game.brainPower = 100; // Full Dex build: reset to the 5,000 demo baseline, not 0, so this build stays ready to showcase paid features
     await saveState();
     renderSidebar();
   });
